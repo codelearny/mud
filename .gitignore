@@ -25,3 +25,6 @@ dist-ssr
 
 
 .*/
+
+# 例外：GitHub Actions 工作流目录需纳入版本控制
+!.github/
