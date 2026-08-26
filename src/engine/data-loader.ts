@@ -31,7 +31,7 @@ for (const scene of scenesJson as Scene[]) {
   scenes.set(scene.id, scene)
 }
 
-for (const npc of npcsJson as NPC[]) {
+for (const npc of npcsJson as unknown as NPC[]) {
   npcs.set(npc.id, npc)
 }
 

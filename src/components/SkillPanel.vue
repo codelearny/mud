@@ -2,19 +2,31 @@
 import { computed } from 'vue'
 import { usePlayerStore } from '../stores/player'
 import { getAllSkills, getSkill } from '../engine/data-loader'
-import type { SkillCategory } from '../types'
+import type { Skill, SkillCategory } from '../types'
 
 const playerStore = usePlayerStore()
 const char = computed(() => playerStore.character)
 
-const learnedSkills = computed(() => {
+type LearnedSkillView = Skill & {
+  level: number
+  proficiency: number
+  proficiencyToNext: number
+}
+
+const learnedSkills = computed<LearnedSkillView[]>(() => {
   if (!char.value) return []
-  return char.value.learnedSkills.map(ls => ({
-    ...getSkill(ls.skillId),
-    level: ls.level,
-    proficiency: ls.proficiency,
-    proficiencyToNext: ls.proficiencyToNext,
-  })).filter(s => s.id !== undefined)
+  return char.value.learnedSkills
+    .map(ls => {
+      const skill = getSkill(ls.skillId)
+      if (!skill) return null
+      return {
+        ...skill,
+        level: ls.level,
+        proficiency: ls.proficiency,
+        proficiencyToNext: ls.proficiencyToNext,
+      }
+    })
+    .filter((s): s is LearnedSkillView => s !== null)
 })
 
 const availableSkills = computed(() => {
