@@ -1,0 +1,654 @@
+:root {
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b2e;
+  --bg-tertiary: #1c2333;
+  --bg-panel: #1a2030;
+  --text-primary: #e0d8c8;
+  --text-secondary: #9b9489;
+  --text-tertiary: #6b6760;
+  --text-accent: #c9a84c;
+  --text-danger: #e74c3c;
+  --text-success: #2ecc71;
+  --text-info: #5dade2;
+  --border-color: #2d3548;
+  --border-hover: #4a5275;
+  --hp-color: #e74c3c;
+  --mp-color: #5dade2;
+  --exp-color: #c9a84c;
+  --gold-color: #f1c40f;
+  --font-serif: "Noto Serif SC", "STSong", "SimSun", "宋体", serif;
+  --font-sans: "Noto Sans SC", "Microsoft YaHei", "微软雅黑", sans-serif;
+  --radius: 6px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  max-width: 640px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-app {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.panel-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-accent);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+  font-family: var(--font-serif);
+}
+
+.bar-container {
+  background: var(--bg-tertiary);
+  border-radius: 4px;
+  height: 14px;
+  overflow: hidden;
+  position: relative;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.bar-fill.hp { background: var(--hp-color); }
+.bar-fill.mp { background: var(--mp-color); }
+.bar-fill.exp { background: var(--exp-color); }
+
+.bar-text {
+  font-size: 12px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  text-shadow: 0 0 2px rgba(0,0,0,0.8);
+  line-height: 1;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-family: var(--font-serif);
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+}
+
+.btn:hover:not(:disabled) {
+  background: var(--border-color);
+  border-color: var(--border-hover);
+  color: var(--text-accent);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: #2d3548;
+  border-color: var(--text-accent);
+  color: var(--text-accent);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--text-accent);
+  color: var(--bg-primary);
+}
+
+.btn-danger {
+  border-color: var(--text-danger);
+  color: var(--text-danger);
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: var(--text-danger);
+  color: #fff;
+}
+
+.btn-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.btn-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.status-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-serif);
+}
+
+.status-info .name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-accent);
+}
+
+.status-info .level {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.status-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 160px;
+}
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bar-label {
+  font-size: 12px;
+  width: 28px;
+  text-align: right;
+  font-family: var(--font-serif);
+}
+
+.bar-container.small {
+  height: 10px;
+  flex: 1;
+}
+
+.gold-display {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--gold-color);
+  font-size: 14px;
+  font-family: var(--font-serif);
+}
+
+.game-log {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  font-family: var(--font-serif);
+  font-size: 14px;
+  line-height: 1.9;
+  max-height: 320px;
+  min-height: 200px;
+}
+
+.log-entry {
+  margin-bottom: 4px;
+  padding: 2px 0;
+}
+
+.log-entry .turn-tag {
+  color: var(--text-tertiary);
+  font-size: 12px;
+  margin-right: 4px;
+}
+
+.log-entry.player { color: var(--text-primary); }
+.log-entry.enemy { color: var(--text-secondary); }
+.log-entry .dodge { color: var(--text-info); }
+.log-entry .crit { color: var(--text-danger); font-weight: 600; }
+.log-entry .victory { color: var(--text-success); font-weight: 600; }
+.log-entry .defeat { color: var(--text-danger); font-weight: 600; }
+.log-entry .heal { color: var(--text-success); }
+.log-entry .skill { color: var(--text-accent); }
+.log-entry .info { color: var(--text-secondary); font-style: italic; }
+
+.action-menu {
+  display: flex;
+  gap: 6px;
+  padding: 10px;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  flex-wrap: wrap;
+}
+
+.action-menu .btn {
+  flex: 1;
+  min-width: 80px;
+}
+
+.enemy-info,
+.battle-self-info {
+  padding: 10px 14px;
+  background: var(--bg-secondary);
+}
+
+.enemy-info {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.battle-self-info {
+  border-top: 1px solid var(--border-color);
+}
+
+.combatant-name {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.combatant-name.enemy { color: var(--text-danger); }
+.combatant-name.self { color: var(--text-success); }
+
+.combatant-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.game-title {
+  font-family: var(--font-serif);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text-accent);
+  letter-spacing: 8px;
+  margin-bottom: 8px;
+  text-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
+}
+
+.game-subtitle {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+  letter-spacing: 2px;
+}
+
+.title-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 220px;
+}
+
+.title-menu .btn {
+  padding: 12px 24px;
+  font-size: 16px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-family: var(--font-serif);
+  font-size: 15px;
+  outline: none;
+}
+
+.input-field:focus {
+  border-color: var(--text-accent);
+}
+
+.attr-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border-color);
+  font-family: var(--font-serif);
+}
+
+.attr-row .attr-name {
+  color: var(--text-secondary);
+}
+
+.attr-row .attr-value {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.attr-row .attr-bonus {
+  color: var(--text-success);
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+.item-list,
+.skill-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.item-card,
+.skill-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  font-family: var(--font-serif);
+  transition: border-color 0.15s;
+}
+
+.item-card:hover,
+.skill-card:hover {
+  border-color: var(--border-hover);
+}
+
+.item-info,
+.skill-info {
+  flex: 1;
+}
+
+.item-name,
+.skill-name {
+  font-size: 15px;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.item-desc,
+.skill-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.item-actions,
+.skill-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.item-actions .btn,
+.skill-actions .btn {
+  padding: 4px 12px;
+  font-size: 13px;
+}
+
+.equipped-badge {
+  display: inline-block;
+  font-size: 11px;
+  color: var(--text-accent);
+  border: 1px solid var(--text-accent);
+  border-radius: 3px;
+  padding: 1px 5px;
+  margin-left: 6px;
+}
+
+.scene-text {
+  padding: 20px;
+  font-family: var(--font-serif);
+  font-size: 15px;
+  line-height: 2;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.scene-text p {
+  margin-bottom: 12px;
+}
+
+.result-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.result-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 30px 40px;
+  text-align: center;
+  max-width: 400px;
+}
+
+.result-title {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.result-title.victory { color: var(--text-success); }
+.result-title.defeat { color: var(--text-danger); }
+.result-title.fled { color: var(--text-info); }
+
+.result-details {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  line-height: 2;
+}
+
+.result-details .reward-line {
+  color: var(--text-primary);
+}
+
+.level-up-text {
+  color: var(--text-accent);
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.empty-text {
+  text-align: center;
+  color: var(--text-tertiary);
+  padding: 20px;
+  font-family: var(--font-serif);
+}
+
+/* ===== 地图 / 江湖 ===== */
+.map-view {
+  padding: 10px;
+  flex: 1;
+}
+
+.scene-desc {
+  font-family: var(--font-serif);
+  line-height: 1.9;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.toast {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--text-accent);
+  border-radius: var(--radius);
+  color: var(--text-accent);
+  font-family: var(--font-serif);
+  font-size: 14px;
+}
+
+.npc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.npc-btn {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.npc-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-accent);
+}
+
+.npc-title {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* ===== 对话 / 奇遇 ===== */
+.dialogue-card {
+  max-width: 460px;
+  text-align: left;
+}
+
+.dialogue-speaker {
+  font-family: var(--font-serif);
+  color: var(--text-accent);
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.dialogue-title {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 400;
+  margin-left: 6px;
+}
+
+.encounter-title {
+  color: var(--text-danger);
+}
+
+.dialogue-text {
+  font-family: var(--font-serif);
+  line-height: 1.9;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.dialogue-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dialogue-choice {
+  width: 100%;
+  text-align: left;
+  justify-content: flex-start;
+}
+
+/* ===== 任务 ===== */
+.quest-wrap {
+  padding: 10px;
+  flex: 1;
+}
+
+.quest-item {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.quest-item:last-child {
+  border-bottom: none;
+}
+
+.quest-name {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-accent);
+}
+
+.quest-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 4px 0;
+}
+
+.quest-progress {
+  font-size: 13px;
+  color: var(--text-info);
+}
+
+.quest-item.completed .quest-name {
+  color: var(--text-success);
+}
+
+@media (max-width: 480px) {
+  .game-title { font-size: 28px; }
+  .btn-grid { grid-template-columns: 1fr; }
+  .btn-grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .action-menu { flex-direction: column; }
+  .action-menu .btn { width: 100%; }
+}

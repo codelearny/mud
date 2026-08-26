@@ -1,0 +1,30 @@
+[
+  {
+    "id": "quest_bandits",
+    "name": "剿灭山贼",
+    "description": "青石村李伯请少侠剿灭后山贼人，保一方平安。",
+    "giver": "village_chief",
+    "acceptText": "少侠愿往剿匪",
+    "completeCondition": { "type": "counter", "target": "banditsDefeated", "op": ">=", "value": 3 },
+    "completeFlag": "bandits_cleared",
+    "rewards": { "exp": 120, "gold": 100, "items": [{ "itemId": "great_medicine", "quantity": 2 }] }
+  },
+  {
+    "id": "quest_herb",
+    "name": "寻药济世",
+    "description": "古刹慧能大师欲以易筋经相授，需少侠寻来草药三株为引。",
+    "giver": "monk",
+    "acceptText": "少侠去寻草药",
+    "completeCondition": { "type": "item", "target": "medicine_herb", "op": ">=", "value": 3 },
+    "rewards": { "exp": 80, "gold": 50 }
+  },
+  {
+    "id": "quest_duel",
+    "name": "扬名立万",
+    "description": "武馆教头王铁柱言，胜敌五场便传独孤九剑。",
+    "giver": "instructor",
+    "acceptText": "少侠领命",
+    "completeCondition": { "type": "counter", "target": "duelsWon", "op": ">=", "value": 5 },
+    "rewards": { "exp": 100, "gold": 60 }
+  }
+]

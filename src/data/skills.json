@@ -1,0 +1,110 @@
+[
+  {
+    "id": "basic_fist",
+    "name": "基本拳法",
+    "description": "江湖中最常见的拳法，平平无奇但胜在实用。",
+    "type": "active",
+    "category": "fist",
+    "power": 10,
+    "mpCost": 0,
+    "hitRate": 0.9,
+    "critRate": 0.05,
+    "unlockLevel": 1
+  },
+  {
+    "id": "basic_sword",
+    "name": "基本剑法",
+    "description": "入门剑法，一板一眼，中规中矩。",
+    "type": "active",
+    "category": "sword",
+    "power": 14,
+    "mpCost": 2,
+    "hitRate": 0.88,
+    "critRate": 0.08,
+    "unlockLevel": 1
+  },
+  {
+    "id": "basic_internal",
+    "name": "吐纳基本功",
+    "description": "最基础的内功心法，调息吐纳，恢复内力。",
+    "type": "active",
+    "category": "internal",
+    "power": 0,
+    "mpCost": 0,
+    "hitRate": 1,
+    "critRate": 0,
+    "unlockLevel": 1
+  },
+  {
+    "id": "wolf_fang",
+    "name": "猛虎拳",
+    "description": "形意拳分支，模仿猛虎扑食之势，刚猛异常。",
+    "type": "active",
+    "category": "fist",
+    "power": 22,
+    "mpCost": 5,
+    "hitRate": 0.85,
+    "critRate": 0.12,
+    "unlockLevel": 3
+  },
+  {
+    "id": "lianhuan_sword",
+    "name": "连环剑法",
+    "description": "一剑三连环，剑出如风，令人防不胜防。",
+    "type": "active",
+    "category": "sword",
+    "power": 28,
+    "mpCost": 8,
+    "hitRate": 0.82,
+    "critRate": 0.15,
+    "unlockLevel": 5
+  },
+  {
+    "id": "qingyun_step",
+    "name": "青云步",
+    "description": "轻功身法，脚踏青云，闪避大幅提升。",
+    "type": "active",
+    "category": "movement",
+    "power": 0,
+    "mpCost": 6,
+    "hitRate": 1,
+    "critRate": 0,
+    "unlockLevel": 4
+  },
+  {
+    "id": "yijinjing",
+    "name": "易筋经",
+    "description": "少林镇寺之宝，脱胎换骨，大幅提升攻击与防御。",
+    "type": "active",
+    "category": "internal",
+    "power": 0,
+    "mpCost": 12,
+    "hitRate": 1,
+    "critRate": 0,
+    "unlockLevel": 8
+  },
+  {
+    "id": "xianglong_palms",
+    "name": "降龙十八掌",
+    "description": "丐帮绝学，掌力雄浑，有降龙伏虎之威，江湖第一刚猛掌法。",
+    "type": "active",
+    "category": "fist",
+    "power": 55,
+    "mpCost": 20,
+    "hitRate": 0.78,
+    "critRate": 0.2,
+    "unlockLevel": 12
+  },
+  {
+    "id": "dugu_nine",
+    "name": "独孤九剑",
+    "description": "剑魔独孤求败所创，破尽天下武学，无招胜有招。",
+    "type": "active",
+    "category": "sword",
+    "power": 65,
+    "mpCost": 18,
+    "hitRate": 0.85,
+    "critRate": 0.3,
+    "unlockLevel": 15
+  }
+]

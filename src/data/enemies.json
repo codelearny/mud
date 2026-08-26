@@ -1,0 +1,128 @@
+[
+  {
+    "id": "ruffian",
+    "name": "街头混混",
+    "description": "横行街头的无赖，只会些三脚猫功夫。",
+    "level": 1,
+    "attributes": {
+      "hp": 30,
+      "maxHp": 30,
+      "mp": 0,
+      "maxMp": 0,
+      "attack": 8,
+      "defense": 2,
+      "agility": 5,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": ["basic_fist"],
+    "expReward": 15,
+    "goldReward": 10,
+    "drops": []
+  },
+  {
+    "id": "bandit",
+    "name": "山贼",
+    "description": "占山为王的强盗，凶悍异常，常持刀抢劫过路行人。",
+    "level": 3,
+    "attributes": {
+      "hp": 60,
+      "maxHp": 60,
+      "mp": 10,
+      "maxMp": 10,
+      "attack": 14,
+      "defense": 5,
+      "agility": 8,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": ["basic_fist", "wolf_fang"],
+    "expReward": 35,
+    "goldReward": 30,
+    "drops": [{ "itemId": "medicine_herb", "rate": 0.4 }]
+  },
+  {
+    "id": "wild_wolf",
+    "name": "野狼",
+    "description": "山林中的野兽，牙尖爪利，速度极快。",
+    "level": 2,
+    "attributes": {
+      "hp": 40,
+      "maxHp": 40,
+      "mp": 0,
+      "maxMp": 0,
+      "attack": 12,
+      "defense": 3,
+      "agility": 14,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": ["basic_fist"],
+    "expReward": 25,
+    "goldReward": 5,
+    "drops": []
+  },
+  {
+    "id": "evil_disciple",
+    "name": "邪派弟子",
+    "description": "邪派门下弟子，行事狠辣，武功不弱。",
+    "level": 5,
+    "attributes": {
+      "hp": 90,
+      "maxHp": 90,
+      "mp": 20,
+      "maxMp": 20,
+      "attack": 20,
+      "defense": 8,
+      "agility": 12,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": ["basic_sword", "wolf_fang", "lianhuan_sword"],
+    "expReward": 60,
+    "goldReward": 50,
+    "drops": [{ "itemId": "medicine_herb", "rate": 0.5 }, { "itemId": "iron_sword", "rate": 0.1 }]
+  },
+  {
+    "id": "jianghu_villain",
+    "name": "江湖恶人",
+    "description": "在江湖上为非作歹的恶人，武功高强，心狠手辣。",
+    "level": 8,
+    "attributes": {
+      "hp": 150,
+      "maxHp": 150,
+      "mp": 40,
+      "maxMp": 40,
+      "attack": 30,
+      "defense": 12,
+      "agility": 15,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": ["wolf_fang", "lianhuan_sword", "qingyun_step"],
+    "expReward": 120,
+    "goldReward": 100,
+    "drops": [{ "itemId": "great_medicine", "rate": 0.3 }, { "itemId": "qingfeng_sword", "rate": 0.1 }]
+  },
+  {
+    "id": "bandit_chief",
+    "name": "黑风寨主",
+    "description": "黑风山的山大王，一身横练功夫刀枪不入，人称铁霸王。",
+    "level": 12,
+    "attributes": {
+      "hp": 280,
+      "maxHp": 280,
+      "mp": 60,
+      "maxMp": 60,
+      "attack": 40,
+      "defense": 20,
+      "agility": 12,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": ["wolf_fang", "lianhuan_sword", "qingyun_step", "yijinjing"],
+    "expReward": 250,
+    "goldReward": 200,
+    "drops": [{ "itemId": "great_medicine", "rate": 0.5 }, { "itemId": "silk_robe", "rate": 0.15 }]
+  }
+]

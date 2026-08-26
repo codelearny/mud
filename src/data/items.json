@@ -1,0 +1,118 @@
+[
+  {
+    "id": "wooden_sword",
+    "name": "木剑",
+    "description": "一把普通的木剑，练武之人常用。",
+    "type": "weapon",
+    "category": "sword",
+    "price": 50,
+    "slot": "weapon",
+    "effects": [{ "type": "attack", "value": 3 }]
+  },
+  {
+    "id": "iron_sword",
+    "name": "铁剑",
+    "description": "百炼精铁所铸，锋利无比。",
+    "type": "weapon",
+    "category": "sword",
+    "price": 200,
+    "slot": "weapon",
+    "effects": [{ "type": "attack", "value": 8 }]
+  },
+  {
+    "id": "qingfeng_sword",
+    "name": "青锋剑",
+    "description": "寒铁打造，剑身泛青光，削铁如泥。",
+    "type": "weapon",
+    "category": "sword",
+    "price": 800,
+    "slot": "weapon",
+    "effects": [{ "type": "attack", "value": 15 }, { "type": "agility", "value": 3 }]
+  },
+  {
+    "id": "iron_fist",
+    "name": "铁拳套",
+    "description": "铸铁拳套，戴上后拳力大增。",
+    "type": "weapon",
+    "category": "fist",
+    "price": 150,
+    "slot": "weapon",
+    "effects": [{ "type": "attack", "value": 6 }]
+  },
+  {
+    "id": "cloth_robe",
+    "name": "布衣",
+    "description": "粗布缝制的衣物，聊胜于无。",
+    "type": "armor",
+    "category": "body",
+    "price": 30,
+    "slot": "armor",
+    "effects": [{ "type": "defense", "value": 2 }]
+  },
+  {
+    "id": "leather_armor",
+    "name": "皮甲",
+    "description": "兽皮制成，轻便且有一定防护力。",
+    "type": "armor",
+    "category": "body",
+    "price": 120,
+    "slot": "armor",
+    "effects": [{ "type": "defense", "value": 6 }]
+  },
+  {
+    "id": "silk_robe",
+    "name": "天蚕丝甲",
+    "description": "天蚕丝编织，刀枪不入，轻盈如无物。",
+    "type": "armor",
+    "category": "body",
+    "price": 1000,
+    "slot": "armor",
+    "effects": [{ "type": "defense", "value": 15 }, { "type": "agility", "value": 5 }]
+  },
+  {
+    "id": "jade_ring",
+    "name": "玉佩",
+    "description": "温润玉佩，安神定气，提升内力上限。",
+    "type": "accessory",
+    "category": "accessory",
+    "price": 300,
+    "slot": "accessory",
+    "effects": [{ "type": "mp", "value": 20 }]
+  },
+  {
+    "id": "medicine_herb",
+    "name": "金创药",
+    "description": "止血疗伤的常用药，恢复50点气血。",
+    "type": "consumable",
+    "category": "medicine",
+    "price": 20,
+    "effects": [{ "type": "hp", "value": 50 }]
+  },
+  {
+    "id": "great_medicine",
+    "name": "大还丹",
+    "description": "名贵丹药，恢复200点气血和50点内力。",
+    "type": "consumable",
+    "category": "medicine",
+    "price": 200,
+    "effects": [{ "type": "hp", "value": 200 }, { "type": "mp", "value": 50 }]
+  },
+  {
+    "id": "strength_pill",
+    "name": "大力丸",
+    "description": "服用后永久增加3点攻击力。",
+    "type": "consumable",
+    "category": "pill",
+    "price": 150,
+    "effects": [{ "type": "attack", "value": 3 }]
+  },
+  {
+    "id": "agility_pill",
+    "name": "轻身丹",
+    "description": "服用后永久增加2点轻功。",
+    "type": "consumable",
+    "category": "pill",
+    "price": 150,
+    "effects": [{ "type": "agility", "value": 2 }]
+  }
+]

@@ -1,0 +1,182 @@
+[
+  {
+    "id": "village_chief",
+    "name": "李伯",
+    "title": "青石村长",
+    "description": "须发皆白的老村长，为村中安危忧心忡忡。",
+    "sceneId": "village",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "李伯",
+        "text": "少侠，你来了。老朽正愁无人可托。",
+        "choices": [
+          { "text": "后山贼患可平定了？", "next": "cleared_talk", "condition": { "type": "flag", "target": "bandits_cleared", "op": "==", "value": true } },
+          { "text": "村中近况如何？", "next": "bandits" },
+          { "text": "晚辈告辞。", "next": "END" }
+        ]
+      },
+      "bandits": {
+        "id": "bandits",
+        "speaker": "李伯",
+        "text": "后山来了伙强人，拦路抢劫、伤我村民。镇上武馆的王教头又不在，老朽实在束手无策。",
+        "choices": [
+          { "text": "此等恶行，晚辈愿往剿之！", "next": "accept", "condition": { "type": "quest", "target": "quest_bandits", "op": "!=", "value": "active" }, "effects": [{ "type": "quest", "target": "quest_bandits", "value": "active" }, { "type": "flag", "target": "met_chief", "value": true }] },
+          { "text": "我正要去后山。", "next": "active_hint", "condition": { "type": "quest", "target": "quest_bandits", "op": "==", "value": "active" } },
+          { "text": "容晚辈思量。", "next": "END" }
+        ]
+      },
+      "accept": {
+        "id": "accept",
+        "speaker": "李伯",
+        "text": "善哉！少侠侠义心肠，老朽代全村谢过。那伙贼人约有三五之数，少侠务必小心。",
+        "choices": [{ "text": "理会得。", "next": "END", "effects": [{ "type": "flag", "target": "accepted_bandits", "value": true }] }]
+      },
+      "active_hint": {
+        "id": "active_hint",
+        "speaker": "李伯",
+        "text": "后山路径险峻，少侠可从村西小径前往。剿灭贼人后，老朽自有重谢。",
+        "choices": [{ "text": "多谢指点。", "next": "END" }]
+      },
+      "cleared_talk": {
+        "id": "cleared_talk",
+        "speaker": "李伯",
+        "text": "托少侠之福，后山已复太平。老朽与全村感念大德，这枚平安玉佩，权作薄礼。",
+        "choices": [{ "text": "村长言重了。", "next": "END" }]
+      }
+    }
+  },
+  {
+    "id": "innkeeper",
+    "name": "红姑",
+    "title": "客栈掌柜",
+    "description": "俏丽利落的客栈女掌柜，爱说江湖闲话。",
+    "sceneId": "village",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "红姑",
+        "text": "客官里面请～俺家红姑掌柜的，热茶沃酒管够。看你这身打扮，也是个走江湖的？",
+        "choices": [
+          { "text": "掌柜的可有见闻？", "next": "gossip", "effects": [{ "type": "affinity", "target": "innkeeper", "value": 2 }] },
+          { "text": "我想歇歇脚（耗银十两）", "next": "heal_done", "condition": { "type": "gold", "target": "", "op": ">=", "value": 10 }, "effects": [{ "type": "gold", "value": -10 }, { "type": "heal", "value": "full" }] },
+          { "text": "告辞。", "next": "END" }
+        ]
+      },
+      "gossip": {
+        "id": "gossip",
+        "speaker": "红姑",
+        "text": "听说后山那伙强人，头领是个使铁棍的狠角色，唤作铁霸王。镇上武馆的王教头，早年间也是响当当的人物哩。",
+        "choices": [{ "text": "受教了。", "next": "END" }]
+      },
+      "heal_done": {
+        "id": "heal_done",
+        "speaker": "红姑",
+        "text": "红姑端来热汤：客官慢用，养好了身子才好闯荡。",
+        "choices": [{ "text": "多谢掌柜。", "next": "END" }]
+      }
+    }
+  },
+  {
+    "id": "instructor",
+    "name": "王铁柱",
+    "title": "武馆教头",
+    "description": "清风镇武馆教头，性烈豪爽，剑法不俗。",
+    "sceneId": "town",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "王铁柱",
+        "text": "某家王铁柱，清风镇武馆教头。看你根骨不差，可想学两手真功夫？",
+        "choices": [
+          { "text": "教头，晚辈已胜敌五场。", "next": "teach_done", "condition": { "type": "quest", "target": "quest_duel", "op": "==", "value": "completed" } },
+          { "text": "请教教头绝学。", "next": "teach", "condition": { "type": "flag", "target": "learned_dugu", "op": "!=", "value": true } },
+          { "text": "敢问江湖事。", "next": "talk", "effects": [{ "type": "affinity", "target": "instructor", "value": 1 }] },
+          { "text": "告辞。", "next": "END" }
+        ]
+      },
+      "teach": {
+        "id": "teach",
+        "speaker": "王铁柱",
+        "text": "某家的独孤九剑，乃剑法中的绝诣。你若能扬名立万、胜敌五场，某家便破例相传。",
+        "effects": [{ "type": "quest", "target": "quest_duel", "value": "active" }],
+        "choices": [{ "text": "晚辈定当尽力。", "next": "END" }]
+      },
+      "teach_done": {
+        "id": "teach_done",
+        "speaker": "王铁柱",
+        "text": "好！你已胜敌五场，某家言出必行——这独孤九剑，拿去！",
+        "effects": [{ "type": "learn_skill", "target": "dugu_nine" }, { "type": "flag", "target": "learned_dugu", "value": true }],
+        "choices": [{ "text": "多谢教头！", "next": "END" }]
+      },
+      "talk": {
+        "id": "talk",
+        "speaker": "王铁柱",
+        "text": "江湖险恶，人心难测。少侠初出茅庐，凡事多留个心眼。那古刹里的慧能老僧，倒是位真高人。",
+        "choices": [{ "text": "记下了。", "next": "END" }]
+      }
+    }
+  },
+  {
+    "id": "merchant",
+    "name": "钱通",
+    "title": "药铺掌柜",
+    "description": "清风镇药铺掌柜，圆滑精明，手中药材齐全。",
+    "sceneId": "town",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "钱通",
+        "text": "客官要些什么药材？金创药、大力丸，俺这都有。今日便送客官一株草药，结个善缘。",
+        "choices": [
+          { "text": "多谢钱掌柜。", "next": "give_herb", "effects": [{ "type": "item", "target": "medicine_herb", "value": 1 }, { "type": "affinity", "target": "merchant", "value": 1 }] },
+          { "text": "告辞。", "next": "END" }
+        ]
+      },
+      "give_herb": {
+        "id": "give_herb",
+        "speaker": "钱通",
+        "text": "这草药名为三七，止血生肌最是灵验。江湖行走，身上总得备些。",
+        "choices": [{ "text": "记下。", "next": "END" }]
+      }
+    }
+  },
+  {
+    "id": "monk",
+    "name": "慧能",
+    "title": "古刹老僧",
+    "description": "古刹中枯坐数十载的白眉老僧，武功深不可测。",
+    "sceneId": "temple",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "慧能",
+        "text": "施主何来？老衲慧能，在此枯坐数十载。佛门虽不尚争斗，然强身修心之易筋经，亦可广传有缘人。",
+        "choices": [
+          { "text": "晚辈已寻得草药三株。", "next": "offer_done", "condition": { "type": "quest", "target": "quest_herb", "op": "==", "value": "completed" } },
+          { "text": "敢问易筋经。", "next": "offer", "condition": { "type": "flag", "target": "learned_yijin", "op": "!=", "value": true } },
+          { "text": "老禅师心。", "next": "END", "effects": [{ "type": "affinity", "target": "monk", "value": 2 }] }
+        ]
+      },
+      "offer": {
+        "id": "offer",
+        "speaker": "慧能",
+        "text": "易筋经需上等药材为引，施主若寻来草药三株相赠，老衲便传你此经，洗髓易筋。",
+        "effects": [{ "type": "quest", "target": "quest_herb", "value": "active" }],
+        "choices": [{ "text": "晚辈去寻来。", "next": "END" }]
+      },
+      "offer_done": {
+        "id": "offer_done",
+        "speaker": "慧能",
+        "text": "善哉。施主诚心，老衲便将易筋经相传，望你以此行侠仗义。",
+        "effects": [{ "type": "learn_skill", "target": "yijinjing" }, { "type": "flag", "target": "learned_yijin", "value": true }],
+        "choices": [{ "text": "多谢大师。", "next": "END" }]
+      }
+    }
+  }
+]

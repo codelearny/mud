@@ -1,0 +1,54 @@
+[
+  {
+    "id": "village",
+    "name": "青石村",
+    "description": "青石村坐落山谷之中，屋舍俨然，炊烟袅袅。村口一株老槐遮天蔽日，树下老人们摇扇闲谈。一条青石小径向东通往清风镇，向西没入后山云雾。",
+    "connections": ["mountain", "town"],
+    "npcs": ["village_chief", "innkeeper"],
+    "actions": [
+      { "id": "rest", "label": "客栈歇息", "type": "rest", "text": "你在客栈歇脚，饱餐一顿，气血内力尽复。" },
+      { "id": "explore_village", "label": "村中漫步", "type": "encounter", "text": "你在村中漫步，或许能遇上些机缘。" }
+    ]
+  },
+  {
+    "id": "mountain",
+    "name": "后山",
+    "description": "后山林木幽深，怪石嶙峋。山道旁时见被劫杀的行商尸骸，显然有匪类盘踞。崖边有一处平坦石台，似是前人练功之所。",
+    "connections": ["village", "forest"],
+    "npcs": [],
+    "actions": [
+      { "id": "explore_mountain", "label": "搜山寻敌", "type": "encounter", "text": "你提气轻身，深入后山搜寻匪踪。" },
+      { "id": "train", "label": "石台练功", "type": "train", "text": "你在石台上吐纳运功，隐隐有所领悟。" }
+    ]
+  },
+  {
+    "id": "town",
+    "name": "清风镇",
+    "description": "清风镇乃四方通衢，市集喧闹，茶楼酒肆鳞次栉比。镇西武馆旌旗猎猎，镇东药铺药香扑鼻。再往北行，可达深山古刹。",
+    "connections": ["village", "temple"],
+    "npcs": ["instructor", "merchant"],
+    "actions": [
+      { "id": "explore_town", "label": "镇上走动", "type": "encounter", "text": "你在镇上走动，市井之中藏着不少故事。" }
+    ]
+  },
+  {
+    "id": "forest",
+    "name": "迷雾林",
+    "description": "迷雾林终年氤氲，古木蔽天，寻常人等入内多迷失方向。林深之处偶有奇花异草，亦有猛兽毒虫，更传闻有前辈高人隐居。",
+    "connections": ["mountain"],
+    "npcs": [],
+    "actions": [
+      { "id": "explore_forest", "label": "林中探奇", "type": "encounter", "text": "你拨开迷雾，向林深处探去。" }
+    ]
+  },
+  {
+    "id": "temple",
+    "name": "古刹",
+    "description": "古刹隐于云林深处，断壁残垣间梵音隐隐。大殿前一位白眉老僧默然枯坐，似已与青石融为一体。此处香火虽稀，却藏武学至理。",
+    "connections": ["town"],
+    "npcs": ["monk"],
+    "actions": [
+      { "id": "explore_temple", "label": "殿中礼佛", "type": "encounter", "text": "你于殿中焚香礼佛，心境渐趋澄明。" }
+    ]
+  }
+]
