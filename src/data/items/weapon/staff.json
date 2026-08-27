@@ -1,0 +1,28 @@
+[
+  {
+    "id": "green_staff",
+    "name": "青木杖",
+    "description": "坚韧青木为杖，沉稳厚重，利于强身。",
+    "type": "weapon",
+    "category": "staff",
+    "school": "staff",
+    "price": 120,
+    "slot": "weapon",
+    "minLevel": 2,
+    "rarity": "common",
+    "effects": [{ "type": "attack", "value": 5 }, { "type": "maxHp", "value": 10 }]
+  },
+  {
+    "id": "dragon_staff",
+    "name": "盘龙棍",
+    "description": "棍身盘龙纹，使起来大开大合，攻防一体。",
+    "type": "weapon",
+    "category": "staff",
+    "school": "staff",
+    "price": 1500,
+    "slot": "weapon",
+    "minLevel": 8,
+    "rarity": "epic",
+    "effects": [{ "type": "attack", "value": 18 }, { "type": "maxHp", "value": 30 }, { "type": "defense", "value": 3 }]
+  }
+]

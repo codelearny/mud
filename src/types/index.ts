@@ -6,6 +6,10 @@ export type ItemType = 'weapon' | 'armor' | 'accessory' | 'consumable' | 'materi
 
 export type ItemRarity = 'common' | 'rare' | 'epic' | 'legendary'
 
+// 兵器流派：与技能 category 对应（fist/sword/blade/staff）。
+// 'none' 表示无流派（如徒手之外的通用兵器），用于兜底。
+export type WeaponSchool = 'none' | 'sword' | 'blade' | 'fist' | 'staff'
+
 // 物品/装备效果类型（全部由 JSON 数据驱动，引擎按 type 分发，绝不写死具体物品）
 export type EffectType =
   | 'hp'            // 恢复当前气血
@@ -103,6 +107,7 @@ export interface Item {
   slot?: EquipSlot
   minLevel?: number   // 装备/服用所需最低等级（配置驱动，引擎校验）
   rarity?: ItemRarity // 稀有度，仅用于展示与收集感
+  school?: WeaponSchool // 兵器流派（仅 type==='weapon' 有意义）；与技能 category 强关联
   effects?: ItemEffect[]
 }
 
@@ -169,6 +174,7 @@ export interface BattleCharacter {
   poison?: number
   poisonTurns?: number
   buffs?: ActiveBuff[]
+  weaponSchool?: WeaponSchool // 已装备兵器的流派，用于战斗内「兵刃与功法相性」判定
 }
 
 export interface BattleLogEntry {

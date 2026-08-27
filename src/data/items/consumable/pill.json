@@ -1,0 +1,99 @@
+[
+  {
+    "id": "inner_pill",
+    "name": "培元丹",
+    "description": "温养经脉，恢复120点内力。",
+    "type": "consumable",
+    "category": "pill",
+    "price": 80,
+    "rarity": "common",
+    "effects": [{ "type": "mp", "value": 120 }]
+  },
+  {
+    "id": "atk_pill",
+    "name": "猛攻丹",
+    "description": "战时服下，气血翻涌，攻击力大涨三回合。",
+    "type": "consumable",
+    "category": "pill",
+    "price": 120,
+    "rarity": "rare",
+    "effects": [{ "type": "buffAttack", "value": 10, "turns": 3 }]
+  },
+  {
+    "id": "def_pill",
+    "name": "金钟丹",
+    "description": "护体金钟罩之效，防御力大涨三回合。",
+    "type": "consumable",
+    "category": "pill",
+    "price": 120,
+    "rarity": "rare",
+    "effects": [{ "type": "buffDefense", "value": 10, "turns": 3 }]
+  },
+  {
+    "id": "agi_pill",
+    "name": "神行丹",
+    "description": "服后身轻如燕，轻功大涨三回合，更易闪避。",
+    "type": "consumable",
+    "category": "pill",
+    "price": 120,
+    "rarity": "rare",
+    "effects": [{ "type": "buffAgility", "value": 8, "turns": 3 }]
+  },
+  {
+    "id": "power_pill",
+    "name": "神力丹",
+    "description": "攻防身法一时俱强，持续四回合，临阵破敌之宝。",
+    "type": "consumable",
+    "category": "pill",
+    "price": 300,
+    "minLevel": 6,
+    "rarity": "epic",
+    "effects": [
+      { "type": "buffAttack", "value": 8, "turns": 4 },
+      { "type": "buffDefense", "value": 8, "turns": 4 },
+      { "type": "buffAgility", "value": 8, "turns": 4 }
+    ]
+  },
+  {
+    "id": "strength_pill",
+    "name": "大力丸",
+    "description": "服用后永久增加3点攻击力。",
+    "type": "consumable",
+    "category": "pill",
+    "price": 150,
+    "rarity": "rare",
+    "effects": [{ "type": "attack", "value": 3 }]
+  },
+  {
+    "id": "agility_pill",
+    "name": "轻身丹",
+    "description": "服用后永久增加2点轻功。",
+    "type": "consumable",
+    "category": "pill",
+    "price": 150,
+    "rarity": "rare",
+    "effects": [{ "type": "agility", "value": 2 }]
+  },
+  {
+    "id": "comprehension_pill",
+    "name": "开窍丹",
+    "description": "服之灵台清明，永久增加3点悟性，利于习武。",
+    "type": "consumable",
+    "category": "pill",
+    "price": 400,
+    "minLevel": 5,
+    "rarity": "epic",
+    "effects": [{ "type": "comprehension", "value": 3 }]
+  },
+  {
+    "id": "luck_pill",
+    "name": "转运丹",
+    "description": "机缘所钟，永久增加3点福缘。",
+    "type": "consumable",
+    "category": "pill",
+    "price": 400,
+    "minLevel": 5,
+    "rarity": "epic",
+    "effects": [{ "type": "luck", "value": 3 }]
+  }
+]

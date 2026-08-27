@@ -1,0 +1,77 @@
+[
+  {
+    "id": "basic_sword",
+    "name": "基本剑法",
+    "description": "入门剑法，一板一眼，中规中矩。",
+    "type": "active",
+    "category": "sword",
+    "power": 14,
+    "mpCost": 2,
+    "hitRate": 0.88,
+    "critRate": 0.08,
+    "unlockLevel": 1
+  },
+  {
+    "id": "lianhuan_sword",
+    "name": "连环剑法",
+    "description": "一剑三连环，剑出如风，令人防不胜防。",
+    "type": "active",
+    "category": "sword",
+    "power": 28,
+    "mpCost": 8,
+    "hitRate": 0.82,
+    "critRate": 0.15,
+    "unlockLevel": 5
+  },
+  {
+    "id": "taiji_sword",
+    "name": "太极剑",
+    "description": "剑走轻灵，绵里藏针，挥洒间卸去敌之攻势。",
+    "type": "active",
+    "category": "sword",
+    "power": 36,
+    "mpCost": 12,
+    "hitRate": 0.88,
+    "critRate": 0.1,
+    "unlockLevel": 6,
+    "enemyDebuff": { "attack": -5 }
+  },
+  {
+    "id": "yuenyu_sword",
+    "name": "越女剑",
+    "description": "相传越女所传，剑走轻灵，一瞬两击，快若惊鸿。",
+    "type": "active",
+    "category": "sword",
+    "power": 44,
+    "mpCost": 14,
+    "hitRate": 0.9,
+    "critRate": 0.12,
+    "unlockLevel": 8,
+    "hits": 2
+  },
+  {
+    "id": "wanjan_sword",
+    "name": "万剑归宗",
+    "description": "剑圣绝学，剑气纵横化为万剑，三连斩落，无可躲闪。",
+    "type": "active",
+    "category": "sword",
+    "power": 58,
+    "mpCost": 22,
+    "hitRate": 0.85,
+    "critRate": 0.25,
+    "unlockLevel": 14,
+    "hits": 3
+  },
+  {
+    "id": "dugu_nine",
+    "name": "独孤九剑",
+    "description": "剑魔独孤求败所创，破尽天下武学，无招胜有招。",
+    "type": "active",
+    "category": "sword",
+    "power": 65,
+    "mpCost": 18,
+    "hitRate": 0.85,
+    "critRate": 0.3,
+    "unlockLevel": 15
+  }
+]

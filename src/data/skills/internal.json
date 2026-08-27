@@ -1,0 +1,82 @@
+[
+  {
+    "id": "basic_internal",
+    "name": "吐纳基本功",
+    "description": "最基础的内功心法，调息吐纳，运转周天恢复内力。",
+    "type": "active",
+    "category": "internal",
+    "power": 0,
+    "mpCost": 0,
+    "hitRate": 1,
+    "critRate": 0,
+    "unlockLevel": 1,
+    "restoreMp": 15
+  },
+  {
+    "id": "yijinjing",
+    "name": "易筋经",
+    "description": "少林镇寺之宝，脱胎换骨，大幅提升攻击与防御。",
+    "type": "active",
+    "category": "internal",
+    "power": 0,
+    "mpCost": 12,
+    "hitRate": 1,
+    "critRate": 0,
+    "unlockLevel": 8,
+    "selfBuff": { "attack": 10, "defense": 5 }
+  },
+  {
+    "id": "beiming_internal",
+    "name": "北冥神功",
+    "description": "逍遥派绝学，海纳百川，既可回复内力，又能滋养气血。",
+    "type": "active",
+    "category": "internal",
+    "power": 0,
+    "mpCost": 10,
+    "hitRate": 1,
+    "critRate": 0,
+    "unlockLevel": 6,
+    "restoreMp": 30,
+    "heal": 20
+  },
+  {
+    "id": "heal_shengshou",
+    "name": "疗伤圣手",
+    "description": "杏林妙手，运功疗伤，瞬息间回复大量气血。",
+    "type": "active",
+    "category": "internal",
+    "power": 0,
+    "mpCost": 8,
+    "hitRate": 1,
+    "critRate": 0,
+    "unlockLevel": 4,
+    "heal": 60
+  },
+  {
+    "id": "jiuyin_internal",
+    "name": "九阴真经",
+    "description": "武学总纲，内力深不可测，攻守兼备且能自愈。",
+    "type": "active",
+    "category": "internal",
+    "power": 0,
+    "mpCost": 16,
+    "hitRate": 1,
+    "critRate": 0,
+    "unlockLevel": 12,
+    "selfBuff": { "attack": 8, "defense": 8 },
+    "heal": 30
+  },
+  {
+    "id": "huagong_internal",
+    "name": "化功大法",
+    "description": "星宿奇功，化去敌人功力，令其攻弱身滞。",
+    "type": "active",
+    "category": "internal",
+    "power": 0,
+    "mpCost": 14,
+    "hitRate": 1,
+    "critRate": 0,
+    "unlockLevel": 9,
+    "enemyDebuff": { "attack": -8, "agility": -4 }
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "spirit_herb",
+    "name": "紫灵草",
+    "description": "生于幽谷的灵草，药香清远，不少方子都用得上。",
+    "type": "material",
+    "category": "herb",
+    "price": 60,
+    "rarity": "common"
+  },
+  {
+    "id": "iron_ore",
+    "name": "玄铁砂",
+    "description": "精炼矿石，是打造兵刃的上好材料。",
+    "type": "material",
+    "category": "ore",
+    "price": 45,
+    "rarity": "common"
+  },
+  {
+    "id": "beast_core",
+    "name": "妖兽内丹",
+    "description": "异兽体内凝结的内丹，蕴含精纯元气，价值不菲。",
+    "type": "material",
+    "category": "core",
+    "price": 300,
+    "rarity": "rare"
+  },
+  {
+    "id": "ancient_relic",
+    "name": "上古遗物",
+    "description": "不知年代的残破玉璧，隐隐透着古朴气息，似有大用。",
+    "type": "material",
+    "category": "relic",
+    "price": 1500,
+    "rarity": "legendary"
+  }
+]

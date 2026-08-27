@@ -1,0 +1,61 @@
+[
+  {
+    "id": "cloth_robe",
+    "name": "布衣",
+    "description": "粗布缝制的衣物，聊胜于无。",
+    "type": "armor",
+    "category": "body",
+    "price": 30,
+    "slot": "armor",
+    "rarity": "common",
+    "effects": [{ "type": "defense", "value": 2 }]
+  },
+  {
+    "id": "leather_armor",
+    "name": "皮甲",
+    "description": "兽皮制成，轻便且有一定防护力。",
+    "type": "armor",
+    "category": "body",
+    "price": 120,
+    "slot": "armor",
+    "minLevel": 3,
+    "rarity": "rare",
+    "effects": [{ "type": "defense", "value": 6 }]
+  },
+  {
+    "id": "scale_armor",
+    "name": "锁子甲",
+    "description": "铁环相扣而成，防护甚佳，亦固本培元。",
+    "type": "armor",
+    "category": "body",
+    "price": 900,
+    "slot": "armor",
+    "minLevel": 6,
+    "rarity": "epic",
+    "effects": [{ "type": "defense", "value": 10 }, { "type": "maxHp", "value": 20 }]
+  },
+  {
+    "id": "silk_robe",
+    "name": "天蚕丝甲",
+    "description": "天蚕丝编织，刀枪不入，轻盈如无物。",
+    "type": "armor",
+    "category": "body",
+    "price": 1000,
+    "slot": "armor",
+    "minLevel": 8,
+    "rarity": "legendary",
+    "effects": [{ "type": "defense", "value": 15 }, { "type": "agility", "value": 5 }]
+  },
+  {
+    "id": "beast_armor",
+    "name": "蛮兽战甲",
+    "description": "以异兽筋骨混玄铁打造，坚固异常，刀斧难伤。",
+    "type": "armor",
+    "category": "body",
+    "price": 2600,
+    "slot": "armor",
+    "minLevel": 11,
+    "rarity": "legendary",
+    "effects": [{ "type": "defense", "value": 20 }, { "type": "maxHp", "value": 40 }, { "type": "agility", "value": 3 }]
+  }
+]

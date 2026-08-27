@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router'
 import { useBattleStore } from '../stores/battle'
 import { usePlayerStore } from '../stores/player'
 import { getSkill, getItem } from '../engine/data-loader'
-import { skillTags } from '../engine/skill-utils'
+import { skillTags, skillSchoolLabel } from '../engine/skill-utils'
 import { itemTags } from '../engine/item-utils'
 import GameLog from '../components/GameLog.vue'
 import type { Skill, Item } from '../types'
@@ -38,15 +38,24 @@ const playerMpPercent = computed(() => {
   return (battle.value.player.mp / battle.value.player.maxMp) * 100
 })
 
-const availableSkills = computed<(Skill & { canUse: boolean })[]>(() => {
+const availableSkills = computed<(Skill & { canUse: boolean; discounted: boolean; matched: boolean })[]>(() => {
   if (!battle.value) return []
+  const ws = battle.value.player.weaponSchool
+  const WEAPON_CATS = ['sword', 'blade', 'fist', 'staff']
   return battle.value.player.skills
     .map(id => getSkill(id))
     .filter((s): s is Skill => s !== undefined && s.type === 'active')
-    .map(s => ({
-      ...s,
-      canUse: battle.value!.player.mp >= s.mpCost
-    }))
+    .map(s => {
+      const isWeaponSkill = WEAPON_CATS.includes(s.category)
+      const effectiveSchool = ws ?? 'fist'
+      const matched = isWeaponSkill && effectiveSchool === s.category
+      return {
+        ...s,
+        canUse: battle.value!.player.mp >= s.mpCost,
+        discounted: isWeaponSkill && !matched,
+        matched
+      }
+    })
 })
 
 const consumableItems = computed<(Item & { quantity: number })[]>(() => {
@@ -154,10 +163,16 @@ function returnToMenu() {
             @click="skill.canUse && doUseSkill(skill.id)"
           >
               <div class="skill-info" style="text-align: left;">
-              <div class="skill-name">{{ skill.name }}</div>
+              <div class="skill-name">
+                {{ skill.name }}
+                <span class="school-badge" v-if="skillSchoolLabel(skill)">适配{{ skillSchoolLabel(skill) }}</span>
+              </div>
               <div class="skill-desc">威力 {{ skill.power }} · 耗内力 {{ skill.mpCost }}</div>
               <div class="skill-tags" v-if="skillTags(skill).length" style="margin-top: 4px;">
                 <span class="skill-tag" v-for="t in skillTags(skill)" :key="t">{{ t }}</span>
+              </div>
+              <div class="skill-tags" style="margin-top: 4px;" v-if="skill.discounted">
+                <span class="skill-tag warn">⚠ 兵器不合·威力折扣</span>
               </div>
             </div>
           </button>

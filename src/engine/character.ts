@@ -28,9 +28,8 @@ export function createNewCharacter(name: string): Character {
       { skillId: 'basic_fist', level: 1, proficiency: 0, proficiencyToNext: 100 },
       { skillId: 'basic_sword', level: 1, proficiency: 0, proficiencyToNext: 100 }
     ],
-    equipment: {},
+    equipment: { weapon: 'wooden_sword' },
     inventory: [
-      { itemId: 'wooden_sword', quantity: 1 },
       { itemId: 'cloth_robe', quantity: 1 },
       { itemId: 'medicine_herb', quantity: 3 },
       { itemId: 'minor_heal', quantity: 2 },

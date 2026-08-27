@@ -1,10 +1,17 @@
 import type { Item, ItemEffect, ItemRarity, EffectType } from '../types'
+import { WEAPON_SCHOOL_LABELS } from './skill-utils'
 
 export const RARITY_LABELS: Record<ItemRarity, string> = {
   common: '凡品',
   rare: '精良',
   epic: '上品',
   legendary: '神兵'
+}
+
+// 兵器流派标签，如「刀系兵器」；非兵器或无流派返回 null
+export function itemSchoolLabel(item: Item): string | null {
+  if (item.type !== 'weapon' || !item.school || item.school === 'none') return null
+  return WEAPON_SCHOOL_LABELS[item.school] + '系兵器'
 }
 
 // 单条效果 -> 展示文案（完全由 type 决定，新增效果类型只需在此扩展）

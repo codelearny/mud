@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { usePlayerStore } from '../stores/player'
 import { getAllSkills, getSkill } from '../engine/data-loader'
-import { skillTags } from '../engine/skill-utils'
+import { skillTags, skillSchoolLabel } from '../engine/skill-utils'
 import type { Skill, SkillCategory } from '../types'
 
 const playerStore = usePlayerStore()
@@ -66,6 +66,7 @@ function learnSkill(skillId: string) {
           <div class="skill-name">
             {{ skill.name }}
             <span class="equipped-badge">{{ categoryLabels[skill.category] }}</span>
+            <span class="equipped-badge" v-if="skillSchoolLabel(skill)">适配{{ skillSchoolLabel(skill) }}</span>
             <span class="equipped-badge">第{{ skill.level }}层</span>
           </div>
           <div class="skill-desc">{{ skill.description }}</div>
@@ -92,6 +93,7 @@ function learnSkill(skillId: string) {
           <div class="skill-name">
             {{ skill.name }}
             <span class="equipped-badge">{{ categoryLabels[skill.category] }}</span>
+            <span class="equipped-badge" v-if="skillSchoolLabel(skill)">适配{{ skillSchoolLabel(skill) }}</span>
           </div>
           <div class="skill-desc">{{ skill.description }}</div>
           <div class="skill-desc" style="color: var(--text-tertiary);">

@@ -1,0 +1,28 @@
+[
+  {
+    "id": "steel_blade",
+    "name": "雁翎刀",
+    "description": "厚重雁翎刀，劈砍沉猛，亦能护身。",
+    "type": "weapon",
+    "category": "blade",
+    "school": "blade",
+    "price": 500,
+    "slot": "weapon",
+    "minLevel": 5,
+    "rarity": "rare",
+    "effects": [{ "type": "attack", "value": 14 }, { "type": "defense", "value": 2 }]
+  },
+  {
+    "id": "black_blade",
+    "name": "玄铁屠龙刀",
+    "description": "玄铁混赤金铸成，重逾百斤，挥之可断金碎玉，更添几分气运。",
+    "type": "weapon",
+    "category": "blade",
+    "school": "blade",
+    "price": 2200,
+    "slot": "weapon",
+    "minLevel": 9,
+    "rarity": "epic",
+    "effects": [{ "type": "attack", "value": 22 }, { "type": "luck", "value": 3 }]
+  }
+]

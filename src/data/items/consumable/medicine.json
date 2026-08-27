@@ -1,0 +1,53 @@
+[
+  {
+    "id": "minor_heal",
+    "name": "金疮药",
+    "description": "寻常外伤药，恢复30点气血。",
+    "type": "consumable",
+    "category": "medicine",
+    "price": 10,
+    "rarity": "common",
+    "effects": [{ "type": "hp", "value": 30 }]
+  },
+  {
+    "id": "medicine_herb",
+    "name": "大补膏",
+    "description": "疗伤圣药，恢复50点气血。",
+    "type": "consumable",
+    "category": "medicine",
+    "price": 20,
+    "rarity": "common",
+    "effects": [{ "type": "hp", "value": 50 }]
+  },
+  {
+    "id": "great_medicine",
+    "name": "大还丹",
+    "description": "名贵丹药，恢复200点气血和50点内力。",
+    "type": "consumable",
+    "category": "medicine",
+    "price": 200,
+    "rarity": "rare",
+    "effects": [{ "type": "hp", "value": 200 }, { "type": "mp", "value": 50 }]
+  },
+  {
+    "id": "jade_heal",
+    "name": "九转玉液丹",
+    "description": "宫中秘传丹药，恢复400点气血与100点内力。",
+    "type": "consumable",
+    "category": "medicine",
+    "price": 600,
+    "minLevel": 5,
+    "rarity": "epic",
+    "effects": [{ "type": "hp", "value": 400 }, { "type": "mp", "value": 100 }]
+  },
+  {
+    "id": "antidote",
+    "name": "解毒丸",
+    "description": "以数种草药炼成，可解百毒（战斗中清除中毒）。",
+    "type": "consumable",
+    "category": "medicine",
+    "price": 40,
+    "rarity": "common",
+    "effects": [{ "type": "cure", "value": 0 }]
+  }
+]

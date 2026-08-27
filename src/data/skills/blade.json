@@ -1,0 +1,54 @@
+[
+  {
+    "id": "basic_blade",
+    "name": "基础刀法",
+    "description": "大开大合的基础刀法，重势不重巧。",
+    "type": "active",
+    "category": "blade",
+    "power": 16,
+    "mpCost": 2,
+    "hitRate": 0.9,
+    "critRate": 0.06,
+    "unlockLevel": 1
+  },
+  {
+    "id": "kuangfeng_blade",
+    "name": "狂风刀法",
+    "description": "如狂风骤雨，连环两刀劈下，让人喘不过气。",
+    "type": "active",
+    "category": "blade",
+    "power": 30,
+    "mpCost": 9,
+    "hitRate": 0.82,
+    "critRate": 0.12,
+    "unlockLevel": 5,
+    "hits": 2
+  },
+  {
+    "id": "hujiaya_blade",
+    "name": "胡家刀法",
+    "description": "刀中名家，刀风凌厉破敌护甲，削其守势。",
+    "type": "active",
+    "category": "blade",
+    "power": 50,
+    "mpCost": 16,
+    "hitRate": 0.86,
+    "critRate": 0.18,
+    "unlockLevel": 10,
+    "enemyDebuff": { "defense": -6 }
+  },
+  {
+    "id": "daoba_blade",
+    "name": "刀霸天下",
+    "description": "霸道绝伦的刀法，双刀齐出，刀过处血涌如泉。",
+    "type": "active",
+    "category": "blade",
+    "power": 70,
+    "mpCost": 24,
+    "hitRate": 0.8,
+    "critRate": 0.2,
+    "unlockLevel": 15,
+    "hits": 2,
+    "lifesteal": 0.15
+  }
+]

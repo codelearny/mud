@@ -1,13 +1,23 @@
-import type { Battle, BattleCharacter, Character, Skill, ActiveBuff } from '../types'
+import type { Battle, BattleCharacter, Character, Skill, ActiveBuff, WeaponSchool, SkillCategory } from '../types'
 import { getEnemy, getSkill, getItem } from './data-loader'
 import { getEffectiveAttributes } from './character'
 import { chance, randomInt } from './random'
+import { WEAPON_SCHOOL_LABELS } from './skill-utils'
+
+// 兵刃与功法相性：兵器流派与技能 category 一致则威力尽出（略增），不一致则大打折扣
+const MATCH_MULT = 1.1
+const MISMATCH_MULT = 0.6
+const WEAPON_SKILL_CATS: SkillCategory[] = ['sword', 'blade', 'fist', 'staff']
 
 export function startBattle(player: Character, enemyId: string): Battle {
   const enemy = getEnemy(enemyId)
   if (!enemy) throw new Error(`Enemy ${enemyId} not found`)
 
   const eff = getEffectiveAttributes(player)
+
+  // 已装备兵器的流派，用于战斗内「兵刃与功法相性」判定
+  const equippedWeapon = player.equipment.weapon ? getItem(player.equipment.weapon) : undefined
+  const weaponSchool: WeaponSchool | undefined = equippedWeapon?.school
 
   const playerBC: BattleCharacter = {
     name: player.name,
@@ -20,7 +30,8 @@ export function startBattle(player: Character, enemyId: string): Battle {
     agility: eff.agility,
     skills: player.learnedSkills.map(s => s.skillId),
     isPlayer: true,
-    buffs: []
+    buffs: [],
+    weaponSchool
   }
 
   const enemyBC: BattleCharacter = {
@@ -298,11 +309,28 @@ export function playerUseSkill(battle: Battle, skillId: string): Battle {
 
   b.player.mp -= skill.mpCost
 
+  // —— 兵刃与功法相性 ——
+  // 兵器流派与技能 category 一致 → 威力尽出（略增）；不一致 → 威力大打折扣。
+  // 徒手视同拳脚流派：未持兵器时拳法仍可正常施展，但刀/剑/棍法威力大减。
+  const isWeaponSkill = WEAPON_SKILL_CATS.includes(skill.category)
+  let schoolMult = 1
+  let schoolNote = ''
+  if (isWeaponSkill) {
+    const effectiveSchool: WeaponSchool = b.player.weaponSchool ?? 'fist'
+    if (effectiveSchool === skill.category) {
+      schoolMult = MATCH_MULT
+    } else {
+      schoolMult = MISMATCH_MULT
+      schoolNote = `手中无${WEAPON_SCHOOL_LABELS[skill.category as WeaponSchool]}刃，招法威力大减`
+    }
+  }
+  const effSkill: Skill = { ...skill, power: Math.max(0, Math.round(skill.power * schoolMult)) }
+
   const logParts: string[] = []
 
   // 进攻部分
-  if (skill.power > 0) {
-    const res = performOffensive(b.player, b.enemy, skill)
+  if (effSkill.power > 0) {
+    const res = performOffensive(b.player, b.enemy, effSkill)
     logParts.push(...res.logParts)
     if (res.dead) {
       b.enemy.hp = 0
@@ -313,6 +341,10 @@ export function playerUseSkill(battle: Battle, skillId: string): Battle {
   applySupportEffects(b.player, b.enemy, skill, logParts)
 
   b.log.push({ turn: b.turn, actor: 'player', text: `你施展${skill.name}：${logParts.join('；')}！`, type: 'skill' })
+
+  if (schoolNote) {
+    b.log.push({ turn: b.turn, actor: 'player', text: `${schoolNote}！`, type: 'info' })
+  }
 
   if (b.enemy.hp <= 0) {
     b.enemy.hp = 0

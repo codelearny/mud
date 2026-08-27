@@ -1,11 +1,14 @@
-import skillsJson from '../data/skills.json'
-import itemsJson from '../data/items.json'
 import enemiesJson from '../data/enemies.json'
 import scenesJson from '../data/scenes.json'
 import npcsJson from '../data/npcs.json'
 import questsJson from '../data/quests.json'
 import encountersJson from '../data/encounters.json'
 import type { Skill, Item, Enemy, Scene, NPC, Quest, Encounter } from '../types'
+
+// 技能与物品按「大类/子类」拆分到独立文件（见 src/data/skills、src/data/items）。
+// 这里用 import.meta.glob 将目录下所有 JSON 合并进 Map，对外接口保持不变。
+const skillModules = import.meta.glob('../data/skills/**/*.json', { eager: true }) as unknown as Record<string, { default: Skill[] }>
+const itemModules = import.meta.glob('../data/items/**/*.json', { eager: true }) as unknown as Record<string, { default: Item[] }>
 
 const skills = new Map<string, Skill>()
 const items = new Map<string, Item>()
@@ -15,12 +18,16 @@ const npcs = new Map<string, NPC>()
 const quests = new Map<string, Quest>()
 const encounters = new Map<string, Encounter>()
 
-for (const skill of skillsJson as Skill[]) {
-  skills.set(skill.id, skill)
+for (const mod of Object.values(skillModules)) {
+  for (const skill of mod.default) {
+    skills.set(skill.id, skill)
+  }
 }
 
-for (const item of itemsJson as Item[]) {
-  items.set(item.id, item)
+for (const mod of Object.values(itemModules)) {
+  for (const item of mod.default) {
+    items.set(item.id, item)
+  }
 }
 
 for (const enemy of enemiesJson as Enemy[]) {

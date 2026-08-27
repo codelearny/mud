@@ -1,0 +1,41 @@
+[
+  {
+    "id": "basic_staff",
+    "name": "基础棍法",
+    "description": "棍为百兵之祖，扫砸挑拨，朴实无华。",
+    "type": "active",
+    "category": "staff",
+    "power": 18,
+    "mpCost": 3,
+    "hitRate": 0.88,
+    "critRate": 0.07,
+    "unlockLevel": 2
+  },
+  {
+    "id": "dagou_staff",
+    "name": "打狗棒法",
+    "description": "丐帮镇帮武学，棒法刁钻，点穴封脉令敌动弹不得。",
+    "type": "active",
+    "category": "staff",
+    "power": 42,
+    "mpCost": 14,
+    "hitRate": 0.85,
+    "critRate": 0.12,
+    "unlockLevel": 8,
+    "stun": true,
+    "enemyDebuff": { "agility": -5 }
+  },
+  {
+    "id": "fengmo_staff",
+    "name": "疯魔杖法",
+    "description": "一旦使开便如疯似魔，两杖连环，势不可挡。",
+    "type": "active",
+    "category": "staff",
+    "power": 55,
+    "mpCost": 18,
+    "hitRate": 0.84,
+    "critRate": 0.2,
+    "unlockLevel": 12,
+    "hits": 2
+  }
+]

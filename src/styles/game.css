@@ -465,6 +465,25 @@ html, body {
   white-space: nowrap;
 }
 
+.skill-tag.warn {
+  color: #f0a0a0;
+  background: rgba(200, 60, 60, 0.14);
+  border-color: rgba(200, 60, 60, 0.5);
+}
+
+.school-badge {
+  display: inline-block;
+  font-size: 10px;
+  line-height: 1.4;
+  color: #7fc8c0;
+  background: rgba(80, 180, 170, 0.12);
+  border: 1px solid rgba(80, 180, 170, 0.45);
+  border-radius: 3px;
+  padding: 0 5px;
+  margin-left: 6px;
+  white-space: nowrap;
+}
+
 .rarity-badge {
   display: inline-block;
   font-size: 10px;

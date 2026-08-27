@@ -1,0 +1,27 @@
+[
+  {
+    "id": "iron_fist",
+    "name": "铁拳套",
+    "description": "铸铁拳套，戴上后拳力大增。",
+    "type": "weapon",
+    "category": "fist",
+    "school": "fist",
+    "price": 150,
+    "slot": "weapon",
+    "rarity": "common",
+    "effects": [{ "type": "attack", "value": 6 }]
+  },
+  {
+    "id": "fine_fist",
+    "name": "流星锤爪",
+    "description": "指套藏锋，出拳如流星，兼具几分身法。",
+    "type": "weapon",
+    "category": "fist",
+    "school": "fist",
+    "price": 600,
+    "slot": "weapon",
+    "minLevel": 4,
+    "rarity": "rare",
+    "effects": [{ "type": "attack", "value": 12 }, { "type": "agility", "value": 2 }]
+  }
+]

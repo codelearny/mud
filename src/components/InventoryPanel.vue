@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { usePlayerStore } from '../stores/player'
 import { getItem } from '../engine/data-loader'
-import { itemTags, RARITY_LABELS } from '../engine/item-utils'
+import { itemTags, RARITY_LABELS, itemSchoolLabel } from '../engine/item-utils'
 import type { EquipSlot, Item, ItemType, ItemRarity } from '../types'
 
 const playerStore = usePlayerStore()
@@ -69,6 +69,9 @@ function useItem(itemId: string) {
             <span v-if="char.equipment[slot.key]" class="rarity-badge" :class="rarityClass(getItem(char.equipment[slot.key]!)?.rarity)">
               {{ RARITY_LABELS[getItem(char.equipment[slot.key]!)?.rarity ?? 'common'] }}
             </span>
+            <span v-if="char.equipment[slot.key] && itemSchoolLabel(getItem(char.equipment[slot.key]!)!)" class="school-badge">
+              {{ itemSchoolLabel(getItem(char.equipment[slot.key]!)!) }}
+            </span>
           </div>
           <div class="item-tags" v-if="char.equipment[slot.key] && itemTags(getItem(char.equipment[slot.key]!)!).length">
             <span class="skill-tag" v-for="t in itemTags(getItem(char.equipment[slot.key]!)!)" :key="t">{{ t }}</span>
@@ -89,6 +92,7 @@ function useItem(itemId: string) {
             <span class="equipped-badge">x{{ item.quantity }}</span>
             <span class="equipped-badge" v-if="isEquipped(item.id)">已装备</span>
             <span class="rarity-badge" :class="rarityClass(item.rarity)">{{ RARITY_LABELS[item.rarity ?? 'common'] }}</span>
+            <span class="school-badge" v-if="itemSchoolLabel(item)">{{ itemSchoolLabel(item) }}</span>
           </div>
           <div class="item-desc">{{ item.description }}</div>
           <div class="item-meta" style="color: var(--text-tertiary);">

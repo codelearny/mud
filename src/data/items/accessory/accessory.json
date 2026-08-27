@@ -1,0 +1,73 @@
+[
+  {
+    "id": "jade_ring",
+    "name": "玉佩",
+    "description": "温润玉佩，安神定气，提升内力上限。",
+    "type": "accessory",
+    "category": "accessory",
+    "price": 300,
+    "slot": "accessory",
+    "minLevel": 2,
+    "rarity": "rare",
+    "effects": [{ "type": "maxMp", "value": 20 }]
+  },
+  {
+    "id": "iron_pendant",
+    "name": "铁护符",
+    "description": "粗铁护身符，略增几分防御。",
+    "type": "accessory",
+    "category": "accessory",
+    "price": 80,
+    "slot": "accessory",
+    "rarity": "common",
+    "effects": [{ "type": "defense", "value": 3 }]
+  },
+  {
+    "id": "agi_pendant",
+    "name": "疾风坠",
+    "description": "缀以鹰羽的玉坠，令人身轻如燕。",
+    "type": "accessory",
+    "category": "accessory",
+    "price": 500,
+    "slot": "accessory",
+    "minLevel": 4,
+    "rarity": "rare",
+    "effects": [{ "type": "agility", "value": 4 }]
+  },
+  {
+    "id": "health_jade",
+    "name": "长生玉",
+    "description": "温养气血的玉饰，体魄更显强健。",
+    "type": "accessory",
+    "category": "accessory",
+    "price": 1100,
+    "slot": "accessory",
+    "minLevel": 6,
+    "rarity": "epic",
+    "effects": [{ "type": "maxHp", "value": 40 }, { "type": "defense", "value": 3 }]
+  },
+  {
+    "id": "luck_talisman",
+    "name": "趋吉符",
+    "description": "道观开光的符箓，转运避灾，亦助身法。",
+    "type": "accessory",
+    "category": "accessory",
+    "price": 1300,
+    "slot": "accessory",
+    "minLevel": 7,
+    "rarity": "epic",
+    "effects": [{ "type": "luck", "value": 8 }, { "type": "agility", "value": 3 }]
+  },
+  {
+    "id": "spirit_orb",
+    "name": "玄天灵珠",
+    "description": "传闻吸纳天地灵气的宝珠，内力、福缘、悟性皆有所增。",
+    "type": "accessory",
+    "category": "accessory",
+    "price": 4000,
+    "slot": "accessory",
+    "minLevel": 10,
+    "rarity": "legendary",
+    "effects": [{ "type": "maxMp", "value": 50 }, { "type": "luck", "value": 5 }, { "type": "comprehension", "value": 5 }]
+  }
+]

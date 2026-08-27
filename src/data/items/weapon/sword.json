@@ -1,0 +1,53 @@
+[
+  {
+    "id": "wooden_sword",
+    "name": "木剑",
+    "description": "一把普通的木剑，练武之人常用。",
+    "type": "weapon",
+    "category": "sword",
+    "school": "sword",
+    "price": 50,
+    "slot": "weapon",
+    "rarity": "common",
+    "effects": [{ "type": "attack", "value": 3 }]
+  },
+  {
+    "id": "iron_sword",
+    "name": "铁剑",
+    "description": "百炼精铁所铸，锋利无比。",
+    "type": "weapon",
+    "category": "sword",
+    "school": "sword",
+    "price": 200,
+    "slot": "weapon",
+    "minLevel": 3,
+    "rarity": "rare",
+    "effects": [{ "type": "attack", "value": 8 }]
+  },
+  {
+    "id": "qingfeng_sword",
+    "name": "青锋剑",
+    "description": "寒铁打造，剑身泛青光，削铁如泥。",
+    "type": "weapon",
+    "category": "sword",
+    "school": "sword",
+    "price": 800,
+    "slot": "weapon",
+    "minLevel": 6,
+    "rarity": "epic",
+    "effects": [{ "type": "attack", "value": 15 }, { "type": "agility", "value": 3 }]
+  },
+  {
+    "id": "hero_sword",
+    "name": "侠客行剑",
+    "description": "剑身镌「侠客行」三字，乃义士信物，攻守兼备且助人逢凶化吉。",
+    "type": "weapon",
+    "category": "sword",
+    "school": "sword",
+    "price": 3000,
+    "slot": "weapon",
+    "minLevel": 10,
+    "rarity": "legendary",
+    "effects": [{ "type": "attack", "value": 25 }, { "type": "agility", "value": 5 }, { "type": "luck", "value": 5 }]
+  }
+]
