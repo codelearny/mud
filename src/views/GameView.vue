@@ -5,6 +5,7 @@ import { usePlayerStore } from '../stores/player'
 import { useGameStore } from '../stores/game'
 import { useBattleStore } from '../stores/battle'
 import { useStoryStore } from '../stores/story'
+import { useShopStore } from '../stores/shop'
 import { getScene, getNPC } from '../engine/data-loader'
 import StatusBar from '../components/StatusBar.vue'
 import CharacterPanel from '../components/CharacterPanel.vue'
@@ -13,6 +14,7 @@ import InventoryPanel from '../components/InventoryPanel.vue'
 import DialoguePanel from '../components/DialoguePanel.vue'
 import EncounterPanel from '../components/EncounterPanel.vue'
 import QuestPanel from '../components/QuestPanel.vue'
+import ShopPanel from '../components/ShopPanel.vue'
 import type { SceneAction } from '../types'
 
 const router = useRouter()
@@ -20,6 +22,7 @@ const playerStore = usePlayerStore()
 const gameStore = useGameStore()
 const battleStore = useBattleStore()
 const storyStore = useStoryStore()
+const shopStore = useShopStore()
 
 type Tab = 'map' | 'quests' | 'character' | 'skills' | 'inventory'
 const activeTab = ref<Tab>('map')
@@ -184,5 +187,6 @@ onMounted(() => {
 
     <DialoguePanel v-if="storyStore.currentDialogue" />
     <EncounterPanel v-if="storyStore.currentEncounter" />
+    <ShopPanel v-if="shopStore.currentShopId" />
   </template>
 </template>

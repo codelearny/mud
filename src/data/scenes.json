@@ -26,7 +26,7 @@
     "name": "清风镇",
     "description": "清风镇乃四方通衢，市集喧闹，茶楼酒肆鳞次栉比。镇西武馆旌旗猎猎，镇东药铺药香扑鼻。再往北行，可达深山古刹。",
     "connections": ["village", "temple"],
-    "npcs": ["instructor", "merchant"],
+    "npcs": ["instructor", "merchant", "blacksmith"],
     "actions": [
       { "id": "explore_town", "label": "镇上走动", "type": "encounter", "text": "你在镇上走动，市井之中藏着不少故事。" }
     ]

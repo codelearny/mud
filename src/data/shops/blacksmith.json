@@ -1,0 +1,28 @@
+[
+  {
+    "id": "blacksmith_shop",
+    "name": "铁大山铁匠铺",
+    "npcId": "blacksmith",
+    "description": "清风镇铁匠铺，炉火昼夜不熄。刀枪剑戟、甲胄护符，只要银子够，铁大山都能给你弄来。",
+    "buyFactor": 1.05,
+    "sellFactor": 0.55,
+    "stock": [
+      { "itemId": "wooden_sword", "price": 55, "limit": 99 },
+      { "itemId": "iron_sword", "price": 220, "limit": 20 },
+      { "itemId": "qingfeng_sword", "price": 850, "limit": 5 },
+      { "itemId": "steel_blade", "price": 540, "limit": 15 },
+      { "itemId": "black_blade", "price": 2300, "limit": 3 },
+      { "itemId": "iron_fist", "price": 165, "limit": 20 },
+      { "itemId": "fine_fist", "price": 650, "limit": 10 },
+      { "itemId": "green_staff", "price": 130, "limit": 20 },
+      { "itemId": "dragon_staff", "price": 1600, "limit": 3 },
+      { "itemId": "cloth_robe", "price": 35, "limit": 99 },
+      { "itemId": "leather_armor", "price": 130, "limit": 20 },
+      { "itemId": "scale_armor", "price": 950, "limit": 8 },
+      { "itemId": "silk_robe", "price": 1050, "limit": 5 },
+      { "itemId": "beast_armor", "price": 2700, "limit": 3 },
+      { "itemId": "agi_pendant", "price": 520, "limit": 10 },
+      { "itemId": "health_jade", "price": 1150, "limit": 5 }
+    ]
+  }
+]

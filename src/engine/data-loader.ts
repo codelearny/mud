@@ -3,12 +3,13 @@ import scenesJson from '../data/scenes.json'
 import npcsJson from '../data/npcs.json'
 import questsJson from '../data/quests.json'
 import encountersJson from '../data/encounters.json'
-import type { Skill, Item, Enemy, Scene, NPC, Quest, Encounter } from '../types'
+import type { Skill, Item, Enemy, Scene, NPC, Quest, Encounter, Shop } from '../types'
 
 // 技能与物品按「大类/子类」拆分到独立文件（见 src/data/skills、src/data/items）。
 // 这里用 import.meta.glob 将目录下所有 JSON 合并进 Map，对外接口保持不变。
 const skillModules = import.meta.glob('../data/skills/**/*.json', { eager: true }) as unknown as Record<string, { default: Skill[] }>
 const itemModules = import.meta.glob('../data/items/**/*.json', { eager: true }) as unknown as Record<string, { default: Item[] }>
+const shopModules = import.meta.glob('../data/shops/**/*.json', { eager: true }) as unknown as Record<string, { default: Shop[] }>
 
 const skills = new Map<string, Skill>()
 const items = new Map<string, Item>()
@@ -17,6 +18,7 @@ const scenes = new Map<string, Scene>()
 const npcs = new Map<string, NPC>()
 const quests = new Map<string, Quest>()
 const encounters = new Map<string, Encounter>()
+const shops = new Map<string, Shop>()
 
 for (const mod of Object.values(skillModules)) {
   for (const skill of mod.default) {
@@ -48,6 +50,12 @@ for (const quest of questsJson as Quest[]) {
 
 for (const enc of encountersJson as Encounter[]) {
   encounters.set(enc.id, enc)
+}
+
+for (const mod of Object.values(shopModules)) {
+  for (const shop of mod.default) {
+    shops.set(shop.id, shop)
+  }
 }
 
 export function getSkill(id: string): Skill | undefined {
@@ -100,4 +108,16 @@ export function getAllItems(): Item[] {
 
 export function getAllEnemies(): Enemy[] {
   return Array.from(enemies.values())
+}
+
+export function getShop(id: string): Shop | undefined {
+  return shops.get(id)
+}
+
+export function getAllShops(): Shop[] {
+  return Array.from(shops.values())
+}
+
+export function getShopByNpc(npcId: string): Shop | undefined {
+  return Array.from(shops.values()).find(s => s.npcId === npcId)
 }

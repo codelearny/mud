@@ -11,6 +11,7 @@ import {
 } from '../engine/story'
 import { getAllQuests } from '../engine/data-loader'
 import { usePlayerStore } from './player'
+import { useShopStore } from './shop'
 
 const STORY_KEY = 'jianghu_story'
 
@@ -130,6 +131,12 @@ export const useStoryStore = defineStore('story', () => {
   function selectDialogueChoice(choice: DialogueChoice) {
     applyEffects(choice.effects)
     checkQuestCompletions()
+    if (choice.shop) {
+      const shopStore = useShopStore()
+      shopStore.openShop(choice.shop)
+      closeDialogue()
+      return 'shop'
+    }
     if (choice.next === 'END') {
       closeDialogue()
       return 'END'

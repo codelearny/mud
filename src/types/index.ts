@@ -226,6 +226,7 @@ export interface DialogueChoice {
   condition?: DialogueCondition
   effects?: DialogueEffect[]
   battle?: string
+  shop?: string // 选择此项即打开对应 id 的商铺（见 src/data/shops）
 }
 
 export interface DialogueNode {
@@ -291,4 +292,23 @@ export interface Encounter {
   text: string
   condition?: DialogueCondition
   choices: DialogueChoice[]
+}
+
+// ===== 商铺模块类型 =====
+// 商铺完全由配置驱动（见 src/data/shops），引擎只按字段分发，绝不写死具体物品。
+
+export interface ShopItemEntry {
+  itemId: string
+  price?: number      // 覆盖买入价；省略则取 物品.price * shop.buyFactor
+  limit?: number      // 现存/单次最大可购数量；省略表示不限量（每日进货重置）
+}
+
+export interface Shop {
+  id: string
+  name: string
+  npcId: string       // 对应 npcs.json 中的掌柜
+  description: string
+  buyFactor: number   // 买入倍率（默认 1）
+  sellFactor: number  // 卖出倍率（默认 0.5）
+  stock: ShopItemEntry[]
 }

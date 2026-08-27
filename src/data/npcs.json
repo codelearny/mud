@@ -133,6 +133,7 @@
         "speaker": "钱通",
         "text": "客官要些什么药材？金创药、大力丸，俺这都有。今日便送客官一株草药，结个善缘。",
         "choices": [
+          { "text": "掌柜的，看看你这铺子都有些什么好货。", "next": "END", "effects": [{ "type": "affinity", "target": "merchant", "value": 1 }], "shop": "qiantong_shop" },
           { "text": "多谢钱掌柜。", "next": "give_herb", "effects": [{ "type": "item", "target": "medicine_herb", "value": 1 }, { "type": "affinity", "target": "merchant", "value": 1 }] },
           { "text": "告辞。", "next": "END" }
         ]
@@ -176,6 +177,32 @@
         "text": "善哉。施主诚心，老衲便将易筋经相传，望你以此行侠仗义。",
         "effects": [{ "type": "learn_skill", "target": "yijinjing" }, { "type": "flag", "target": "learned_yijin", "value": true }],
         "choices": [{ "text": "多谢大师。", "next": "END" }]
+      }
+    }
+  },
+  {
+    "id": "blacksmith",
+    "name": "铁大山",
+    "title": "镇上铁匠",
+    "description": "一身腱子肉的老铁匠，打铁声昼夜不息，性子爽直。",
+    "sceneId": "town",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "铁大山",
+        "text": "某家铁大山，清风镇铁匠铺的掌柜！刀枪剑戟、甲胄护符，只要银子够，某家都能给你弄来。",
+        "choices": [
+          { "text": "铁匠，看看你铺子里都有啥。", "next": "END", "effects": [{ "type": "affinity", "target": "blacksmith", "value": 1 }], "shop": "blacksmith_shop" },
+          { "text": "敢问江湖事。", "next": "talk", "effects": [{ "type": "affinity", "target": "blacksmith", "value": 1 }] },
+          { "text": "告辞。", "next": "END" }
+        ]
+      },
+      "talk": {
+        "id": "talk",
+        "speaker": "铁大山",
+        "text": "后山那伙强人用的铁棍，便是某家早年打的。江湖儿女，一身好兵刃顶半条命，挑趁手的要紧！",
+        "choices": [{ "text": "受教了。", "next": "END" }]
       }
     }
   }
