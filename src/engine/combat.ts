@@ -76,9 +76,114 @@ function calculateDamage(
   return { damage: finalDamage, crit, dodged: false }
 }
 
+// 对 opponent 施加一次进攻型技能（多段、吸血），返回总伤害
+function performOffensive(
+  attacker: BattleCharacter,
+  defender: BattleCharacter,
+  skill: Skill
+): { total: number; dead: boolean; logParts: string[] } {
+  const hits = Math.max(1, skill.hits ?? 1)
+  let total = 0
+  const logParts: string[] = []
+  let dead = false
+
+  for (let i = 0; i < hits; i++) {
+    const { damage, crit, dodged } = calculateDamage(attacker, defender, skill)
+    if (dodged) {
+      logParts.push(`第${i + 1}击被闪开`)
+      continue
+    }
+    defender.hp -= damage
+    total += damage
+    logParts.push(`第${i + 1}击造成${damage}伤害${crit ? '（暴击）' : ''}`)
+    if (defender.hp <= 0) {
+      defender.hp = 0
+      dead = true
+      break
+    }
+  }
+
+  // 吸血：按总伤害比例恢复自身气血
+  if (total > 0 && skill.lifesteal && skill.lifesteal > 0) {
+    const healed = Math.floor(total * skill.lifesteal)
+    if (healed > 0) {
+      attacker.hp = Math.min(attacker.maxHp, attacker.hp + healed)
+      logParts.push(`吸取${healed}点气血`)
+    }
+  }
+
+  return { total, dead, logParts }
+}
+
+// 对 self / opponent 施加技能的支持类效果（增益、削敌、回内、疗伤、施毒）
+function applySupportEffects(
+  self: BattleCharacter,
+  opponent: BattleCharacter,
+  skill: Skill,
+  logParts: string[]
+) {
+  if (skill.restoreMp) {
+    self.mp = Math.min(self.maxMp, self.mp + skill.restoreMp)
+    logParts.push(`恢复${skill.restoreMp}内力`)
+  }
+  if (skill.heal) {
+    self.hp = Math.min(self.maxHp, self.hp + skill.heal)
+    logParts.push(`恢复${skill.heal}气血`)
+  }
+  if (skill.selfBuff) {
+    const sb = skill.selfBuff
+    const bits: string[] = []
+    if (sb.attack) { self.attack += sb.attack; bits.push(`攻+${sb.attack}`) }
+    if (sb.defense) { self.defense += sb.defense; bits.push(`防+${sb.defense}`) }
+    if (sb.agility) { self.agility += sb.agility; bits.push(`身法+${sb.agility}`) }
+    if (bits.length) logParts.push(`自身${bits.join('')}`)
+  }
+  if (skill.enemyDebuff) {
+    const ed = skill.enemyDebuff
+    const bits: string[] = []
+    if (ed.attack) { opponent.attack = Math.max(1, opponent.attack + ed.attack); bits.push(`攻${ed.attack}`) }
+    if (ed.defense) { opponent.defense = Math.max(0, opponent.defense + ed.defense); bits.push(`防${ed.defense}`) }
+    if (ed.agility) { opponent.agility = Math.max(1, opponent.agility + ed.agility); bits.push(`身法${ed.agility}`) }
+    if (bits.length) logParts.push(`对手${bits.join('')}`)
+  }
+  if (skill.poison) {
+    const turns = skill.poisonTurns ?? 3
+    opponent.poison = (opponent.poison ?? 0) + skill.poison
+    opponent.poisonTurns = (opponent.poisonTurns ?? 0) + turns
+    logParts.push(`施毒（每回合${skill.poison}伤，持续${turns}回合）`)
+  }
+}
+
+// 回合开始结算中毒伤害（作用于 targer），返回是否致死
+function tickPoison(target: BattleCharacter, turn: number, log: Battle['log']): boolean {
+  if (!target.poisonTurns || target.poisonTurns <= 0 || !target.poison) return false
+  const dmg = target.poison
+  target.hp -= dmg
+  target.poisonTurns -= 1
+  log.push({
+    turn,
+    actor: target.isPlayer ? 'player' : 'enemy',
+    text: `${target.name}身中剧毒，受到${dmg}点毒性伤害。`,
+    type: 'attack' as const
+  })
+  if (target.poisonTurns <= 0) target.poison = 0
+  if (target.hp <= 0) {
+    target.hp = 0
+    return true
+  }
+  return false
+}
+
 function enemyTurn(battle: Battle): Battle {
   const b: Battle = JSON.parse(JSON.stringify(battle))
   b.turn++
+
+  // 敌方中毒结算
+  if (tickPoison(b.enemy, b.turn, b.log)) {
+    b.state = 'victory'
+    b.log.push({ turn: b.turn, actor: 'enemy', text: `${b.enemy.name}毒发身亡！你赢了！`, type: 'victory' })
+    return b
+  }
 
   const usableSkills = b.enemy.skills.filter(sid => {
     const sk = getSkill(sid)
@@ -94,21 +199,22 @@ function enemyTurn(battle: Battle): Battle {
     }
   }
 
-  const { damage, crit, dodged } = calculateDamage(b.enemy, b.player, skill)
-
-  let logText: string
-  if (dodged) {
-    logText = `${b.enemy.name}出招攻击你，但你闪开了！`
-  } else if (crit) {
-    logText = `${b.enemy.name}一击命中你的要害，造成${damage}点伤害！`
-    b.player.hp -= damage
+  const logParts: string[] = []
+  if (skill && skill.power > 0) {
+    const res = performOffensive(b.enemy, b.player, skill)
+    logParts.push(...res.logParts)
   } else {
-    const action = skill ? `以${skill.name}` : '出拳'
-    logText = `${b.enemy.name}${action}攻击你，造成${damage}点伤害。`
-    b.player.hp -= damage
+    const { damage, crit, dodged } = calculateDamage(b.enemy, b.player, undefined)
+    if (dodged) {
+      logParts.push('出招被你闪开')
+    } else {
+      b.player.hp -= damage
+      logParts.push(`造成${damage}伤害${crit ? '（暴击）' : ''}`)
+    }
   }
 
-  b.log.push({ turn: b.turn, actor: 'enemy', text: logText, type: crit ? 'crit' : 'attack' })
+  const action = skill ? `以${skill.name}` : '出拳'
+  b.log.push({ turn: b.turn, actor: 'enemy', text: `${b.enemy.name}${action}攻击你：${logParts.join('；')}。`, type: critType(logParts) })
 
   if (b.player.hp <= 0) {
     b.player.hp = 0
@@ -117,6 +223,10 @@ function enemyTurn(battle: Battle): Battle {
   }
 
   return b
+}
+
+function critType(logParts: string[]): 'crit' | 'attack' {
+  return logParts.some(p => p.includes('暴击')) ? 'crit' : 'attack'
 }
 
 export function playerAttack(battle: Battle): Battle {
@@ -159,41 +269,32 @@ export function playerUseSkill(battle: Battle, skillId: string): Battle {
 
   b.player.mp -= skill.mpCost
 
-  if (skill.category === 'internal' || skill.category === 'movement') {
-    let buffText = `你施展了${skill.name}！`
-    if (skill.id === 'basic_internal') {
-      const restore = 15
-      b.player.mp = Math.min(b.player.maxMp, b.player.mp + restore)
-      buffText = `你运功调息，恢复${restore}点内力。`
-    } else if (skill.id === 'qingyun_step') {
-      b.player.agility += 10
-      buffText = `你脚踏青云步，身法大增！`
-    } else if (skill.id === 'yijinjing') {
-      b.player.attack += 10
-      b.player.defense += 5
-      buffText = `你运转易筋经，脱胎换骨，攻防大增！`
-    }
-    b.log.push({ turn: b.turn, actor: 'player', text: buffText, type: 'skill' })
-  } else {
-    const { damage, crit, dodged } = calculateDamage(b.player, b.enemy, skill)
+  const logParts: string[] = []
 
-    let logText: string
-    if (dodged) {
-      logText = `你施展${skill.name}，但${b.enemy.name}闪开了！`
-    } else if (crit) {
-      logText = `你以${skill.name}击中${b.enemy.name}，造成${damage}点伤害！暴击！`
-      b.enemy.hp -= damage
-    } else {
-      logText = `你施展${skill.name}，对${b.enemy.name}造成${damage}点伤害。`
-      b.enemy.hp -= damage
+  // 进攻部分
+  if (skill.power > 0) {
+    const res = performOffensive(b.player, b.enemy, skill)
+    logParts.push(...res.logParts)
+    if (res.dead) {
+      b.enemy.hp = 0
     }
-    b.log.push({ turn: b.turn, actor: 'player', text: logText, type: crit ? 'crit' : 'skill' })
   }
+
+  // 支持类效果（增益/削敌/回内/疗伤/施毒）
+  applySupportEffects(b.player, b.enemy, skill, logParts)
+
+  b.log.push({ turn: b.turn, actor: 'player', text: `你施展${skill.name}：${logParts.join('；')}！`, type: 'skill' })
 
   if (b.enemy.hp <= 0) {
     b.enemy.hp = 0
     b.state = 'victory'
     b.log.push({ turn: b.turn, actor: 'player', text: `${b.enemy.name}倒下了！你赢了！`, type: 'victory' })
+    return b
+  }
+
+  // 点穴：对手本回合无法行动
+  if (skill.stun) {
+    b.log.push({ turn: b.turn, actor: 'player', text: `${b.enemy.name}被点中穴道，动弹不得！`, type: 'info' })
     return b
   }
 

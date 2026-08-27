@@ -446,6 +446,25 @@ html, body {
   margin-left: 6px;
 }
 
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.skill-tag {
+  display: inline-block;
+  font-size: 10px;
+  line-height: 1.4;
+  color: #d7c9a7;
+  background: rgba(201, 168, 76, 0.12);
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  border-radius: 3px;
+  padding: 0 5px;
+  white-space: nowrap;
+}
+
 .scene-text {
   padding: 20px;
   font-family: var(--font-serif);

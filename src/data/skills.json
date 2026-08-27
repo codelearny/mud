@@ -26,14 +26,15 @@
   {
     "id": "basic_internal",
     "name": "吐纳基本功",
-    "description": "最基础的内功心法，调息吐纳，恢复内力。",
+    "description": "最基础的内功心法，调息吐纳，运转周天恢复内力。",
     "type": "active",
     "category": "internal",
     "power": 0,
     "mpCost": 0,
     "hitRate": 1,
     "critRate": 0,
-    "unlockLevel": 1
+    "unlockLevel": 1,
+    "restoreMp": 15
   },
   {
     "id": "wolf_fang",
@@ -69,7 +70,8 @@
     "mpCost": 6,
     "hitRate": 1,
     "critRate": 0,
-    "unlockLevel": 4
+    "unlockLevel": 4,
+    "selfBuff": { "agility": 10 }
   },
   {
     "id": "yijinjing",
@@ -81,7 +83,8 @@
     "mpCost": 12,
     "hitRate": 1,
     "critRate": 0,
-    "unlockLevel": 8
+    "unlockLevel": 8,
+    "selfBuff": { "attack": 10, "defense": 5 }
   },
   {
     "id": "xianglong_palms",
@@ -106,5 +109,303 @@
     "hitRate": 0.85,
     "critRate": 0.3,
     "unlockLevel": 15
+  },
+
+  {
+    "id": "qishang_fist",
+    "name": "七伤拳",
+    "description": "崆峒绝技，先伤己后伤人，拳拳到肉，兼带吸力。",
+    "type": "active",
+    "category": "fist",
+    "power": 46,
+    "mpCost": 16,
+    "hitRate": 0.82,
+    "critRate": 0.22,
+    "unlockLevel": 7,
+    "lifesteal": 0.18
+  },
+  {
+    "id": "zui_fist",
+    "name": "醉拳",
+    "description": "似醉非醉，步法飘忽难以预测，身法随之精进。",
+    "type": "active",
+    "category": "fist",
+    "power": 30,
+    "mpCost": 10,
+    "hitRate": 0.95,
+    "critRate": 0.1,
+    "unlockLevel": 6,
+    "selfBuff": { "agility": 6 }
+  },
+  {
+    "id": "taiji_fist",
+    "name": "太极拳",
+    "description": "以柔克刚，四两拨千斤，出掌便可削弱对手力道。",
+    "type": "active",
+    "category": "fist",
+    "power": 34,
+    "mpCost": 10,
+    "hitRate": 0.9,
+    "critRate": 0.08,
+    "unlockLevel": 5,
+    "enemyDebuff": { "attack": -4 }
+  },
+
+  {
+    "id": "taiji_sword",
+    "name": "太极剑",
+    "description": "剑走轻灵，绵里藏针，挥洒间卸去敌之攻势。",
+    "type": "active",
+    "category": "sword",
+    "power": 36,
+    "mpCost": 12,
+    "hitRate": 0.88,
+    "critRate": 0.1,
+    "unlockLevel": 6,
+    "enemyDebuff": { "attack": -5 }
+  },
+  {
+    "id": "yuenyu_sword",
+    "name": "越女剑",
+    "description": "相传越女所传，剑走轻灵，一瞬两击，快若惊鸿。",
+    "type": "active",
+    "category": "sword",
+    "power": 44,
+    "mpCost": 14,
+    "hitRate": 0.9,
+    "critRate": 0.12,
+    "unlockLevel": 8,
+    "hits": 2
+  },
+  {
+    "id": "wanjan_sword",
+    "name": "万剑归宗",
+    "description": "剑圣绝学，剑气纵横化为万剑，三连斩落，无可躲闪。",
+    "type": "active",
+    "category": "sword",
+    "power": 58,
+    "mpCost": 22,
+    "hitRate": 0.85,
+    "critRate": 0.25,
+    "unlockLevel": 14,
+    "hits": 3
+  },
+
+  {
+    "id": "basic_blade",
+    "name": "基础刀法",
+    "description": "大开大合的基础刀法，重势不重巧。",
+    "type": "active",
+    "category": "blade",
+    "power": 16,
+    "mpCost": 2,
+    "hitRate": 0.9,
+    "critRate": 0.06,
+    "unlockLevel": 1
+  },
+  {
+    "id": "kuangfeng_blade",
+    "name": "狂风刀法",
+    "description": "如狂风骤雨，连环两刀劈下，让人喘不过气。",
+    "type": "active",
+    "category": "blade",
+    "power": 30,
+    "mpCost": 9,
+    "hitRate": 0.82,
+    "critRate": 0.12,
+    "unlockLevel": 5,
+    "hits": 2
+  },
+  {
+    "id": "hujiaya_blade",
+    "name": "胡家刀法",
+    "description": "刀中名家，刀风凌厉破敌护甲，削其守势。",
+    "type": "active",
+    "category": "blade",
+    "power": 50,
+    "mpCost": 16,
+    "hitRate": 0.86,
+    "critRate": 0.18,
+    "unlockLevel": 10,
+    "enemyDebuff": { "defense": -6 }
+  },
+  {
+    "id": "daoba_blade",
+    "name": "刀霸天下",
+    "description": "霸道绝伦的刀法，双刀齐出，刀过处血涌如泉。",
+    "type": "active",
+    "category": "blade",
+    "power": 70,
+    "mpCost": 24,
+    "hitRate": 0.8,
+    "critRate": 0.2,
+    "unlockLevel": 15,
+    "hits": 2,
+    "lifesteal": 0.15
+  },
+
+  {
+    "id": "basic_staff",
+    "name": "基础棍法",
+    "description": "棍为百兵之祖，扫砸挑拨，朴实无华。",
+    "type": "active",
+    "category": "staff",
+    "power": 18,
+    "mpCost": 3,
+    "hitRate": 0.88,
+    "critRate": 0.07,
+    "unlockLevel": 2
+  },
+  {
+    "id": "dagou_staff",
+    "name": "打狗棒法",
+    "description": "丐帮镇帮武学，棒法刁钻，点穴封脉令敌动弹不得。",
+    "type": "active",
+    "category": "staff",
+    "power": 42,
+    "mpCost": 14,
+    "hitRate": 0.85,
+    "critRate": 0.12,
+    "unlockLevel": 8,
+    "stun": true,
+    "enemyDebuff": { "agility": -5 }
+  },
+  {
+    "id": "fengmo_staff",
+    "name": "疯魔杖法",
+    "description": "一旦使开便如疯似魔，两杖连环，势不可挡。",
+    "type": "active",
+    "category": "staff",
+    "power": 55,
+    "mpCost": 18,
+    "hitRate": 0.84,
+    "critRate": 0.2,
+    "unlockLevel": 12,
+    "hits": 2
+  },
+
+  {
+    "id": "beiming_internal",
+    "name": "北冥神功",
+    "description": "逍遥派绝学，海纳百川，既可回复内力，又能滋养气血。",
+    "type": "active",
+    "category": "internal",
+    "power": 0,
+    "mpCost": 10,
+    "hitRate": 1,
+    "critRate": 0,
+    "unlockLevel": 6,
+    "restoreMp": 30,
+    "heal": 20
+  },
+  {
+    "id": "heal_shengshou",
+    "name": "疗伤圣手",
+    "description": "杏林妙手，运功疗伤，瞬息间回复大量气血。",
+    "type": "active",
+    "category": "internal",
+    "power": 0,
+    "mpCost": 8,
+    "hitRate": 1,
+    "critRate": 0,
+    "unlockLevel": 4,
+    "heal": 60
+  },
+  {
+    "id": "jiuyin_internal",
+    "name": "九阴真经",
+    "description": "武学总纲，内力深不可测，攻守兼备且能自愈。",
+    "type": "active",
+    "category": "internal",
+    "power": 0,
+    "mpCost": 16,
+    "hitRate": 1,
+    "critRate": 0,
+    "unlockLevel": 12,
+    "selfBuff": { "attack": 8, "defense": 8 },
+    "heal": 30
+  },
+  {
+    "id": "huagong_internal",
+    "name": "化功大法",
+    "description": "星宿奇功，化去敌人功力，令其攻弱身滞。",
+    "type": "active",
+    "category": "internal",
+    "power": 0,
+    "mpCost": 14,
+    "hitRate": 1,
+    "critRate": 0,
+    "unlockLevel": 9,
+    "enemyDebuff": { "attack": -8, "agility": -4 }
+  },
+
+  {
+    "id": "lingbo_step",
+    "name": "凌波微步",
+    "description": "逍遥派轻功，步法如凌波踏水，身法、守势俱增。",
+    "type": "active",
+    "category": "movement",
+    "power": 0,
+    "mpCost": 8,
+    "hitRate": 1,
+    "critRate": 0,
+    "unlockLevel": 6,
+    "selfBuff": { "agility": 14, "defense": 3 }
+  },
+  {
+    "id": "shenxing_step",
+    "name": "神行百变",
+    "description": "江湖逃命绝学，身形飘忽，攻守皆受其益。",
+    "type": "active",
+    "category": "movement",
+    "power": 0,
+    "mpCost": 10,
+    "hitRate": 1,
+    "critRate": 0,
+    "unlockLevel": 10,
+    "selfBuff": { "agility": 8, "attack": 4 }
+  },
+
+  {
+    "id": "poison_sand",
+    "name": "含沙射影",
+    "description": "淬毒暗器手法，伤人于无形，中者身中奇毒。",
+    "type": "active",
+    "category": "fist",
+    "power": 20,
+    "mpCost": 6,
+    "hitRate": 0.9,
+    "critRate": 0.05,
+    "unlockLevel": 5,
+    "poison": 8,
+    "poisonTurns": 3
+  },
+  {
+    "id": "wudu_palm",
+    "name": "五毒神掌",
+    "description": "五毒教镇派掌法，掌带剧毒，伤敌同时反哺自身。",
+    "type": "active",
+    "category": "fist",
+    "power": 38,
+    "mpCost": 14,
+    "hitRate": 0.85,
+    "critRate": 0.12,
+    "unlockLevel": 11,
+    "poison": 14,
+    "poisonTurns": 4,
+    "lifesteal": 0.1
+  },
+  {
+    "id": "tieshan_palm",
+    "name": "铁砂掌",
+    "description": "外门硬功，掌如铁砂，破敌护体真气，削其守势身法。",
+    "type": "active",
+    "category": "fist",
+    "power": 50,
+    "mpCost": 18,
+    "hitRate": 0.84,
+    "critRate": 0.18,
+    "unlockLevel": 11,
+    "enemyDebuff": { "defense": -8, "agility": -4 }
   }
 ]

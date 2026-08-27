@@ -120,7 +120,7 @@
       "comprehension": 0,
       "luck": 0
     },
-    "skills": ["wolf_fang", "lianhuan_sword", "qingyun_step", "yijinjing"],
+    "skills": ["wolf_fang", "lianhuan_sword", "qingyun_step", "yijinjing", "tieshan_palm"],
     "expReward": 250,
     "goldReward": 200,
     "drops": [{ "itemId": "great_medicine", "rate": 0.5 }, { "itemId": "silk_robe", "rate": 0.15 }]

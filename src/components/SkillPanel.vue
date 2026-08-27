@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { usePlayerStore } from '../stores/player'
 import { getAllSkills, getSkill } from '../engine/data-loader'
+import { skillTags } from '../engine/skill-utils'
 import type { Skill, SkillCategory } from '../types'
 
 const playerStore = usePlayerStore()
@@ -71,6 +72,9 @@ function learnSkill(skillId: string) {
           <div class="skill-desc" style="color: var(--text-tertiary);">
             威力 {{ skill.power }} · 耗内力 {{ skill.mpCost }} · 命中 {{ Math.round(skill.hitRate * 100) }}% · 暴击 {{ Math.round(skill.critRate * 100) }}%
           </div>
+          <div class="skill-tags" v-if="skillTags(skill).length">
+            <span class="skill-tag" v-for="t in skillTags(skill)" :key="t">{{ t }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -92,6 +96,9 @@ function learnSkill(skillId: string) {
           <div class="skill-desc">{{ skill.description }}</div>
           <div class="skill-desc" style="color: var(--text-tertiary);">
             威力 {{ skill.power }} · 耗内力 {{ skill.mpCost }} · 需第{{ skill.unlockLevel }}重
+          </div>
+          <div class="skill-tags" v-if="skillTags(skill).length">
+            <span class="skill-tag" v-for="t in skillTags(skill)" :key="t">{{ t }}</span>
           </div>
         </div>
         <div class="skill-actions">

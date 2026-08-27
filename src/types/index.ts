@@ -35,6 +35,12 @@ export interface CharacterAttributes {
   luck: number
 }
 
+export interface SkillBuff {
+  attack?: number
+  defense?: number
+  agility?: number
+}
+
 export interface Skill {
   id: string
   name: string
@@ -46,6 +52,16 @@ export interface Skill {
   hitRate: number
   critRate: number
   unlockLevel: number
+  // —— 进阶机制（可选）——
+  hits?: number            // 多段攻击次数，默认 1
+  heal?: number            // 命中后自我治疗（恢复气血）
+  restoreMp?: number       // 自我恢复内力
+  lifesteal?: number       // 吸血比例 0~1（按造成伤害吸取气血）
+  selfBuff?: SkillBuff     // 自身增益（攻击/防御/身法）
+  enemyDebuff?: SkillBuff  // 对对手削弱（攻/防/身法，负值为减）
+  stun?: boolean           // 点穴：使对手本回合无法行动
+  poison?: number          // 施毒：对手每回合受到的中毒伤害
+  poisonTurns?: number     // 中毒持续回合，默认 3
 }
 
 export interface LearnedSkill {
@@ -124,6 +140,8 @@ export interface BattleCharacter {
   agility: number
   skills: string[]
   isPlayer: boolean
+  poison?: number
+  poisonTurns?: number
 }
 
 export interface BattleLogEntry {

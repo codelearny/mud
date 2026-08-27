@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import { useBattleStore } from '../stores/battle'
 import { usePlayerStore } from '../stores/player'
 import { getSkill, getItem } from '../engine/data-loader'
+import { skillTags } from '../engine/skill-utils'
 import GameLog from '../components/GameLog.vue'
 import type { Skill, Item } from '../types'
 
@@ -151,9 +152,12 @@ function returnToMenu() {
             :style="{ opacity: skill.canUse ? 1 : 0.4, cursor: skill.canUse ? 'pointer' : 'not-allowed', width: '100%', background: 'transparent' }"
             @click="skill.canUse && doUseSkill(skill.id)"
           >
-            <div class="skill-info" style="text-align: left;">
+              <div class="skill-info" style="text-align: left;">
               <div class="skill-name">{{ skill.name }}</div>
               <div class="skill-desc">威力 {{ skill.power }} · 耗内力 {{ skill.mpCost }}</div>
+              <div class="skill-tags" v-if="skillTags(skill).length" style="margin-top: 4px;">
+                <span class="skill-tag" v-for="t in skillTags(skill)" :key="t">{{ t }}</span>
+              </div>
             </div>
           </button>
         </div>
