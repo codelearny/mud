@@ -1,4 +1,4 @@
-import type { Battle, BattleCharacter, Character, Skill } from '../types'
+import type { Battle, BattleCharacter, Character, Skill, ActiveBuff } from '../types'
 import { getEnemy, getSkill, getItem } from './data-loader'
 import { getEffectiveAttributes } from './character'
 import { chance, randomInt } from './random'
@@ -19,7 +19,8 @@ export function startBattle(player: Character, enemyId: string): Battle {
     defense: eff.defense,
     agility: eff.agility,
     skills: player.learnedSkills.map(s => s.skillId),
-    isPlayer: true
+    isPlayer: true,
+    buffs: []
   }
 
   const enemyBC: BattleCharacter = {
@@ -229,8 +230,35 @@ function critType(logParts: string[]): 'crit' | 'attack' {
   return logParts.some(p => p.includes('暴击')) ? 'crit' : 'attack'
 }
 
+// 玩家每次行动开始时结算临时增益：剩余回合 -1，到期则回收属性加成
+function tickBuffs(bc: BattleCharacter, turn: number, log: Battle['log']) {
+  if (!bc.buffs || bc.buffs.length === 0) return
+  const remaining: ActiveBuff[] = []
+  const expired: string[] = []
+  for (const buff of bc.buffs) {
+    buff.turns -= 1
+    if (buff.turns > 0) {
+      remaining.push(buff)
+    } else {
+      bc[buff.stat] = Math.max(1, (bc[buff.stat] ?? 1) - buff.value)
+      const label = buff.stat === 'attack' ? '攻击' : buff.stat === 'defense' ? '防御' : '轻功'
+      expired.push(label)
+    }
+  }
+  bc.buffs = remaining
+  if (expired.length > 0) {
+    log.push({
+      turn,
+      actor: bc.isPlayer ? 'player' : 'enemy',
+      text: `${bc.name}的增益（${expired.join('、')}）消退了。`,
+      type: 'info' as const
+    })
+  }
+}
+
 export function playerAttack(battle: Battle): Battle {
   const b: Battle = JSON.parse(JSON.stringify(battle))
+  tickBuffs(b.player, b.turn, b.log)
   const { damage, crit, dodged } = calculateDamage(b.player, b.enemy, undefined)
 
   let logText: string
@@ -261,6 +289,7 @@ export function playerUseSkill(battle: Battle, skillId: string): Battle {
   if (!skill) return battle
 
   const b: Battle = JSON.parse(JSON.stringify(battle))
+  tickBuffs(b.player, b.turn, b.log)
 
   if (b.player.mp < skill.mpCost) {
     b.log.push({ turn: b.turn, actor: 'player', text: `内力不足，无法施展${skill.name}！`, type: 'info' })
@@ -306,32 +335,76 @@ export function playerUseItem(battle: Battle, itemId: string): Battle {
   if (!item || !item.effects) return battle
 
   const b: Battle = JSON.parse(JSON.stringify(battle))
+  tickBuffs(b.player, b.turn, b.log)
 
-  let logText = `你使用了${item.name}。`
+  const parts: string[] = []
   for (const effect of item.effects) {
     switch (effect.type) {
       case 'hp':
         b.player.hp = Math.min(b.player.maxHp, b.player.hp + effect.value)
-        logText = `你使用${item.name}，恢复${effect.value}点气血。`
+        parts.push(`恢复${effect.value}气血`)
         break
       case 'mp':
         b.player.mp = Math.min(b.player.maxMp, b.player.mp + effect.value)
-        logText = `你使用${item.name}，恢复${effect.value}点内力。`
+        parts.push(`恢复${effect.value}内力`)
+        break
+      case 'maxHp':
+        b.player.maxHp += effect.value
+        b.player.hp += effect.value
+        parts.push(`气血上限+${effect.value}`)
+        break
+      case 'maxMp':
+        b.player.maxMp += effect.value
+        b.player.mp += effect.value
+        parts.push(`内力上限+${effect.value}`)
         break
       case 'attack':
         b.player.attack += effect.value
-        logText = `你使用${item.name}，攻击力提升${effect.value}点。`
+        parts.push(`攻击+${effect.value}`)
         break
       case 'defense':
         b.player.defense += effect.value
+        parts.push(`防御+${effect.value}`)
         break
       case 'agility':
         b.player.agility += effect.value
+        parts.push(`轻功+${effect.value}`)
+        break
+      case 'cure':
+        b.player.poison = 0
+        b.player.poisonTurns = 0
+        parts.push('解去毒性')
+        break
+      case 'buffAttack': {
+        const turns = effect.turns ?? 3
+        b.player.attack += effect.value
+        b.player.buffs = b.player.buffs ?? []
+        b.player.buffs.push({ stat: 'attack', value: effect.value, turns })
+        parts.push(`攻击↑${effect.value}(持续${turns}回合)`)
+        break
+      }
+      case 'buffDefense': {
+        const turns = effect.turns ?? 3
+        b.player.defense += effect.value
+        b.player.buffs = b.player.buffs ?? []
+        b.player.buffs.push({ stat: 'defense', value: effect.value, turns })
+        parts.push(`防御↑${effect.value}(持续${turns}回合)`)
+        break
+      }
+      case 'buffAgility': {
+        const turns = effect.turns ?? 3
+        b.player.agility += effect.value
+        b.player.buffs = b.player.buffs ?? []
+        b.player.buffs.push({ stat: 'agility', value: effect.value, turns })
+        parts.push(`轻功↑${effect.value}(持续${turns}回合)`)
+        break
+      }
+      default:
         break
     }
   }
 
-  b.log.push({ turn: b.turn, actor: 'player', text: logText, type: 'heal' })
+  b.log.push({ turn: b.turn, actor: 'player', text: `你使用${item.name}：${parts.join('；')}。`, type: 'heal' })
 
   return enemyTurn(b)
 }

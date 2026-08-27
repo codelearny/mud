@@ -18,7 +18,7 @@
     "skills": ["basic_fist"],
     "expReward": 15,
     "goldReward": 10,
-    "drops": []
+    "drops": [{ "itemId": "minor_heal", "rate": 0.3 }]
   },
   {
     "id": "bandit",
@@ -39,7 +39,7 @@
     "skills": ["basic_fist", "wolf_fang"],
     "expReward": 35,
     "goldReward": 30,
-    "drops": [{ "itemId": "medicine_herb", "rate": 0.4 }]
+    "drops": [{ "itemId": "medicine_herb", "rate": 0.4 }, { "itemId": "steel_blade", "rate": 0.06 }]
   },
   {
     "id": "wild_wolf",
@@ -60,7 +60,7 @@
     "skills": ["basic_fist"],
     "expReward": 25,
     "goldReward": 5,
-    "drops": []
+    "drops": [{ "itemId": "beast_core", "rate": 0.15 }]
   },
   {
     "id": "evil_disciple",
@@ -81,7 +81,7 @@
     "skills": ["basic_sword", "wolf_fang", "lianhuan_sword"],
     "expReward": 60,
     "goldReward": 50,
-    "drops": [{ "itemId": "medicine_herb", "rate": 0.5 }, { "itemId": "iron_sword", "rate": 0.1 }]
+    "drops": [{ "itemId": "medicine_herb", "rate": 0.5 }, { "itemId": "iron_sword", "rate": 0.1 }, { "itemId": "antidote", "rate": 0.3 }, { "itemId": "iron_ore", "rate": 0.25 }]
   },
   {
     "id": "jianghu_villain",
@@ -102,7 +102,7 @@
     "skills": ["wolf_fang", "lianhuan_sword", "qingyun_step"],
     "expReward": 120,
     "goldReward": 100,
-    "drops": [{ "itemId": "great_medicine", "rate": 0.3 }, { "itemId": "qingfeng_sword", "rate": 0.1 }]
+    "drops": [{ "itemId": "great_medicine", "rate": 0.3 }, { "itemId": "qingfeng_sword", "rate": 0.1 }, { "itemId": "agi_pendant", "rate": 0.15 }, { "itemId": "luck_talisman", "rate": 0.1 }]
   },
   {
     "id": "bandit_chief",
@@ -123,6 +123,6 @@
     "skills": ["wolf_fang", "lianhuan_sword", "qingyun_step", "yijinjing", "tieshan_palm"],
     "expReward": 250,
     "goldReward": 200,
-    "drops": [{ "itemId": "great_medicine", "rate": 0.5 }, { "itemId": "silk_robe", "rate": 0.15 }]
+    "drops": [{ "itemId": "great_medicine", "rate": 0.5 }, { "itemId": "silk_robe", "rate": 0.15 }, { "itemId": "spirit_orb", "rate": 0.2 }, { "itemId": "beast_armor", "rate": 0.1 }, { "itemId": "ancient_relic", "rate": 0.08 }]
   }
 ]

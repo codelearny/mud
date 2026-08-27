@@ -25,6 +25,6 @@
     "giver": "instructor",
     "acceptText": "少侠领命",
     "completeCondition": { "type": "counter", "target": "duelsWon", "op": ">=", "value": 5 },
-    "rewards": { "exp": 100, "gold": 60 }
+    "rewards": { "exp": 100, "gold": 60, "items": [{ "itemId": "hero_sword", "quantity": 1 }] }
   }
 ]

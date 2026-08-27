@@ -4,7 +4,23 @@ export type SkillType = 'active' | 'passive'
 
 export type ItemType = 'weapon' | 'armor' | 'accessory' | 'consumable' | 'material'
 
-export type EffectType = 'hp' | 'mp' | 'attack' | 'defense' | 'agility' | 'cure'
+export type ItemRarity = 'common' | 'rare' | 'epic' | 'legendary'
+
+// 物品/装备效果类型（全部由 JSON 数据驱动，引擎按 type 分发，绝不写死具体物品）
+export type EffectType =
+  | 'hp'            // 恢复当前气血
+  | 'mp'            // 恢复当前内力
+  | 'maxHp'         // 永久提升气血上限
+  | 'maxMp'         // 永久提升内力上限
+  | 'attack'        // 攻击（装备加成 / 丹药永久提升）
+  | 'defense'       // 防御
+  | 'agility'       // 轻功
+  | 'luck'          // 福缘
+  | 'comprehension' // 悟性
+  | 'cure'          // 解毒（战斗中清除中毒）
+  | 'buffAttack'    // 战斗内临时增益：攻击
+  | 'buffDefense'   // 战斗内临时增益：防御
+  | 'buffAgility'   // 战斗内临时增益：轻功
 
 export type EquipSlot = 'weapon' | 'armor' | 'accessory'
 
@@ -74,6 +90,7 @@ export interface LearnedSkill {
 export interface ItemEffect {
   type: EffectType
   value: number
+  turns?: number      // 仅临时增益类（buff*）使用：持续回合数
 }
 
 export interface Item {
@@ -84,6 +101,8 @@ export interface Item {
   category: string
   price: number
   slot?: EquipSlot
+  minLevel?: number   // 装备/服用所需最低等级（配置驱动，引擎校验）
+  rarity?: ItemRarity // 稀有度，仅用于展示与收集感
   effects?: ItemEffect[]
 }
 
@@ -129,6 +148,13 @@ export interface Character {
   gold: number
 }
 
+// 战斗内临时增益（由 buff* 类物品/技能施加，回合开始结算）
+export interface ActiveBuff {
+  stat: 'attack' | 'defense' | 'agility'
+  value: number
+  turns: number
+}
+
 export interface BattleCharacter {
   name: string
   hp: number
@@ -142,6 +168,7 @@ export interface BattleCharacter {
   isPlayer: boolean
   poison?: number
   poisonTurns?: number
+  buffs?: ActiveBuff[]
 }
 
 export interface BattleLogEntry {

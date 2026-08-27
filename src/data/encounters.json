@@ -14,7 +14,7 @@
     "title": "山野灵草",
     "text": "岩缝中一株灵草泛着幽光，嗅之清心宁神，正是一味疗伤良药。",
     "choices": [
-      { "text": "采下草药", "next": "END", "effects": [{ "type": "item", "target": "medicine_herb", "value": 2 }] },
+      { "text": "采下草药", "next": "END", "effects": [{ "type": "item", "target": "medicine_herb", "value": 2 }, { "type": "item", "target": "spirit_herb", "value": 1 }] },
       { "text": "不理会", "next": "END" }
     ]
   },

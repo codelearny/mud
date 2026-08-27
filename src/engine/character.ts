@@ -32,7 +32,9 @@ export function createNewCharacter(name: string): Character {
     inventory: [
       { itemId: 'wooden_sword', quantity: 1 },
       { itemId: 'cloth_robe', quantity: 1 },
-      { itemId: 'medicine_herb', quantity: 3 }
+      { itemId: 'medicine_herb', quantity: 3 },
+      { itemId: 'minor_heal', quantity: 2 },
+      { itemId: 'antidote', quantity: 1 }
     ],
     gold: 100
   }
@@ -54,6 +56,10 @@ export function getEffectiveAttributes(character: Character): CharacterAttribute
         case 'agility': attrs.agility += effect.value; break
         case 'hp': attrs.maxHp += effect.value; break
         case 'mp': attrs.maxMp += effect.value; break
+        case 'maxHp': attrs.maxHp += effect.value; break
+        case 'maxMp': attrs.maxMp += effect.value; break
+        case 'luck': attrs.luck += effect.value; break
+        case 'comprehension': attrs.comprehension += effect.value; break
       }
     }
   }
@@ -113,6 +119,7 @@ export function learnSkill(character: Character, skillId: string): Character {
 export function equipItem(character: Character, itemId: string): Character {
   const item = getItem(itemId)
   if (!item || !item.slot) return character
+  if (item.minLevel && character.level < item.minLevel) return character
 
   const char: Character = JSON.parse(JSON.stringify(character))
 
@@ -158,14 +165,34 @@ export function useConsumable(character: Character, itemId: string): Character {
       case 'mp':
         char.attributes.mp = Math.min(char.attributes.maxMp, char.attributes.mp + effect.value)
         break
+      case 'maxHp':
+        char.attributes.maxHp += effect.value
+        char.attributes.hp += effect.value
+        break
+      case 'maxMp':
+        char.attributes.maxMp += effect.value
+        char.attributes.mp += effect.value
+        break
       case 'attack':
+      case 'buffAttack':
         char.attributes.attack += effect.value
         break
       case 'defense':
+      case 'buffDefense':
         char.attributes.defense += effect.value
         break
       case 'agility':
+      case 'buffAgility':
         char.attributes.agility += effect.value
+        break
+      case 'luck':
+        char.attributes.luck += effect.value
+        break
+      case 'comprehension':
+        char.attributes.comprehension += effect.value
+        break
+      // cure / revive 仅在战斗内生效，此处忽略
+      default:
         break
     }
   }

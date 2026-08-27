@@ -5,6 +5,7 @@ import { useBattleStore } from '../stores/battle'
 import { usePlayerStore } from '../stores/player'
 import { getSkill, getItem } from '../engine/data-loader'
 import { skillTags } from '../engine/skill-utils'
+import { itemTags } from '../engine/item-utils'
 import GameLog from '../components/GameLog.vue'
 import type { Skill, Item } from '../types'
 
@@ -179,6 +180,9 @@ function returnToMenu() {
             <div class="item-info" style="text-align: left;">
               <div class="item-name">{{ item.name }} x{{ item.quantity }}</div>
               <div class="skill-desc">{{ item.description }}</div>
+              <div class="item-tags skill-tags" v-if="itemTags(item).length">
+                <span class="skill-tag" v-for="t in itemTags(item)" :key="t">{{ t }}</span>
+              </div>
             </div>
           </button>
           <div v-if="consumableItems.length === 0" class="empty-text">

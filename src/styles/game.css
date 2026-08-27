@@ -465,6 +465,32 @@ html, body {
   white-space: nowrap;
 }
 
+.rarity-badge {
+  display: inline-block;
+  font-size: 10px;
+  line-height: 1.4;
+  border-radius: 3px;
+  padding: 0 5px;
+  margin-left: 6px;
+  border: 1px solid currentColor;
+}
+.rarity-common { color: #9aa0a6; }
+.rarity-rare { color: #5b9bd5; }
+.rarity-epic { color: #b06fd6; }
+.rarity-legendary { color: #d4a017; }
+
+.item-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.item-meta {
+  font-size: 12px;
+  margin-top: 2px;
+}
+
 .scene-text {
   padding: 20px;
   font-family: var(--font-serif);

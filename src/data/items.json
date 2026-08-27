@@ -7,6 +7,7 @@
     "category": "sword",
     "price": 50,
     "slot": "weapon",
+    "rarity": "common",
     "effects": [{ "type": "attack", "value": 3 }]
   },
   {
@@ -17,6 +18,8 @@
     "category": "sword",
     "price": 200,
     "slot": "weapon",
+    "minLevel": 3,
+    "rarity": "rare",
     "effects": [{ "type": "attack", "value": 8 }]
   },
   {
@@ -27,7 +30,21 @@
     "category": "sword",
     "price": 800,
     "slot": "weapon",
+    "minLevel": 6,
+    "rarity": "epic",
     "effects": [{ "type": "attack", "value": 15 }, { "type": "agility", "value": 3 }]
+  },
+  {
+    "id": "hero_sword",
+    "name": "侠客行剑",
+    "description": "剑身镌「侠客行」三字，乃义士信物，攻守兼备且助人逢凶化吉。",
+    "type": "weapon",
+    "category": "sword",
+    "price": 3000,
+    "slot": "weapon",
+    "minLevel": 10,
+    "rarity": "legendary",
+    "effects": [{ "type": "attack", "value": 25 }, { "type": "agility", "value": 5 }, { "type": "luck", "value": 5 }]
   },
   {
     "id": "iron_fist",
@@ -37,7 +54,68 @@
     "category": "fist",
     "price": 150,
     "slot": "weapon",
+    "rarity": "common",
     "effects": [{ "type": "attack", "value": 6 }]
+  },
+  {
+    "id": "fine_fist",
+    "name": "流星锤爪",
+    "description": "指套藏锋，出拳如流星，兼具几分身法。",
+    "type": "weapon",
+    "category": "fist",
+    "price": 600,
+    "slot": "weapon",
+    "minLevel": 4,
+    "rarity": "rare",
+    "effects": [{ "type": "attack", "value": 12 }, { "type": "agility", "value": 2 }]
+  },
+  {
+    "id": "steel_blade",
+    "name": "雁翎刀",
+    "description": "厚重雁翎刀，劈砍沉猛，亦能护身。",
+    "type": "weapon",
+    "category": "blade",
+    "price": 500,
+    "slot": "weapon",
+    "minLevel": 5,
+    "rarity": "rare",
+    "effects": [{ "type": "attack", "value": 14 }, { "type": "defense", "value": 2 }]
+  },
+  {
+    "id": "black_blade",
+    "name": "玄铁屠龙刀",
+    "description": "玄铁混赤金铸成，重逾百斤，挥之可断金碎玉，更添几分气运。",
+    "type": "weapon",
+    "category": "blade",
+    "price": 2200,
+    "slot": "weapon",
+    "minLevel": 9,
+    "rarity": "epic",
+    "effects": [{ "type": "attack", "value": 22 }, { "type": "luck", "value": 3 }]
+  },
+  {
+    "id": "green_staff",
+    "name": "青木杖",
+    "description": "坚韧青木为杖，沉稳厚重，利于强身。",
+    "type": "weapon",
+    "category": "staff",
+    "price": 120,
+    "slot": "weapon",
+    "minLevel": 2,
+    "rarity": "common",
+    "effects": [{ "type": "attack", "value": 5 }, { "type": "maxHp", "value": 10 }]
+  },
+  {
+    "id": "dragon_staff",
+    "name": "盘龙棍",
+    "description": "棍身盘龙纹，使起来大开大合，攻防一体。",
+    "type": "weapon",
+    "category": "staff",
+    "price": 1500,
+    "slot": "weapon",
+    "minLevel": 8,
+    "rarity": "epic",
+    "effects": [{ "type": "attack", "value": 18 }, { "type": "maxHp", "value": 30 }, { "type": "defense", "value": 3 }]
   },
   {
     "id": "cloth_robe",
@@ -47,6 +125,7 @@
     "category": "body",
     "price": 30,
     "slot": "armor",
+    "rarity": "common",
     "effects": [{ "type": "defense", "value": 2 }]
   },
   {
@@ -57,7 +136,21 @@
     "category": "body",
     "price": 120,
     "slot": "armor",
+    "minLevel": 3,
+    "rarity": "rare",
     "effects": [{ "type": "defense", "value": 6 }]
+  },
+  {
+    "id": "scale_armor",
+    "name": "锁子甲",
+    "description": "铁环相扣而成，防护甚佳，亦固本培元。",
+    "type": "armor",
+    "category": "body",
+    "price": 900,
+    "slot": "armor",
+    "minLevel": 6,
+    "rarity": "epic",
+    "effects": [{ "type": "defense", "value": 10 }, { "type": "maxHp", "value": 20 }]
   },
   {
     "id": "silk_robe",
@@ -67,7 +160,21 @@
     "category": "body",
     "price": 1000,
     "slot": "armor",
+    "minLevel": 8,
+    "rarity": "legendary",
     "effects": [{ "type": "defense", "value": 15 }, { "type": "agility", "value": 5 }]
+  },
+  {
+    "id": "beast_armor",
+    "name": "蛮兽战甲",
+    "description": "以异兽筋骨混玄铁打造，坚固异常，刀斧难伤。",
+    "type": "armor",
+    "category": "body",
+    "price": 2600,
+    "slot": "armor",
+    "minLevel": 11,
+    "rarity": "legendary",
+    "effects": [{ "type": "defense", "value": 20 }, { "type": "maxHp", "value": 40 }, { "type": "agility", "value": 3 }]
   },
   {
     "id": "jade_ring",
@@ -77,15 +184,87 @@
     "category": "accessory",
     "price": 300,
     "slot": "accessory",
-    "effects": [{ "type": "mp", "value": 20 }]
+    "minLevel": 2,
+    "rarity": "rare",
+    "effects": [{ "type": "maxMp", "value": 20 }]
+  },
+  {
+    "id": "iron_pendant",
+    "name": "铁护符",
+    "description": "粗铁护身符，略增几分防御。",
+    "type": "accessory",
+    "category": "accessory",
+    "price": 80,
+    "slot": "accessory",
+    "rarity": "common",
+    "effects": [{ "type": "defense", "value": 3 }]
+  },
+  {
+    "id": "agi_pendant",
+    "name": "疾风坠",
+    "description": "缀以鹰羽的玉坠，令人身轻如燕。",
+    "type": "accessory",
+    "category": "accessory",
+    "price": 500,
+    "slot": "accessory",
+    "minLevel": 4,
+    "rarity": "rare",
+    "effects": [{ "type": "agility", "value": 4 }]
+  },
+  {
+    "id": "health_jade",
+    "name": "长生玉",
+    "description": "温养气血的玉饰，体魄更显强健。",
+    "type": "accessory",
+    "category": "accessory",
+    "price": 1100,
+    "slot": "accessory",
+    "minLevel": 6,
+    "rarity": "epic",
+    "effects": [{ "type": "maxHp", "value": 40 }, { "type": "defense", "value": 3 }]
+  },
+  {
+    "id": "luck_talisman",
+    "name": "趋吉符",
+    "description": "道观开光的符箓，转运避灾，亦助身法。",
+    "type": "accessory",
+    "category": "accessory",
+    "price": 1300,
+    "slot": "accessory",
+    "minLevel": 7,
+    "rarity": "epic",
+    "effects": [{ "type": "luck", "value": 8 }, { "type": "agility", "value": 3 }]
+  },
+  {
+    "id": "spirit_orb",
+    "name": "玄天灵珠",
+    "description": "传闻吸纳天地灵气的宝珠，内力、福缘、悟性皆有所增。",
+    "type": "accessory",
+    "category": "accessory",
+    "price": 4000,
+    "slot": "accessory",
+    "minLevel": 10,
+    "rarity": "legendary",
+    "effects": [{ "type": "maxMp", "value": 50 }, { "type": "luck", "value": 5 }, { "type": "comprehension", "value": 5 }]
+  },
+  {
+    "id": "minor_heal",
+    "name": "金疮药",
+    "description": "寻常外伤药，恢复30点气血。",
+    "type": "consumable",
+    "category": "medicine",
+    "price": 10,
+    "rarity": "common",
+    "effects": [{ "type": "hp", "value": 30 }]
   },
   {
     "id": "medicine_herb",
-    "name": "金创药",
-    "description": "止血疗伤的常用药，恢复50点气血。",
+    "name": "大补膏",
+    "description": "疗伤圣药，恢复50点气血。",
     "type": "consumable",
     "category": "medicine",
     "price": 20,
+    "rarity": "common",
     "effects": [{ "type": "hp", "value": 50 }]
   },
   {
@@ -95,7 +274,84 @@
     "type": "consumable",
     "category": "medicine",
     "price": 200,
+    "rarity": "rare",
     "effects": [{ "type": "hp", "value": 200 }, { "type": "mp", "value": 50 }]
+  },
+  {
+    "id": "jade_heal",
+    "name": "九转玉液丹",
+    "description": "宫中秘传丹药，恢复400点气血与100点内力。",
+    "type": "consumable",
+    "category": "medicine",
+    "price": 600,
+    "minLevel": 5,
+    "rarity": "epic",
+    "effects": [{ "type": "hp", "value": 400 }, { "type": "mp", "value": 100 }]
+  },
+  {
+    "id": "antidote",
+    "name": "解毒丸",
+    "description": "以数种草药炼成，可解百毒（战斗中清除中毒）。",
+    "type": "consumable",
+    "category": "medicine",
+    "price": 40,
+    "rarity": "common",
+    "effects": [{ "type": "cure", "value": 0 }]
+  },
+  {
+    "id": "inner_pill",
+    "name": "培元丹",
+    "description": "温养经脉，恢复120点内力。",
+    "type": "consumable",
+    "category": "pill",
+    "price": 80,
+    "rarity": "common",
+    "effects": [{ "type": "mp", "value": 120 }]
+  },
+  {
+    "id": "atk_pill",
+    "name": "猛攻丹",
+    "description": "战时服下，气血翻涌，攻击力大涨三回合。",
+    "type": "consumable",
+    "category": "pill",
+    "price": 120,
+    "rarity": "rare",
+    "effects": [{ "type": "buffAttack", "value": 10, "turns": 3 }]
+  },
+  {
+    "id": "def_pill",
+    "name": "金钟丹",
+    "description": "护体金钟罩之效，防御力大涨三回合。",
+    "type": "consumable",
+    "category": "pill",
+    "price": 120,
+    "rarity": "rare",
+    "effects": [{ "type": "buffDefense", "value": 10, "turns": 3 }]
+  },
+  {
+    "id": "agi_pill",
+    "name": "神行丹",
+    "description": "服后身轻如燕，轻功大涨三回合，更易闪避。",
+    "type": "consumable",
+    "category": "pill",
+    "price": 120,
+    "rarity": "rare",
+    "effects": [{ "type": "buffAgility", "value": 8, "turns": 3 }]
+  },
+  {
+    "id": "power_pill",
+    "name": "神力丹",
+    "description": "攻防身法一时俱强，持续四回合，临阵破敌之宝。",
+    "type": "consumable",
+    "category": "pill",
+    "price": 300,
+    "minLevel": 6,
+    "rarity": "epic",
+    "effects": [
+      { "type": "buffAttack", "value": 8, "turns": 4 },
+      { "type": "buffDefense", "value": 8, "turns": 4 },
+      { "type": "buffAgility", "value": 8, "turns": 4 }
+    ]
   },
   {
     "id": "strength_pill",
@@ -104,6 +360,7 @@
     "type": "consumable",
     "category": "pill",
     "price": 150,
+    "rarity": "rare",
     "effects": [{ "type": "attack", "value": 3 }]
   },
   {
@@ -113,6 +370,65 @@
     "type": "consumable",
     "category": "pill",
     "price": 150,
+    "rarity": "rare",
     "effects": [{ "type": "agility", "value": 2 }]
+  },
+  {
+    "id": "comprehension_pill",
+    "name": "开窍丹",
+    "description": "服之灵台清明，永久增加3点悟性，利于习武。",
+    "type": "consumable",
+    "category": "pill",
+    "price": 400,
+    "minLevel": 5,
+    "rarity": "epic",
+    "effects": [{ "type": "comprehension", "value": 3 }]
+  },
+  {
+    "id": "luck_pill",
+    "name": "转运丹",
+    "description": "机缘所钟，永久增加3点福缘。",
+    "type": "consumable",
+    "category": "pill",
+    "price": 400,
+    "minLevel": 5,
+    "rarity": "epic",
+    "effects": [{ "type": "luck", "value": 3 }]
+  },
+  {
+    "id": "spirit_herb",
+    "name": "紫灵草",
+    "description": "生于幽谷的灵草，药香清远，不少方子都用得上。",
+    "type": "material",
+    "category": "herb",
+    "price": 60,
+    "rarity": "common"
+  },
+  {
+    "id": "iron_ore",
+    "name": "玄铁砂",
+    "description": "精炼矿石，是打造兵刃的上好材料。",
+    "type": "material",
+    "category": "ore",
+    "price": 45,
+    "rarity": "common"
+  },
+  {
+    "id": "beast_core",
+    "name": "妖兽内丹",
+    "description": "异兽体内凝结的内丹，蕴含精纯元气，价值不菲。",
+    "type": "material",
+    "category": "core",
+    "price": 300,
+    "rarity": "rare"
+  },
+  {
+    "id": "ancient_relic",
+    "name": "上古遗物",
+    "description": "不知年代的残破玉璧，隐隐透着古朴气息，似有大用。",
+    "type": "material",
+    "category": "relic",
+    "price": 1500,
+    "rarity": "legendary"
   }
 ]

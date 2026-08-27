@@ -2,7 +2,8 @@
 import { computed } from 'vue'
 import { usePlayerStore } from '../stores/player'
 import { getItem } from '../engine/data-loader'
-import type { EquipSlot, Item, ItemType } from '../types'
+import { itemTags, RARITY_LABELS } from '../engine/item-utils'
+import type { EquipSlot, Item, ItemType, ItemRarity } from '../types'
 
 const playerStore = usePlayerStore()
 const char = computed(() => playerStore.character)
@@ -26,23 +27,22 @@ const typeLabels: Record<ItemType, string> = {
   armor: '防具',
   accessory: '饰品',
   consumable: '消耗品',
-  material: '材料',
-}
-
-function effectText(item: Item): string {
-  if (!item.effects) return ''
-  return item.effects.map(e => {
-    const labels: Record<string, string> = {
-      hp: '气血', mp: '内力', attack: '攻击',
-      defense: '防御', agility: '轻功', cure: '治疗'
-    }
-    return `${labels[e.type] ?? e.type}+${e.value}`
-  }).join(' / ')
+  material: '材料'
 }
 
 function isEquipped(itemId: string): boolean {
   if (!char.value) return false
   return Object.values(char.value.equipment).includes(itemId)
+}
+
+function canEquip(item: Item): boolean {
+  if (!item.slot || !char.value) return false
+  if (item.minLevel && char.value.level < item.minLevel) return false
+  return !isEquipped(item.id)
+}
+
+function rarityClass(rarity?: ItemRarity): string {
+  return rarity ? `rarity-${rarity}` : 'rarity-common'
 }
 
 function equip(itemId: string) {
@@ -66,9 +66,12 @@ function useItem(itemId: string) {
         <div class="item-info">
           <div class="item-name">
             {{ slot.label }}：{{ char.equipment[slot.key] ? getItem(char.equipment[slot.key]!)?.name : '空' }}
+            <span v-if="char.equipment[slot.key]" class="rarity-badge" :class="rarityClass(getItem(char.equipment[slot.key]!)?.rarity)">
+              {{ RARITY_LABELS[getItem(char.equipment[slot.key]!)?.rarity ?? 'common'] }}
+            </span>
           </div>
-          <div class="item-desc" v-if="char.equipment[slot.key]">
-            {{ effectText(getItem(char.equipment[slot.key]!)!) }}
+          <div class="item-tags" v-if="char.equipment[slot.key] && itemTags(getItem(char.equipment[slot.key]!)!).length">
+            <span class="skill-tag" v-for="t in itemTags(getItem(char.equipment[slot.key]!)!)" :key="t">{{ t }}</span>
           </div>
         </div>
         <div class="item-actions" v-if="char.equipment[slot.key]">
@@ -85,10 +88,14 @@ function useItem(itemId: string) {
             {{ item.name }}
             <span class="equipped-badge">x{{ item.quantity }}</span>
             <span class="equipped-badge" v-if="isEquipped(item.id)">已装备</span>
+            <span class="rarity-badge" :class="rarityClass(item.rarity)">{{ RARITY_LABELS[item.rarity ?? 'common'] }}</span>
           </div>
           <div class="item-desc">{{ item.description }}</div>
-          <div class="item-desc" style="color: var(--text-tertiary);">
-            {{ typeLabels[item.type] }} · {{ effectText(item) }}
+          <div class="item-meta" style="color: var(--text-tertiary);">
+            {{ typeLabels[item.type] }}<template v-if="item.minLevel"> · 需{{ item.minLevel }}级</template>
+          </div>
+          <div class="item-tags" v-if="itemTags(item).length">
+            <span class="skill-tag" v-for="t in itemTags(item)" :key="t">{{ t }}</span>
           </div>
         </div>
         <div class="item-actions">
@@ -98,10 +105,12 @@ function useItem(itemId: string) {
             @click="useItem(item.id)"
           >使用</button>
           <button
-            v-if="item.slot && !isEquipped(item.id)"
+            v-if="item.slot"
             class="btn"
-            @click="equip(item.id)"
-          >装备</button>
+            :disabled="!canEquip(item)"
+            :title="item.minLevel && char.level < item.minLevel ? `需${item.minLevel}级方可装备` : ''"
+            @click="canEquip(item) && equip(item.id)"
+          >{{ isEquipped(item.id) ? '已装备' : '装备' }}</button>
         </div>
       </div>
     </div>
