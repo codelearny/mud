@@ -127,6 +127,9 @@ export interface Drop {
   rate: number
 }
 
+// 怪物大类：与 src/data/enemies 下的拆分配置一一对应（beast/bandit/evil/boss）。
+export type EnemyCategory = 'beast' | 'bandit' | 'evil' | 'boss'
+
 export interface Enemy {
   id: string
   name: string
@@ -137,6 +140,8 @@ export interface Enemy {
   expReward: number
   goldReward: number
   drops: Drop[]
+  category?: EnemyCategory // 大类，用于图鉴归类与随机遭遇分组
+  boss?: boolean            // 是否头目（剧情/强敌，可选）
 }
 
 export interface Character {

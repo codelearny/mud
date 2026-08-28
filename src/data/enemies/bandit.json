@@ -1,0 +1,75 @@
+[
+  {
+    "id": "ruffian",
+    "name": "街头混混",
+    "category": "bandit",
+    "description": "横行街头的无赖，只会些三脚猫功夫。",
+    "level": 1,
+    "attributes": { "hp": 30, "maxHp": 30, "mp": 0, "maxMp": 0, "attack": 8, "defense": 2, "agility": 5, "comprehension": 0, "luck": 0 },
+    "skills": ["basic_fist"],
+    "expReward": 15,
+    "goldReward": 10,
+    "drops": [{ "itemId": "minor_heal", "rate": 0.3 }]
+  },
+  {
+    "id": "bandit",
+    "name": "山贼",
+    "category": "bandit",
+    "description": "占山为王的强盗，凶悍异常，常持刀抢劫过路行人。",
+    "level": 3,
+    "attributes": { "hp": 60, "maxHp": 60, "mp": 10, "maxMp": 10, "attack": 14, "defense": 5, "agility": 8, "comprehension": 0, "luck": 0 },
+    "skills": ["basic_fist", "wolf_fang"],
+    "expReward": 35,
+    "goldReward": 30,
+    "drops": [{ "itemId": "medicine_herb", "rate": 0.4 }, { "itemId": "steel_blade", "rate": 0.06 }]
+  },
+  {
+    "id": "river_pirate",
+    "name": "水贼",
+    "category": "bandit",
+    "description": "盘踞水道的盗匪，惯使分水刺，水性极好，官船亦敢劫。",
+    "level": 4,
+    "attributes": { "hp": 65, "maxHp": 65, "mp": 10, "maxMp": 10, "attack": 16, "defense": 6, "agility": 12, "comprehension": 0, "luck": 0 },
+    "skills": ["basic_blade", "wolf_fang"],
+    "expReward": 45,
+    "goldReward": 35,
+    "drops": [{ "itemId": "steel_blade", "rate": 0.08 }, { "itemId": "medicine_herb", "rate": 0.4 }, { "itemId": "iron_ore", "rate": 0.3 }]
+  },
+  {
+    "id": "female_thief",
+    "name": "女飞贼",
+    "category": "bandit",
+    "description": "来去如风的女贼，专偷富户，身法灵巧，寻常护卫难近其身。",
+    "level": 6,
+    "attributes": { "hp": 80, "maxHp": 80, "mp": 20, "maxMp": 20, "attack": 20, "defense": 7, "agility": 19, "comprehension": 0, "luck": 0 },
+    "skills": ["basic_fist", "qingyun_step", "wolf_fang"],
+    "expReward": 70,
+    "goldReward": 55,
+    "drops": [{ "itemId": "agi_pendant", "rate": 0.12 }, { "itemId": "medicine_herb", "rate": 0.3 }, { "itemId": "luck_talisman", "rate": 0.06 }]
+  },
+  {
+    "id": "horse_bandit",
+    "name": "马匪",
+    "category": "bandit",
+    "description": "驰骋北境的马贼，马上刀法凌厉，来去如风，极难围捕。",
+    "level": 8,
+    "attributes": { "hp": 140, "maxHp": 140, "mp": 20, "maxMp": 20, "attack": 28, "defense": 11, "agility": 17, "comprehension": 0, "luck": 0 },
+    "skills": ["basic_blade", "kuangfeng_blade", "qingyun_step"],
+    "expReward": 110,
+    "goldReward": 80,
+    "drops": [{ "itemId": "steel_blade", "rate": 0.12 }, { "itemId": "black_blade", "rate": 0.05 }, { "itemId": "leather_armor", "rate": 0.15 }, { "itemId": "great_medicine", "rate": 0.15 }]
+  },
+  {
+    "id": "bandit_chief",
+    "name": "黑风寨主",
+    "category": "bandit",
+    "boss": true,
+    "description": "黑风山的山大王，一身横练功夫刀枪不入，人称铁霸王。",
+    "level": 12,
+    "attributes": { "hp": 280, "maxHp": 280, "mp": 60, "maxMp": 60, "attack": 40, "defense": 20, "agility": 12, "comprehension": 0, "luck": 0 },
+    "skills": ["wolf_fang", "lianhuan_sword", "qingyun_step", "yijinjing", "tieshan_palm"],
+    "expReward": 250,
+    "goldReward": 200,
+    "drops": [{ "itemId": "great_medicine", "rate": 0.5 }, { "itemId": "silk_robe", "rate": 0.15 }, { "itemId": "spirit_orb", "rate": 0.2 }, { "itemId": "beast_armor", "rate": 0.1 }, { "itemId": "ancient_relic", "rate": 0.08 }]
+  }
+]

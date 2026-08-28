@@ -1,0 +1,87 @@
+[
+  {
+    "id": "wild_wolf",
+    "name": "野狼",
+    "category": "beast",
+    "description": "山林中的野兽，牙尖爪利，速度极快。",
+    "level": 2,
+    "attributes": { "hp": 40, "maxHp": 40, "mp": 0, "maxMp": 0, "attack": 12, "defense": 3, "agility": 14, "comprehension": 0, "luck": 0 },
+    "skills": ["basic_fist"],
+    "expReward": 25,
+    "goldReward": 5,
+    "drops": [{ "itemId": "beast_core", "rate": 0.15 }]
+  },
+  {
+    "id": "boar",
+    "name": "野猪",
+    "category": "beast",
+    "description": "后山常见猛兽，皮厚力大，横冲直撞势不可挡。",
+    "level": 3,
+    "attributes": { "hp": 70, "maxHp": 70, "mp": 0, "maxMp": 0, "attack": 14, "defense": 8, "agility": 6, "comprehension": 0, "luck": 0 },
+    "skills": ["basic_fist"],
+    "expReward": 35,
+    "goldReward": 8,
+    "drops": [{ "itemId": "beast_core", "rate": 0.2 }, { "itemId": "minor_heal", "rate": 0.1 }]
+  },
+  {
+    "id": "venom_snake",
+    "name": "毒蛇",
+    "category": "beast",
+    "description": "草丛中潜伏的毒蛇，啮咬带毒，须得小心提防。",
+    "level": 4,
+    "attributes": { "hp": 45, "maxHp": 45, "mp": 10, "maxMp": 10, "attack": 13, "defense": 2, "agility": 16, "comprehension": 0, "luck": 0 },
+    "skills": ["poison_sand"],
+    "expReward": 40,
+    "goldReward": 6,
+    "drops": [{ "itemId": "beast_core", "rate": 0.15 }, { "itemId": "antidote", "rate": 0.25 }]
+  },
+  {
+    "id": "venom_spider",
+    "name": "毒蛛",
+    "category": "beast",
+    "description": "迷雾林深处的巨蛛，吐丝结网，毒液蚀骨，寻常人避之不及。",
+    "level": 5,
+    "attributes": { "hp": 55, "maxHp": 55, "mp": 20, "maxMp": 20, "attack": 15, "defense": 4, "agility": 13, "comprehension": 0, "luck": 0 },
+    "skills": ["wudu_palm", "poison_sand"],
+    "expReward": 55,
+    "goldReward": 10,
+    "drops": [{ "itemId": "beast_core", "rate": 0.2 }, { "itemId": "antidote", "rate": 0.3 }, { "itemId": "spirit_herb", "rate": 0.1 }]
+  },
+  {
+    "id": "falcon",
+    "name": "苍鹰",
+    "category": "beast",
+    "description": "盘旋于崖顶的猎鹰，俯冲如电，钢爪钩人，常人难敌其速。",
+    "level": 5,
+    "attributes": { "hp": 50, "maxHp": 50, "mp": 0, "maxMp": 0, "attack": 18, "defense": 3, "agility": 20, "comprehension": 0, "luck": 0 },
+    "skills": ["basic_fist"],
+    "expReward": 50,
+    "goldReward": 7,
+    "drops": [{ "itemId": "beast_core", "rate": 0.18 }, { "itemId": "agi_pendant", "rate": 0.05 }]
+  },
+  {
+    "id": "black_bear",
+    "name": "黑熊",
+    "category": "beast",
+    "description": "古木间出没的巨熊，一掌可断碗口粗树枝，皮糙肉厚。",
+    "level": 7,
+    "attributes": { "hp": 130, "maxHp": 130, "mp": 10, "maxMp": 10, "attack": 24, "defense": 12, "agility": 7, "comprehension": 0, "luck": 0 },
+    "skills": ["basic_fist", "wolf_fang"],
+    "expReward": 90,
+    "goldReward": 15,
+    "drops": [{ "itemId": "beast_core", "rate": 0.3 }, { "itemId": "beast_armor", "rate": 0.08 }, { "itemId": "great_medicine", "rate": 0.1 }]
+  },
+  {
+    "id": "tiger",
+    "name": "吊睛白额虎",
+    "category": "beast",
+    "boss": true,
+    "description": "迷雾林之主，兽中之王，啸声震林，爪牙生风，罕有敌手。",
+    "level": 10,
+    "attributes": { "hp": 200, "maxHp": 200, "mp": 30, "maxMp": 30, "attack": 34, "defense": 14, "agility": 18, "comprehension": 0, "luck": 0 },
+    "skills": ["wolf_fang", "xianglong_palms", "qingyun_step"],
+    "expReward": 160,
+    "goldReward": 30,
+    "drops": [{ "itemId": "beast_core", "rate": 0.4 }, { "itemId": "beast_armor", "rate": 0.15 }, { "itemId": "great_medicine", "rate": 0.2 }, { "itemId": "agi_pendant", "rate": 0.08 }]
+  }
+]

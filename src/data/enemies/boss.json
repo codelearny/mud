@@ -1,0 +1,54 @@
+[
+  {
+    "id": "black_wind_second",
+    "name": "黑风寨二当家",
+    "category": "boss",
+    "boss": true,
+    "description": "黑风寨的二当家，使一柄鬼头刀，刀法狠辣，性烈如酒，仅次于寨主。",
+    "level": 10,
+    "attributes": { "hp": 240, "maxHp": 240, "mp": 50, "maxMp": 50, "attack": 36, "defense": 18, "agility": 14, "comprehension": 0, "luck": 0 },
+    "skills": ["basic_blade", "daoba_blade", "tieshan_palm", "qingyun_step"],
+    "expReward": 220,
+    "goldReward": 160,
+    "drops": [{ "itemId": "black_blade", "rate": 0.25 }, { "itemId": "leather_armor", "rate": 0.2 }, { "itemId": "great_medicine", "rate": 0.3 }, { "itemId": "iron_ore", "rate": 0.3 }]
+  },
+  {
+    "id": "ancient_corps",
+    "name": "古墓尸傀",
+    "category": "boss",
+    "boss": true,
+    "description": "古墓中受邪法操控的尸傀，刀枪难入，力大无穷，不知痛痒。",
+    "level": 12,
+    "attributes": { "hp": 360, "maxHp": 360, "mp": 0, "maxMp": 0, "attack": 40, "defense": 30, "agility": 8, "comprehension": 0, "luck": 0 },
+    "skills": ["basic_fist", "wolf_fang", "tieshan_palm"],
+    "expReward": 280,
+    "goldReward": 150,
+    "drops": [{ "itemId": "ancient_relic", "rate": 0.3 }, { "itemId": "beast_armor", "rate": 0.2 }, { "itemId": "iron_ore", "rate": 0.4 }, { "itemId": "def_pill", "rate": 0.15 }]
+  },
+  {
+    "id": "tomb_poisoness",
+    "name": "古墓毒妇",
+    "category": "boss",
+    "boss": true,
+    "description": "隐居古墓的毒妇，喜怒无常，周身奇毒，触之即毙，歹毒异常。",
+    "level": 13,
+    "attributes": { "hp": 300, "maxHp": 300, "mp": 90, "maxMp": 90, "attack": 42, "defense": 16, "agility": 20, "comprehension": 0, "luck": 0 },
+    "skills": ["wudu_palm", "poison_sand", "shenxing_step", "huagong_internal"],
+    "expReward": 300,
+    "goldReward": 200,
+    "drops": [{ "itemId": "antidote", "rate": 0.5 }, { "itemId": "jade_heal", "rate": 0.25 }, { "itemId": "spirit_orb", "rate": 0.18 }, { "itemId": "ancient_relic", "rate": 0.1 }, { "itemId": "agi_pill", "rate": 0.12 }]
+  },
+  {
+    "id": "demon_general",
+    "name": "魔教护法尊者",
+    "category": "boss",
+    "boss": true,
+    "description": "魔教四大护法之一，一身盖世魔功，邪焰滔天，乃武林百年大患。",
+    "level": 18,
+    "attributes": { "hp": 520, "maxHp": 520, "mp": 150, "maxMp": 150, "attack": 62, "defense": 30, "agility": 22, "comprehension": 0, "luck": 0 },
+    "skills": ["xianglong_palms", "huagong_internal", "wudu_palm", "tieshan_palm", "shenxing_step", "jiuyin_internal"],
+    "expReward": 560,
+    "goldReward": 400,
+    "drops": [{ "itemId": "hero_sword", "rate": 0.06 }, { "itemId": "dragon_staff", "rate": 0.06 }, { "itemId": "jade_heal", "rate": 0.4 }, { "itemId": "ancient_relic", "rate": 0.25 }, { "itemId": "power_pill", "rate": 0.2 }, { "itemId": "luck_pill", "rate": 0.15 }]
+  }
+]
