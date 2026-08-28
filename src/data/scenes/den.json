@@ -1,0 +1,53 @@
+[
+  {
+    "id": "blackwind",
+    "name": "黑风寨",
+    "description": "黑风寨依山筑寨，木栅高耸，寨门上悬着几颗风干的头颅。寨中酒肉香气与血腥气混杂，喽啰们的吆喝声隔着山梁都能听见。后寨柴房里似有女子低低的啜泣声。",
+    "connections": ["mountain"],
+    "npcs": ["captive"],
+    "enemyPool": ["ruffian", "bandit", "horse_bandit", "black_wind_second", "bandit_chief"],
+    "requirement": { "type": "level", "target": "", "op": ">=", "value": 10 },
+    "requireHint": "贼巢凶险，需等级 10 方可探寨",
+    "actions": [
+      { "id": "explore_blackwind", "label": "探寨", "type": "encounter", "text": "你伏在寨墙外，窥探寨中动静。", "encounters": ["enc_den_patrol", "enc_den_loot", "enc_den_prisoner"] },
+      { "id": "gather_loot", "label": "搜寻贼赃", "type": "gather", "text": "你摸进寨中库房，翻检劫来的财物。", "gains": [
+        { "itemId": "iron_ore", "min": 2, "max": 3, "weight": 2 },
+        { "itemId": "ancient_relic", "min": 1, "max": 1, "weight": 1 },
+        { "itemId": "mystery_ore", "min": 1, "max": 1, "weight": 1 }
+      ] }
+    ]
+  },
+  {
+    "id": "reed",
+    "name": "芦苇荡",
+    "description": "芦苇荡一望无际，芦花如雪，风过处哗哗作响。水道纵横交错，是水贼最好的藏身之所。荡中时有乌篷小舟穿行，船头挂着不属于本地的镖旗。",
+    "connections": ["ferry"],
+    "npcs": [],
+    "enemyPool": ["ruffian", "bandit", "river_pirate", "female_thief"],
+    "actions": [
+      { "id": "explore_reed", "label": "荡中搜寻", "type": "encounter", "text": "你撑着小船钻进芦苇深处。", "encounters": ["enc_river_trade", "enc_den_patrol", "enc_den_loot", "enc_boat_wreck"] },
+      { "id": "gather_reed", "label": "拾贝摸蚌", "type": "gather", "text": "你沿着浅滩摸索，指望摸到些值钱物事。", "gains": [
+        { "itemId": "river_fish", "min": 1, "max": 3, "weight": 3 },
+        { "itemId": "spirit_orb", "min": 1, "max": 1, "weight": 1 }
+      ] }
+    ]
+  },
+  {
+    "id": "demon_altar",
+    "name": "魔教分坛",
+    "description": "分坛建于荒山绝顶，黑石垒成的高台四面点着血色灯笼。坛心一座狰狞石像面目模糊，供桌上残留着暗褐色的痕迹。空气中硫磺与血腥混杂，令人作呕，却又隐隐透出一股邪异的内力波动。",
+    "connections": ["tomb", "peak"],
+    "npcs": [],
+    "enemyPool": ["poison_cultist", "evil_guard", "evil_elder", "demon_general"],
+    "requirement": { "type": "level", "target": "", "op": ">=", "value": 14 },
+    "requireHint": "妖氛冲天，需等级 14 方可闯坛",
+    "actions": [
+      { "id": "explore_altar", "label": "闯坛", "type": "encounter", "text": "你踏着血色灯光，直入坛心。", "encounters": ["enc_altar_blood", "enc_den_patrol", "enc_tomb_gas"] },
+      { "id": "gather_altar", "label": "搜刮祭器", "type": "gather", "text": "你翻检坛上祭器，寻些罕见的物事。", "gains": [
+        { "itemId": "mystery_ore", "min": 1, "max": 2, "weight": 2 },
+        { "itemId": "ancient_relic", "min": 1, "max": 2, "weight": 2 },
+        { "itemId": "spirit_orb", "min": 1, "max": 1, "weight": 1 }
+      ] }
+    ]
+  }
+]

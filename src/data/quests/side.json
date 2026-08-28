@@ -1,0 +1,42 @@
+[
+  {
+    "id": "quest_hide",
+    "name": "猎户之托",
+    "description": "后山猎户赵大山欲以家传物件换三张兽皮。",
+    "giver": "hunter",
+    "acceptText": "少侠去打兽皮",
+    "completeCondition": { "type": "item", "target": "beast_hide", "op": ">=", "value": 3 },
+    "completeFlag": "hide_delivered",
+    "rewards": { "exp": 100, "gold": 80, "items": [{ "itemId": "agi_pill", "quantity": 1 }] }
+  },
+  {
+    "id": "quest_herbs",
+    "name": "药谷灵草",
+    "description": "药王谷谷三娘欲考验来人，命其采来紫灵草三株。",
+    "giver": "herbalist",
+    "acceptText": "少侠去采灵草",
+    "completeCondition": { "type": "item", "target": "spirit_herb", "op": ">=", "value": 3 },
+    "completeFlag": "herbs_delivered",
+    "rewards": { "exp": 120, "gold": 60 }
+  },
+  {
+    "id": "quest_undead",
+    "name": "古墓尸患",
+    "description": "守墓人石九请求除掉墓中两具尸傀，以绝后患。",
+    "giver": "tomb_keeper",
+    "acceptText": "少侠去除尸傀",
+    "completeCondition": { "type": "counter", "target": "undeadSlain", "op": ">=", "value": 2 },
+    "completeFlag": "undead_cleared",
+    "rewards": { "exp": 200, "gold": 150, "items": [{ "itemId": "ancient_relic", "quantity": 2 }] }
+  },
+  {
+    "id": "quest_altar",
+    "name": "魔教之患",
+    "description": "落雁峰无名老人要你三次挫败魔教门徒，方传绝学。",
+    "giver": "hermit",
+    "acceptText": "少侠领命除魔",
+    "completeCondition": { "type": "counter", "target": "demonSlain", "op": ">=", "value": 3 },
+    "completeFlag": "altar_struck",
+    "rewards": { "exp": 400, "gold": 300, "items": [{ "itemId": "power_pill", "quantity": 2 }, { "itemId": "hero_sword", "quantity": 1 }] }
+  }
+]

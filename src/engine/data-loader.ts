@@ -1,15 +1,15 @@
-import scenesJson from '../data/scenes.json'
-import npcsJson from '../data/npcs.json'
-import questsJson from '../data/quests.json'
-import encountersJson from '../data/encounters.json'
 import type { Skill, Item, Enemy, Scene, NPC, Quest, Encounter, Shop } from '../types'
 
-// 技能/物品/怪物/商铺均按「大类」拆分到独立文件（见 src/data 下对应目录）。
+// 所有数据表均按「大类/地区」拆分到独立文件（见 src/data 下对应目录）。
 // 这里用 import.meta.glob 将目录下所有 JSON 合并进 Map，对外接口保持不变。
 const skillModules = import.meta.glob('../data/skills/**/*.json', { eager: true }) as unknown as Record<string, { default: Skill[] }>
 const itemModules = import.meta.glob('../data/items/**/*.json', { eager: true }) as unknown as Record<string, { default: Item[] }>
 const enemyModules = import.meta.glob('../data/enemies/**/*.json', { eager: true }) as unknown as Record<string, { default: Enemy[] }>
 const shopModules = import.meta.glob('../data/shops/**/*.json', { eager: true }) as unknown as Record<string, { default: Shop[] }>
+const sceneModules = import.meta.glob('../data/scenes/**/*.json', { eager: true }) as unknown as Record<string, { default: Scene[] }>
+const npcModules = import.meta.glob('../data/npcs/**/*.json', { eager: true }) as unknown as Record<string, { default: NPC[] }>
+const questModules = import.meta.glob('../data/quests/**/*.json', { eager: true }) as unknown as Record<string, { default: Quest[] }>
+const encounterModules = import.meta.glob('../data/encounters/**/*.json', { eager: true }) as unknown as Record<string, { default: Encounter[] }>
 
 const skills = new Map<string, Skill>()
 const items = new Map<string, Item>()
@@ -38,20 +38,28 @@ for (const mod of Object.values(enemyModules)) {
   }
 }
 
-for (const scene of scenesJson as Scene[]) {
-  scenes.set(scene.id, scene)
+for (const mod of Object.values(sceneModules)) {
+  for (const scene of mod.default) {
+    scenes.set(scene.id, scene)
+  }
 }
 
-for (const npc of npcsJson as unknown as NPC[]) {
-  npcs.set(npc.id, npc)
+for (const mod of Object.values(npcModules)) {
+  for (const npc of mod.default) {
+    npcs.set(npc.id, npc)
+  }
 }
 
-for (const quest of questsJson as Quest[]) {
-  quests.set(quest.id, quest)
+for (const mod of Object.values(questModules)) {
+  for (const quest of mod.default) {
+    quests.set(quest.id, quest)
+  }
 }
 
-for (const enc of encountersJson as Encounter[]) {
-  encounters.set(enc.id, enc)
+for (const mod of Object.values(encounterModules)) {
+  for (const enc of mod.default) {
+    encounters.set(enc.id, enc)
+  }
 }
 
 for (const mod of Object.values(shopModules)) {

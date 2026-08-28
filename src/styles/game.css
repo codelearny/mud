@@ -816,6 +816,17 @@ html, body {
   color: var(--text-danger);
 }
 
+/* 地图：未满足进入条件的地点 */
+.btn-locked {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.lock-hint {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
 @media (max-width: 480px) {
   .game-title { font-size: 28px; }
   .btn-grid { grid-template-columns: 1fr; }

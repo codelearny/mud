@@ -1,0 +1,166 @@
+[
+  {
+    "id": "village_chief",
+    "name": "李伯",
+    "title": "青石村长",
+    "description": "须发皆白的老村长，为村中安危忧心忡忡。",
+    "sceneId": "village",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "李伯",
+        "text": "少侠，你来了。老朽正愁无人可托。",
+        "choices": [
+          { "text": "后山贼患可平定了？", "next": "cleared_talk", "condition": { "type": "flag", "target": "bandits_cleared", "op": "==", "value": true } },
+          { "text": "村中近况如何？", "next": "bandits" },
+          { "text": "晚辈告辞。", "next": "END" }
+        ]
+      },
+      "bandits": {
+        "id": "bandits",
+        "speaker": "李伯",
+        "text": "后山来了伙强人，拦路抢劫、伤我村民。那伙贼人的老巢便在后山深处的黑风寨，只是山道险峻，寻常人寻不着。",
+        "choices": [
+          { "text": "此等恶行，晚辈愿往剿之！", "next": "accept", "condition": { "type": "quest", "target": "quest_bandits", "op": "!=", "value": "active" }, "effects": [{ "type": "quest", "target": "quest_bandits", "value": "active" }, { "type": "flag", "target": "met_chief", "value": true }] },
+          { "text": "我正要去后山。", "next": "active_hint", "condition": { "type": "quest", "target": "quest_bandits", "op": "==", "value": "active" } },
+          { "text": "容晚辈思量。", "next": "END" }
+        ]
+      },
+      "accept": {
+        "id": "accept",
+        "speaker": "李伯",
+        "text": "善哉！少侠侠义心肠，老朽代全村谢过。那伙贼人约有三五之数，少侠务必小心。",
+        "choices": [{ "text": "理会得。", "next": "END", "effects": [{ "type": "flag", "target": "accepted_bandits", "value": true }] }]
+      },
+      "active_hint": {
+        "id": "active_hint",
+        "speaker": "李伯",
+        "text": "后山路径险峻，少侠可从村西小径前往。寨子藏在山梁背后，等级不足十成，切莫硬闯。",
+        "choices": [{ "text": "多谢指点。", "next": "END" }]
+      },
+      "cleared_talk": {
+        "id": "cleared_talk",
+        "speaker": "李伯",
+        "text": "托少侠之福，后山已复太平。老朽与全村感念大德，这枚平安玉佩，权作薄礼。",
+        "choices": [{ "text": "村长言重了。", "next": "END" }]
+      }
+    }
+  },
+  {
+    "id": "innkeeper",
+    "name": "红姑",
+    "title": "客栈掌柜",
+    "description": "俏丽利落的客栈女掌柜，爱说江湖闲话。",
+    "sceneId": "village",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "红姑",
+        "text": "客官里面请～俺家红姑掌柜的，热茶沃酒管够。看你这身打扮，也是个走江湖的？",
+        "choices": [
+          { "text": "掌柜的可有见闻？", "next": "gossip", "effects": [{ "type": "affinity", "target": "innkeeper", "value": 2 }] },
+          { "text": "我想歇歇脚（耗银十两）", "next": "heal_done", "condition": { "type": "gold", "target": "", "op": ">=", "value": 10 }, "effects": [{ "type": "gold", "value": -10 }, { "type": "heal", "value": "full" }] },
+          { "text": "告辞。", "next": "END" }
+        ]
+      },
+      "gossip": {
+        "id": "gossip",
+        "speaker": "红姑",
+        "text": "听说后山那伙强人，头领是个使铁棍的狠角色，唤作铁霸王。城南渡口的老艄公，年轻时也是条好汉哩。至于落雁峰上那位……嘘，不可说。",
+        "choices": [{ "text": "受教了。", "next": "END" }]
+      },
+      "heal_done": {
+        "id": "heal_done",
+        "speaker": "红姑",
+        "text": "红姑端来热汤：客官慢用，养好了身子才好闯荡。",
+        "choices": [{ "text": "多谢掌柜。", "next": "END" }]
+      }
+    }
+  },
+  {
+    "id": "hunter",
+    "name": "赵大山",
+    "title": "山村猎户",
+    "description": "常年在后山讨生活的老猎户，熟知山中一切兽迹。",
+    "sceneId": "mountain",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "赵大山",
+        "text": "哟，稀客。这后山近来不太平，猛兽出没不说，还有那伙占山的强人。你是来寻什么的？",
+        "choices": [
+          { "text": "猎户，晚辈已打到兽皮三张。", "next": "hide_done", "condition": { "type": "quest", "target": "quest_hide", "op": "==", "value": "completed" } },
+          { "text": "敢问山中情形。", "next": "talk" },
+          { "text": "告辞。", "next": "END" }
+        ]
+      },
+      "talk": {
+        "id": "talk",
+        "speaker": "赵大山",
+        "text": "不瞒你说，俺那张祖传的弓前些日子让野兽撞折了。少侠若打得三张兽皮，俺便拿家传的物件与你换——如何？",
+        "choices": [
+          { "text": "一言为定！", "next": "accept", "condition": { "type": "quest", "target": "quest_hide", "op": "!=", "value": "active" }, "effects": [{ "type": "quest", "target": "quest_hide", "value": "active" }] },
+          { "text": "我正打着呢。", "next": "hint", "condition": { "type": "quest", "target": "quest_hide", "op": "==", "value": "active" } },
+          { "text": "容后再议。", "next": "END" }
+        ]
+      },
+      "accept": {
+        "id": "accept",
+        "speaker": "赵大山",
+        "text": "好！这后山野猪黑熊都有，兽皮厚实得很。少侠在林中狩猎便是。",
+        "choices": [{ "text": "包在我身上。", "next": "END" }]
+      },
+      "hint": {
+        "id": "hint",
+        "speaker": "赵大山",
+        "text": "就地设陷阱最是省力，迷雾林里的走兽皮子更好，只是当心毒虫。",
+        "choices": [{ "text": "记下了。", "next": "END" }]
+      },
+      "hide_done": {
+        "id": "hide_done",
+        "speaker": "赵大山",
+        "text": "好皮子！少侠好眼力。这枚铁胆是俺家传的护身物，戴着能使身子骨更结实，你收下！",
+        "effects": [{ "type": "item", "target": "def_pill", "value": 2 }, { "type": "item", "target": "leather_armor", "value": 1 }],
+        "choices": [{ "text": "多谢猎户大哥。", "next": "END" }]
+      }
+    }
+  },
+  {
+    "id": "ferryman",
+    "name": "老艄公",
+    "title": "渡口船家",
+    "description": "在青石渡口摆渡四十年的老船工，见惯了江上的风浪与人事。",
+    "sceneId": "ferry",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "老艄公",
+        "text": "客官要过江？坐稳喽——这江面看着平，底下可湍得很。",
+        "choices": [
+          { "text": "老人家在这渡口多少年了？", "next": "story", "effects": [{ "type": "affinity", "target": "ferryman", "value": 2 }] },
+          { "text": "敢问江上可有异事？", "next": "rumor" },
+          { "text": "不过江，随便看看。", "next": "END" }
+        ]
+      },
+      "story": {
+        "id": "story",
+        "speaker": "老艄公",
+        "text": "四十年喽。早年间俺也走过镖，后来腿让水匪伤了，就在这渡口安了身。客官若要去芦苇荡，可千万别走夜路。",
+        "choices": [{ "text": "晚辈记下了。", "next": "END", "effects": [{ "type": "exp", "value": 20 }] }]
+      },
+      "rumor": {
+        "id": "rumor",
+        "speaker": "老艄公",
+        "text": "下游第三道弯，沉着前朝的宝船，打捞的人多，能上来的少。客官若水性好，倒不妨试试。",
+        "choices": [
+          { "text": "多谢指点（得绳索一副）", "next": "END", "effects": [{ "type": "item", "target": "iron_ore", "value": 1 }, { "type": "exp", "value": 15 }] },
+          { "text": "知道了。", "next": "END" }
+        ]
+      }
+    }
+  }
+]

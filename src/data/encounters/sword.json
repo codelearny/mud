@@ -1,0 +1,32 @@
+[
+  {
+    "id": "enc_sword_rust",
+    "title": "锈剑",
+    "text": "一柄通体青锈的长剑斜插在土中，剑柄处却磨得发亮，显然常有人握持。",
+    "choices": [
+      { "text": "拔剑一试", "next": "END", "battle": "evil_disciple" },
+      { "text": "取走此剑（得精钢剑）", "next": "END", "effects": [{ "type": "item", "target": "iron_sword", "value": 1 }] },
+      { "text": "插回原处", "next": "END" }
+    ]
+  },
+  {
+    "id": "enc_sword_epitaph",
+    "title": "剑碑",
+    "text": "冢心立着一方残碑，碑文已漫漶不清，唯余八个大字：『心剑合一，无招胜有招』。",
+    "choices": [
+      { "text": "凝神参悟（得经验）", "next": "END", "effects": [{ "type": "exp", "value": 60 }] },
+      { "text": "摹下碑文（习太极剑）", "next": "END", "effects": [{ "type": "learn_skill", "target": "taiji_sword" }] },
+      { "text": "不解其意，离去", "next": "END" }
+    ]
+  },
+  {
+    "id": "enc_sword_spirit",
+    "title": "剑灵",
+    "text": "风起时，万剑齐鸣，一道清越的剑气自冢底冲天而起，绕着你盘旋不去，似在邀战。",
+    "choices": [
+      { "text": "拔剑相迎", "next": "END", "battle": "jianghu_villain" },
+      { "text": "静观其变（得剑意）", "next": "END", "effects": [{ "type": "exp", "value": 50 }, { "type": "item", "target": "qingfeng_sword", "value": 1 }] },
+      { "text": "敛息退开", "next": "END" }
+    ]
+  }
+]

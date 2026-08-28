@@ -1,0 +1,42 @@
+[
+  {
+    "id": "enc_ferry_talk",
+    "title": "艄公闲话",
+    "text": "老艄公磕了磕烟袋：『客官，这江水底下可埋着不少故事。前朝那支运宝的船队，就沉在下游第三道弯里。』",
+    "choices": [
+      { "text": "细听究竟（长见识）", "next": "END", "effects": [{ "type": "exp", "value": 25 }] },
+      { "text": "请教水性（习青云步）", "next": "END", "effects": [{ "type": "learn_skill", "target": "qingyun_step" }] },
+      { "text": "多谢，告辞", "next": "END" }
+    ]
+  },
+  {
+    "id": "enc_boat_wreck",
+    "title": "沉船遗骸",
+    "text": "退潮时分，一截焦黑的船骸从江底露出，舱板缝隙里似乎卡着什么东西，正泛着金属的光。",
+    "choices": [
+      { "text": "撬开舱板", "next": "END", "effects": [{ "type": "item", "target": "iron_ore", "value": 2 }, { "type": "item", "target": "ancient_relic", "value": 1 }] },
+      { "text": "只取看得见的", "next": "END", "effects": [{ "type": "item", "target": "iron_ore", "value": 1 }] },
+      { "text": "晦气，走开", "next": "END" }
+    ]
+  },
+  {
+    "id": "enc_river_trade",
+    "title": "江上商船",
+    "text": "一艘满载货物的商船缓缓靠岸，船主满面堆笑地迎上来：『这位爷，可要捎带些货物？』",
+    "choices": [
+      { "text": "好言攀谈（得金创药）", "next": "END", "effects": [{ "type": "item", "target": "minor_heal", "value": 2 }] },
+      { "text": "强行索要买路钱", "next": "END", "battle": "river_pirate" },
+      { "text": "不做理会", "next": "END" }
+    ]
+  },
+  {
+    "id": "enc_drowning",
+    "title": "江中遇险",
+    "text": "江心传来孩童的呼救声，一个小小的身影在急流中起伏，眼看就要被漩涡卷走。",
+    "choices": [
+      { "text": "纵身入水相救", "next": "END", "effects": [{ "type": "exp", "value": 40 }, { "type": "item", "target": "jade_heal", "value": 1 }] },
+      { "text": "高呼求援（得银十两）", "next": "END", "effects": [{ "type": "gold", "value": 10 }] },
+      { "text": "佯作未见", "next": "END" }
+    ]
+  }
+]

@@ -1,0 +1,211 @@
+[
+  {
+    "id": "instructor",
+    "name": "王铁柱",
+    "title": "武馆教头",
+    "description": "清风镇武馆教头，性烈豪爽，剑法不俗。",
+    "sceneId": "town",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "王铁柱",
+        "text": "某家王铁柱，清风镇武馆教头。看你根骨不差，可想学两手真功夫？",
+        "choices": [
+          { "text": "教头，晚辈已胜敌五场。", "next": "teach_done", "condition": { "type": "quest", "target": "quest_duel", "op": "==", "value": "completed" } },
+          { "text": "请教教头绝学。", "next": "teach", "condition": { "type": "flag", "target": "learned_dugu", "op": "!=", "value": true } },
+          { "text": "敢问江湖事。", "next": "talk", "effects": [{ "type": "affinity", "target": "instructor", "value": 1 }] },
+          { "text": "告辞。", "next": "END" }
+        ]
+      },
+      "teach": {
+        "id": "teach",
+        "speaker": "王铁柱",
+        "text": "某家的独孤九剑，乃剑法中的绝诣。你若能扬名立万、胜敌五场，某家便破例相传。",
+        "effects": [{ "type": "quest", "target": "quest_duel", "value": "active" }],
+        "choices": [{ "text": "晚辈定当尽力。", "next": "END" }]
+      },
+      "teach_done": {
+        "id": "teach_done",
+        "speaker": "王铁柱",
+        "text": "好！你已胜敌五场，某家言出必行——这独孤九剑，拿去！",
+        "effects": [{ "type": "learn_skill", "target": "dugu_nine" }, { "type": "flag", "target": "learned_dugu", "value": true }],
+        "choices": [{ "text": "多谢教头！", "next": "END" }]
+      },
+      "talk": {
+        "id": "talk",
+        "speaker": "王铁柱",
+        "text": "江湖险恶，人心难测。少侠初出茅庐，凡事多留个心眼。那古刹里的慧能老僧，倒是位真高人；城南药王谷的药草，也值一采。",
+        "choices": [{ "text": "记下了。", "next": "END" }]
+      }
+    }
+  },
+  {
+    "id": "merchant",
+    "name": "钱通",
+    "title": "药铺掌柜",
+    "description": "清风镇药铺掌柜，圆滑精明，手中药材齐全。",
+    "sceneId": "town",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "钱通",
+        "text": "客官要些什么药材？金创药、大力丸，俺这都有。今日便送客官一株草药，结个善缘。",
+        "choices": [
+          { "text": "掌柜的，看看你这铺子都有些什么好货。", "next": "END", "effects": [{ "type": "affinity", "target": "merchant", "value": 1 }], "shop": "qiantong_shop" },
+          { "text": "多谢钱掌柜。", "next": "give_herb", "effects": [{ "type": "item", "target": "medicine_herb", "value": 1 }, { "type": "affinity", "target": "merchant", "value": 1 }] },
+          { "text": "告辞。", "next": "END" }
+        ]
+      },
+      "give_herb": {
+        "id": "give_herb",
+        "speaker": "钱通",
+        "text": "这草药名为三七，止血生肌最是灵验。江湖行走，身上总得备些。",
+        "choices": [{ "text": "记下。", "next": "END" }]
+      }
+    }
+  },
+  {
+    "id": "blacksmith",
+    "name": "铁大山",
+    "title": "镇上铁匠",
+    "description": "一身腱子肉的老铁匠，打铁声昼夜不息，性子爽直。",
+    "sceneId": "town",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "铁大山",
+        "text": "某家铁大山，清风镇铁匠铺的掌柜！刀枪剑戟、甲胄护符，只要银子够，某家都能给你弄来。",
+        "choices": [
+          { "text": "铁匠，看看你铺子里都有啥。", "next": "END", "effects": [{ "type": "affinity", "target": "blacksmith", "value": 1 }], "shop": "blacksmith_shop" },
+          { "text": "敢问江湖事。", "next": "talk", "effects": [{ "type": "affinity", "target": "blacksmith", "value": 1 }] },
+          { "text": "告辞。", "next": "END" }
+        ]
+      },
+      "talk": {
+        "id": "talk",
+        "speaker": "铁大山",
+        "text": "后山那伙强人用的铁棍，便是某家早年打的，悔不该啊！你要是打得着玄铁，拿来给某家，某家给你打件趁手的兵刃。",
+        "choices": [{ "text": "受教了。", "next": "END" }]
+      }
+    }
+  },
+  {
+    "id": "monk",
+    "name": "慧能",
+    "title": "古刹老僧",
+    "description": "古刹中枯坐数十载的白眉老僧，武功深不可测。",
+    "sceneId": "temple",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "慧能",
+        "text": "施主何来？老衲慧能，在此枯坐数十载。佛门虽不尚争斗，然强身修心之易筋经，亦可广传有缘人。",
+        "choices": [
+          { "text": "晚辈已寻得草药三株。", "next": "offer_done", "condition": { "type": "quest", "target": "quest_herb", "op": "==", "value": "completed" } },
+          { "text": "敢问易筋经。", "next": "offer", "condition": { "type": "flag", "target": "learned_yijin", "op": "!=", "value": true } },
+          { "text": "老禅师心。", "next": "END", "effects": [{ "type": "affinity", "target": "monk", "value": 2 }] }
+        ]
+      },
+      "offer": {
+        "id": "offer",
+        "speaker": "慧能",
+        "text": "易筋经需上等药材为引，施主若寻来草药三株相赠，老衲便传你此经，洗髓易筋。",
+        "effects": [{ "type": "quest", "target": "quest_herb", "value": "active" }],
+        "choices": [{ "text": "晚辈去寻来。", "next": "END" }]
+      },
+      "offer_done": {
+        "id": "offer_done",
+        "speaker": "慧能",
+        "text": "善哉。施主诚心，老衲便将易筋经相传，望你以此行侠仗义。殿后小径可登落雁峰，那上头住着一位故人，施主若有机缘，不妨一见。",
+        "effects": [{ "type": "learn_skill", "target": "yijinjing" }, { "type": "flag", "target": "learned_yijin", "value": true }],
+        "choices": [{ "text": "多谢大师！", "next": "END" }]
+      }
+    }
+  },
+  {
+    "id": "herbalist",
+    "name": "谷三娘",
+    "title": "药王谷药农",
+    "description": "守着药王谷一辈子的老药农，性子古怪，识得百草。",
+    "sceneId": "valley",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "谷三娘",
+        "text": "哪来的野小子，踩坏我的药苗了！……哼，看在你身子骨还成的份上，饶你这一回。",
+        "choices": [
+          { "text": "晚辈已采得灵草三株。", "next": "herb_done", "condition": { "type": "quest", "target": "quest_herbs", "op": "==", "value": "completed" } },
+          { "text": "老人家，想跟你学认药。", "next": "teach", "condition": { "type": "quest", "target": "quest_herbs", "op": "!=", "value": "active" } },
+          { "text": "我正采着呢。", "next": "hint", "condition": { "type": "quest", "target": "quest_herbs", "op": "==", "value": "active" } },
+          { "text": "得罪了，告辞。", "next": "END" }
+        ]
+      },
+      "teach": {
+        "id": "teach",
+        "speaker": "谷三娘",
+        "text": "认药？行啊。先去给我采三株灵草来——这谷里那泛着幽光的就是。采来了，老婆子教你几手。",
+        "effects": [{ "type": "quest", "target": "quest_herbs", "value": "active" }],
+        "choices": [{ "text": "这就去采。", "next": "END" }]
+      },
+      "hint": {
+        "id": "hint",
+        "speaker": "谷三娘",
+        "text": "灵草长在阴湿的岩缝里，泛着幽光，仔细看。就在这谷中采药，莫要偷懒。",
+        "choices": [{ "text": "知道了。", "next": "END" }]
+      },
+      "herb_done": {
+        "id": "herb_done",
+        "speaker": "谷三娘",
+        "text": "嗯，采得不错，是个细心的。老婆子说话算话——这几丸解毒丹，还有这张方子，都给你。",
+        "effects": [{ "type": "item", "target": "antidote", "value": 3 }, { "type": "item", "target": "jade_heal", "value": 2 }, { "type": "learn_skill", "target": "heal_shengshou" }],
+        "choices": [{ "text": "多谢老人家！", "next": "END" }]
+      }
+    }
+  },
+  {
+    "id": "hermit",
+    "name": "无名老人",
+    "title": "落雁峰隐者",
+    "description": "盘坐峰顶数十年的灰袍老者，身份成谜，目光如电。",
+    "sceneId": "peak",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "无名老人",
+        "text": "……能爬上这落雁峰的，十年里你是第三个。坐吧，说说，你为何而来？",
+        "choices": [
+          { "text": "晚辈已破魔教分坛三次。", "next": "altar_done", "condition": { "type": "quest", "target": "quest_altar", "op": "==", "value": "completed" } },
+          { "text": "为除魔教而来。", "next": "altar", "condition": { "type": "quest", "target": "quest_altar", "op": "!=", "value": "active" } },
+          { "text": "晚辈正在筹谋。", "next": "hint", "condition": { "type": "quest", "target": "quest_altar", "op": "==", "value": "active" } },
+          { "text": "只是路过。", "next": "END" }
+        ]
+      },
+      "altar": {
+        "id": "altar",
+        "speaker": "无名老人",
+        "text": "好。老夫年轻时欠下魔教一笔账，如今手脚不便了。你若能三次挫败魔教门徒，老夫便将压箱底的功夫传你。",
+        "effects": [{ "type": "quest", "target": "quest_altar", "value": "active" }],
+        "choices": [{ "text": "晚辈领命。", "next": "END" }]
+      },
+      "hint": {
+        "id": "hint",
+        "speaker": "无名老人",
+        "text": "魔教分坛的门户，一在古墓深处，一在这峰下。那里的护法长老、魔教尊者，都算得上一号人物。等级不足十四，切莫去送死。",
+        "choices": [{ "text": "晚辈明白。", "next": "END" }]
+      },
+      "altar_done": {
+        "id": "altar_done",
+        "speaker": "无名老人",
+        "text": "好小子，老夫没看错人。这路「凌波微步」，是老夫当年纵横江湖的看家本领，今日传你！",
+        "effects": [{ "type": "learn_skill", "target": "lingbo_step" }, { "type": "item", "target": "power_pill", "value": 2 }],
+        "choices": [{ "text": "多谢前辈厚赐！", "next": "END" }]
+      }
+    }
+  }
+]

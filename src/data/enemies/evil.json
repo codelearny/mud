@@ -45,7 +45,8 @@
     "skills": ["wudu_palm", "xianglong_palms", "yijinjing", "qingyun_step"],
     "expReward": 200,
     "goldReward": 120,
-    "drops": [{ "itemId": "great_medicine", "rate": 0.35 }, { "itemId": "jade_heal", "rate": 0.15 }, { "itemId": "spirit_orb", "rate": 0.12 }, { "itemId": "inner_pill", "rate": 0.1 }]
+    "drops": [{ "itemId": "great_medicine", "rate": 0.35 }, { "itemId": "jade_heal", "rate": 0.15 }, { "itemId": "spirit_orb", "rate": 0.12 }, { "itemId": "inner_pill", "rate": 0.1 }],
+    "counters": ["demonSlain"]
   },
   {
     "id": "evil_elder",
@@ -58,6 +59,7 @@
     "skills": ["xianglong_palms", "huagong_internal", "tieshan_palm", "wudu_palm", "shenxing_step"],
     "expReward": 360,
     "goldReward": 240,
-    "drops": [{ "itemId": "jade_heal", "rate": 0.3 }, { "itemId": "spirit_orb", "rate": 0.2 }, { "itemId": "ancient_relic", "rate": 0.12 }, { "itemId": "power_pill", "rate": 0.15 }, { "itemId": "atk_pill", "rate": 0.12 }]
+    "drops": [{ "itemId": "jade_heal", "rate": 0.3 }, { "itemId": "spirit_orb", "rate": 0.2 }, { "itemId": "ancient_relic", "rate": 0.12 }, { "itemId": "power_pill", "rate": 0.15 }, { "itemId": "atk_pill", "rate": 0.12 }],
+    "counters": ["demonSlain"]
   }
 ]

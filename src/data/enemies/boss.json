@@ -23,7 +23,8 @@
     "skills": ["basic_fist", "wolf_fang", "tieshan_palm"],
     "expReward": 280,
     "goldReward": 150,
-    "drops": [{ "itemId": "ancient_relic", "rate": 0.3 }, { "itemId": "beast_armor", "rate": 0.2 }, { "itemId": "iron_ore", "rate": 0.4 }, { "itemId": "def_pill", "rate": 0.15 }]
+    "drops": [{ "itemId": "ancient_relic", "rate": 0.3 }, { "itemId": "beast_armor", "rate": 0.2 }, { "itemId": "iron_ore", "rate": 0.4 }, { "itemId": "def_pill", "rate": 0.15 }],
+    "counters": ["undeadSlain"]
   },
   {
     "id": "tomb_poisoness",
@@ -36,7 +37,8 @@
     "skills": ["wudu_palm", "poison_sand", "shenxing_step", "huagong_internal"],
     "expReward": 300,
     "goldReward": 200,
-    "drops": [{ "itemId": "antidote", "rate": 0.5 }, { "itemId": "jade_heal", "rate": 0.25 }, { "itemId": "spirit_orb", "rate": 0.18 }, { "itemId": "ancient_relic", "rate": 0.1 }, { "itemId": "agi_pill", "rate": 0.12 }]
+    "drops": [{ "itemId": "antidote", "rate": 0.5 }, { "itemId": "jade_heal", "rate": 0.25 }, { "itemId": "spirit_orb", "rate": 0.18 }, { "itemId": "ancient_relic", "rate": 0.1 }, { "itemId": "agi_pill", "rate": 0.12 }],
+    "counters": ["undeadSlain"]
   },
   {
     "id": "demon_general",
@@ -49,6 +51,7 @@
     "skills": ["xianglong_palms", "huagong_internal", "wudu_palm", "tieshan_palm", "shenxing_step", "jiuyin_internal"],
     "expReward": 560,
     "goldReward": 400,
-    "drops": [{ "itemId": "hero_sword", "rate": 0.06 }, { "itemId": "dragon_staff", "rate": 0.06 }, { "itemId": "jade_heal", "rate": 0.4 }, { "itemId": "ancient_relic", "rate": 0.25 }, { "itemId": "power_pill", "rate": 0.2 }, { "itemId": "luck_pill", "rate": 0.15 }]
+    "drops": [{ "itemId": "hero_sword", "rate": 0.06 }, { "itemId": "dragon_staff", "rate": 0.06 }, { "itemId": "jade_heal", "rate": 0.4 }, { "itemId": "ancient_relic", "rate": 0.25 }, { "itemId": "power_pill", "rate": 0.2 }, { "itemId": "luck_pill", "rate": 0.15 }],
+    "counters": ["demonSlain"]
   }
 ]

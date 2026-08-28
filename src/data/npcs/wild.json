@@ -1,0 +1,79 @@
+[
+  {
+    "id": "tomb_keeper",
+    "name": "石九",
+    "title": "古墓守墓人",
+    "description": "守着千年古墓的干瘦老者，说话颠三倒四，却对墓中一切了如指掌。",
+    "sceneId": "tomb",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "石九",
+        "text": "又来一个……三十年了，来的人都没能再出去。你也是为了里头那些明器？",
+        "choices": [
+          { "text": "晚辈已除尸傀两具。", "next": "undead_done", "condition": { "type": "quest", "target": "quest_undead", "op": "==", "value": "completed" } },
+          { "text": "墓中究竟有什么？", "next": "talk", "condition": { "type": "quest", "target": "quest_undead", "op": "!=", "value": "active" } },
+          { "text": "我正要进去看看。", "next": "hint", "condition": { "type": "quest", "target": "quest_undead", "op": "==", "value": "active" } },
+          { "text": "叨扰了。", "next": "END" }
+        ]
+      },
+      "talk": {
+        "id": "talk",
+        "speaker": "石九",
+        "text": "里头有受邪法操控的尸傀，刀枪难入，还有个使毒的婆娘。我守着，是不让它们出来害人。你若能除掉两具尸傀，我这辈子攒下的物件，都给你。",
+        "effects": [{ "type": "quest", "target": "quest_undead", "value": "active" }],
+        "choices": [{ "text": "晚辈愿往。", "next": "END" }]
+      },
+      "hint": {
+        "id": "hint",
+        "speaker": "石九",
+        "text": "尸傀皮糙肉厚，寻常兵刃砍不动。墓道深处那具最是凶悍，你要小心。",
+        "choices": [{ "text": "记下了。", "next": "END" }]
+      },
+      "undead_done": {
+        "id": "undead_done",
+        "speaker": "石九",
+        "text": "……你真做到了。好，好。这些是老汉攒了一辈子的，你拿去罢——只求你，别让它们再出来。",
+        "effects": [{ "type": "item", "target": "ancient_relic", "value": 3 }, { "type": "item", "target": "mystery_ore", "value": 2 }, { "type": "item", "target": "spirit_orb", "value": 1 }],
+        "choices": [{ "text": "老人家放心。", "next": "END" }]
+      }
+    }
+  },
+  {
+    "id": "sword_guard",
+    "name": "青衫剑客",
+    "title": "剑冢守剑人",
+    "description": "不知年岁的青衫剑客，守着万柄残剑，剑意已入化境。",
+    "sceneId": "sword_tomb",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "青衫剑客",
+        "text": "这冢里埋着的，都是败剑。剑败了，人也就埋了。——你来此，是想赢，还是想死？",
+        "choices": [
+          { "text": "想求剑道。", "next": "teach", "effects": [{ "type": "affinity", "target": "sword_guard", "value": 2 }] },
+          { "text": "与前辈论剑。", "next": "duel" },
+          { "text": "晚辈告退。", "next": "END" }
+        ]
+      },
+      "teach": {
+        "id": "teach",
+        "speaker": "青衫剑客",
+        "text": "心剑合一，无招胜有招。你且看这万柄残剑——每一柄，都曾是一个人的一生。",
+        "effects": [{ "type": "exp", "value": 60 }, { "type": "learn_skill", "target": "taiji_sword" }],
+        "choices": [{ "text": "晚辈受教。", "next": "END" }]
+      },
+      "duel": {
+        "id": "duel",
+        "speaker": "青衫剑客",
+        "text": "好。接我三剑，接得住，这柄清风剑便归你。",
+        "choices": [
+          { "text": "请赐教！", "next": "END", "battle": "evil_disciple" },
+          { "text": "晚辈功力未足，改日再来。", "next": "END" }
+        ]
+      }
+    }
+  }
+]

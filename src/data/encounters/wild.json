@@ -1,0 +1,42 @@
+[
+  {
+    "id": "enc_wild_trap",
+    "title": "猎户陷阱",
+    "text": "林间一处伪装精巧的陷坑，坑底一头野猪正嗷嗷乱叫，腿上还缠着磨损的兽夹。",
+    "choices": [
+      { "text": "下坑解救（得兽皮）", "next": "END", "effects": [{ "type": "item", "target": "beast_hide", "value": 2 }] },
+      { "text": "取其兽丹", "next": "END", "battle": "boar" },
+      { "text": "不予理会", "next": "END" }
+    ]
+  },
+  {
+    "id": "enc_wild_cave",
+    "title": "幽深山洞",
+    "text": "崖壁上有个半人高的洞口，洞内漆黑，隐约传出粗重的喘息声，石壁上却闪着矿脉的微光。",
+    "choices": [
+      { "text": "入洞探查", "next": "END", "battle": "black_bear" },
+      { "text": "只凿些矿石", "next": "END", "effects": [{ "type": "item", "target": "iron_ore", "value": 3 }] },
+      { "text": "洞口风紧，退去", "next": "END" }
+    ]
+  },
+  {
+    "id": "enc_wild_fog",
+    "title": "林中迷雾",
+    "text": "不过转眼的工夫，浓雾四合，来路去路皆已难辨，林深处传来低沉的兽吼。",
+    "choices": [
+      { "text": "静心辨向（得经验）", "next": "END", "effects": [{ "type": "exp", "value": 30 }] },
+      { "text": "循声探去", "next": "END", "battle": "wild_wolf" },
+      { "text": "原路折返", "next": "END" }
+    ]
+  },
+  {
+    "id": "enc_wild_merchant",
+    "title": "落难行商",
+    "text": "树下靠着个衣衫褴褛的行商，腿上血迹斑斑：『好汉……在下被劫了道，能否借些盘缠回乡？』",
+    "choices": [
+      { "text": "倾囊相助（耗银二十）", "next": "END", "condition": { "type": "gold", "target": "", "op": ">=", "value": 20 }, "effects": [{ "type": "gold", "value": -20 }, { "type": "exp", "value": 35 }, { "type": "item", "target": "luck_talisman", "value": 1 }] },
+      { "text": "替他疗伤（得内功心得）", "next": "END", "effects": [{ "type": "exp", "value": 20 }, { "type": "item", "target": "minor_heal", "value": 1 }] },
+      { "text": "爱莫能助", "next": "END" }
+    ]
+  }
+]

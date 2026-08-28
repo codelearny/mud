@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import type { DialogueChoice, DialogueEffect, Encounter, QuestStatus } from '../types'
+import type { DialogueChoice, DialogueCondition, DialogueEffect, Encounter, QuestStatus } from '../types'
 import {
   evaluateCondition,
   getDialogueNode,
@@ -33,7 +33,12 @@ export const useStoryStore = defineStore('story', () => {
     const status: Record<string, QuestStatus> = {}
     for (const q of getAllQuests()) status[q.id] = 'available'
     questStatus.value = status
-    counters.value = { banditsDefeated: 0, duelsWon: 0 }
+    counters.value = {
+      banditsDefeated: 0,
+      duelsWon: 0,
+      undeadSlain: 0,
+      demonSlain: 0,
+    }
     flags.value = {}
     npcAffinity.value = {}
     currentDialogue.value = null
@@ -156,9 +161,16 @@ export const useStoryStore = defineStore('story', () => {
     currentDialogue.value = null
   }
 
-  function triggerEncounter() {
-    const enc = rollRandomEncounter()
+  // pool 来自 SceneAction.encounters，用于让不同地点/行动触发不同遭遇
+  function triggerEncounter(pool?: string[]) {
+    const enc = rollRandomEncounter(pool)
     currentEncounter.value = enc ?? null
+  }
+
+  // 供场景进入条件、行动前置等外部判定复用（Scene.requirement / SceneAction.requirement）
+  function meetsCondition(cond?: DialogueCondition): boolean {
+    if (!cond) return true
+    return evaluateCondition(cond, buildContext())
   }
 
   function selectEncounterChoice(choice: DialogueChoice): string {
@@ -226,7 +238,13 @@ export const useStoryStore = defineStore('story', () => {
       flags.value = parsed.flags ?? {}
       npcAffinity.value = parsed.npcAffinity ?? {}
       questStatus.value = parsed.questStatus ?? {}
-      counters.value = parsed.counters ?? { banditsDefeated: 0, duelsWon: 0 }
+      counters.value = {
+        banditsDefeated: 0,
+        duelsWon: 0,
+        undeadSlain: 0,
+        demonSlain: 0,
+        ...(parsed.counters ?? {}),
+      }
       return true
     } catch {
       initStory()
@@ -259,6 +277,7 @@ export const useStoryStore = defineStore('story', () => {
     selectDialogueChoice,
     closeDialogue,
     triggerEncounter,
+    meetsCondition,
     selectEncounterChoice,
     closeEncounter,
     incrementCounter,

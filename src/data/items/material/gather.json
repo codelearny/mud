@@ -1,0 +1,29 @@
+[
+  {
+    "id": "river_fish",
+    "name": "江鱼",
+    "description": "江中打捞的肥美鲜鱼，可充饥，也能卖个好价钱。",
+    "type": "material",
+    "category": "fish",
+    "price": 25,
+    "rarity": "common"
+  },
+  {
+    "id": "beast_hide",
+    "name": "兽皮",
+    "description": "剥下的完整兽皮，厚实坚韧，缝制御寒衣物再好不过。",
+    "type": "material",
+    "category": "hide",
+    "price": 70,
+    "rarity": "common"
+  },
+  {
+    "id": "mystery_ore",
+    "name": "玄铁精",
+    "description": "比玄铁砂更精纯的矿髓，泛着幽幽寒光，是铸剑的极品材料。",
+    "type": "material",
+    "category": "ore",
+    "price": 500,
+    "rarity": "rare"
+  }
+]

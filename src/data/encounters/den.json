@@ -1,0 +1,42 @@
+[
+  {
+    "id": "enc_den_patrol",
+    "title": "巡山喽啰",
+    "text": "一队喽啰扛着朴刀自山道转出，为首的醉醺醺地哼着小调，尚未察觉你的存在。",
+    "choices": [
+      { "text": "迎面杀出", "next": "END", "battle": "bandit" },
+      { "text": "屏息潜行", "next": "END", "effects": [{ "type": "exp", "value": 20 }] },
+      { "text": "悄然退走", "next": "END" }
+    ]
+  },
+  {
+    "id": "enc_den_loot",
+    "title": "贼赃库房",
+    "text": "寨中一间僻静的库房门未上锁，里头堆着劫来的箱笼，隐约露出兵刃与矿石的轮廓。",
+    "choices": [
+      { "text": "尽数取走", "next": "END", "effects": [{ "type": "item", "target": "iron_ore", "value": 3 }, { "type": "item", "target": "steel_blade", "value": 1 }] },
+      { "text": "只取些盘缠（得银五十）", "next": "END", "effects": [{ "type": "gold", "value": 50 }] },
+      { "text": "分文不取", "next": "END" }
+    ]
+  },
+  {
+    "id": "enc_den_prisoner",
+    "title": "柴房啜泣",
+    "text": "后寨柴房里锁着几个衣衫破旧的女子，见你来，最小的那个怯怯地开口：『好汉……救救我们……』",
+    "choices": [
+      { "text": "砸开铁锁", "next": "END", "battle": "bandit", "effects": [{ "type": "flag", "target": "saved_captive", "value": true }] },
+      { "text": "先去寻寨主钥匙", "next": "END", "battle": "black_wind_second" },
+      { "text": "忍痛离去", "next": "END" }
+    ]
+  },
+  {
+    "id": "enc_altar_blood",
+    "title": "血祭坛",
+    "text": "坛心石像前，几个黑袍教徒正将一捆捆药材投入火中，火焰腾起诡异的紫色，空气中弥漫着令人眩晕的甜腥。",
+    "choices": [
+      { "text": "冲上坛心破坏祭礼", "next": "END", "battle": "demon_general" },
+      { "text": "潜伏窥探", "next": "END", "effects": [{ "type": "flag", "target": "altar_seen", "value": true }, { "type": "exp", "value": 40 }] },
+      { "text": "悄然退走", "next": "END" }
+    ]
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "id": "enc_valley_spring",
+    "title": "药泉",
+    "text": "谷心一汪清泉汩汩涌出，水面上浮着淡淡的药气，饮之令人精神一振。",
+    "choices": [
+      { "text": "掬饮泉水（气血内力尽复）", "next": "END", "effects": [{ "type": "heal", "value": "full" }] },
+      { "text": "以瓶盛装（得玉露丸）", "next": "END", "effects": [{ "type": "item", "target": "jade_heal", "value": 1 }] },
+      { "text": "不敢造次", "next": "END" }
+    ]
+  },
+  {
+    "id": "enc_valley_oldman",
+    "title": "采药老人",
+    "text": "林间一位背药篓的老者直起腰来，瞥你一眼：『小子，这谷里的草可不能乱采，认错了要出人命的。』",
+    "choices": [
+      { "text": "虚心请教（得经验）", "next": "END", "effects": [{ "type": "exp", "value": 45 }, { "type": "item", "target": "spirit_herb", "value": 2 }] },
+      { "text": "请治伤（得大还丹）", "next": "END", "effects": [{ "type": "item", "target": "great_medicine", "value": 1 }] },
+      { "text": "多谢指教", "next": "END" }
+    ]
+  },
+  {
+    "id": "enc_valley_snake",
+    "title": "毒物拦路",
+    "text": "一株灵芝旁的草丛里盘着一条色彩斑斓的毒蛇，蛇信吞吐，正对着你吐信示警。",
+    "choices": [
+      { "text": "冒险捕蛇取胆", "next": "END", "battle": "venom_snake" },
+      { "text": "绕道而行", "next": "END", "effects": [{ "type": "item", "target": "antidote", "value": 1 }] },
+      { "text": "退去", "next": "END" }
+    ]
+  },
+  {
+    "id": "enc_valley_flower",
+    "title": "幽谷奇花",
+    "text": "绝壁上一朵碗口大的白花在夜风中轻颤，花瓣上凝着露珠，异香扑鼻，必定是难得的药材。",
+    "choices": [
+      { "text": "攀壁摘取", "next": "END", "effects": [{ "type": "item", "target": "spirit_herb", "value": 2 }, { "type": "exp", "value": 20 }] },
+      { "text": "记下位置，来日再取", "next": "END", "effects": [{ "type": "exp", "value": 10 }] },
+      { "text": "不取", "next": "END" }
+    ]
+  }
+]

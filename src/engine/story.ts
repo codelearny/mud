@@ -99,11 +99,17 @@ export function getVisibleChoices(node: DialogueNode, ctx: ConditionContext): Di
   return node.choices.filter(c => isChoiceVisible(c, ctx))
 }
 
-export function rollRandomEncounter(): Encounter | undefined {
-  const list = getAllEncounters()
-  if (list.length === 0) return undefined
-  const enc = list[Math.floor(Math.random() * list.length)]
-  return enc
+// pool 为可选的场景/行动限定遭遇池（来自 SceneAction.encounters）。
+// 若池中 id 全部无效则回退到全局池，保证配置写错也不会卡住流程。
+export function rollRandomEncounter(pool?: string[]): Encounter | undefined {
+  const all = getAllEncounters()
+  if (all.length === 0) return undefined
+  let list = all
+  if (pool && pool.length > 0) {
+    const scoped = pool.map(id => getEncounter(id)).filter((e): e is Encounter => !!e)
+    if (scoped.length > 0) list = scoped
+  }
+  return list[Math.floor(Math.random() * list.length)]
 }
 
 export function getEncounterById(id: string): Encounter | undefined {

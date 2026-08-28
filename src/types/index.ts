@@ -142,6 +142,7 @@ export interface Enemy {
   drops: Drop[]
   category?: EnemyCategory // 大类，用于图鉴归类与随机遭遇分组
   boss?: boolean            // 是否头目（剧情/强敌，可选）
+  counters?: string[]       // 击败后自增的计数器名（配置驱动，取代硬编码判定）
 }
 
 export interface Character {
@@ -253,13 +254,25 @@ export interface NPC {
   dialogue: Record<string, DialogueNode>
 }
 
-export type SceneActionType = 'explore' | 'rest' | 'encounter' | 'train'
+export type SceneActionType = 'explore' | 'rest' | 'encounter' | 'train' | 'gather'
+
+// 采集类行动的产出项（配置驱动：按 weight 随机取一项，数量在 min~max 间）
+export interface SceneGain {
+  itemId: string
+  min: number
+  max: number
+  weight?: number
+}
 
 export interface SceneAction {
   id: string
   label: string
   type: SceneActionType
   text?: string
+  encounters?: string[]          // 限定该行动的遭遇池（省略则用全局池）
+  gains?: SceneGain[]            // gather 类行动的产出
+  requirement?: DialogueCondition // 行事前置（等级/flag/任务等）
+  requireHint?: string            // 未满足前置时的提示文案
 }
 
 export interface Scene {
@@ -269,6 +282,9 @@ export interface Scene {
   connections: string[]
   npcs: string[]
   actions: SceneAction[]
+  enemyPool?: string[]           // 该地「游走历练」的怪物池（省略则用全部怪物）
+  requirement?: DialogueCondition // 进入该地的前置（等级/flag/任务等）
+  requireHint?: string            // 未满足前置时的提示文案
 }
 
 export interface QuestReward {

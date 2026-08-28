@@ -6,7 +6,7 @@ import { useGameStore } from '../stores/game'
 import { useBattleStore } from '../stores/battle'
 import { useStoryStore } from '../stores/story'
 import { useShopStore } from '../stores/shop'
-import { getScene, getNPC } from '../engine/data-loader'
+import { getScene, getNPC, getItem } from '../engine/data-loader'
 import StatusBar from '../components/StatusBar.vue'
 import CharacterPanel from '../components/CharacterPanel.vue'
 import SkillPanel from '../components/SkillPanel.vue'
@@ -15,7 +15,7 @@ import DialoguePanel from '../components/DialoguePanel.vue'
 import EncounterPanel from '../components/EncounterPanel.vue'
 import QuestPanel from '../components/QuestPanel.vue'
 import ShopPanel from '../components/ShopPanel.vue'
-import type { SceneAction } from '../types'
+import type { SceneAction, SceneGain } from '../types'
 
 const router = useRouter()
 const playerStore = usePlayerStore()
@@ -39,9 +39,32 @@ const connectedScenes = computed(() =>
   (scene.value?.connections ?? [])
     .map(id => getScene(id))
     .filter((s): s is NonNullable<typeof s> => !!s)
+    .map(s => ({
+      id: s.id,
+      name: s.name,
+      locked: !storyStore.meetsCondition(s.requirement),
+      hint: s.requireHint ?? '前路未通',
+    }))
 )
 
+// 按 weight 随机抽取一项采集产出
+function rollGain(gains: SceneGain[]): SceneGain | undefined {
+  if (gains.length === 0) return undefined
+  const total = gains.reduce((sum, g) => sum + (g.weight ?? 1), 0)
+  let roll = Math.random() * total
+  for (const g of gains) {
+    roll -= (g.weight ?? 1)
+    if (roll <= 0) return g
+  }
+  return gains[gains.length - 1]
+}
+
 function travel(sceneId: string) {
+  const target = connectedScenes.value.find(s => s.id === sceneId)
+  if (target?.locked) {
+    showToast(target.hint)
+    return
+  }
   gameStore.setScene(sceneId)
   storyStore.saveStoryState()
 }
@@ -51,6 +74,10 @@ function talkNpc(npcId: string) {
 }
 
 function doAction(action: SceneAction) {
+  if (!storyStore.meetsCondition(action.requirement)) {
+    showToast(action.requireHint ?? '时机未到，此事尚不可为。')
+    return
+  }
   const eff = playerStore.effectiveAttrs
   switch (action.type) {
     case 'rest':
@@ -61,16 +88,28 @@ function doAction(action: SceneAction) {
       playerStore.addExp(15)
       showToast((action.text ?? '你勤练不辍') + '（功力 +15）')
       break
+    case 'gather': {
+      const gain = rollGain(action.gains ?? [])
+      const qty = gain ? gain.min + Math.floor(Math.random() * (gain.max - gain.min + 1)) : 0
+      if (gain && qty > 0) {
+        playerStore.addToInventory(gain.itemId, qty)
+        const name = getItem(gain.itemId)?.name ?? gain.itemId
+        showToast(`${action.text ?? '你搜寻一番'}：得【${name}】×${qty}`)
+      } else {
+        showToast(`${action.text ?? '你搜寻一番'}：一无所获。`)
+      }
+      break
+    }
     case 'encounter':
     case 'explore':
-      storyStore.triggerEncounter()
+      storyStore.triggerEncounter(action.encounters)
       break
   }
   gameStore.saveGame()
 }
 
 function randomBattle() {
-  battleStore.startRandomBattle()
+  battleStore.startRandomBattle(scene.value?.enemyPool)
   router.push('/battle')
 }
 
@@ -149,8 +188,12 @@ onMounted(() => {
             v-for="s in connectedScenes"
             :key="s.id"
             class="btn"
+            :class="{ 'btn-locked': s.locked }"
             @click="travel(s.id)"
-          >{{ s.name }}</button>
+          >
+            {{ s.name }}
+            <span v-if="s.locked" class="lock-hint">（{{ s.hint }}）</span>
+          </button>
           <button class="btn btn-primary" @click="randomBattle">游走历练</button>
         </div>
       </div>

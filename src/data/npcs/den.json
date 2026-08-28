@@ -1,0 +1,36 @@
+[
+  {
+    "id": "captive",
+    "name": "小翠",
+    "title": "被掳村女",
+    "description": "被掳上黑风寨的村中少女，蜷缩在柴房角落，眼中满是惊惧。",
+    "sceneId": "blackwind",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "小翠",
+        "text": "好汉……你是来救我们的吗？那伙强人……他们把村里的年轻人都掳来了……",
+        "choices": [
+          { "text": "放心，我这就救你们出去。", "next": "rescue", "effects": [{ "type": "affinity", "target": "captive", "value": 3 }] },
+          { "text": "寨中情形如何？", "next": "info" },
+          { "text": "（默然离去）", "next": "END" }
+        ]
+      },
+      "info": {
+        "id": "info",
+        "speaker": "小翠",
+        "text": "大当家住在后寨，二当家巡前寨。库房里堆着劫来的东西……好汉，你千万要小心那使铁棍的。",
+        "effects": [{ "type": "exp", "value": 25 }, { "type": "item", "target": "minor_heal", "value": 2 }],
+        "choices": [{ "text": "多谢告知。", "next": "END" }]
+      },
+      "rescue": {
+        "id": "rescue",
+        "speaker": "小翠",
+        "text": "好汉大恩大德，小女子没齿难忘！这是我藏在墙缝里的一支玉簪，权当谢礼。",
+        "effects": [{ "type": "item", "target": "jade_ring", "value": 1 }, { "type": "flag", "target": "saved_captive", "value": true }],
+        "choices": [{ "text": "你且躲好，我去了。", "next": "END" }]
+      }
+    }
+  }
+]

@@ -21,7 +21,8 @@
     "skills": ["basic_fist", "wolf_fang"],
     "expReward": 35,
     "goldReward": 30,
-    "drops": [{ "itemId": "medicine_herb", "rate": 0.4 }, { "itemId": "steel_blade", "rate": 0.06 }]
+    "drops": [{ "itemId": "medicine_herb", "rate": 0.4 }, { "itemId": "steel_blade", "rate": 0.06 }],
+    "counters": ["banditsDefeated"]
   },
   {
     "id": "river_pirate",
@@ -70,6 +71,7 @@
     "skills": ["wolf_fang", "lianhuan_sword", "qingyun_step", "yijinjing", "tieshan_palm"],
     "expReward": 250,
     "goldReward": 200,
-    "drops": [{ "itemId": "great_medicine", "rate": 0.5 }, { "itemId": "silk_robe", "rate": 0.15 }, { "itemId": "spirit_orb", "rate": 0.2 }, { "itemId": "beast_armor", "rate": 0.1 }, { "itemId": "ancient_relic", "rate": 0.08 }]
+    "drops": [{ "itemId": "great_medicine", "rate": 0.5 }, { "itemId": "silk_robe", "rate": 0.15 }, { "itemId": "spirit_orb", "rate": 0.2 }, { "itemId": "beast_armor", "rate": 0.1 }, { "itemId": "ancient_relic", "rate": 0.08 }],
+    "counters": ["banditsDefeated"]
   }
 ]

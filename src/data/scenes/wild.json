@@ -1,0 +1,50 @@
+[
+  {
+    "id": "forest",
+    "name": "迷雾林",
+    "description": "迷雾林终年氤氲，古木蔽天，寻常人等入内多迷失方向。林深之处偶有奇花异草，亦有猛兽毒虫，更传闻有前辈高人隐居。林间一条荒废的石道，蜿蜒通向山腹中的千年古墓。",
+    "connections": ["mountain", "valley", "tomb"],
+    "npcs": [],
+    "enemyPool": ["wild_wolf", "boar", "venom_snake", "venom_spider", "falcon", "black_bear", "tiger"],
+    "actions": [
+      { "id": "explore_forest", "label": "林中探奇", "type": "encounter", "text": "你拨开迷雾，向林深处探去。", "encounters": ["enc_wild_cave", "enc_wild_fog", "enc_wild_merchant", "enc_wild_trap"] },
+      { "id": "hunt_forest", "label": "深林狩猎", "type": "gather", "text": "你在林中追寻兽迹。", "gains": [
+        { "itemId": "beast_hide", "min": 1, "max": 2, "weight": 3 },
+        { "itemId": "beast_core", "min": 1, "max": 1, "weight": 2 },
+        { "itemId": "mystery_ore", "min": 1, "max": 1, "weight": 1 }
+      ] }
+    ]
+  },
+  {
+    "id": "tomb",
+    "name": "千年古墓",
+    "description": "古墓凿山而建，墓门半塌，阴风自缝隙中呜咽而出。墓道两侧石俑森然列队，手中灯盏早已熄灭。深处传来若有若无的铁链声，空气里弥漫着腐朽与药石混杂的气味。",
+    "connections": ["forest", "demon_altar"],
+    "npcs": ["tomb_keeper"],
+    "enemyPool": ["ancient_corps", "tomb_poisoness", "poison_cultist"],
+    "requirement": { "type": "level", "target": "", "op": ">=", "value": 8 },
+    "requireHint": "墓中凶险，需等级 8 方可进入",
+    "actions": [
+      { "id": "explore_tomb", "label": "深入墓道", "type": "encounter", "text": "你点亮火折子，摸黑向墓室走去。", "encounters": ["enc_tomb_door", "enc_tomb_coffin", "enc_tomb_gas", "enc_tomb_keeper"] },
+      { "id": "gather_tomb", "label": "搜寻陪葬", "type": "gather", "text": "你在墓室角落翻找，指望寻些值钱的器物。", "gains": [
+        { "itemId": "ancient_relic", "min": 1, "max": 1, "weight": 2 },
+        { "itemId": "iron_ore", "min": 1, "max": 2, "weight": 2 },
+        { "itemId": "mystery_ore", "min": 1, "max": 1, "weight": 1 }
+      ] }
+    ]
+  },
+  {
+    "id": "sword_tomb",
+    "name": "剑冢",
+    "description": "后山绝顶的一片开阔地，千百柄残剑倒插于土中，剑身锈迹斑斑，却依旧透出凛冽剑意。风过处，万剑齐鸣，如有人低声论剑。一位青衫剑客负手立于冢前，已不知站了多少个春秋。",
+    "connections": ["mountain"],
+    "npcs": ["sword_guard"],
+    "enemyPool": ["evil_disciple", "jianghu_villain", "evil_guard"],
+    "requirement": { "type": "level", "target": "", "op": ">=", "value": 8 },
+    "requireHint": "剑意凛冽，需等级 8 方可入冢",
+    "actions": [
+      { "id": "train_sword", "label": "观剑悟道", "type": "train", "text": "你对着万柄残剑凝神参悟，剑意渐生。" },
+      { "id": "explore_sword", "label": "冢中寻剑", "type": "encounter", "text": "你在累累残剑间穿行，寻找可用之兵。", "encounters": ["enc_sword_rust", "enc_sword_epitaph", "enc_sword_spirit"] }
+    ]
+  }
+]

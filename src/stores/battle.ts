@@ -11,7 +11,7 @@ import {
 } from '../engine/combat'
 import { usePlayerStore } from './player'
 import { useStoryStore } from './story'
-import { getAllEnemies } from '../engine/data-loader'
+import { getAllEnemies, getEnemy } from '../engine/data-loader'
 
 export const useBattleStore = defineStore('battle', () => {
   const battle = ref<Battle | null>(null)
@@ -27,13 +27,18 @@ export const useBattleStore = defineStore('battle', () => {
     lastResult.value = null
   }
 
-  function startRandomBattle() {
-    const enemies = getAllEnemies()
+  // pool 来自 Scene.enemyPool，让不同地点遭遇不同怪物（省略则用全部怪物）
+  function startRandomBattle(pool?: string[]) {
+    const all = getAllEnemies()
     const playerStore = usePlayerStore()
     const playerLevel = playerStore.character?.level ?? 1
-    const suitable = enemies.filter(e => Math.abs(e.level - playerLevel) <= 3)
-    const pool = suitable.length > 0 ? suitable : enemies
-    const enemy = pool[Math.floor(Math.random() * pool.length)]
+    const candidates = (pool && pool.length > 0)
+      ? pool.map(id => all.find(e => e.id === id)).filter((e): e is NonNullable<typeof e> => !!e)
+      : all
+    const list = candidates.length > 0 ? candidates : all
+    const suitable = list.filter(e => Math.abs(e.level - playerLevel) <= 3)
+    const finalPool = suitable.length > 0 ? suitable : list
+    const enemy = finalPool[Math.floor(Math.random() * finalPool.length)]
     startBattle(enemy.id)
   }
 
@@ -80,8 +85,10 @@ export const useBattleStore = defineStore('battle', () => {
       }
       const storyStore = useStoryStore()
       storyStore.incrementCounter('duelsWon', 1)
-      if (battle.value.enemyId === 'bandit' || battle.value.enemyId === 'bandit_chief') {
-        storyStore.incrementCounter('banditsDefeated', 1)
+      // 计数器由怪物配置驱动（Enemy.counters），不再硬编码具体 id
+      const killed = getEnemy(battle.value.enemyId)
+      for (const name of killed?.counters ?? []) {
+        storyStore.incrementCounter(name, 1)
       }
       storyStore.checkQuestCompletions()
       lastResult.value = {
