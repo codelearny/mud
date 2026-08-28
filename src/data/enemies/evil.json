@@ -5,11 +5,41 @@
     "category": "evil",
     "description": "邪派门下弟子，行事狠辣，武功不弱，以欺压良善为乐。",
     "level": 5,
-    "attributes": { "hp": 90, "maxHp": 90, "mp": 20, "maxMp": 20, "attack": 20, "defense": 8, "agility": 12, "comprehension": 0, "luck": 0 },
-    "skills": ["basic_sword", "wolf_fang", "lianhuan_sword"],
-    "expReward": 60,
+    "attributes": {
+      "hp": 90,
+      "maxHp": 90,
+      "mp": 20,
+      "maxMp": 20,
+      "attack": 20,
+      "defense": 8,
+      "agility": 12,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "basic_sword",
+      "wolf_fang",
+      "lianhuan_sword"
+    ],
     "goldReward": 50,
-    "drops": [{ "itemId": "medicine_herb", "rate": 0.5 }, { "itemId": "iron_sword", "rate": 0.1 }, { "itemId": "antidote", "rate": 0.3 }, { "itemId": "iron_ore", "rate": 0.25 }]
+    "drops": [
+      {
+        "itemId": "medicine_herb",
+        "rate": 0.5
+      },
+      {
+        "itemId": "iron_sword",
+        "rate": 0.1
+      },
+      {
+        "itemId": "antidote",
+        "rate": 0.3
+      },
+      {
+        "itemId": "iron_ore",
+        "rate": 0.25
+      }
+    ]
   },
   {
     "id": "jianghu_villain",
@@ -17,11 +47,41 @@
     "category": "evil",
     "description": "在江湖上为非作歹的恶人，武功高强，心狠手辣，人见人避。",
     "level": 8,
-    "attributes": { "hp": 150, "maxHp": 150, "mp": 40, "maxMp": 40, "attack": 30, "defense": 12, "agility": 15, "comprehension": 0, "luck": 0 },
-    "skills": ["wolf_fang", "lianhuan_sword", "qingyun_step"],
-    "expReward": 120,
+    "attributes": {
+      "hp": 150,
+      "maxHp": 150,
+      "mp": 40,
+      "maxMp": 40,
+      "attack": 30,
+      "defense": 12,
+      "agility": 15,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "wolf_fang",
+      "lianhuan_sword",
+      "qingyun_step"
+    ],
     "goldReward": 100,
-    "drops": [{ "itemId": "great_medicine", "rate": 0.3 }, { "itemId": "qingfeng_sword", "rate": 0.1 }, { "itemId": "agi_pendant", "rate": 0.15 }, { "itemId": "luck_talisman", "rate": 0.1 }]
+    "drops": [
+      {
+        "itemId": "great_medicine",
+        "rate": 0.3
+      },
+      {
+        "itemId": "qingfeng_sword",
+        "rate": 0.1
+      },
+      {
+        "itemId": "agi_pendant",
+        "rate": 0.15
+      },
+      {
+        "itemId": "luck_talisman",
+        "rate": 0.1
+      }
+    ]
   },
   {
     "id": "poison_cultist",
@@ -29,11 +89,37 @@
     "category": "evil",
     "description": "五毒教门下，擅使毒砂毒掌，阴损狠辣，周身腥臭。",
     "level": 7,
-    "attributes": { "hp": 100, "maxHp": 100, "mp": 40, "maxMp": 40, "attack": 22, "defense": 9, "agility": 13, "comprehension": 0, "luck": 0 },
-    "skills": ["wudu_palm", "poison_sand", "basic_fist"],
-    "expReward": 95,
+    "attributes": {
+      "hp": 100,
+      "maxHp": 100,
+      "mp": 40,
+      "maxMp": 40,
+      "attack": 22,
+      "defense": 9,
+      "agility": 13,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "wudu_palm",
+      "poison_sand",
+      "basic_fist"
+    ],
     "goldReward": 60,
-    "drops": [{ "itemId": "antidote", "rate": 0.4 }, { "itemId": "medicine_herb", "rate": 0.3 }, { "itemId": "spirit_herb", "rate": 0.1 }]
+    "drops": [
+      {
+        "itemId": "antidote",
+        "rate": 0.4
+      },
+      {
+        "itemId": "medicine_herb",
+        "rate": 0.3
+      },
+      {
+        "itemId": "spirit_herb",
+        "rate": 0.1
+      }
+    ]
   },
   {
     "id": "evil_guard",
@@ -41,12 +127,45 @@
     "category": "evil",
     "description": "邪教护法使者，内功深厚，掌风凌厉，护教甚严。",
     "level": 11,
-    "attributes": { "hp": 220, "maxHp": 220, "mp": 60, "maxMp": 60, "attack": 38, "defense": 16, "agility": 16, "comprehension": 0, "luck": 0 },
-    "skills": ["wudu_palm", "xianglong_palms", "yijinjing", "qingyun_step"],
-    "expReward": 200,
+    "attributes": {
+      "hp": 220,
+      "maxHp": 220,
+      "mp": 60,
+      "maxMp": 60,
+      "attack": 38,
+      "defense": 16,
+      "agility": 16,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "wudu_palm",
+      "xianglong_palms",
+      "yijinjing",
+      "qingyun_step"
+    ],
     "goldReward": 120,
-    "drops": [{ "itemId": "great_medicine", "rate": 0.35 }, { "itemId": "jade_heal", "rate": 0.15 }, { "itemId": "spirit_orb", "rate": 0.12 }, { "itemId": "inner_pill", "rate": 0.1 }],
-    "counters": ["demonSlain"]
+    "drops": [
+      {
+        "itemId": "great_medicine",
+        "rate": 0.35
+      },
+      {
+        "itemId": "jade_heal",
+        "rate": 0.15
+      },
+      {
+        "itemId": "spirit_orb",
+        "rate": 0.12
+      },
+      {
+        "itemId": "inner_pill",
+        "rate": 0.1
+      }
+    ],
+    "counters": [
+      "demonSlain"
+    ]
   },
   {
     "id": "evil_elder",
@@ -55,11 +174,49 @@
     "boss": true,
     "description": "邪教执法长老，一身邪功登峰造极，举手投足威压森然，教中权威。",
     "level": 15,
-    "attributes": { "hp": 360, "maxHp": 360, "mp": 100, "maxMp": 100, "attack": 50, "defense": 24, "agility": 18, "comprehension": 0, "luck": 0 },
-    "skills": ["xianglong_palms", "huagong_internal", "tieshan_palm", "wudu_palm", "shenxing_step"],
-    "expReward": 360,
+    "attributes": {
+      "hp": 360,
+      "maxHp": 360,
+      "mp": 100,
+      "maxMp": 100,
+      "attack": 50,
+      "defense": 24,
+      "agility": 18,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "xianglong_palms",
+      "huagong_internal",
+      "tieshan_palm",
+      "wudu_palm",
+      "shenxing_step"
+    ],
     "goldReward": 240,
-    "drops": [{ "itemId": "jade_heal", "rate": 0.3 }, { "itemId": "spirit_orb", "rate": 0.2 }, { "itemId": "ancient_relic", "rate": 0.12 }, { "itemId": "power_pill", "rate": 0.15 }, { "itemId": "atk_pill", "rate": 0.12 }],
-    "counters": ["demonSlain"]
+    "drops": [
+      {
+        "itemId": "jade_heal",
+        "rate": 0.3
+      },
+      {
+        "itemId": "spirit_orb",
+        "rate": 0.2
+      },
+      {
+        "itemId": "ancient_relic",
+        "rate": 0.12
+      },
+      {
+        "itemId": "power_pill",
+        "rate": 0.15
+      },
+      {
+        "itemId": "atk_pill",
+        "rate": 0.12
+      }
+    ],
+    "counters": [
+      "demonSlain"
+    ]
   }
 ]

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "gu_huo",
+    "name": "蛊祸",
+    "giver": "gu_master",
+    "description": "苗疆毒王为祸一方，蛊师阿伊恳你铲除万毒窟中的毒王。",
+    "acceptText": "少侠去除了毒王",
+    "completeCondition": { "type": "counter", "target": "guWangSlain", "op": ">=", "value": 1 },
+    "completeFlag": "guHuoDone",
+    "rewards": { "exp": 700, "gold": 350, "items": [{ "itemId": "mystery_ore", "quantity": 3 }, { "itemId": "jade_heal", "quantity": 2 }] }
+  },
+  {
+    "id": "ping_mo",
+    "name": "荡平魔教",
+    "giver": "demon_defector",
+    "description": "魔教教主祸乱武林，叛徒吴良恳你直捣圣火殿，除此百年大患。",
+    "acceptText": "少侠领命除魔",
+    "completeCondition": { "type": "counter", "target": "jiaoZhuSlain", "op": ">=", "value": 1 },
+    "completeFlag": "pingMoDone",
+    "rewards": { "exp": 1800, "gold": 900, "items": [{ "itemId": "tumo_blade", "quantity": 1 }, { "itemId": "demon_armor", "quantity": 1 }] }
+  }
+]

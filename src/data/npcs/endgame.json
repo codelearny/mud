@@ -1,0 +1,98 @@
+[
+  {
+    "id": "gu_master",
+    "name": "蛊师",
+    "title": "苗疆蛊师",
+    "description": "名动西南的蛊师阿伊，养蛊驭毒一生，性情古怪却明辨是非。",
+    "sceneId": "miao_entrance",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "蛊师",
+        "text": "远来是客。老夫阿伊，养蛊一生。我这苗疆本与世无争——可惜万毒窟里出了个毒王，弄得方圆百里鸡犬不宁。少侠若肯替老夫除了那厮，老夫自有厚报。",
+        "choices": [
+          { "text": "毒王为祸，晚辈愿意一行。", "next": "accept", "condition": { "type": "quest", "target": "gu_huo", "op": "!=", "value": "active" }, "effects": [{ "type": "quest", "target": "gu_huo", "value": "active" }] },
+          { "text": "毒王已被我斩了。", "next": "done", "condition": { "type": "quest", "target": "gu_huo", "op": "==", "value": "completed" } },
+          { "text": "前辈保重，晚辈告辞。", "next": "END" }
+        ]
+      },
+      "accept": {
+        "id": "accept",
+        "speaker": "蛊师",
+        "text": "好胆色！万毒窟在谷最深处，毒雾蚀骨，记得备足解药。去罢。",
+        "choices": [{ "text": "晚辈去也。", "next": "END" }]
+      },
+      "done": {
+        "id": "done",
+        "speaker": "蛊师",
+        "text": "……你竟真杀了那厮。苗疆百姓，要谢你一辈子。老夫言出必践，这些物件，你收好。",
+        "choices": [{ "text": "多谢前辈。", "next": "END" }]
+      }
+    }
+  },
+  {
+    "id": "gu_captive",
+    "name": "小翠",
+    "title": "被掳村女",
+    "description": "山下村落的女子，被毒王掳来喂蛊，锁在万毒窟中。",
+    "sceneId": "wan_du_cave",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "小翠",
+        "text": "壮士救我！我是山下村落的人，被毒王掳来喂蛊……呜呜，若毒王伏诛，还请壮士放我回去。",
+        "choices": [
+          { "text": "你且忍耐，我去除了毒王。", "next": "wait", "condition": { "type": "quest", "target": "gu_huo", "op": "!=", "value": "completed" } },
+          { "text": "毒王已死，我放你回去。", "next": "free", "condition": { "type": "quest", "target": "gu_huo", "op": "==", "value": "completed" }, "effects": [{ "type": "item", "target": "luck_talisman", "value": 1 }, { "type": "flag", "target": "cuiFreed", "value": true }] },
+          { "text": "（离开）", "next": "END" }
+        ]
+      },
+      "wait": {
+        "id": "wait",
+        "speaker": "小翠",
+        "text": "壮士千万小心，那毒王周身是毒，莫要硬拼。",
+        "choices": [{ "text": "记下了。", "next": "END" }]
+      },
+      "free": {
+        "id": "free",
+        "speaker": "小翠",
+        "text": "大恩大德，小女子没齿难忘！这个护身符你拿着，或可避灾。",
+        "choices": [{ "text": "保重。", "next": "END" }]
+      }
+    }
+  },
+  {
+    "id": "demon_defector",
+    "name": "吴良",
+    "title": "魔教叛徒",
+    "description": "因劝教主休要妄动干戈而被下毒刑的魔教叛徒，蜷缩在总坛外垣墙角。",
+    "sceneId": "demon_outpost",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "吴良",
+        "text": "你……也是来送死的？这总坛里，教主盖世魔功已成，左使祭司皆非人类。我因劝教主休要妄动干戈，被下了毒刑……少侠若真有本事，便直捣圣火殿，除了那魔头，武林才有活路！",
+        "choices": [
+          { "text": "我愿直捣圣火殿。", "next": "accept", "condition": { "type": "quest", "target": "ping_mo", "op": "!=", "value": "active" }, "effects": [{ "type": "quest", "target": "ping_mo", "value": "active" }] },
+          { "text": "魔头已被我斩了！", "next": "done", "condition": { "type": "quest", "target": "ping_mo", "op": "==", "value": "completed" } },
+          { "text": "（不理会）", "next": "END" }
+        ]
+      },
+      "accept": {
+        "id": "accept",
+        "speaker": "吴良",
+        "text": "好！圣火殿由左使与祭司把守，殿心才是教主。那柄屠魔刀，本是我教圣物，如今正落在教主之手——你若能夺来，便是邪不胜正。去罢！",
+        "choices": [{ "text": "看我的。", "next": "END" }]
+      },
+      "done": {
+        "id": "done",
+        "speaker": "吴良",
+        "text": "……武林，得救了。",
+        "choices": [{ "text": "（沉默）", "next": "END" }]
+      }
+    }
+  }
+]

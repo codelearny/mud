@@ -3,7 +3,7 @@
     "id": "forest",
     "name": "迷雾林",
     "description": "迷雾林终年氤氲，古木蔽天，寻常人等入内多迷失方向。林深之处偶有奇花异草，亦有猛兽毒虫，更传闻有前辈高人隐居。林间一条荒废的石道，蜿蜒通向山腹中的千年古墓。",
-    "connections": ["mountain", "valley", "tomb"],
+    "connections": ["mountain", "valley", "tomb", "miao_entrance"],
     "npcs": [],
     "enemyPool": ["wild_wolf", "boar", "venom_snake", "venom_spider", "falcon", "black_bear", "tiger"],
     "actions": [
@@ -42,6 +42,7 @@
     "enemyPool": ["evil_disciple", "jianghu_villain", "evil_guard"],
     "requirement": { "type": "level", "target": "", "op": ">=", "value": 8 },
     "requireHint": "剑意凛冽，需等级 8 方可入冢",
+    "trainFactor": 1.4,
     "actions": [
       { "id": "train_sword", "label": "观剑悟道", "type": "train", "text": "你对着万柄残剑凝神参悟，剑意渐生。" },
       { "id": "explore_sword", "label": "冢中寻剑", "type": "encounter", "text": "你在累累残剑间穿行，寻找可用之兵。", "encounters": ["enc_sword_rust", "enc_sword_epitaph", "enc_sword_spirit"] }

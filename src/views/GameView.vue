@@ -7,6 +7,7 @@ import { useBattleStore } from '../stores/battle'
 import { useStoryStore } from '../stores/story'
 import { useShopStore } from '../stores/shop'
 import { getScene, getNPC, getItem } from '../engine/data-loader'
+import { trainingExpFromLevel } from '../engine/leveling'
 import StatusBar from '../components/StatusBar.vue'
 import CharacterPanel from '../components/CharacterPanel.vue'
 import SkillPanel from '../components/SkillPanel.vue'
@@ -84,10 +85,13 @@ function doAction(action: SceneAction) {
       if (eff) playerStore.setHpMp(eff.maxHp, eff.maxMp)
       showToast(action.text ?? '你歇息片刻，气血内力尽复。')
       break
-    case 'train':
-      playerStore.addExp(15)
-      showToast((action.text ?? '你勤练不辍') + '（功力 +15）')
+    case 'train': {
+      const base = trainingExpFromLevel(playerStore.character?.level ?? 1)
+      const amt = Math.round(base * (scene.value?.trainFactor ?? 1))
+      playerStore.addExp(amt)
+      showToast((action.text ?? '你勤练不辍') + `（功力 +${amt}）`)
       break
+    }
     case 'gather': {
       const gain = rollGain(action.gains ?? [])
       const qty = gain ? gain.min + Math.floor(Math.random() * (gain.max - gain.min + 1)) : 0

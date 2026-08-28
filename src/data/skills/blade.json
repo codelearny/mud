@@ -50,5 +50,19 @@
     "unlockLevel": 15,
     "hits": 2,
     "lifesteal": 0.15
+  },
+  {
+    "id": "lie_ri_blade",
+    "name": "烈日刀法",
+    "description": "刀光大盛如烈日当空，三连斩落灼敌周身，破其守势。",
+    "type": "active",
+    "category": "blade",
+    "power": 62,
+    "mpCost": 20,
+    "hitRate": 0.85,
+    "critRate": 0.28,
+    "unlockLevel": 18,
+    "hits": 3,
+    "enemyDebuff": { "defense": -8 }
   }
 ]

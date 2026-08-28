@@ -1,18 +1,27 @@
 import type { Character, CharacterAttributes, EquipSlot } from '../types'
 import { getItem, getSkill } from './data-loader'
+import {
+  expForNextLevel as configExpForNextLevel,
+  growthPerLevel,
+  freePointsPerLevel,
+  titleForLevel,
+  MAX_LEVEL,
+} from './leveling'
 
+// 经验曲线改由升级配置驱动（见 src/data/leveling.json），便于整体调参。
 export function expForNextLevel(level: number): number {
-  return level * 50 + (level - 1) * (level - 1) * 10
+  return configExpForNextLevel(level)
 }
 
 export function createNewCharacter(name: string): Character {
   return {
     id: 'player',
     name,
-    title: '江湖小虾米',
+    title: titleForLevel(1),
     level: 1,
     exp: 0,
     expToNext: expForNextLevel(1),
+    freePoints: 0,
     attributes: {
       maxHp: 100,
       hp: 100,
@@ -76,23 +85,45 @@ export function gainExp(character: Character, amount: number): {
   let leveledUp = false
   let newLevel = char.level
 
-  while (char.exp >= char.expToNext) {
+  const growth = growthPerLevel()
+  const fpp = freePointsPerLevel()
+
+  while (char.exp >= char.expToNext && char.level < MAX_LEVEL) {
     char.exp -= char.expToNext
     char.level++
     newLevel = char.level
     leveledUp = true
     char.expToNext = expForNextLevel(char.level)
 
-    char.attributes.maxHp += 20
+    // 每级自动成长的属性（配置驱动）
+    char.attributes.maxHp += growth.maxHp
     char.attributes.hp = char.attributes.maxHp
-    char.attributes.maxMp += 8
+    char.attributes.maxMp += growth.maxMp
     char.attributes.mp = char.attributes.maxMp
-    char.attributes.attack += 3
-    char.attributes.defense += 2
-    char.attributes.agility += 1
+    char.attributes.attack += growth.attack
+    char.attributes.defense += growth.defense
+    char.attributes.agility += growth.agility
+
+    // 自由属性点：交给玩家自行分配，增强_build 多样性与黏性
+    char.freePoints = (char.freePoints ?? 0) + fpp
+    char.title = titleForLevel(char.level)
   }
 
+  // 封顶后清空溢出经验，避免经验条显示异常
+  if (char.level >= MAX_LEVEL) char.exp = 0
+
   return { character: char, leveledUp, newLevel }
+}
+
+// 自由属性点分配：玩家把升级所得的点数加到基础属性上（装备加成在其之上叠加）。
+export type AllocatableStat = 'attack' | 'defense' | 'agility' | 'comprehension' | 'luck'
+
+export function allocateFreePoint(character: Character, stat: AllocatableStat): Character {
+  if ((character.freePoints ?? 0) <= 0) return character
+  const char: Character = JSON.parse(JSON.stringify(character))
+  char.attributes[stat] += 1
+  char.freePoints = (char.freePoints ?? 0) - 1
+  return char
 }
 
 export function canLearnSkill(character: Character, skillId: string): boolean {

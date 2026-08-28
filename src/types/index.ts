@@ -137,12 +137,12 @@ export interface Enemy {
   level: number
   attributes: CharacterAttributes
   skills: string[]
-  expReward: number
   goldReward: number
   drops: Drop[]
   category?: EnemyCategory // 大类，用于图鉴归类与随机遭遇分组
   boss?: boolean            // 是否头目（剧情/强敌，可选）
   counters?: string[]       // 击败后自增的计数器名（配置驱动，取代硬编码判定）
+  expReward?: number        // 经验奖励；省略则由升级配置按等级推导（地图推进即经验节奏）
 }
 
 export interface Character {
@@ -152,6 +152,7 @@ export interface Character {
   level: number
   exp: number
   expToNext: number
+  freePoints?: number      // 升级获得的自由属性点，可在角色面板自行分配（增强可玩性）
   attributes: CharacterAttributes
   learnedSkills: LearnedSkill[]
   equipment: Equipment
@@ -204,6 +205,30 @@ export interface SaveData {
   currentScene: string
   flags: Record<string, boolean>
   timestamp: number
+}
+
+// ===== 升级系统配置（见 src/data/leveling.json，纯配置驱动）=====
+// 升级节奏完全由地图推进决定：怪物等级即经验节奏的杠杆，enemyExp 按等级推导。
+
+export interface LevelingTitle {
+  level: number
+  title: string
+}
+
+export interface LevelingConfig {
+  maxLevel: number
+  expCurve: { base: number; growth: number }       // 升到下一级所需经验：base * growth^(level-1)
+  enemyExp: { base: number; growth: number; bossFactor: number } // 怪物经验：base * growth^(level-1) * (boss?bossFactor:1)
+  trainingFraction: number                          // 练功所得 = 本级所需经验 * 此比例
+  growthPerLevel: {                                  // 每升一级自动增长的属性
+    maxHp: number
+    maxMp: number
+    attack: number
+    defense: number
+    agility: number
+  }
+  freePointsPerLevel: number                         // 每升一级获得的自由属性点（玩家自行分配）
+  titles: LevelingTitle[]                            // 按等级授予的称号阈值
 }
 
 // ===== 剧情引擎类型 =====
@@ -285,6 +310,7 @@ export interface Scene {
   enemyPool?: string[]           // 该地「游走历练」的怪物池（省略则用全部怪物）
   requirement?: DialogueCondition // 进入该地的前置（等级/flag/任务等）
   requireHint?: string            // 未满足前置时的提示文案
+  trainFactor?: number           // 该地练功经验倍率（省略为 1）；高等级名胜练功更高效，绑定地图推进
 }
 
 export interface QuestReward {

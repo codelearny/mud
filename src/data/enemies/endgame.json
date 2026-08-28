@@ -1,0 +1,243 @@
+[
+  {
+    "id": "gu_po",
+    "name": "蛊婆阿伊",
+    "category": "evil",
+    "description": "苗疆蛊婆，养蛊驭毒数十年，周身浮着一层彩色蛊雾，举手投足皆藏杀机。",
+    "level": 12,
+    "attributes": {
+      "hp": 240,
+      "maxHp": 240,
+      "mp": 80,
+      "maxMp": 80,
+      "attack": 34,
+      "defense": 14,
+      "agility": 17,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "wudu_palm",
+      "poison_sand",
+      "huagong_internal"
+    ],
+    "goldReward": 140,
+    "drops": [
+      {
+        "itemId": "antidote",
+        "rate": 0.5
+      },
+      {
+        "itemId": "medicine_herb",
+        "rate": 0.3
+      },
+      {
+        "itemId": "spirit_herb",
+        "rate": 0.15
+      },
+      {
+        "itemId": "beast_core",
+        "rate": 0.1
+      }
+    ]
+  },
+  {
+    "id": "poison_king",
+    "name": "毒王",
+    "category": "evil",
+    "boss": true,
+    "description": "万毒窟之主，一身蛊毒登峰造极，所过之处百草尽枯、活物皆殁，乃苗疆百年第一毒枭。",
+    "level": 14,
+    "attributes": {
+      "hp": 420,
+      "maxHp": 420,
+      "mp": 120,
+      "maxMp": 120,
+      "attack": 46,
+      "defense": 18,
+      "agility": 20,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "wudu_palm",
+      "huagong_internal",
+      "poison_sand",
+      "shenxing_step"
+    ],
+    "goldReward": 280,
+    "drops": [
+      {
+        "itemId": "mystery_ore",
+        "rate": 0.4
+      },
+      {
+        "itemId": "ancient_relic",
+        "rate": 0.25
+      },
+      {
+        "itemId": "jade_heal",
+        "rate": 0.3
+      },
+      {
+        "itemId": "spirit_orb",
+        "rate": 0.2
+      },
+      {
+        "itemId": "power_pill",
+        "rate": 0.12
+      }
+    ],
+    "counters": [
+      "guWangSlain"
+    ]
+  },
+  {
+    "id": "demon_priest",
+    "name": "魔教祭司",
+    "category": "boss",
+    "description": "魔教护坛祭司，通晓邪异祭礼，掌中圣火可焚尽前来挑衅之敌。",
+    "level": 19,
+    "attributes": {
+      "hp": 460,
+      "maxHp": 460,
+      "mp": 140,
+      "maxMp": 140,
+      "attack": 54,
+      "defense": 22,
+      "agility": 20,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "xianglong_palms",
+      "huagong_internal",
+      "wudu_palm",
+      "shenxing_step"
+    ],
+    "goldReward": 320,
+    "drops": [
+      {
+        "itemId": "jade_heal",
+        "rate": 0.3
+      },
+      {
+        "itemId": "power_pill",
+        "rate": 0.18
+      },
+      {
+        "itemId": "ancient_relic",
+        "rate": 0.2
+      },
+      {
+        "itemId": "spirit_orb",
+        "rate": 0.15
+      }
+    ]
+  },
+  {
+    "id": "demon_envoy",
+    "name": "魔教左使",
+    "category": "boss",
+    "boss": true,
+    "description": "魔教四大护法之首，权倾一朝，一身圣火神功焚天煮海，教主之下第一人。",
+    "level": 20,
+    "attributes": {
+      "hp": 560,
+      "maxHp": 560,
+      "mp": 180,
+      "maxMp": 180,
+      "attack": 60,
+      "defense": 26,
+      "agility": 24,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "xianglong_palms",
+      "huagong_internal",
+      "tieshan_palm",
+      "shenxing_step",
+      "jiuyin_internal"
+    ],
+    "goldReward": 420,
+    "drops": [
+      {
+        "itemId": "sheng_huo_ling",
+        "rate": 0.35
+      },
+      {
+        "itemId": "ancient_relic",
+        "rate": 0.3
+      },
+      {
+        "itemId": "power_pill",
+        "rate": 0.2
+      },
+      {
+        "itemId": "atk_pill",
+        "rate": 0.15
+      }
+    ],
+    "counters": [
+      "zuoShiSlain"
+    ]
+  },
+  {
+    "id": "demon_leader",
+    "name": "魔教教主",
+    "category": "boss",
+    "boss": true,
+    "description": "魔教之主，盖世魔功已臻化境，邪焰滔天，举手投足皆可裂石分金。武林百年大患，尽在此一身。",
+    "level": 22,
+    "attributes": {
+      "hp": 720,
+      "maxHp": 720,
+      "mp": 220,
+      "maxMp": 220,
+      "attack": 70,
+      "defense": 32,
+      "agility": 26,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "xianglong_palms",
+      "huagong_internal",
+      "wudu_palm",
+      "tieshan_palm",
+      "shenxing_step",
+      "jiuyin_internal"
+    ],
+    "goldReward": 800,
+    "drops": [
+      {
+        "itemId": "tumo_blade",
+        "rate": 0.5
+      },
+      {
+        "itemId": "demon_armor",
+        "rate": 0.4
+      },
+      {
+        "itemId": "hero_sword",
+        "rate": 0.3
+      },
+      {
+        "itemId": "jade_heal",
+        "rate": 0.5
+      },
+      {
+        "itemId": "ancient_relic",
+        "rate": 0.4
+      },
+      {
+        "itemId": "luck_pill",
+        "rate": 0.2
+      }
+    ],
+    "counters": [
+      "jiaoZhuSlain"
+    ]
+  }
+]

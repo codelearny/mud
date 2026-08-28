@@ -24,5 +24,18 @@
     "minLevel": 9,
     "rarity": "epic",
     "effects": [{ "type": "attack", "value": 22 }, { "type": "luck", "value": 3 }]
+  },
+  {
+    "id": "tumo_blade",
+    "name": "屠魔刀",
+    "description": "魔教圣物之一，刀身赤红如火，专克邪魔，挥之邪气退散，更添气运。",
+    "type": "weapon",
+    "category": "blade",
+    "school": "blade",
+    "price": 6000,
+    "slot": "weapon",
+    "minLevel": 18,
+    "rarity": "legendary",
+    "effects": [{ "type": "attack", "value": 38 }, { "type": "luck", "value": 6 }]
   }
 ]

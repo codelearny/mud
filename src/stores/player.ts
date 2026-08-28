@@ -5,11 +5,14 @@ import {
   createNewCharacter,
   getEffectiveAttributes,
   gainExp,
+  allocateFreePoint,
   learnSkill as engineLearnSkill,
   equipItem as engineEquip,
   unequipItem as engineUnequip,
   useConsumable as engineUseConsumable,
+  type AllocatableStat,
 } from '../engine/character'
+import { expForNextLevel } from '../engine/leveling'
 import { getItem } from '../engine/data-loader'
 
 const SAVE_KEY = 'jianghu_player'
@@ -112,10 +115,20 @@ export const usePlayerStore = defineStore('player', () => {
   function load(): boolean {
     const data = localStorage.getItem(SAVE_KEY)
     if (data) {
-      character.value = JSON.parse(data) as Character
+      const char = JSON.parse(data) as Character
+      // 兼容旧存档：补齐自由属性点，并按当前升级配置重算本级所需经验，避免经验条错乱。
+      char.freePoints = char.freePoints ?? 0
+      char.expToNext = expForNextLevel(char.level)
+      character.value = char
       return true
     }
     return false
+  }
+
+  function allocatePoint(stat: AllocatableStat) {
+    if (!character.value) return
+    character.value = allocateFreePoint(character.value, stat)
+    save()
   }
 
   function hasSave(): boolean {
@@ -173,6 +186,7 @@ export const usePlayerStore = defineStore('player', () => {
     setHpMp,
     save,
     load,
+    allocatePoint,
     hasSave,
     clear,
     getOwnedItemIds,

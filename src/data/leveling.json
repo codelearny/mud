@@ -1,0 +1,22 @@
+{
+  "maxLevel": 25,
+  "expCurve": { "base": 60, "growth": 1.30 },
+  "enemyExp": { "base": 22, "growth": 1.26, "bossFactor": 1.6 },
+  "trainingFraction": 0.30,
+  "growthPerLevel": {
+    "maxHp": 22,
+    "maxMp": 10,
+    "attack": 3,
+    "defense": 2,
+    "agility": 1
+  },
+  "freePointsPerLevel": 3,
+  "titles": [
+    { "level": 1, "title": "江湖小虾米" },
+    { "level": 5, "title": "初出茅庐" },
+    { "level": 10, "title": "江湖新秀" },
+    { "level": 15, "title": "武林好手" },
+    { "level": 20, "title": "一代宗师" },
+    { "level": 25, "title": "绝世高手" }
+  ]
+}

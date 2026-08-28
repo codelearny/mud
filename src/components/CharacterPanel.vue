@@ -13,6 +13,17 @@ const eff = computed(() => {
   return getEffectiveAttributes(char.value)
 })
 
+const freePoints = computed(() => char.value?.freePoints ?? 0)
+
+// 可由玩家自行分配的自由属性点（基础属性，装备加成叠加其上）
+const allocatable = computed(() => [
+  { key: 'attack' as const, label: '攻击', value: char.value?.attributes.attack ?? 0 },
+  { key: 'defense' as const, label: '防御', value: char.value?.attributes.defense ?? 0 },
+  { key: 'agility' as const, label: '轻功', value: char.value?.attributes.agility ?? 0 },
+  { key: 'comprehension' as const, label: '悟性', value: char.value?.attributes.comprehension ?? 0 },
+  { key: 'luck' as const, label: '运气', value: char.value?.attributes.luck ?? 0 },
+])
+
 const slots: { key: EquipSlot; label: string }[] = [
   { key: 'weapon', label: '武器' },
   { key: 'armor', label: '防具' },
@@ -29,6 +40,10 @@ function equippedItemName(slot: EquipSlot): string {
 
 function attrDiff(base: number, effective: number): number {
   return effective - base
+}
+
+function alloc(stat: 'attack' | 'defense' | 'agility' | 'comprehension' | 'luck') {
+  playerStore.allocatePoint(stat)
 }
 </script>
 
@@ -64,6 +79,19 @@ function attrDiff(base: number, effective: number): number {
       <span class="attr-name">内力</span>
       <span class="attr-value">{{ Math.round(eff.mp) }} / {{ eff.maxMp }}</span>
     </div>
+
+    <div class="alloc-block" v-if="freePoints > 0">
+      <div class="alloc-tip">尚余 <b>{{ freePoints }}</b> 点自由属性，点击「+」分配：</div>
+      <div class="alloc-grid">
+        <div class="alloc-row" v-for="a in allocatable" :key="a.key">
+          <span class="alloc-label">{{ a.label }}</span>
+          <span class="alloc-value">{{ a.value }}</span>
+          <button class="btn alloc-btn" :disabled="freePoints <= 0" @click="alloc(a.key)">+</button>
+        </div>
+      </div>
+    </div>
+    <div v-else class="alloc-done">（自由属性点已分配完毕）</div>
+
     <div class="attr-row">
       <span class="attr-name">攻击</span>
       <span class="attr-value">

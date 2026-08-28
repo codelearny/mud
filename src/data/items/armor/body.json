@@ -57,5 +57,17 @@
     "minLevel": 11,
     "rarity": "legendary",
     "effects": [{ "type": "defense", "value": 20 }, { "type": "maxHp", "value": 40 }, { "type": "agility", "value": 3 }]
+  },
+  {
+    "id": "demon_armor",
+    "name": "天魔甲",
+    "description": "以魔教秘法淬炼的战甲，刀枪难入，更固本培元。",
+    "type": "armor",
+    "category": "body",
+    "price": 6000,
+    "slot": "armor",
+    "minLevel": 18,
+    "rarity": "legendary",
+    "effects": [{ "type": "defense", "value": 28 }, { "type": "maxHp", "value": 60 }, { "type": "agility", "value": 4 }]
   }
 ]

@@ -3,6 +3,7 @@ import { getEnemy, getSkill, getItem } from './data-loader'
 import { getEffectiveAttributes } from './character'
 import { chance, randomInt } from './random'
 import { WEAPON_SCHOOL_LABELS } from './skill-utils'
+import { enemyExpFromLevel } from './leveling'
 
 // 兵刃与功法相性：兵器流派与技能 category 一致则威力尽出（略增），不一致则大打折扣
 const MATCH_MULT = 1.1
@@ -468,7 +469,8 @@ export function getBattleRewards(battle: Battle): { exp: number; gold: number; d
   }
 
   return {
-    exp: enemy.expReward,
+    // 经验由升级配置按怪物等级推导（地图推进即经验节奏）；保留静态值作为覆盖。
+    exp: enemy.expReward ?? enemyExpFromLevel(enemy.level, !!enemy.boss),
     gold: enemy.goldReward,
     drops
   }

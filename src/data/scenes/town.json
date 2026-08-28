@@ -15,6 +15,7 @@
     "description": "古刹隐于云林深处，断壁残垣间梵音隐隐。大殿前一位白眉老僧默然枯坐，似已与青石融为一体。此处香火虽稀，却藏武学至理；殿后小径盘山而上，可登绝险的落雁峰。",
     "connections": ["town", "peak"],
     "npcs": ["monk"],
+    "trainFactor": 1.2,
     "actions": [
       { "id": "explore_temple", "label": "殿中礼佛", "type": "encounter", "text": "你于殿中焚香礼佛，心境渐趋澄明。", "encounters": ["enc_bottle", "enc_herb", "enc_master"] },
       { "id": "train_temple", "label": "抄经静修", "type": "train", "text": "你静心抄录经文，胸中浊气渐消。" }
@@ -24,9 +25,10 @@
     "id": "valley",
     "name": "药王谷",
     "description": "药王谷四面绝壁，谷中却别有洞天：溪水甘冽，百草丰茂，空气中弥漫着沁人的药香。谷中住着一位脾气古怪的老药农，据说他识得天下九成的奇花异草，也养着不少毒物。",
-    "connections": ["town", "forest"],
+    "connections": ["town", "forest", "miao_entrance"],
     "npcs": ["herbalist"],
     "enemyPool": ["venom_snake", "venom_spider", "wild_wolf", "falcon"],
+    "trainFactor": 1.2,
     "actions": [
       { "id": "gather_valley", "label": "谷中采药", "type": "gather", "text": "你在谷中细细搜寻，识得几味好药。", "gains": [
         { "itemId": "medicine_herb", "min": 2, "max": 3, "weight": 3 },
@@ -45,6 +47,7 @@
     "enemyPool": ["falcon", "evil_guard", "jianghu_villain", "black_bear"],
     "requirement": { "type": "level", "target": "", "op": ">=", "value": 10 },
     "requireHint": "山道绝险，需等级 10 方可攀登",
+    "trainFactor": 1.6,
     "actions": [
       { "id": "train_peak", "label": "崖顶吐纳", "type": "train", "text": "你于崖顶迎风吐纳，内力隐隐增长。" },
       { "id": "explore_peak", "label": "峰顶远眺", "type": "encounter", "text": "你独立峰顶，极目四望。", "encounters": ["enc_sword_epitaph", "enc_sword_spirit", "enc_valley_oldman"] }
