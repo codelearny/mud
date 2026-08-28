@@ -471,6 +471,28 @@ html, body {
   border-color: rgba(200, 60, 60, 0.5);
 }
 
+.skill-tag.good {
+  color: #8fe08a;
+  background: rgba(80, 180, 90, 0.14);
+  border-color: rgba(80, 180, 90, 0.5);
+}
+
+/* 战斗内 / 角色面板：当前兵器与相性提示 */
+.weapon-line {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin: 2px 0 6px;
+}
+
+.weapon-current {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin: 4px 0 8px;
+  padding: 4px 8px;
+  border-left: 2px solid var(--text-accent);
+  background: rgba(201, 168, 76, 0.06);
+}
+
 .school-badge {
   display: inline-block;
   font-size: 10px;

@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router'
 import { useBattleStore } from '../stores/battle'
 import { usePlayerStore } from '../stores/player'
 import { getSkill, getItem } from '../engine/data-loader'
-import { skillTags, skillSchoolLabel } from '../engine/skill-utils'
+import { skillTags, skillSchoolLabel, WEAPON_SCHOOL_LABELS, WEAPON_AFFINITY_MATCH, WEAPON_AFFINITY_MISMATCH } from '../engine/skill-utils'
 import { itemTags } from '../engine/item-utils'
 import GameLog from '../components/GameLog.vue'
 import type { Skill, Item } from '../types'
@@ -68,6 +68,18 @@ const consumableItems = computed<(Item & { quantity: number })[]>(() => {
     .filter((x): x is Item & { quantity: number } => x !== null && x.type === 'consumable')
 })
 
+// 当前所持兵器及其流派（用于战斗中提示「兵刃与功法相性」）
+const equippedWeapon = computed(() => {
+  const id = playerStore.character?.equipment.weapon
+  return id ? getItem(id) : undefined
+})
+const equippedSchoolLabel = computed(() => {
+  if (!equippedWeapon.value?.school) return '空手（拳脚）'
+  return WEAPON_SCHOOL_LABELS[equippedWeapon.value.school]
+})
+const affinityMatchPct = Math.round((WEAPON_AFFINITY_MATCH - 1) * 100)
+const affinityMismatchMult = WEAPON_AFFINITY_MISMATCH
+
 const dropNames = computed(() => {
   if (!result.value || result.value.drops.length === 0) return []
   return result.value.drops.map(id => getItem(id)?.name ?? id)
@@ -125,6 +137,7 @@ function returnToMenu() {
 
     <div class="battle-self-info">
       <div class="combatant-name self">{{ battle.player.name }}</div>
+      <div class="weapon-line" v-if="equippedWeapon">兵器：{{ equippedWeapon.name }}（{{ equippedSchoolLabel }}）</div>
       <div class="combatant-bars">
         <div class="bar-row">
           <span class="bar-label">气血</span>
@@ -153,6 +166,10 @@ function returnToMenu() {
     <div v-if="showSkillMenu && !isEnded" class="result-overlay" @click.self="showSkillMenu = false">
       <div class="result-card" style="max-width: 500px;">
         <div class="result-title" style="color: var(--text-accent); font-size: 18px;">选择武功</div>
+        <div class="weapon-line" style="margin-top: 4px; font-size: 12px; color: var(--text-tertiary);">
+          当前兵器：{{ equippedWeapon ? equippedWeapon.name + '（' + equippedSchoolLabel + '）' : '空手（拳脚）' }}
+          — 功法与兵器相合方展威
+        </div>
         <div class="skill-list" style="margin-top: 12px;">
           <button
             v-for="skill in availableSkills"
@@ -171,8 +188,11 @@ function returnToMenu() {
               <div class="skill-tags" v-if="skillTags(skill).length" style="margin-top: 4px;">
                 <span class="skill-tag" v-for="t in skillTags(skill)" :key="t">{{ t }}</span>
               </div>
+              <div class="skill-tags" style="margin-top: 4px;" v-if="skill.matched">
+                <span class="skill-tag good">✓ 兵刃相合·威力+{{ affinityMatchPct }}%</span>
+              </div>
               <div class="skill-tags" style="margin-top: 4px;" v-if="skill.discounted">
-                <span class="skill-tag warn">⚠ 兵器不合·威力折扣</span>
+                <span class="skill-tag warn">⚠ 兵器不合·威力×{{ affinityMismatchMult }}</span>
               </div>
             </div>
           </button>

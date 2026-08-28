@@ -1,14 +1,17 @@
-import type { Battle, BattleCharacter, Character, Skill, ActiveBuff, WeaponSchool, SkillCategory } from '../types'
+import type { Battle, BattleCharacter, Character, Skill, ActiveBuff, WeaponSchool } from '../types'
 import { getEnemy, getSkill, getItem } from './data-loader'
 import { getEffectiveAttributes } from './character'
 import { chance, randomInt } from './random'
-import { WEAPON_SCHOOL_LABELS } from './skill-utils'
+import {
+  WEAPON_SCHOOL_LABELS,
+  WEAPON_SKILL_CATS,
+  WEAPON_AFFINITY_MATCH,
+  WEAPON_AFFINITY_MISMATCH,
+  weaponSchoolMatches
+} from './skill-utils'
 import { enemyExpFromLevel } from './leveling'
 
-// 兵刃与功法相性：兵器流派与技能 category 一致则威力尽出（略增），不一致则大打折扣
-const MATCH_MULT = 1.1
-const MISMATCH_MULT = 0.6
-const WEAPON_SKILL_CATS: SkillCategory[] = ['sword', 'blade', 'fist', 'staff']
+// 兵刃与功法相性倍率改由 skill-utils 统一导出（WEAPON_AFFINITY_*），此处不再硬编码。
 
 export function startBattle(player: Character, enemyId: string): Battle {
   const enemy = getEnemy(enemyId)
@@ -311,18 +314,19 @@ export function playerUseSkill(battle: Battle, skillId: string): Battle {
   b.player.mp -= skill.mpCost
 
   // —— 兵刃与功法相性 ——
-  // 兵器流派与技能 category 一致 → 威力尽出（略增）；不一致 → 威力大打折扣。
-  // 徒手视同拳脚流派：未持兵器时拳法仍可正常施展，但刀/剑/棍法威力大减。
-  const isWeaponSkill = WEAPON_SKILL_CATS.includes(skill.category)
+  // 兵器流派与功法 category 一致 → 威力略增（相合）；不一致（相克）→ 威力大打折扣（折扣而非禁用）。
+  // 徒手视同拳脚：未持兵器时拳脚功法仍可正常施展（且视为相合），但刀/剑/棍法威力大减。
+  const matched = weaponSchoolMatches(b.player.weaponSchool, skill)
   let schoolMult = 1
   let schoolNote = ''
-  if (isWeaponSkill) {
-    const effectiveSchool: WeaponSchool = b.player.weaponSchool ?? 'fist'
-    if (effectiveSchool === skill.category) {
-      schoolMult = MATCH_MULT
+  if (WEAPON_SKILL_CATS.includes(skill.category)) {
+    if (matched) {
+      schoolMult = WEAPON_AFFINITY_MATCH
     } else {
-      schoolMult = MISMATCH_MULT
-      schoolNote = `手中无${WEAPON_SCHOOL_LABELS[skill.category as WeaponSchool]}刃，招法威力大减`
+      schoolMult = WEAPON_AFFINITY_MISMATCH
+      const need = WEAPON_SCHOOL_LABELS[skill.category as WeaponSchool]
+      const have = b.player.weaponSchool ? WEAPON_SCHOOL_LABELS[b.player.weaponSchool] : '空手'
+      schoolNote = `手中${have}难展${need}法，招法威力大减`
     }
   }
   const effSkill: Skill = { ...skill, power: Math.max(0, Math.round(skill.power * schoolMult)) }
