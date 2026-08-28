@@ -153,11 +153,29 @@ export interface Character {
   exp: number
   expToNext: number
   freePoints?: number      // 升级获得的自由属性点，可在角色面板自行分配（增强可玩性）
+  origin?: string          // 开局出身（见 src/data/origins.json），影响初始属性与资源
+  discoveredEnemies?: string[] // 图鉴：已遭遇/已击败的敌人 id 集合（配置不写死，战斗开始时写入）
   attributes: CharacterAttributes
   learnedSkills: LearnedSkill[]
   equipment: Equipment
   inventory: InventoryItem[]
   gold: number
+}
+
+// ===== 开局出身配置（见 src/data/origins.json，纯配置驱动）=====
+// 出身只影响「起跑线」：初始属性增减、额外初始技能/物品/金钱；
+// 后续成长仍由升级系统的自由属性点决定，保证 build 多样性。
+
+export interface OriginConfig {
+  id: string
+  name: string
+  description: string
+  // 仅作用于基础属性（maxHp/maxMp/attack/defense/agility/comprehension/luck），
+  // 应用后自动把 hp=maxHp、mp=maxMp 同步，避免气血/内力显示异常。
+  modifiers: Partial<Record<keyof CharacterAttributes, number>>
+  startSkills?: string[]
+  startItems?: { itemId: string; quantity: number }[]
+  startGold?: number       // 覆盖初始金钱（默认 100），用于「商贾之家」之类开局富裕的出身
 }
 
 // 战斗内临时增益（由 buff* 类物品/技能施加，回合开始结算）

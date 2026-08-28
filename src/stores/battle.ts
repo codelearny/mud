@@ -24,6 +24,8 @@ export const useBattleStore = defineStore('battle', () => {
     const playerStore = usePlayerStore()
     if (!playerStore.character) return
     battle.value = engineStartBattle(playerStore.character, enemyId)
+    // 图鉴：任何战斗（随机历练 / 支线遭遇）开始时记录该敌人已发现
+    playerStore.discoverEnemy(enemyId)
     lastResult.value = null
   }
 

@@ -9,9 +9,9 @@ export const useGameStore = defineStore('game', () => {
   const currentScene = ref<string>('village')
   const gameStarted = ref(false)
 
-  function newGame(name: string) {
+  function newGame(name: string, originId?: string) {
     const playerStore = usePlayerStore()
-    playerStore.init(name)
+    playerStore.init(name, originId)
     const storyStore = useStoryStore()
     storyStore.initStory()
     currentScene.value = 'village'

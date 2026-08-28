@@ -1,4 +1,4 @@
-import type { Skill, Item, Enemy, Scene, NPC, Quest, Encounter, Shop } from '../types'
+import type { Skill, Item, Enemy, Scene, NPC, Quest, Encounter, Shop, OriginConfig } from '../types'
 
 // 所有数据表均按「大类/地区」拆分到独立文件（见 src/data 下对应目录）。
 // 这里用 import.meta.glob 将目录下所有 JSON 合并进 Map，对外接口保持不变。
@@ -10,6 +10,7 @@ const sceneModules = import.meta.glob('../data/scenes/**/*.json', { eager: true 
 const npcModules = import.meta.glob('../data/npcs/**/*.json', { eager: true }) as unknown as Record<string, { default: NPC[] }>
 const questModules = import.meta.glob('../data/quests/**/*.json', { eager: true }) as unknown as Record<string, { default: Quest[] }>
 const encounterModules = import.meta.glob('../data/encounters/**/*.json', { eager: true }) as unknown as Record<string, { default: Encounter[] }>
+const originModules = import.meta.glob('../data/origins/**/*.json', { eager: true }) as unknown as Record<string, { default: OriginConfig[] }>
 
 const skills = new Map<string, Skill>()
 const items = new Map<string, Item>()
@@ -19,6 +20,7 @@ const npcs = new Map<string, NPC>()
 const quests = new Map<string, Quest>()
 const encounters = new Map<string, Encounter>()
 const shops = new Map<string, Shop>()
+const origins = new Map<string, OriginConfig>()
 
 for (const mod of Object.values(skillModules)) {
   for (const skill of mod.default) {
@@ -65,6 +67,12 @@ for (const mod of Object.values(encounterModules)) {
 for (const mod of Object.values(shopModules)) {
   for (const shop of mod.default) {
     shops.set(shop.id, shop)
+  }
+}
+
+for (const mod of Object.values(originModules)) {
+  for (const origin of mod.default) {
+    origins.set(origin.id, origin)
   }
 }
 
@@ -130,4 +138,12 @@ export function getAllShops(): Shop[] {
 
 export function getShopByNpc(npcId: string): Shop | undefined {
   return Array.from(shops.values()).find(s => s.npcId === npcId)
+}
+
+export function getOrigin(id: string): OriginConfig | undefined {
+  return origins.get(id)
+}
+
+export function getOrigins(): OriginConfig[] {
+  return Array.from(origins.values())
 }

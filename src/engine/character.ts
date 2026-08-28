@@ -1,5 +1,5 @@
 import type { Character, CharacterAttributes, EquipSlot } from '../types'
-import { getItem, getSkill } from './data-loader'
+import { getItem, getSkill, getOrigin } from './data-loader'
 import {
   expForNextLevel as configExpForNextLevel,
   growthPerLevel,
@@ -13,8 +13,8 @@ export function expForNextLevel(level: number): number {
   return configExpForNextLevel(level)
 }
 
-export function createNewCharacter(name: string): Character {
-  return {
+export function createNewCharacter(name: string, originId?: string): Character {
+  const char: Character = {
     id: 'player',
     name,
     title: titleForLevel(1),
@@ -46,6 +46,41 @@ export function createNewCharacter(name: string): Character {
     ],
     gold: 100
   }
+
+  const origin = originId ? getOrigin(originId) : undefined
+  if (origin) {
+    // 应用出身属性增减（仅作用于基础属性，hp/mp 随后同步）
+    const mods = origin.modifiers ?? {}
+    const attrs = char.attributes as unknown as Record<string, number>
+    for (const [key, value] of Object.entries(mods)) {
+      if (value && key in char.attributes) {
+        attrs[key] += value
+      }
+    }
+    char.attributes.hp = char.attributes.maxHp
+    char.attributes.mp = char.attributes.maxMp
+
+    // 额外初始武功（去重，不覆盖已有的 basic_fist/basic_sword）
+    for (const sid of origin.startSkills ?? []) {
+      if (!char.learnedSkills.find(s => s.skillId === sid)) {
+        char.learnedSkills.push({ skillId: sid, level: 1, proficiency: 0, proficiencyToNext: 100 })
+      }
+    }
+
+    // 额外初始物品（叠加到背包）
+    for (const it of origin.startItems ?? []) {
+      const existing = char.inventory.find(i => i.itemId === it.itemId)
+      if (existing) existing.quantity += it.quantity
+      else char.inventory.push({ itemId: it.itemId, quantity: it.quantity })
+    }
+
+    // 覆盖初始金钱（如「商贾之家」开局富裕）
+    if (origin.startGold != null) char.gold = origin.startGold
+
+    char.origin = origin.id
+  }
+
+  return char
 }
 
 export function getEffectiveAttributes(character: Character): CharacterAttributes {

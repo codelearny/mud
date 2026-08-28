@@ -1,0 +1,47 @@
+[
+  {
+    "id": "martial_clan",
+    "name": "武林世家",
+    "description": "世代习武，天生筋骨强健，攻守俱佳，然疏于诗书，悟性稍逊。",
+    "modifiers": { "attack": 3, "defense": 2, "maxHp": 20, "comprehension": -3 },
+    "startSkills": [],
+    "startItems": [],
+    "startGold": 100
+  },
+  {
+    "id": "scholar",
+    "name": "书香门第",
+    "description": "饱读诗书，悟性过人，内力醇厚，然不擅搏击，体魄偏弱。",
+    "modifiers": { "comprehension": 6, "maxMp": 20, "maxHp": -15, "attack": -2 },
+    "startSkills": [],
+    "startItems": [],
+    "startGold": 100
+  },
+  {
+    "id": "rogue",
+    "name": "江湖游侠",
+    "description": "浪迹天涯，身法轻灵，福缘深厚，机变百出，攻防平平。",
+    "modifiers": { "agility": 4, "luck": 4, "defense": -1 },
+    "startSkills": [],
+    "startItems": [],
+    "startGold": 100
+  },
+  {
+    "id": "farmer",
+    "name": "农家子弟",
+    "description": "生于田亩，体魄壮实，耐劳善守，却不甚灵巧，悟性一般。",
+    "modifiers": { "maxHp": 30, "defense": 3, "agility": -3, "comprehension": -2 },
+    "startSkills": [],
+    "startItems": [],
+    "startGold": 100
+  },
+  {
+    "id": "merchant",
+    "name": "商贾之家",
+    "description": "家资殷实，善于经营，福缘不浅，初始盘缠充裕，内力亦稳。",
+    "modifiers": { "luck": 3, "maxMp": 10 },
+    "startSkills": [],
+    "startItems": [],
+    "startGold": 250
+  }
+]

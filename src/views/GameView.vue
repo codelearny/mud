@@ -16,6 +16,7 @@ import DialoguePanel from '../components/DialoguePanel.vue'
 import EncounterPanel from '../components/EncounterPanel.vue'
 import QuestPanel from '../components/QuestPanel.vue'
 import ShopPanel from '../components/ShopPanel.vue'
+import CodexPanel from '../components/CodexPanel.vue'
 import type { SceneAction, SceneGain } from '../types'
 
 const router = useRouter()
@@ -25,7 +26,7 @@ const battleStore = useBattleStore()
 const storyStore = useStoryStore()
 const shopStore = useShopStore()
 
-type Tab = 'map' | 'quests' | 'character' | 'skills' | 'inventory'
+type Tab = 'map' | 'quests' | 'character' | 'skills' | 'inventory' | 'codex'
 const activeTab = ref<Tab>('map')
 const toastMsg = ref('')
 let toastTimer: ReturnType<typeof setTimeout> | undefined
@@ -224,12 +225,17 @@ onMounted(() => {
       <InventoryPanel />
     </div>
 
+    <div v-show="activeTab === 'codex'">
+      <CodexPanel />
+    </div>
+
     <div class="action-menu">
       <button class="btn" :class="{ 'btn-primary': activeTab === 'map' }" @click="activeTab = 'map'">江湖</button>
       <button class="btn" :class="{ 'btn-primary': activeTab === 'quests' }" @click="activeTab = 'quests'">任务</button>
       <button class="btn" :class="{ 'btn-primary': activeTab === 'character' }" @click="activeTab = 'character'">角色</button>
       <button class="btn" :class="{ 'btn-primary': activeTab === 'skills' }" @click="activeTab = 'skills'">武功</button>
       <button class="btn" :class="{ 'btn-primary': activeTab === 'inventory' }" @click="activeTab = 'inventory'">物品</button>
+      <button class="btn" :class="{ 'btn-primary': activeTab === 'codex' }" @click="activeTab = 'codex'">图鉴</button>
     </div>
 
     <DialoguePanel v-if="storyStore.currentDialogue" />

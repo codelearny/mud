@@ -25,8 +25,8 @@ export const usePlayerStore = defineStore('player', () => {
     return getEffectiveAttributes(character.value)
   })
 
-  function init(name: string) {
-    character.value = createNewCharacter(name)
+  function init(name: string, originId?: string) {
+    character.value = createNewCharacter(name, originId)
     save()
   }
 
@@ -119,10 +119,22 @@ export const usePlayerStore = defineStore('player', () => {
       // 兼容旧存档：补齐自由属性点，并按当前升级配置重算本级所需经验，避免经验条错乱。
       char.freePoints = char.freePoints ?? 0
       char.expToNext = expForNextLevel(char.level)
+      char.discoveredEnemies = char.discoveredEnemies ?? []
       character.value = char
       return true
     }
     return false
+  }
+
+  // 图鉴：记录已遭遇/已击败的敌人；仅在首次发现时写入并持久化。
+  function discoverEnemy(id: string) {
+    if (!character.value) return
+    const list = character.value.discoveredEnemies ?? []
+    if (list.includes(id)) return
+    const char = JSON.parse(JSON.stringify(character.value)) as Character
+    char.discoveredEnemies = [...list, id]
+    character.value = char
+    save()
   }
 
   function allocatePoint(stat: AllocatableStat) {
@@ -175,6 +187,7 @@ export const usePlayerStore = defineStore('player', () => {
     effectiveAttrs,
     init,
     update,
+    discoverEnemy,
     addExp,
     learnNewSkill,
     equip,
