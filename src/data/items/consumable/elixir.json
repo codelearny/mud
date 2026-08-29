@@ -1,0 +1,35 @@
+[
+  {
+    "id": "tianwang_dan",
+    "name": "天王补心丹",
+    "description": "宫中秘方炼制的丹药，气血内力同补，最宜久战之后调息。",
+    "type": "consumable",
+    "category": "medicine",
+    "price": 400,
+    "minLevel": 5,
+    "rarity": "rare",
+    "effects": [{ "type": "hp", "value": 300 }, { "type": "mp", "value": 300 }]
+  },
+  {
+    "id": "xueshen_wan",
+    "name": "雪参玉蟾丸",
+    "description": "以雪岭老参与玉蟾酥入药，药力峻猛，能起沉疴。",
+    "type": "consumable",
+    "category": "medicine",
+    "price": 1200,
+    "minLevel": 8,
+    "rarity": "epic",
+    "effects": [{ "type": "hp", "value": 600 }, { "type": "mp", "value": 150 }]
+  },
+  {
+    "id": "jiuzhuan_dan",
+    "name": "九转还魂丹",
+    "description": "相传可起死回生的道家至宝，九转方成，气血内力顷刻尽复。",
+    "type": "consumable",
+    "category": "medicine",
+    "price": 1500,
+    "minLevel": 10,
+    "rarity": "epic",
+    "effects": [{ "type": "hp", "value": 800 }, { "type": "mp", "value": 200 }]
+  }
+]

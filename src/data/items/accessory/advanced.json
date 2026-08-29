@@ -1,0 +1,50 @@
+[
+  {
+    "id": "bingxin_pendant",
+    "name": "冰心玉佩",
+    "description": "雪岭寒玉雕成的玉佩，触之冰凉，佩戴者心神澄明、内力绵长。",
+    "type": "accessory",
+    "category": "accessory",
+    "price": 1500,
+    "slot": "accessory",
+    "minLevel": 15,
+    "rarity": "rare",
+    "effects": [{ "type": "maxMp", "value": 30 }, { "type": "comprehension", "value": 4 }]
+  },
+  {
+    "id": "dongzhu_ring",
+    "name": "东珠扳指",
+    "description": "大内御用的东珠扳指，珠光莹润，戴着它的人福缘与气力皆旺。",
+    "type": "accessory",
+    "category": "accessory",
+    "price": 3000,
+    "slot": "accessory",
+    "minLevel": 18,
+    "rarity": "epic",
+    "effects": [{ "type": "luck", "value": 8 }, { "type": "attack", "value": 6 }]
+  },
+  {
+    "id": "jiaozhu_pearl",
+    "name": "北海鲛珠",
+    "description": "北海鲛人泣泪所化的明珠，莹润生辉，佩戴者福缘深厚、内力悠长。",
+    "type": "accessory",
+    "category": "accessory",
+    "price": 6000,
+    "slot": "accessory",
+    "minLevel": 21,
+    "rarity": "legendary",
+    "effects": [{ "type": "luck", "value": 12 }, { "type": "maxMp", "value": 40 }]
+  },
+  {
+    "id": "jiuyou_ring",
+    "name": "九幽魔戒",
+    "description": "深渊魔气淬炼的指环，戴上它攻守兼具，只是那份阴寒，非人人受得住。",
+    "type": "accessory",
+    "category": "accessory",
+    "price": 8500,
+    "slot": "accessory",
+    "minLevel": 23,
+    "rarity": "legendary",
+    "effects": [{ "type": "attack", "value": 10 }, { "type": "defense", "value": 8 }, { "type": "luck", "value": 10 }]
+  }
+]

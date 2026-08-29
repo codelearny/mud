@@ -1,0 +1,80 @@
+[
+  {
+    "id": "hanyue_blade",
+    "name": "寒月弯刀",
+    "description": "塞外寒铁所铸的弯刀，刀身泛着冷月般的青光，挥之寒气逼人。",
+    "type": "weapon",
+    "category": "blade",
+    "school": "blade",
+    "price": 1800,
+    "slot": "weapon",
+    "minLevel": 15,
+    "rarity": "epic",
+    "effects": [{ "type": "attack", "value": 30 }, { "type": "agility", "value": 3 }]
+  },
+  {
+    "id": "xuepo_sword",
+    "name": "雪魄剑",
+    "description": "以雪岭千年寒玉淬炼的剑，剑气如冰，亦可护住周身。",
+    "type": "weapon",
+    "category": "sword",
+    "school": "sword",
+    "price": 2200,
+    "slot": "weapon",
+    "minLevel": 16,
+    "rarity": "epic",
+    "effects": [{ "type": "attack", "value": 32 }, { "type": "defense", "value": 4 }]
+  },
+  {
+    "id": "jinsi_ring",
+    "name": "金丝缠手",
+    "description": "以金丝混天蚕丝缠成的护手，出手无声，却能断石分金。",
+    "type": "weapon",
+    "category": "fist",
+    "school": "fist",
+    "price": 3200,
+    "slot": "weapon",
+    "minLevel": 19,
+    "rarity": "epic",
+    "effects": [{ "type": "attack", "value": 36 }, { "type": "luck", "value": 4 }]
+  },
+  {
+    "id": "xuanbing_sword",
+    "name": "玄冰重剑",
+    "description": "玄冰深处埋藏千年的古剑，重逾百斤，剑气过处凝霜结雪。",
+    "type": "weapon",
+    "category": "sword",
+    "school": "sword",
+    "price": 5000,
+    "slot": "weapon",
+    "minLevel": 20,
+    "rarity": "legendary",
+    "effects": [{ "type": "attack", "value": 42 }, { "type": "defense", "value": 8 }]
+  },
+  {
+    "id": "longxiang_staff",
+    "name": "龙象般若杖",
+    "description": "密宗至宝，杖身刻满梵文，持之可生龙象之力，亦固本培元。",
+    "type": "weapon",
+    "category": "staff",
+    "school": "staff",
+    "price": 6500,
+    "slot": "weapon",
+    "minLevel": 22,
+    "rarity": "legendary",
+    "effects": [{ "type": "attack", "value": 48 }, { "type": "maxHp", "value": 40 }]
+  },
+  {
+    "id": "yuandi_blade",
+    "name": "渊底魔刃",
+    "description": "自九幽深渊底凿出的魔刃，刃身暗红，嗜血而利，持之更添气运。",
+    "type": "weapon",
+    "category": "blade",
+    "school": "blade",
+    "price": 9000,
+    "slot": "weapon",
+    "minLevel": 24,
+    "rarity": "legendary",
+    "effects": [{ "type": "attack", "value": 56 }, { "type": "luck", "value": 8 }, { "type": "defense", "value": 6 }]
+  }
+]

@@ -1,0 +1,70 @@
+[
+  {
+    "id": "xisui_internal",
+    "name": "洗髓经",
+    "description": "少林不传之秘，伐毛洗髓，攻守俱增，兼能自愈内伤。",
+    "type": "active",
+    "category": "internal",
+    "power": 0,
+    "mpCost": 18,
+    "hitRate": 1,
+    "critRate": 0,
+    "unlockLevel": 16,
+    "selfBuff": { "attack": 14, "defense": 10 },
+    "heal": 45
+  },
+  {
+    "id": "taixuan_internal",
+    "name": "太玄经",
+    "description": "侠客岛绝学，内力如渊深不可测，攻守兼备，且能自复内力气血。",
+    "type": "active",
+    "category": "internal",
+    "power": 0,
+    "mpCost": 24,
+    "hitRate": 1,
+    "critRate": 0,
+    "unlockLevel": 22,
+    "selfBuff": { "attack": 18, "defense": 14 },
+    "restoreMp": 60,
+    "heal": 50
+  },
+  {
+    "id": "taxue_step",
+    "name": "踏雪无痕",
+    "description": "塞外苦修的身法，踏雪而行不留痕迹，身法大增。",
+    "type": "active",
+    "category": "movement",
+    "power": 0,
+    "mpCost": 12,
+    "hitRate": 1,
+    "critRate": 0,
+    "unlockLevel": 14,
+    "selfBuff": { "agility": 14 }
+  },
+  {
+    "id": "xiaoyao_step",
+    "name": "逍遥游",
+    "description": "逍遥子所悟身法，逍遥于天地之间，身法与守势俱进。",
+    "type": "active",
+    "category": "movement",
+    "power": 0,
+    "mpCost": 16,
+    "hitRate": 1,
+    "critRate": 0,
+    "unlockLevel": 19,
+    "selfBuff": { "agility": 20, "defense": 6 }
+  },
+  {
+    "id": "zhichi_step",
+    "name": "咫尺天涯",
+    "description": "身法之极致，咫尺之间恍若天涯，进退如电，且能借势反击。",
+    "type": "active",
+    "category": "movement",
+    "power": 0,
+    "mpCost": 20,
+    "hitRate": 1,
+    "critRate": 0,
+    "unlockLevel": 23,
+    "selfBuff": { "agility": 26, "attack": 6 }
+  }
+]

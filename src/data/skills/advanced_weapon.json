@@ -1,0 +1,54 @@
+[
+  {
+    "id": "tianwai_flysword",
+    "name": "天外飞仙",
+    "description": "剑仙绝技，剑自天外飞来，一瞬两击，防无可防。",
+    "type": "active",
+    "category": "sword",
+    "power": 72,
+    "mpCost": 26,
+    "hitRate": 0.88,
+    "critRate": 0.3,
+    "unlockLevel": 19,
+    "hits": 2
+  },
+  {
+    "id": "taia_sword_codex",
+    "name": "太阿剑典",
+    "description": "上古剑道总纲，三剑齐出，威势可断山河，非剑道宗师不可施展。",
+    "type": "active",
+    "category": "sword",
+    "power": 88,
+    "mpCost": 32,
+    "hitRate": 0.86,
+    "critRate": 0.36,
+    "unlockLevel": 24,
+    "hits": 3
+  },
+  {
+    "id": "blood_blade_sutra",
+    "name": "血刀经",
+    "description": "血刀门镇派绝学，刀出必见血，一瞬两斩，招招直取要害。",
+    "type": "active",
+    "category": "blade",
+    "power": 76,
+    "mpCost": 26,
+    "hitRate": 0.84,
+    "critRate": 0.3,
+    "unlockLevel": 21,
+    "hits": 2
+  },
+  {
+    "id": "blade_shatter_army",
+    "name": "刀破千军",
+    "description": "刀道极致，一刀破尽千军万马，三斩连环，血气为之夺。",
+    "type": "active",
+    "category": "blade",
+    "power": 92,
+    "mpCost": 34,
+    "hitRate": 0.82,
+    "critRate": 0.34,
+    "unlockLevel": 24,
+    "hits": 3
+  }
+]

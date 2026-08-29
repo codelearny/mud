@@ -1,0 +1,29 @@
+[
+  {
+    "id": "snow_lotus",
+    "name": "雪岭雪莲",
+    "description": "生于塞外绝顶的千年雪莲，终年不凋，是炼制峻猛丹药的主材。",
+    "type": "material",
+    "category": "herb",
+    "price": 800,
+    "rarity": "rare"
+  },
+  {
+    "id": "mermaid_tear",
+    "name": "鲛人泪",
+    "description": "南海鲛人泣泪所化的珠泪，入药可续断重生，亦是绝世珍宝。",
+    "type": "material",
+    "category": "core",
+    "price": 2000,
+    "rarity": "legendary"
+  },
+  {
+    "id": "demon_crystal",
+    "name": "九幽魔晶",
+    "description": "深渊魔气凝结的晶石，触之阴寒刺骨，却是淬炼神兵的至宝。",
+    "type": "material",
+    "category": "core",
+    "price": 3000,
+    "rarity": "legendary"
+  }
+]

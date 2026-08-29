@@ -72,6 +72,10 @@
       {
         "itemId": "great_medicine",
         "rate": 0.15
+      },
+      {
+        "itemId": "hanyue_blade",
+        "rate": 0.15
       }
     ],
     "counters": [

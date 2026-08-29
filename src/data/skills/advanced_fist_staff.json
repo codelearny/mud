@@ -1,0 +1,54 @@
+[
+  {
+    "id": "dafumo_fist",
+    "name": "大伏魔拳",
+    "description": "少林降魔拳法，刚猛无俦，中拳者筋骨俱损、守势大减。",
+    "type": "active",
+    "category": "fist",
+    "power": 66,
+    "mpCost": 22,
+    "hitRate": 0.86,
+    "critRate": 0.2,
+    "unlockLevel": 16,
+    "enemyDebuff": { "defense": -8 }
+  },
+  {
+    "id": "anran_palm",
+    "name": "黯然销魂掌",
+    "description": "情至深处所悟掌法，掌出两叠，一掌断肠，再掌销魂。",
+    "type": "active",
+    "category": "fist",
+    "power": 78,
+    "mpCost": 28,
+    "hitRate": 0.85,
+    "critRate": 0.26,
+    "unlockLevel": 21,
+    "hits": 2
+  },
+  {
+    "id": "weiduo_staff",
+    "name": "韦陀杖法",
+    "description": "少林护法杖法，一杖两扫，沉稳厚重，专破邪门外道。",
+    "type": "active",
+    "category": "staff",
+    "power": 64,
+    "mpCost": 20,
+    "hitRate": 0.85,
+    "critRate": 0.18,
+    "unlockLevel": 16,
+    "hits": 2
+  },
+  {
+    "id": "panlong_staff",
+    "name": "盘龙杖法",
+    "description": "杖化游龙，缠身盘打，中者臂骨欲裂，攻势大挫。",
+    "type": "active",
+    "category": "staff",
+    "power": 82,
+    "mpCost": 30,
+    "hitRate": 0.84,
+    "critRate": 0.22,
+    "unlockLevel": 22,
+    "enemyDebuff": { "attack": -12 }
+  }
+]

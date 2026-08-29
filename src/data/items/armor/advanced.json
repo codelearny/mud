@@ -1,0 +1,62 @@
+[
+  {
+    "id": "xuecan_robe",
+    "name": "雪蚕丝衣",
+    "description": "以雪岭冰蚕丝织成，轻暖异常，亦可护住心脉。",
+    "type": "armor",
+    "category": "body",
+    "price": 1600,
+    "slot": "armor",
+    "minLevel": 15,
+    "rarity": "rare",
+    "effects": [{ "type": "defense", "value": 20 }, { "type": "maxHp", "value": 20 }]
+  },
+  {
+    "id": "yunjin_robe",
+    "name": "云锦道袍",
+    "description": "云海剑宗弟子所着道袍，云纹暗织，穿着者内息绵长。",
+    "type": "armor",
+    "category": "body",
+    "price": 2400,
+    "slot": "armor",
+    "minLevel": 17,
+    "rarity": "epic",
+    "effects": [{ "type": "defense", "value": 24 }, { "type": "maxMp", "value": 30 }]
+  },
+  {
+    "id": "jinsi_armor",
+    "name": "金丝软甲",
+    "description": "京城大内特制的护身软甲，金丝织就，刀剑难伤。",
+    "type": "armor",
+    "category": "body",
+    "price": 3800,
+    "slot": "armor",
+    "minLevel": 19,
+    "rarity": "epic",
+    "effects": [{ "type": "defense", "value": 28 }, { "type": "maxHp", "value": 40 }]
+  },
+  {
+    "id": "taixu_robe",
+    "name": "太虚道衣",
+    "description": "太虚真人所留道衣，穿上身轻如无物，内力生生不息。",
+    "type": "armor",
+    "category": "body",
+    "price": 7000,
+    "slot": "armor",
+    "minLevel": 22,
+    "rarity": "legendary",
+    "effects": [{ "type": "defense", "value": 34 }, { "type": "maxMp", "value": 50 }, { "type": "agility", "value": 6 }]
+  },
+  {
+    "id": "jiaoren_armor",
+    "name": "鲛人鳞甲",
+    "description": "以南海鲛人之鳞缀成的甲胄，入水不沉，入火不燃，坚逾精钢。",
+    "type": "armor",
+    "category": "body",
+    "price": 9500,
+    "slot": "armor",
+    "minLevel": 24,
+    "rarity": "legendary",
+    "effects": [{ "type": "defense", "value": 40 }, { "type": "maxHp", "value": 60 }]
+  }
+]

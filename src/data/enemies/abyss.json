@@ -76,6 +76,18 @@
       {
         "itemId": "atk_pill",
         "rate": 0.15
+      },
+      {
+        "itemId": "jinsi_armor",
+        "rate": 0.15
+      },
+      {
+        "itemId": "dongzhu_ring",
+        "rate": 0.2
+      },
+      {
+        "itemId": "jinsi_ring",
+        "rate": 0.15
       }
     ],
     "counters": [
@@ -117,6 +129,18 @@
       {
         "itemId": "ancient_relic",
         "rate": 0.2
+      },
+      {
+        "itemId": "demon_crystal",
+        "rate": 0.25
+      },
+      {
+        "itemId": "xuanbing_sword",
+        "rate": 0.12
+      },
+      {
+        "itemId": "jiaozhu_pearl",
+        "rate": 0.1
       }
     ]
   },
@@ -164,6 +188,30 @@
       },
       {
         "itemId": "luck_pill",
+        "rate": 0.15
+      },
+      {
+        "itemId": "demon_crystal",
+        "rate": 0.3
+      },
+      {
+        "itemId": "longxiang_staff",
+        "rate": 0.15
+      },
+      {
+        "itemId": "yuandi_blade",
+        "rate": 0.12
+      },
+      {
+        "itemId": "taixu_robe",
+        "rate": 0.12
+      },
+      {
+        "itemId": "jiaoren_armor",
+        "rate": 0.1
+      },
+      {
+        "itemId": "jiuyou_ring",
         "rate": 0.15
       }
     ],
