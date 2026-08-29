@@ -1,0 +1,74 @@
+[
+  {
+    "id": "snow_peak",
+    "name": "塞外雪岭",
+    "description": "落雁峰再往北，便是苦寒之地。雪岭终年积雪，朔风如刀，呼吸间眉毛便结了霜。雪线以上人迹罕至，却是雪狼与冰猿的天下。绝顶之上，据说生着一朵千年雪莲。",
+    "connections": ["peak", "cloud_sect"],
+    "npcs": ["snow_lama"],
+    "enemyPool": ["snow_wolf", "ice_ape", "falcon", "black_bear"],
+    "requirement": { "type": "level", "target": "", "op": ">=", "value": 12 },
+    "requireHint": "风雪噬人，需等级 12 方可登岭",
+    "trainFactor": 1.2,
+    "actions": [
+      { "id": "explore_snow", "label": "踏雪寻径", "type": "encounter", "text": "你踩着没膝的积雪，向雪线以上攀去。", "encounters": ["enc_snow_cave", "enc_wild_cave", "enc_wild_trap", "enc_master"] },
+      { "id": "gather_snow", "label": "雪中采药", "type": "gather", "text": "你在背风的岩缝间搜寻耐寒的药材。", "gains": [
+        { "itemId": "beast_hide", "min": 1, "max": 2, "weight": 3 },
+        { "itemId": "spirit_herb", "min": 1, "max": 1, "weight": 2 },
+        { "itemId": "mystery_ore", "min": 1, "max": 1, "weight": 1 }
+      ] }
+    ]
+  },
+  {
+    "id": "silk_road_desert",
+    "name": "大漠丝路",
+    "description": "出清风镇往西，黄沙万里。商队的驼铃是这条路上唯一的活气，沙丘间不时露出半截被掩埋的车辕与白骨。往西三十里有一口沙井，是方圆百里唯一的水源。",
+    "connections": ["town"],
+    "npcs": ["desert_merchant"],
+    "enemyPool": ["sand_bandit", "scorpion_king", "ruffian", "bandit"],
+    "requirement": { "type": "level", "target": "", "op": ">=", "value": 13 },
+    "requireHint": "大漠无垠，需等级 13 方可西行",
+    "trainFactor": 1.2,
+    "actions": [
+      { "id": "explore_desert", "label": "循迹西行", "type": "encounter", "text": "你跟着沙上的车辙，向大漠深处走去。", "encounters": ["enc_desert_well", "enc_den_patrol", "enc_den_loot", "enc_master"] },
+      { "id": "gather_desert", "label": "沙中寻宝", "type": "gather", "text": "你在半掩的货物与骸骨间翻找。", "gains": [
+        { "itemId": "ancient_relic", "min": 1, "max": 2, "weight": 3 },
+        { "itemId": "iron_ore", "min": 1, "max": 2, "weight": 2 },
+        { "itemId": "mystery_ore", "min": 1, "max": 1, "weight": 1 }
+      ] }
+    ]
+  },
+  {
+    "id": "imperial_capital",
+    "name": "京城皇城",
+    "description": "天子脚下，九里三十步的城墙巍峨入云。朱雀大街上车马如流，瓦市里百戏杂陈，一派繁华气象。只是东厂的番子四处游弋，酒肆之中的谈笑声总压得极低。",
+    "connections": ["town"],
+    "npcs": ["capital_official"],
+    "enemyPool": ["imperial_guard", "eunuch_master", "evil_guard"],
+    "requirement": { "type": "level", "target": "", "op": ">=", "value": 16 },
+    "requireHint": "天子脚下，需等级 16 方可入京",
+    "trainFactor": 1.3,
+    "actions": [
+      { "id": "explore_capital", "label": "街市走动", "type": "encounter", "text": "你混在熙攘的人流里，听些朝野的闲话。", "encounters": ["enc_capital_bazaar", "enc_den_patrol", "enc_robber", "enc_master"] },
+      { "id": "gather_capital", "label": "瓦市淘宝", "type": "gather", "text": "你在瓦市的地摊间翻捡，指望寻着些好东西。", "gains": [
+        { "itemId": "ancient_relic", "min": 1, "max": 2, "weight": 2 },
+        { "itemId": "mystery_ore", "min": 1, "max": 1, "weight": 2 },
+        { "itemId": "spirit_orb", "min": 1, "max": 1, "weight": 1 }
+      ] }
+    ]
+  },
+  {
+    "id": "cloud_sect",
+    "name": "云海剑宗",
+    "description": "云海之上的千年剑宗，殿宇依山而建，白墙黛瓦半没于云雾。演武台上剑痕密布，皆是历代弟子所留。此处不问世事，只传剑道，是天下剑客心中的圣地。",
+    "connections": ["peak", "snow_peak"],
+    "npcs": ["cloud_elder"],
+    "enemyPool": ["evil_disciple", "jianghu_villain", "evil_guard"],
+    "requirement": { "type": "level", "target": "", "op": ">=", "value": 17 },
+    "requireHint": "云海无路，需等级 17 方可登山",
+    "trainFactor": 1.5,
+    "actions": [
+      { "id": "train_sect", "label": "演武台悟剑", "type": "train", "text": "你立于演武台上，对着满台剑痕凝神参悟，胸中剑意渐生。" },
+      { "id": "explore_sect", "label": "遍历殿宇", "type": "encounter", "text": "你穿行于云雾缭绕的殿宇之间。", "encounters": ["enc_master", "enc_sword_epitaph", "enc_sword_spirit", "enc_sword_rust"] }
+    ]
+  }
+]

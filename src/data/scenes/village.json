@@ -14,7 +14,7 @@
     "id": "mountain",
     "name": "后山",
     "description": "后山林木幽深，怪石嶙峋。山道旁时见被劫杀的行商尸骸，显然有匪类盘踞。崖边有一处平坦石台，似是前人练功之所；密林深处，隐隐有剑气冲霄，传说埋着前朝剑客的剑冢。",
-    "connections": ["village", "forest", "blackwind", "sword_tomb"],
+    "connections": ["village", "forest", "blackwind", "sword_tomb", "ancient_battlefield"],
     "npcs": ["hunter"],
     "enemyPool": ["ruffian", "bandit", "wild_wolf", "boar"],
     "actions": [
@@ -34,7 +34,7 @@
     "id": "ferry",
     "name": "青石渡口",
     "description": "江水滔滔，拍打着青石砌成的渡头。几艘乌篷船随波起伏，老艄公蹲在船头吧嗒吧嗒抽着旱烟。江心偶有沉船的桅杆露出水面，据说底下压着不少前朝的物事。往南穿过芦苇荡，便是另一番天地。",
-    "connections": ["village", "town", "reed"],
+    "connections": ["village", "town", "reed", "tongji_port"],
     "npcs": ["ferryman"],
     "actions": [
       { "id": "fish", "label": "江边垂钓", "type": "gather", "text": "你借来钓竿，临江而坐。", "gains": [

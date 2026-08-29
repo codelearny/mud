@@ -1,0 +1,78 @@
+[
+  {
+    "id": "ancient_battlefield",
+    "name": "古战场",
+    "description": "一片开阔的荒原，土色暗红，据说是百年前两国交兵之地。断戟残戈半埋土中，风过时呜咽如泣。北首乱葬岗后有一座塌陷的将台，台下便是老将军的墓室。一位残魂常在此徘徊不去。",
+    "connections": ["mountain", "tomb"],
+    "npcs": ["battlefield_ghost"],
+    "enemyPool": ["ghost_soldier", "grave_general", "ancient_corps", "tomb_poisoness"],
+    "requirement": { "type": "level", "target": "", "op": ">=", "value": 9 },
+    "requireHint": "怨气冲天，需等级 9 方可踏入",
+    "trainFactor": 1.1,
+    "actions": [
+      { "id": "explore_battlefield", "label": "荒原搜寻", "type": "encounter", "text": "你踏着暗红的土，向战场深处走去。", "encounters": ["enc_battlefield_ghost", "enc_battlefield_armor", "enc_wild_cave", "enc_master"] },
+      { "id": "gather_battlefield", "label": "拾捡遗甲", "type": "gather", "text": "你在断戟残戈间翻找，指望寻些值钱的物事。", "gains": [
+        { "itemId": "iron_ore", "min": 1, "max": 2, "weight": 3 },
+        { "itemId": "ancient_relic", "min": 1, "max": 1, "weight": 2 },
+        { "itemId": "mystery_ore", "min": 1, "max": 1, "weight": 1 }
+      ] }
+    ]
+  },
+  {
+    "id": "spider_cavern",
+    "name": "盘丝洞",
+    "description": "迷雾林西首的一处溶洞，洞口垂着层层蛛丝，如帘如幕。洞内石壁上挂满茧囊，偶有微微颤动，似有活物在内。深处传来细碎的爬行声，空气里弥漫着腥甜的毒气。",
+    "connections": ["forest", "miao_entrance"],
+    "npcs": ["cavern_guide"],
+    "enemyPool": ["spider_demon", "spider_queen", "venom_spider", "venom_snake"],
+    "requirement": { "type": "level", "target": "", "op": ">=", "value": 11 },
+    "requireHint": "蛛丝缠身，需等级 11 方可入洞",
+    "trainFactor": 1.1,
+    "actions": [
+      { "id": "explore_cavern", "label": "深入蛛洞", "type": "encounter", "text": "你拨开洞口的蛛丝，摸黑向里走去。", "encounters": ["enc_spider_web", "enc_tomb_gas", "enc_wild_cave", "enc_herb"] },
+      { "id": "gather_cavern", "label": "刮取蛛毒", "type": "gather", "text": "你小心刮下洞壁上的毒囊与蛛丝。", "gains": [
+        { "itemId": "antidote", "min": 1, "max": 2, "weight": 3 },
+        { "itemId": "spirit_herb", "min": 1, "max": 1, "weight": 2 },
+        { "itemId": "beast_core", "min": 1, "max": 1, "weight": 1 }
+      ] }
+    ]
+  },
+  {
+    "id": "tongji_port",
+    "name": "通济港",
+    "description": "大江入海处的第一大港，桅樯如林，号子声此起彼伏。码头上货物堆积如山，脚夫往来如织，酒肆茶寮昼夜不休。港东是货栈，港西是船坞，据说向东三百里有座蓬莱岛。",
+    "connections": ["ferry", "penglai_isle"],
+    "npcs": ["port_keeper"],
+    "enemyPool": ["ruffian", "river_pirate", "female_thief"],
+    "requirement": { "type": "level", "target": "", "op": ">=", "value": 10 },
+    "requireHint": "港务繁杂，需等级 10 方可入港",
+    "trainFactor": 1.1,
+    "actions": [
+      { "id": "explore_port", "label": "码头走动", "type": "encounter", "text": "你混在脚夫与客商之间，听些南来北往的消息。", "encounters": ["enc_port_cargo", "enc_river_trade", "enc_robber", "enc_master"] },
+      { "id": "gather_port", "label": "货栈拾遗", "type": "gather", "text": "你在散落的货箱间翻检，寻些漏下的物事。", "gains": [
+        { "itemId": "river_fish", "min": 1, "max": 2, "weight": 3 },
+        { "itemId": "iron_ore", "min": 1, "max": 2, "weight": 2 },
+        { "itemId": "ancient_relic", "min": 1, "max": 1, "weight": 1 }
+      ] }
+    ]
+  },
+  {
+    "id": "penglai_isle",
+    "name": "蓬莱岛",
+    "description": "东海上的孤岛，终年云雾缭绕。岛上有渔村数户，屋舍以贝壳垒墙。东首浅滩水色澄澈，隐约有珠光自水底透出；岛北礁石嶙峋，传说有海蛟盘踞其间。",
+    "connections": ["tongji_port"],
+    "npcs": ["penglai_fisher"],
+    "enemyPool": ["sea_serpent", "clam_spirit", "river_pirate"],
+    "requirement": { "type": "level", "target": "", "op": ">=", "value": 14 },
+    "requireHint": "海路凶险，需等级 14 方可渡海",
+    "trainFactor": 1.2,
+    "actions": [
+      { "id": "explore_isle", "label": "环岛探看", "type": "encounter", "text": "你沿着礁石与浅滩，绕岛而行。", "encounters": ["enc_penglai_pearl", "enc_boat_wreck", "enc_herb", "enc_wild_cave"] },
+      { "id": "gather_isle", "label": "浅滩采珠", "type": "gather", "text": "你涉入浅滩，在贝壳间摸索。", "gains": [
+        { "itemId": "medicine_herb", "min": 1, "max": 2, "weight": 3 },
+        { "itemId": "spirit_orb", "min": 1, "max": 1, "weight": 2 },
+        { "itemId": "ancient_relic", "min": 1, "max": 1, "weight": 1 }
+      ] }
+    ]
+  }
+]

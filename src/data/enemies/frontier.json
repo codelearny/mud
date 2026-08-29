@@ -1,0 +1,164 @@
+[
+  {
+    "id": "ghost_soldier",
+    "name": "亡灵甲士",
+    "category": "evil",
+    "description": "古战场上的阵亡甲士，尸身不腐，铁甲锈迹斑斑，眼眶中燃着幽幽鬼火，挥戈之际带起一阵阴风。",
+    "level": 9,
+    "attributes": {
+      "hp": 190,
+      "maxHp": 190,
+      "mp": 0,
+      "maxMp": 0,
+      "attack": 28,
+      "defense": 12,
+      "agility": 8,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "basic_fist",
+      "tieshan_palm"
+    ],
+    "goldReward": 60,
+    "drops": [
+      {
+        "itemId": "iron_ore",
+        "rate": 0.25
+      },
+      {
+        "itemId": "ancient_relic",
+        "rate": 0.2
+      },
+      {
+        "itemId": "minor_heal",
+        "rate": 0.1
+      }
+    ]
+  },
+  {
+    "id": "grave_general",
+    "name": "墓中将军",
+    "category": "evil",
+    "boss": true,
+    "description": "前朝镇守此地的将军，战死沙场后怨念不散，铁甲下只余一具枯骨，手中长戈却依旧寒芒逼人。",
+    "level": 11,
+    "attributes": {
+      "hp": 320,
+      "maxHp": 320,
+      "mp": 60,
+      "maxMp": 60,
+      "attack": 36,
+      "defense": 18,
+      "agility": 10,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "basic_fist",
+      "tieshan_palm",
+      "xianglong_palms"
+    ],
+    "goldReward": 160,
+    "drops": [
+      {
+        "itemId": "ancient_relic",
+        "rate": 0.4
+      },
+      {
+        "itemId": "mystery_ore",
+        "rate": 0.2
+      },
+      {
+        "itemId": "great_medicine",
+        "rate": 0.15
+      }
+    ],
+    "counters": [
+      "graveGeneralSlain"
+    ]
+  },
+  {
+    "id": "spider_demon",
+    "name": "蛛妖",
+    "category": "beast",
+    "description": "盘丝洞中的成精巨蛛，八足如钩，口吐黏丝缠人手足，腹中毒囊鼓胀，一滴毒液便可蚀穿石板。",
+    "level": 11,
+    "attributes": {
+      "hp": 200,
+      "maxHp": 200,
+      "mp": 60,
+      "maxMp": 60,
+      "attack": 30,
+      "defense": 8,
+      "agility": 16,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "wudu_palm",
+      "poison_sand"
+    ],
+    "goldReward": 70,
+    "drops": [
+      {
+        "itemId": "antidote",
+        "rate": 0.4
+      },
+      {
+        "itemId": "spirit_herb",
+        "rate": 0.2
+      },
+      {
+        "itemId": "beast_core",
+        "rate": 0.15
+      }
+    ]
+  },
+  {
+    "id": "spider_queen",
+    "name": "蛛后",
+    "category": "beast",
+    "boss": true,
+    "description": "盘丝洞之主，千年道行的蛛精，人面蛛身，吐气成网，洞中累累白骨皆是它历年餐食所遗。",
+    "level": 13,
+    "attributes": {
+      "hp": 380,
+      "maxHp": 380,
+      "mp": 100,
+      "maxMp": 100,
+      "attack": 40,
+      "defense": 14,
+      "agility": 18,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "wudu_palm",
+      "poison_sand",
+      "qingyun_step"
+    ],
+    "goldReward": 180,
+    "drops": [
+      {
+        "itemId": "antidote",
+        "rate": 0.5
+      },
+      {
+        "itemId": "spirit_herb",
+        "rate": 0.3
+      },
+      {
+        "itemId": "mystery_ore",
+        "rate": 0.2
+      },
+      {
+        "itemId": "agi_pendant",
+        "rate": 0.08
+      }
+    ],
+    "counters": [
+      "spiderQueenSlain"
+    ]
+  }
+]

@@ -1,0 +1,220 @@
+[
+  {
+    "id": "snow_wolf",
+    "name": "雪狼",
+    "category": "beast",
+    "description": "塞外雪原上的群居猛兽，毛色与雪同，奔行无声，常成群围猎，落单者极易被撕碎。",
+    "level": 12,
+    "attributes": {
+      "hp": 210,
+      "maxHp": 210,
+      "mp": 0,
+      "maxMp": 0,
+      "attack": 32,
+      "defense": 10,
+      "agility": 18,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "wolf_fang"
+    ],
+    "goldReward": 75,
+    "drops": [
+      {
+        "itemId": "beast_hide",
+        "rate": 0.3
+      },
+      {
+        "itemId": "beast_core",
+        "rate": 0.25
+      }
+    ]
+  },
+  {
+    "id": "ice_ape",
+    "name": "冰猿",
+    "category": "beast",
+    "description": "雪岭深处的巨猿，浑身覆着一层白霜，臂力无穷，一拳砸下可裂冰开石，性子却极是记仇。",
+    "level": 14,
+    "attributes": {
+      "hp": 300,
+      "maxHp": 300,
+      "mp": 40,
+      "maxMp": 40,
+      "attack": 42,
+      "defense": 20,
+      "agility": 12,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "basic_fist",
+      "wolf_fang",
+      "tieshan_palm"
+    ],
+    "goldReward": 120,
+    "drops": [
+      {
+        "itemId": "beast_hide",
+        "rate": 0.35
+      },
+      {
+        "itemId": "beast_core",
+        "rate": 0.3
+      },
+      {
+        "itemId": "great_medicine",
+        "rate": 0.12
+      }
+    ]
+  },
+  {
+    "id": "sand_bandit",
+    "name": "沙盗",
+    "category": "bandit",
+    "description": "大漠中劫掠商队的马贼，蒙面持弯刀，来去如风，熟悉每一处沙丘与水井，行商闻之色变。",
+    "level": 13,
+    "attributes": {
+      "hp": 230,
+      "maxHp": 230,
+      "mp": 20,
+      "maxMp": 20,
+      "attack": 34,
+      "defense": 12,
+      "agility": 15,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "basic_blade",
+      "basic_fist"
+    ],
+    "goldReward": 90,
+    "drops": [
+      {
+        "itemId": "iron_ore",
+        "rate": 0.2
+      },
+      {
+        "itemId": "ancient_relic",
+        "rate": 0.15
+      },
+      {
+        "itemId": "minor_heal",
+        "rate": 0.1
+      }
+    ]
+  },
+  {
+    "id": "scorpion_king",
+    "name": "蝎王",
+    "category": "beast",
+    "boss": true,
+    "description": "盘踞丝路水源的千年毒蝎，大如牛犊，尾钩滴落的毒液能在沙石上灼出焦痕，往来商旅多丧其口。",
+    "level": 15,
+    "attributes": {
+      "hp": 400,
+      "maxHp": 400,
+      "mp": 120,
+      "maxMp": 120,
+      "attack": 46,
+      "defense": 22,
+      "agility": 16,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "basic_fist",
+      "wudu_palm",
+      "poison_sand"
+    ],
+    "goldReward": 200,
+    "drops": [
+      {
+        "itemId": "antidote",
+        "rate": 0.5
+      },
+      {
+        "itemId": "mystery_ore",
+        "rate": 0.25
+      },
+      {
+        "itemId": "spirit_orb",
+        "rate": 0.15
+      }
+    ],
+    "counters": [
+      "scorpionKingSlain"
+    ]
+  },
+  {
+    "id": "sea_serpent",
+    "name": "海蛟",
+    "category": "beast",
+    "description": "出没于东海的凶物，身长数丈，鳞如铁甲，能掀起数丈巨浪，渔船遇之十不存一。",
+    "level": 14,
+    "attributes": {
+      "hp": 340,
+      "maxHp": 340,
+      "mp": 80,
+      "maxMp": 80,
+      "attack": 44,
+      "defense": 16,
+      "agility": 20,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "basic_fist",
+      "wolf_fang"
+    ],
+    "goldReward": 130,
+    "drops": [
+      {
+        "itemId": "beast_core",
+        "rate": 0.3
+      },
+      {
+        "itemId": "spirit_orb",
+        "rate": 0.18
+      }
+    ]
+  },
+  {
+    "id": "clam_spirit",
+    "name": "蚌精",
+    "category": "beast",
+    "description": "蓬莱浅滩修行数百年的蚌精，两片巨壳坚逾精钢，内藏一颗莹润明珠，寻常刀剑难伤分毫。",
+    "level": 15,
+    "attributes": {
+      "hp": 360,
+      "maxHp": 360,
+      "mp": 100,
+      "maxMp": 100,
+      "attack": 38,
+      "defense": 26,
+      "agility": 8,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "basic_internal"
+    ],
+    "goldReward": 150,
+    "drops": [
+      {
+        "itemId": "spirit_orb",
+        "rate": 0.3
+      },
+      {
+        "itemId": "ancient_relic",
+        "rate": 0.2
+      },
+      {
+        "itemId": "mystery_ore",
+        "rate": 0.12
+      }
+    ]
+  }
+]

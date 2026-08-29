@@ -1,0 +1,42 @@
+[
+  {
+    "id": "quest_battlefield",
+    "name": "平定怨魂",
+    "giver": "battlefield_ghost",
+    "description": "古战场墓室中的墓中将军怨念不散，夜夜击鼓点兵，残魂恳你超度这位老将军。",
+    "acceptText": "少侠领命超度亡魂",
+    "completeCondition": { "type": "counter", "target": "graveGeneralSlain", "op": ">=", "value": 1 },
+    "completeFlag": "battlefieldDone",
+    "rewards": { "exp": 400, "gold": 200, "items": [{ "itemId": "ancient_relic", "quantity": 2 }, { "itemId": "great_medicine", "quantity": 2 }] }
+  },
+  {
+    "id": "quest_desert",
+    "name": "丝路除害",
+    "giver": "desert_merchant",
+    "description": "千年蝎王霸占丝路唯一的水源，沙盗仗势横行，胡商安伽罗恳你除掉此獠，重通商路。",
+    "acceptText": "少侠领命除蝎",
+    "completeCondition": { "type": "counter", "target": "scorpionKingSlain", "op": ">=", "value": 1 },
+    "completeFlag": "desertDone",
+    "rewards": { "exp": 800, "gold": 400, "items": [{ "itemId": "mystery_ore", "quantity": 2 }, { "itemId": "antidote", "quantity": 3 }] }
+  },
+  {
+    "id": "quest_capital",
+    "name": "铲除东厂",
+    "giver": "capital_official",
+    "description": "东厂督主一手遮天、构陷忠良，京兆府尹陆文谦恳你入京除此一害。",
+    "acceptText": "少侠领命除奸",
+    "completeCondition": { "type": "counter", "target": "eunuchMasterSlain", "op": ">=", "value": 1 },
+    "completeFlag": "capitalDone",
+    "rewards": { "exp": 1400, "gold": 700, "items": [{ "itemId": "ancient_relic", "quantity": 2 }, { "itemId": "jade_heal", "quantity": 2 }, { "itemId": "atk_pill", "quantity": 1 }] }
+  },
+  {
+    "id": "quest_abyss",
+    "name": "封印血魔",
+    "giver": "cloud_elder",
+    "description": "九幽深渊血池中封着一头太古血魔，魔教历代教主亦未能镇之。云海长老恳你下渊除魔，绝此祸根。",
+    "acceptText": "少侠领命下渊",
+    "completeCondition": { "type": "counter", "target": "bloodDemonSlain", "op": ">=", "value": 1 },
+    "completeFlag": "abyssDone",
+    "rewards": { "exp": 3000, "gold": 1500, "items": [{ "itemId": "mystery_ore", "quantity": 3 }, { "itemId": "spirit_orb", "quantity": 2 }, { "itemId": "power_pill", "quantity": 1 }, { "itemId": "luck_pill", "quantity": 1 }] }
+  }
+]

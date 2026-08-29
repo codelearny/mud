@@ -1,0 +1,59 @@
+[
+  {
+    "id": "purgatory_valley",
+    "name": "炼狱谷",
+    "description": "魔教分坛与总坛之间的一道裂谷，谷底终年喷吐着硫磺毒焰，赤红的岩壁上钉满刑架。教中叛徒与俘虏多弃于此，日夜哀号不绝。欲上总坛，此为必经之路。",
+    "connections": ["demon_altar", "demon_outpost"],
+    "npcs": [],
+    "enemyPool": ["evil_elder", "demon_general", "poison_cultist"],
+    "requirement": { "type": "level", "target": "", "op": ">=", "value": 15 },
+    "requireHint": "烈焰焚谷，需等级 15 方可深入",
+    "trainFactor": 1.3,
+    "actions": [
+      { "id": "explore_purgatory", "label": "穿谷而过", "type": "encounter", "text": "你掩住口鼻，踏着灼热的岩石向谷底摸去。", "encounters": ["enc_altar_blood", "enc_den_patrol", "enc_tomb_gas", "enc_wild_trap"] },
+      { "id": "gather_purgatory", "label": "搜检刑架", "type": "gather", "text": "你在废弃的刑架旁翻找，寻些残留的物事。", "gains": [
+        { "itemId": "mystery_ore", "min": 1, "max": 2, "weight": 3 },
+        { "itemId": "ancient_relic", "min": 1, "max": 2, "weight": 2 },
+        { "itemId": "spirit_orb", "min": 1, "max": 1, "weight": 1 }
+      ] }
+    ]
+  },
+  {
+    "id": "nine_nether_abyss",
+    "name": "九幽深渊",
+    "description": "圣火殿地底的一道裂隙，深不见底。魔气自渊底翻涌而上，凝成一张张模糊的人面，又在半空散去。石阶盘旋而下，每落一步，周身内力便似被抽走一分。渊底尽头，是一池暗红的血水。",
+    "connections": ["sacred_fire_hall", "blood_pool"],
+    "npcs": [],
+    "enemyPool": ["abyss_fiend", "blood_demon", "demon_priest", "demon_envoy"],
+    "requirement": { "type": "level", "target": "", "op": ">=", "value": 21 },
+    "requireHint": "魔气蚀骨，需等级 21 方可下渊",
+    "trainFactor": 1.5,
+    "actions": [
+      { "id": "explore_abyss", "label": "缘阶而下", "type": "encounter", "text": "你运功护住心神，沿石阶向渊底走去。", "encounters": ["enc_abyss_whisper", "enc_altar_blood", "enc_tomb_gas", "enc_den_patrol"] },
+      { "id": "gather_abyss", "label": "拾取魔晶", "type": "gather", "text": "你撬下岩壁上凝结的魔气结晶。", "gains": [
+        { "itemId": "mystery_ore", "min": 1, "max": 2, "weight": 3 },
+        { "itemId": "spirit_orb", "min": 1, "max": 2, "weight": 2 },
+        { "itemId": "ancient_relic", "min": 1, "max": 2, "weight": 1 }
+      ] }
+    ]
+  },
+  {
+    "id": "blood_pool",
+    "name": "血池秘境",
+    "description": "深渊尽头的密闭石窟，窟心一池血水粘稠如浆，咕嘟咕嘟冒着泡。池畔立着九根残破的封魔石柱，柱上刻满了早已失效的符咒。池中似有物事在缓缓翻身，每一次起伏，整个石窟便随之震颤。",
+    "connections": ["nine_nether_abyss"],
+    "npcs": [],
+    "enemyPool": ["blood_demon", "abyss_fiend", "demon_leader"],
+    "requirement": { "type": "level", "target": "", "op": ">=", "value": 23 },
+    "requireHint": "太古凶物盘踞，需等级 23 方可踏入",
+    "trainFactor": 1.5,
+    "actions": [
+      { "id": "explore_pool", "label": "逼近血池", "type": "encounter", "text": "你握紧兵刃，一步步走向池心。", "encounters": ["enc_abyss_whisper", "enc_altar_blood", "enc_tomb_coffin"] },
+      { "id": "gather_pool", "label": "池畔拾遗", "type": "gather", "text": "你在血池周遭翻找历代封魔者所留的器物。", "gains": [
+        { "itemId": "mystery_ore", "min": 2, "max": 3, "weight": 3 },
+        { "itemId": "spirit_orb", "min": 1, "max": 2, "weight": 3 },
+        { "itemId": "jade_heal", "min": 1, "max": 1, "weight": 1 }
+      ] }
+    ]
+  }
+]

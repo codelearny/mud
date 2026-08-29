@@ -3,7 +3,7 @@
     "id": "forest",
     "name": "迷雾林",
     "description": "迷雾林终年氤氲，古木蔽天，寻常人等入内多迷失方向。林深之处偶有奇花异草，亦有猛兽毒虫，更传闻有前辈高人隐居。林间一条荒废的石道，蜿蜒通向山腹中的千年古墓。",
-    "connections": ["mountain", "valley", "tomb", "miao_entrance"],
+    "connections": ["mountain", "valley", "tomb", "miao_entrance", "spider_cavern"],
     "npcs": [],
     "enemyPool": ["wild_wolf", "boar", "venom_snake", "venom_spider", "falcon", "black_bear", "tiger"],
     "actions": [

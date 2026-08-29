@@ -1,0 +1,174 @@
+[
+  {
+    "id": "imperial_guard",
+    "name": "大内禁军",
+    "category": "evil",
+    "description": "皇城当值的禁军校尉，甲胄鲜明，刀法严整，奉命清剿一切擅入禁地之人，出手毫不留情。",
+    "level": 16,
+    "attributes": {
+      "hp": 380,
+      "maxHp": 380,
+      "mp": 60,
+      "maxMp": 60,
+      "attack": 48,
+      "defense": 26,
+      "agility": 14,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "basic_sword",
+      "taiji_sword"
+    ],
+    "goldReward": 180,
+    "drops": [
+      {
+        "itemId": "iron_ore",
+        "rate": 0.2
+      },
+      {
+        "itemId": "ancient_relic",
+        "rate": 0.15
+      },
+      {
+        "itemId": "great_medicine",
+        "rate": 0.1
+      }
+    ]
+  },
+  {
+    "id": "eunuch_master",
+    "name": "东厂督主",
+    "category": "evil",
+    "boss": true,
+    "description": "权倾朝野的东厂首领，一柄绣春剑下冤魂无数，内力阴毒刁钻，朝中忠良闻其名而股栗。",
+    "level": 18,
+    "attributes": {
+      "hp": 560,
+      "maxHp": 560,
+      "mp": 200,
+      "maxMp": 200,
+      "attack": 58,
+      "defense": 28,
+      "agility": 22,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "taiji_sword",
+      "dugu_nine",
+      "qingyun_step"
+    ],
+    "goldReward": 400,
+    "drops": [
+      {
+        "itemId": "ancient_relic",
+        "rate": 0.35
+      },
+      {
+        "itemId": "mystery_ore",
+        "rate": 0.25
+      },
+      {
+        "itemId": "jade_heal",
+        "rate": 0.2
+      },
+      {
+        "itemId": "atk_pill",
+        "rate": 0.15
+      }
+    ],
+    "counters": [
+      "eunuchMasterSlain"
+    ]
+  },
+  {
+    "id": "abyss_fiend",
+    "name": "深渊魔",
+    "category": "evil",
+    "description": "九幽深渊中滋生的魔物，形貌不定，周身缠绕着化不开的黑气，凡近其身者，内力便如泥牛入海。",
+    "level": 21,
+    "attributes": {
+      "hp": 620,
+      "maxHp": 620,
+      "mp": 200,
+      "maxMp": 200,
+      "attack": 66,
+      "defense": 30,
+      "agility": 20,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "huagong_internal",
+      "fengmo_staff",
+      "tieshan_palm"
+    ],
+    "goldReward": 500,
+    "drops": [
+      {
+        "itemId": "mystery_ore",
+        "rate": 0.35
+      },
+      {
+        "itemId": "spirit_orb",
+        "rate": 0.25
+      },
+      {
+        "itemId": "ancient_relic",
+        "rate": 0.2
+      }
+    ]
+  },
+  {
+    "id": "blood_demon",
+    "name": "血魔",
+    "category": "evil",
+    "boss": true,
+    "description": "血池秘境中孕育的太古凶物，以血为食，以杀为乐，魔教历代教主亦只能将其封印，不敢直面。",
+    "level": 23,
+    "attributes": {
+      "hp": 850,
+      "maxHp": 850,
+      "mp": 280,
+      "maxMp": 280,
+      "attack": 78,
+      "defense": 38,
+      "agility": 24,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "huagong_internal",
+      "xianglong_palms",
+      "jiuyin_internal",
+      "qingyun_step"
+    ],
+    "goldReward": 900,
+    "drops": [
+      {
+        "itemId": "mystery_ore",
+        "rate": 0.5
+      },
+      {
+        "itemId": "spirit_orb",
+        "rate": 0.35
+      },
+      {
+        "itemId": "jade_heal",
+        "rate": 0.3
+      },
+      {
+        "itemId": "power_pill",
+        "rate": 0.2
+      },
+      {
+        "itemId": "luck_pill",
+        "rate": 0.15
+      }
+    ],
+    "counters": [
+      "bloodDemonSlain"
+    ]
+  }
+]

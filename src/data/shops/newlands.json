@@ -1,0 +1,40 @@
+[
+  {
+    "id": "port_shop",
+    "name": "通济港货栈",
+    "npcId": "port_keeper",
+    "description": "通济港最大的货栈，南北干货、药材五金堆到房梁，掌柜郑九一手托两家，价钱还算公道。",
+    "buyFactor": 1,
+    "sellFactor": 0.5,
+    "stock": [
+      { "itemId": "minor_heal", "price": 12, "limit": 99 },
+      { "itemId": "medicine_herb", "price": 25, "limit": 99 },
+      { "itemId": "antidote", "price": 45, "limit": 99 },
+      { "itemId": "great_medicine", "price": 220, "limit": 20 },
+      { "itemId": "jade_heal", "price": 650, "limit": 10 },
+      { "itemId": "river_fish", "price": 15, "limit": 99 },
+      { "itemId": "beast_hide", "price": 60, "limit": 50 },
+      { "itemId": "iron_ore", "price": 55, "limit": 50 }
+    ]
+  },
+  {
+    "id": "capital_shop",
+    "name": "京城宝号",
+    "npcId": "capital_official",
+    "description": "皇城根下的百年老号，珍品丹药、奇门秘药应有尽有，非有身份者不得入内采买。",
+    "buyFactor": 1,
+    "sellFactor": 0.55,
+    "stock": [
+      { "itemId": "great_medicine", "price": 220, "limit": 30 },
+      { "itemId": "jade_heal", "price": 650, "limit": 15 },
+      { "itemId": "power_pill", "price": 320, "limit": 10 },
+      { "itemId": "strength_pill", "price": 160, "limit": 20 },
+      { "itemId": "agility_pill", "price": 160, "limit": 20 },
+      { "itemId": "comprehension_pill", "price": 420, "limit": 10 },
+      { "itemId": "luck_pill", "price": 420, "limit": 10 },
+      { "itemId": "atk_pill", "price": 130, "limit": 30 },
+      { "itemId": "def_pill", "price": 130, "limit": 30 },
+      { "itemId": "agi_pill", "price": 130, "limit": 30 }
+    ]
+  }
+]

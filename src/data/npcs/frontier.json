@@ -1,0 +1,149 @@
+[
+  {
+    "id": "battlefield_ghost",
+    "name": "无名残魂",
+    "title": "战场残魂",
+    "description": "古战场上徘徊的一缕残魂，生前似是此地的守将，死时犹自握戈。",
+    "sceneId": "ancient_battlefield",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "无名残魂",
+        "text": "……又一个活人。你可见着我的部下了？三千甲士，就埋在这片土里。那墓中的老将军，至今还在点兵。",
+        "choices": [
+          { "text": "愿闻其详。", "next": "story" },
+          { "text": "将军执念不散，晚辈愿为超度。", "next": "accept", "condition": { "type": "quest", "target": "quest_battlefield", "op": "!=", "value": "active" }, "effects": [{ "type": "quest", "target": "quest_battlefield", "value": "active" }] },
+          { "text": "老将军已被我击溃。", "next": "done", "condition": { "type": "quest", "target": "quest_battlefield", "op": "==", "value": "completed" } },
+          { "text": "（默然离开）", "next": "END" }
+        ]
+      },
+      "story": {
+        "id": "story",
+        "speaker": "无名残魂",
+        "text": "那年边关告急，我们死守此地七昼夜。箭尽了，粮绝了，将军却仍不许退。最后一战，无人活着离开。将军怨念不散，化作尸将，每逢月夜便在墓中击鼓点兵。",
+        "choices": [
+          { "text": "我去会会这位将军。", "next": "accept", "condition": { "type": "quest", "target": "quest_battlefield", "op": "!=", "value": "active" }, "effects": [{ "type": "quest", "target": "quest_battlefield", "value": "active" }] },
+          { "text": "可叹。", "next": "END" }
+        ]
+      },
+      "accept": {
+        "id": "accept",
+        "speaker": "无名残魂",
+        "text": "往北穿过乱葬岗，便是他的墓室。将军武艺了得，更兼一身铜皮铁骨，少侠切莫轻敌。若能让他解脱，我等……也该散了。",
+        "choices": [{ "text": "晚辈尽力。", "next": "END" }]
+      },
+      "done": {
+        "id": "done",
+        "speaker": "无名残魂",
+        "text": "鼓声停了……我听见弟兄们在唤我了。多谢你，让三千甲士终于得以安息。",
+        "choices": [{ "text": "一路走好。", "next": "END", "effects": [{ "type": "exp", "value": 100 }] }]
+      }
+    }
+  },
+  {
+    "id": "cavern_guide",
+    "name": "老茧",
+    "title": "引路人",
+    "description": "常年在盘丝洞外围替人带路的干瘦老者，浑身上下没有一处不带伤疤。",
+    "sceneId": "spider_cavern",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "老茧",
+        "text": "站住！再往里走，可就不是人的地界了。老汉在这洞口讨了二十年生活，见过进去的，没见着几个出来的。",
+        "choices": [
+          { "text": "洞里那蛛后，究竟是何物？", "next": "info" },
+          { "text": "可有防毒的物事相赠？", "next": "aid" },
+          { "text": "多谢提醒。", "next": "END" }
+        ]
+      },
+      "info": {
+        "id": "info",
+        "speaker": "老茧",
+        "text": "千年蛛精，人面蛛身，吐的丝沾上就化不开。它腹中那颗毒囊最是要命——寻常刀剑砍上去，反倒把毒沾回自个儿身上。洞深处还有蛛妖成群，你若无十成把握，趁早回头。",
+        "choices": [
+          { "text": "晚辈自有分寸。", "next": "END" },
+          { "text": "先给些解药吧。", "next": "aid" }
+        ]
+      },
+      "aid": {
+        "id": "aid",
+        "speaker": "老茧",
+        "text": "拿去，两粒避毒丹，是我拿三条疤换来的方子。省着点用——里头可没第二份。",
+        "choices": [{ "text": "多谢老丈。", "next": "END", "effects": [{ "type": "item", "target": "antidote", "value": 2 }] }]
+      }
+    }
+  },
+  {
+    "id": "port_keeper",
+    "name": "郑九",
+    "title": "港务掌柜",
+    "description": "通济港的港务掌柜，管着码头上百号脚夫，南来北往的消息无一不知。",
+    "sceneId": "tongji_port",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "郑九",
+        "text": "客官面生得很。要卸货还是装船？我这通济港，天下货物十成里要走三成。铺子在码头东头，缺什么尽管开口。",
+        "choices": [
+          { "text": "可有出海的路子？", "next": "news" },
+          { "text": "港上近来可太平？", "next": "rumor" },
+          { "text": "随便看看。", "next": "END" }
+        ]
+      },
+      "news": {
+        "id": "news",
+        "speaker": "郑九",
+        "text": "出海？往东三百里有座蓬莱岛，岛上渔获丰厚，浅滩还出明珠。只是这两年海里闹蛟，船没了几条，肯去的船家不多了。客官若要去，得自个儿雇船。",
+        "choices": [
+          { "text": "多谢指点。", "next": "END", "effects": [{ "type": "exp", "value": 30 }] },
+          { "text": "再说说别的。", "next": "rumor" }
+        ]
+      },
+      "rumor": {
+        "id": "rumor",
+        "speaker": "郑九",
+        "text": "太平？芦苇荡的水贼年前被剿了一伙，如今又聚起来了。码头上也混进了些沙盗探子，怕是嗅着什么买卖。客官夜里莫走暗巷。",
+        "choices": [{ "text": "记下了。", "next": "END" }]
+      }
+    }
+  },
+  {
+    "id": "penglai_fisher",
+    "name": "海老丈",
+    "title": "蓬莱渔夫",
+    "description": "在蓬莱岛上打了一辈子鱼的老渔夫，皮肤黝黑，双手如枯藤。",
+    "sceneId": "penglai_isle",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "海老丈",
+        "text": "咦？外乡人。这岛三十年没来过生人了——你是怎么渡的那片海？没遇上那海蛟？",
+        "choices": [
+          { "text": "岛上可有什么讲究？", "next": "tale" },
+          { "text": "讨些吃食。", "next": "gift" },
+          { "text": "告辞。", "next": "END" }
+        ]
+      },
+      "tale": {
+        "id": "tale",
+        "speaker": "海老丈",
+        "text": "讲究可大了。岛东浅滩有蚌精，壳里含珠，取一颗能卖百两，可那蚌一合壳，人的胳膊就断了。海里那条蛟更凶，翻起浪来能把渔船拍成柴。若非祖辈传下的避水法子，我早喂了鱼。",
+        "choices": [
+          { "text": "多谢老丈提醒。", "next": "END", "effects": [{ "type": "exp", "value": 50 }] },
+          { "text": "先要点吃食。", "next": "gift" }
+        ]
+      },
+      "gift": {
+        "id": "gift",
+        "speaker": "海老丈",
+        "text": "拿去吧，鱼干和几株岛上长的草药，虽不值钱，路上顶饿。",
+        "choices": [{ "text": "多谢。", "next": "END", "effects": [{ "type": "item", "target": "medicine_herb", "value": 2 }, { "type": "item", "target": "minor_heal", "value": 1 }] }]
+      }
+    }
+  }
+]

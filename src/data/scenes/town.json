@@ -3,7 +3,7 @@
     "id": "town",
     "name": "清风镇",
     "description": "清风镇乃四方通衢，市集喧闹，茶楼酒肆鳞次栉比。镇西武馆旌旗猎猎，镇东药铺药香扑鼻，铁匠铺里炉火昼夜不熄。再往北行可达深山古刹，出南门则是沃野千里的药王谷。",
-    "connections": ["village", "temple", "ferry", "valley"],
+    "connections": ["village", "temple", "ferry", "valley", "silk_road_desert", "imperial_capital"],
     "npcs": ["instructor", "merchant", "blacksmith"],
     "actions": [
       { "id": "explore_town", "label": "镇上走动", "type": "encounter", "text": "你在镇上走动，市井之中藏着不少故事。", "encounters": ["enc_bottle", "enc_master", "enc_robber"] }
@@ -42,7 +42,7 @@
     "id": "peak",
     "name": "落雁峰",
     "description": "落雁峰孤悬云表，山风猎猎，飞鸟难渡。峰顶一方青石常年被云雾笼罩，石上盘膝坐着一位不知年岁的灰袍老者，一双眸子却亮得慑人。此处向下俯瞰，可见魔教分坛的幢幢黑影。",
-    "connections": ["temple", "demon_altar"],
+    "connections": ["temple", "demon_altar", "snow_peak", "cloud_sect"],
     "npcs": ["hermit"],
     "enemyPool": ["falcon", "evil_guard", "jianghu_villain", "black_bear"],
     "requirement": { "type": "level", "target": "", "op": ">=", "value": 10 },

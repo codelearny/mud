@@ -36,7 +36,7 @@
     "id": "demon_altar",
     "name": "魔教分坛",
     "description": "分坛建于荒山绝顶，黑石垒成的高台四面点着血色灯笼。坛心一座狰狞石像面目模糊，供桌上残留着暗褐色的痕迹。空气中硫磺与血腥混杂，令人作呕，却又隐隐透出一股邪异的内力波动。",
-    "connections": ["tomb", "peak", "demon_outpost"],
+    "connections": ["tomb", "peak", "demon_outpost", "purgatory_valley"],
     "npcs": [],
     "enemyPool": ["poison_cultist", "evil_guard", "evil_elder", "demon_general"],
     "requirement": { "type": "level", "target": "", "op": ">=", "value": 14 },

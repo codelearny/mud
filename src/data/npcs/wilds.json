@@ -1,0 +1,166 @@
+[
+  {
+    "id": "snow_lama",
+    "name": "格桑",
+    "title": "雪山喇嘛",
+    "description": "云游至此的番僧，赤足踏雪而不冷，据说是为了寻一味只在绝顶生长的雪莲。",
+    "sceneId": "snow_peak",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "格桑",
+        "text": "施主止步。风雪就要来了，若不急着赶路，不妨坐下喝口热茶。这山上的风，能刮走人的魂。",
+        "choices": [
+          { "text": "大师在此修行？", "next": "teach" },
+          { "text": "山上可有什么猛兽？", "next": "beast" },
+          { "text": "多谢，不必了。", "next": "END" }
+        ]
+      },
+      "teach": {
+        "id": "teach",
+        "speaker": "格桑",
+        "text": "修行？老衲是在寻一味雪莲，要救山下一位故人。施主若也修内功，不妨记住：心静则气顺，气顺则力生。强求猛进，反伤其身。",
+        "choices": [{ "text": "受教了。", "next": "END", "effects": [{ "type": "exp", "value": 80 }] }]
+      },
+      "beast": {
+        "id": "beast",
+        "speaker": "格桑",
+        "text": "雪狼成群，最忌被围。还有那冰猿，力大无穷却极记仇——你若伤了它而不死，它能追你三天三夜。施主若无十足把握，莫要轻易招惹。",
+        "choices": [{ "text": "晚辈记下了。", "next": "END" }]
+      }
+    }
+  },
+  {
+    "id": "desert_merchant",
+    "name": "安伽罗",
+    "title": "西域胡商",
+    "description": "往来丝路二十年的老商人，骆驼队被劫了三次，如今只剩两匹瘦驼和一辆破车。",
+    "sceneId": "silk_road_desert",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "安伽罗",
+        "text": "啊啊，又是沙盗！我这一车货，已是第三回被劫了。那位好汉若能替我除了那蝎王，我愿以半车货物相谢！",
+        "choices": [
+          { "text": "蝎王是什么来头？", "next": "story" },
+          { "text": "我替你除了它。", "next": "accept", "condition": { "type": "quest", "target": "quest_desert", "op": "!=", "value": "active" }, "effects": [{ "type": "quest", "target": "quest_desert", "value": "active" }] },
+          { "text": "蝎王已被我斩了。", "next": "done", "condition": { "type": "quest", "target": "quest_desert", "op": "==", "value": "completed" } },
+          { "text": "爱莫能助。", "next": "END" }
+        ]
+      },
+      "story": {
+        "id": "story",
+        "speaker": "安伽罗",
+        "text": "往西三十里有一口沙井，是这条路上唯一的水源。两年前来了只巨蝎，占了井，尾钩滴毒，喝过水的商队没一个活着走出来。沙盗也仗着它横行，谁也过不去。",
+        "choices": [
+          { "text": "我去会会它。", "next": "accept", "condition": { "type": "quest", "target": "quest_desert", "op": "!=", "value": "active" }, "effects": [{ "type": "quest", "target": "quest_desert", "value": "active" }] },
+          { "text": "此事难办。", "next": "END" }
+        ]
+      },
+      "accept": {
+        "id": "accept",
+        "speaker": "安伽罗",
+        "text": "好汉仗义！那蝎子甲壳极硬，寻常刀剑砍不进，唯有攻它腹下软处。带上这些解药，切莫被尾钩扫着！",
+        "choices": [{ "text": "知道了。", "next": "END", "effects": [{ "type": "item", "target": "antidote", "value": 2 }] }]
+      },
+      "done": {
+        "id": "done",
+        "speaker": "安伽罗",
+        "text": "好汉竟真做到了！这条路，算是重新通了。我安伽罗说话算话，这些货，你尽管挑！",
+        "choices": [{ "text": "恭喜发财。", "next": "END" }]
+      }
+    }
+  },
+  {
+    "id": "capital_official",
+    "name": "陆文谦",
+    "title": "京兆府尹",
+    "description": "京城父母官，为官清正却处处受东厂掣肘，眉宇间常年带着忧色。",
+    "sceneId": "imperial_capital",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "陆文谦",
+        "text": "这位少侠，京城非比江湖，刀剑无眼，还望收敛些。东厂的番子满街都是，一言不慎便有牢狱之灾。",
+        "choices": [
+          { "text": "东厂究竟如何？", "next": "story" },
+          { "text": "我愿为京城除此一害。", "next": "accept", "condition": { "type": "quest", "target": "quest_capital", "op": "!=", "value": "active" }, "effects": [{ "type": "quest", "target": "quest_capital", "value": "active" }] },
+          { "text": "督主已伏诛。", "next": "done", "condition": { "type": "quest", "target": "quest_capital", "op": "==", "value": "completed" } },
+          { "text": "告辞。", "next": "END" }
+        ]
+      },
+      "story": {
+        "id": "story",
+        "speaker": "陆文谦",
+        "text": "东厂督主一手遮天，构陷忠良、鱼肉百姓，朝中弹劾他的奏折堆了三尺高，却无一道递得上去。他那手绣春剑，据说已臻化境，府中高手如云。",
+        "choices": [
+          { "text": "我去会会他。", "next": "accept", "condition": { "type": "quest", "target": "quest_capital", "op": "!=", "value": "active" }, "effects": [{ "type": "quest", "target": "quest_capital", "value": "active" }] },
+          { "text": "此事棘手。", "next": "END" }
+        ]
+      },
+      "accept": {
+        "id": "accept",
+        "speaker": "陆文谦",
+        "text": "少侠义举，本官铭记于心。督主府在皇城西首，门口两尊石狮子便是标记。京中宝号亦有本官的面子，需用什么，尽管去取。",
+        "choices": [{ "text": "我自有计较。", "next": "END" }]
+      },
+      "done": {
+        "id": "done",
+        "speaker": "陆文谦",
+        "text": "督主一除，朝野震动。少侠此举，救的何止一城百姓。本官代京城万民，敬你一杯。",
+        "choices": [{ "text": "分内之事。", "next": "END" }]
+      }
+    }
+  },
+  {
+    "id": "cloud_elder",
+    "name": "青玄",
+    "title": "云海长老",
+    "description": "云海剑宗硕果仅存的长老，白须及胸，据说已有二十年未曾下山。",
+    "sceneId": "cloud_sect",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "青玄",
+        "text": "云海之上，不接俗客。你既上得山来，便是有缘。此处清静，最宜参悟剑理——若愿留下，可随意在此修行。",
+        "choices": [
+          { "text": "请教剑道。", "next": "teach" },
+          { "text": "武林可还有什么隐患？", "next": "story" },
+          { "text": "血魔已被我镇住了。", "next": "done", "condition": { "type": "quest", "target": "quest_abyss", "op": "==", "value": "completed" } },
+          { "text": "告辞。", "next": "END" }
+        ]
+      },
+      "teach": {
+        "id": "teach",
+        "speaker": "青玄",
+        "text": "剑之一道，不在快，不在狠，而在心与剑合。你心中所念所执，皆会映在剑上。本宗演武台终年开放，可随时上去参悟。",
+        "choices": [{ "text": "多谢前辈指点。", "next": "END", "effects": [{ "type": "exp", "value": 120 }] }]
+      },
+      "story": {
+        "id": "story",
+        "speaker": "青玄",
+        "text": "魔教虽平，祸根未除。圣火殿之下，有九幽深渊，渊底血池中封着一头太古血魔——历代教主不过借它的气炼功，从未有人真正镇住它。此獠若出，天下苍生休矣。",
+        "choices": [
+          { "text": "我去镇住它。", "next": "accept", "condition": { "type": "quest", "target": "quest_abyss", "op": "!=", "value": "active" }, "effects": [{ "type": "quest", "target": "quest_abyss", "value": "active" }] },
+          { "text": "此事重大，容后再议。", "next": "END" }
+        ]
+      },
+      "accept": {
+        "id": "accept",
+        "speaker": "青玄",
+        "text": "好气魄。只是那血魔已非凡间武力可敌，你须先将修为磨至极致，再下深渊。渊底魔气蚀心，步步凶险——去罢，莫要逞强。",
+        "choices": [{ "text": "晚辈明白。", "next": "END" }]
+      },
+      "done": {
+        "id": "done",
+        "speaker": "青玄",
+        "text": "血魔伏诛……老道此生，再无牵挂了。云海剑宗，后继有人。",
+        "choices": [{ "text": "前辈言重了。", "next": "END" }]
+      }
+    }
+  }
+]
