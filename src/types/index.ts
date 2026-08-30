@@ -155,7 +155,7 @@ export interface Character {
   exp: number
   expToNext: number
   freePoints?: number      // 升级获得的自由属性点，可在角色面板自行分配（增强可玩性）
-  origin?: string          // 开局出身（见 src/data/origins.json），影响初始属性与资源
+  origin?: string          // 开局出身（见 src/data/origins/origins.json），影响初始属性与资源
   discoveredEnemies?: string[] // 图鉴：已遭遇/已击败的敌人 id 集合（配置不写死，战斗开始时写入）
   discoveredItems?: string[]   // 图鉴：已获得过的物品 id 集合（卖出或消耗后仍保留，由 player.save 统一记录）
   attributes: CharacterAttributes
@@ -165,7 +165,7 @@ export interface Character {
   gold: number
 }
 
-// ===== 开局出身配置（见 src/data/origins.json，纯配置驱动）=====
+// ===== 开局出身配置（见 src/data/origins/origins.json，纯配置驱动）=====
 // 出身只影响「起跑线」：初始属性增减、额外初始技能/物品/金钱；
 // 后续成长仍由升级系统的自由属性点决定，保证 build 多样性。
 
