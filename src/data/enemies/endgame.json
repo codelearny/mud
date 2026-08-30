@@ -38,6 +38,10 @@
       {
         "itemId": "beast_core",
         "rate": 0.1
+      },
+      {
+        "itemId": "manual_weiduo_staff",
+        "rate": 0.08
       }
     ]
   },
@@ -177,6 +181,10 @@
       {
         "itemId": "atk_pill",
         "rate": 0.15
+      },
+      {
+        "itemId": "manual_panlong_staff",
+        "rate": 0.18
       }
     ],
     "counters": [
@@ -234,6 +242,14 @@
       {
         "itemId": "luck_pill",
         "rate": 0.2
+      },
+      {
+        "itemId": "manual_lie_ri_blade",
+        "rate": 0.15
+      },
+      {
+        "itemId": "manual_taia_sword_codex",
+        "rate": 0.12
       }
     ],
     "counters": [

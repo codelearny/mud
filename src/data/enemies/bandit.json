@@ -226,6 +226,10 @@
       {
         "itemId": "ancient_relic",
         "rate": 0.08
+      },
+      {
+        "itemId": "manual_fengmo_staff",
+        "rate": 0.1
       }
     ],
     "counters": [

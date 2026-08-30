@@ -7,22 +7,91 @@
     "buyFactor": 1,
     "sellFactor": 0.5,
     "stock": [
-      { "itemId": "minor_heal", "price": 12, "limit": 99 },
-      { "itemId": "medicine_herb", "price": 25, "limit": 99 },
-      { "itemId": "great_medicine", "price": 220, "limit": 20 },
-      { "itemId": "jade_heal", "price": 650, "limit": 10 },
-      { "itemId": "antidote", "price": 45, "limit": 99 },
-      { "itemId": "inner_pill", "price": 90, "limit": 99 },
-      { "itemId": "atk_pill", "price": 130, "limit": 30 },
-      { "itemId": "def_pill", "price": 130, "limit": 30 },
-      { "itemId": "agi_pill", "price": 130, "limit": 30 },
-      { "itemId": "power_pill", "price": 320, "limit": 10 },
-      { "itemId": "strength_pill", "price": 160, "limit": 20 },
-      { "itemId": "agility_pill", "price": 160, "limit": 20 },
-      { "itemId": "comprehension_pill", "price": 420, "limit": 10 },
-      { "itemId": "luck_pill", "price": 420, "limit": 10 },
-      { "itemId": "iron_pendant", "price": 85, "limit": 20 },
-      { "itemId": "jade_ring", "price": 320, "limit": 10 }
+      {
+        "itemId": "minor_heal",
+        "price": 12,
+        "limit": 99
+      },
+      {
+        "itemId": "medicine_herb",
+        "price": 25,
+        "limit": 99
+      },
+      {
+        "itemId": "great_medicine",
+        "price": 220,
+        "limit": 20
+      },
+      {
+        "itemId": "jade_heal",
+        "price": 650,
+        "limit": 10
+      },
+      {
+        "itemId": "antidote",
+        "price": 45,
+        "limit": 99
+      },
+      {
+        "itemId": "inner_pill",
+        "price": 90,
+        "limit": 99
+      },
+      {
+        "itemId": "atk_pill",
+        "price": 130,
+        "limit": 30
+      },
+      {
+        "itemId": "def_pill",
+        "price": 130,
+        "limit": 30
+      },
+      {
+        "itemId": "agi_pill",
+        "price": 130,
+        "limit": 30
+      },
+      {
+        "itemId": "power_pill",
+        "price": 320,
+        "limit": 10
+      },
+      {
+        "itemId": "strength_pill",
+        "price": 160,
+        "limit": 20
+      },
+      {
+        "itemId": "agility_pill",
+        "price": 160,
+        "limit": 20
+      },
+      {
+        "itemId": "comprehension_pill",
+        "price": 420,
+        "limit": 10
+      },
+      {
+        "itemId": "luck_pill",
+        "price": 420,
+        "limit": 10
+      },
+      {
+        "itemId": "iron_pendant",
+        "price": 85,
+        "limit": 20
+      },
+      {
+        "itemId": "jade_ring",
+        "price": 320,
+        "limit": 10
+      },
+      {
+        "itemId": "manual_shenxing_step",
+        "price": 1600,
+        "limit": 3
+      }
     ]
   }
 ]

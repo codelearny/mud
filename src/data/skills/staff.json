@@ -9,7 +9,8 @@
     "mpCost": 3,
     "hitRate": 0.88,
     "critRate": 0.07,
-    "unlockLevel": 2
+    "unlockLevel": 2,
+    "rarity": "common"
   },
   {
     "id": "dagou_staff",
@@ -23,7 +24,10 @@
     "critRate": 0.12,
     "unlockLevel": 8,
     "stun": true,
-    "enemyDebuff": { "agility": -5 }
+    "enemyDebuff": {
+      "agility": -5
+    },
+    "rarity": "rare"
   },
   {
     "id": "fengmo_staff",
@@ -36,6 +40,7 @@
     "hitRate": 0.84,
     "critRate": 0.2,
     "unlockLevel": 12,
-    "hits": 2
+    "hits": 2,
+    "rarity": "epic"
   }
 ]

@@ -9,7 +9,8 @@
     "mpCost": 2,
     "hitRate": 0.9,
     "critRate": 0.06,
-    "unlockLevel": 1
+    "unlockLevel": 1,
+    "rarity": "common"
   },
   {
     "id": "kuangfeng_blade",
@@ -22,7 +23,8 @@
     "hitRate": 0.82,
     "critRate": 0.12,
     "unlockLevel": 5,
-    "hits": 2
+    "hits": 2,
+    "rarity": "rare"
   },
   {
     "id": "hujiaya_blade",
@@ -35,7 +37,10 @@
     "hitRate": 0.86,
     "critRate": 0.18,
     "unlockLevel": 10,
-    "enemyDebuff": { "defense": -6 }
+    "enemyDebuff": {
+      "defense": -6
+    },
+    "rarity": "epic"
   },
   {
     "id": "daoba_blade",
@@ -49,7 +54,8 @@
     "critRate": 0.2,
     "unlockLevel": 15,
     "hits": 2,
-    "lifesteal": 0.15
+    "lifesteal": 0.15,
+    "rarity": "epic"
   },
   {
     "id": "lie_ri_blade",
@@ -63,6 +69,9 @@
     "critRate": 0.28,
     "unlockLevel": 18,
     "hits": 3,
-    "enemyDebuff": { "defense": -8 }
+    "enemyDebuff": {
+      "defense": -8
+    },
+    "rarity": "legendary"
   }
 ]

@@ -72,6 +72,7 @@ export interface Skill {
   hitRate: number
   critRate: number
   unlockLevel: number
+  rarity?: ItemRarity  // 稀有度决定获取难度：common 达标即悟 / rare 需银两 / epic 需秘籍 / legendary 需秘籍+银两
   // —— 进阶机制（可选）——
   hits?: number            // 多段攻击次数，默认 1
   heal?: number            // 命中后自我治疗（恢复气血）
@@ -108,6 +109,7 @@ export interface Item {
   minLevel?: number   // 装备/服用所需最低等级（配置驱动，引擎校验）
   rarity?: ItemRarity // 稀有度，仅用于展示与收集感
   school?: WeaponSchool // 兵器流派（仅 type==='weapon' 有意义）；与技能 category 强关联
+  skillId?: string      // 秘籍所载武学（仅 category==='manual' 有意义）：持有该秘籍方可参悟
   effects?: ItemEffect[]
 }
 

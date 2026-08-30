@@ -10,7 +10,10 @@
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 4,
-    "selfBuff": { "agility": 10 }
+    "selfBuff": {
+      "agility": 10
+    },
+    "rarity": "common"
   },
   {
     "id": "lingbo_step",
@@ -23,7 +26,11 @@
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 6,
-    "selfBuff": { "agility": 14, "defense": 3 }
+    "selfBuff": {
+      "agility": 14,
+      "defense": 3
+    },
+    "rarity": "rare"
   },
   {
     "id": "shenxing_step",
@@ -36,6 +43,10 @@
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 10,
-    "selfBuff": { "agility": 8, "attack": 4 }
+    "selfBuff": {
+      "agility": 8,
+      "attack": 4
+    },
+    "rarity": "epic"
   }
 ]

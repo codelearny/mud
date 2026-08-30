@@ -9,7 +9,8 @@
     "mpCost": 2,
     "hitRate": 0.88,
     "critRate": 0.08,
-    "unlockLevel": 1
+    "unlockLevel": 1,
+    "rarity": "common"
   },
   {
     "id": "lianhuan_sword",
@@ -21,7 +22,8 @@
     "mpCost": 8,
     "hitRate": 0.82,
     "critRate": 0.15,
-    "unlockLevel": 5
+    "unlockLevel": 5,
+    "rarity": "rare"
   },
   {
     "id": "taiji_sword",
@@ -34,7 +36,10 @@
     "hitRate": 0.88,
     "critRate": 0.1,
     "unlockLevel": 6,
-    "enemyDebuff": { "attack": -5 }
+    "enemyDebuff": {
+      "attack": -5
+    },
+    "rarity": "rare"
   },
   {
     "id": "yuenyu_sword",
@@ -47,7 +52,8 @@
     "hitRate": 0.9,
     "critRate": 0.12,
     "unlockLevel": 8,
-    "hits": 2
+    "hits": 2,
+    "rarity": "rare"
   },
   {
     "id": "wanjan_sword",
@@ -60,7 +66,8 @@
     "hitRate": 0.85,
     "critRate": 0.25,
     "unlockLevel": 14,
-    "hits": 3
+    "hits": 3,
+    "rarity": "epic"
   },
   {
     "id": "dugu_nine",
@@ -72,6 +79,7 @@
     "mpCost": 18,
     "hitRate": 0.85,
     "critRate": 0.3,
-    "unlockLevel": 15
+    "unlockLevel": 15,
+    "rarity": "epic"
   }
 ]

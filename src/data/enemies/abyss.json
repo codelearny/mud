@@ -141,6 +141,14 @@
       {
         "itemId": "jiaozhu_pearl",
         "rate": 0.1
+      },
+      {
+        "itemId": "manual_taixuan_internal",
+        "rate": 0.15
+      },
+      {
+        "itemId": "manual_zhichi_step",
+        "rate": 0.12
       }
     ]
   },
@@ -213,6 +221,18 @@
       {
         "itemId": "jiuyou_ring",
         "rate": 0.15
+      },
+      {
+        "itemId": "manual_anran_palm",
+        "rate": 0.12
+      },
+      {
+        "itemId": "manual_blood_blade_sutra",
+        "rate": 0.12
+      },
+      {
+        "itemId": "manual_blade_shatter_army",
+        "rate": 0.1
       }
     ],
     "counters": [

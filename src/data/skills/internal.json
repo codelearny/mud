@@ -10,7 +10,8 @@
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 1,
-    "restoreMp": 15
+    "restoreMp": 15,
+    "rarity": "common"
   },
   {
     "id": "yijinjing",
@@ -23,7 +24,11 @@
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 8,
-    "selfBuff": { "attack": 10, "defense": 5 }
+    "selfBuff": {
+      "attack": 10,
+      "defense": 5
+    },
+    "rarity": "rare"
   },
   {
     "id": "beiming_internal",
@@ -37,7 +42,8 @@
     "critRate": 0,
     "unlockLevel": 6,
     "restoreMp": 30,
-    "heal": 20
+    "heal": 20,
+    "rarity": "rare"
   },
   {
     "id": "heal_shengshou",
@@ -50,7 +56,8 @@
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 4,
-    "heal": 60
+    "heal": 60,
+    "rarity": "common"
   },
   {
     "id": "jiuyin_internal",
@@ -63,8 +70,12 @@
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 12,
-    "selfBuff": { "attack": 8, "defense": 8 },
-    "heal": 30
+    "selfBuff": {
+      "attack": 8,
+      "defense": 8
+    },
+    "heal": 30,
+    "rarity": "epic"
   },
   {
     "id": "huagong_internal",
@@ -77,6 +88,10 @@
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 9,
-    "enemyDebuff": { "attack": -8, "agility": -4 }
+    "enemyDebuff": {
+      "attack": -8,
+      "agility": -4
+    },
+    "rarity": "rare"
   }
 ]

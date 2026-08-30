@@ -76,6 +76,14 @@
       {
         "itemId": "hanyue_blade",
         "rate": 0.15
+      },
+      {
+        "itemId": "manual_xianglong_palms",
+        "rate": 0.12
+      },
+      {
+        "itemId": "manual_wanjan_sword",
+        "rate": 0.1
       }
     ],
     "counters": [
@@ -159,6 +167,10 @@
       {
         "itemId": "agi_pendant",
         "rate": 0.08
+      },
+      {
+        "itemId": "manual_daoba_blade",
+        "rate": 0.12
       }
     ],
     "counters": [

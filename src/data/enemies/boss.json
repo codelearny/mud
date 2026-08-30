@@ -191,6 +191,10 @@
       {
         "itemId": "luck_pill",
         "rate": 0.15
+      },
+      {
+        "itemId": "manual_xisui_internal",
+        "rate": 0.08
       }
     ],
     "counters": [

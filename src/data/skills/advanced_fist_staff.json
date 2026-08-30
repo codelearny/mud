@@ -10,7 +10,10 @@
     "hitRate": 0.86,
     "critRate": 0.2,
     "unlockLevel": 16,
-    "enemyDebuff": { "defense": -8 }
+    "enemyDebuff": {
+      "defense": -8
+    },
+    "rarity": "epic"
   },
   {
     "id": "anran_palm",
@@ -23,7 +26,8 @@
     "hitRate": 0.85,
     "critRate": 0.26,
     "unlockLevel": 21,
-    "hits": 2
+    "hits": 2,
+    "rarity": "legendary"
   },
   {
     "id": "weiduo_staff",
@@ -36,7 +40,8 @@
     "hitRate": 0.85,
     "critRate": 0.18,
     "unlockLevel": 16,
-    "hits": 2
+    "hits": 2,
+    "rarity": "epic"
   },
   {
     "id": "panlong_staff",
@@ -49,6 +54,9 @@
     "hitRate": 0.84,
     "critRate": 0.22,
     "unlockLevel": 22,
-    "enemyDebuff": { "attack": -12 }
+    "enemyDebuff": {
+      "attack": -12
+    },
+    "rarity": "legendary"
   }
 ]

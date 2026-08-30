@@ -10,7 +10,8 @@
     "hitRate": 0.88,
     "critRate": 0.3,
     "unlockLevel": 19,
-    "hits": 2
+    "hits": 2,
+    "rarity": "epic"
   },
   {
     "id": "taia_sword_codex",
@@ -23,7 +24,8 @@
     "hitRate": 0.86,
     "critRate": 0.36,
     "unlockLevel": 24,
-    "hits": 3
+    "hits": 3,
+    "rarity": "legendary"
   },
   {
     "id": "blood_blade_sutra",
@@ -36,7 +38,8 @@
     "hitRate": 0.84,
     "critRate": 0.3,
     "unlockLevel": 21,
-    "hits": 2
+    "hits": 2,
+    "rarity": "legendary"
   },
   {
     "id": "blade_shatter_army",
@@ -49,6 +52,7 @@
     "hitRate": 0.82,
     "critRate": 0.34,
     "unlockLevel": 24,
-    "hits": 3
+    "hits": 3,
+    "rarity": "legendary"
   }
 ]

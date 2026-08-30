@@ -10,8 +10,12 @@
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 16,
-    "selfBuff": { "attack": 14, "defense": 10 },
-    "heal": 45
+    "selfBuff": {
+      "attack": 14,
+      "defense": 10
+    },
+    "heal": 45,
+    "rarity": "epic"
   },
   {
     "id": "taixuan_internal",
@@ -24,9 +28,13 @@
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 22,
-    "selfBuff": { "attack": 18, "defense": 14 },
+    "selfBuff": {
+      "attack": 18,
+      "defense": 14
+    },
     "restoreMp": 60,
-    "heal": 50
+    "heal": 50,
+    "rarity": "legendary"
   },
   {
     "id": "taxue_step",
@@ -39,7 +47,10 @@
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 14,
-    "selfBuff": { "agility": 14 }
+    "selfBuff": {
+      "agility": 14
+    },
+    "rarity": "epic"
   },
   {
     "id": "xiaoyao_step",
@@ -52,7 +63,11 @@
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 19,
-    "selfBuff": { "agility": 20, "defense": 6 }
+    "selfBuff": {
+      "agility": 20,
+      "defense": 6
+    },
+    "rarity": "epic"
   },
   {
     "id": "zhichi_step",
@@ -65,6 +80,10 @@
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 23,
-    "selfBuff": { "agility": 26, "attack": 6 }
+    "selfBuff": {
+      "agility": 26,
+      "attack": 6
+    },
+    "rarity": "legendary"
   }
 ]

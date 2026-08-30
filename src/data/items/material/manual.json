@@ -1,0 +1,242 @@
+[
+  {
+    "id": "manual_dafumo_fist",
+    "name": "大伏魔拳拳谱",
+    "description": "记载「大伏魔拳」的拳谱，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 2400,
+    "rarity": "epic",
+    "skillId": "dafumo_fist"
+  },
+  {
+    "id": "manual_anran_palm",
+    "name": "黯然销魂掌拳谱",
+    "description": "记载「黯然销魂掌」的拳谱，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 7200,
+    "rarity": "legendary",
+    "skillId": "anran_palm"
+  },
+  {
+    "id": "manual_weiduo_staff",
+    "name": "韦陀杖法杖谱",
+    "description": "记载「韦陀杖法」的杖谱，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 2400,
+    "rarity": "epic",
+    "skillId": "weiduo_staff"
+  },
+  {
+    "id": "manual_panlong_staff",
+    "name": "盘龙杖法杖谱",
+    "description": "记载「盘龙杖法」的杖谱，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 7400,
+    "rarity": "legendary",
+    "skillId": "panlong_staff"
+  },
+  {
+    "id": "manual_xisui_internal",
+    "name": "洗髓经心法",
+    "description": "记载「洗髓经」的心法，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 2400,
+    "rarity": "epic",
+    "skillId": "xisui_internal"
+  },
+  {
+    "id": "manual_taixuan_internal",
+    "name": "太玄经心法",
+    "description": "记载「太玄经」的心法，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 7400,
+    "rarity": "legendary",
+    "skillId": "taixuan_internal"
+  },
+  {
+    "id": "manual_taxue_step",
+    "name": "踏雪无痕身法",
+    "description": "记载「踏雪无痕」的身法，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 2200,
+    "rarity": "epic",
+    "skillId": "taxue_step"
+  },
+  {
+    "id": "manual_xiaoyao_step",
+    "name": "逍遥游身法",
+    "description": "记载「逍遥游」的身法，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 2700,
+    "rarity": "epic",
+    "skillId": "xiaoyao_step"
+  },
+  {
+    "id": "manual_zhichi_step",
+    "name": "咫尺天涯身法",
+    "description": "记载「咫尺天涯」的身法，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 7600,
+    "rarity": "legendary",
+    "skillId": "zhichi_step"
+  },
+  {
+    "id": "manual_tianwai_flysword",
+    "name": "天外飞仙剑谱",
+    "description": "记载「天外飞仙」的剑谱，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 2700,
+    "rarity": "epic",
+    "skillId": "tianwai_flysword"
+  },
+  {
+    "id": "manual_taia_sword_codex",
+    "name": "太阿剑典剑谱",
+    "description": "记载「太阿剑典」的剑谱，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 7800,
+    "rarity": "legendary",
+    "skillId": "taia_sword_codex"
+  },
+  {
+    "id": "manual_blood_blade_sutra",
+    "name": "血刀经刀谱",
+    "description": "记载「血刀经」的刀谱，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 7200,
+    "rarity": "legendary",
+    "skillId": "blood_blade_sutra"
+  },
+  {
+    "id": "manual_blade_shatter_army",
+    "name": "刀破千军刀谱",
+    "description": "记载「刀破千军」的刀谱，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 7800,
+    "rarity": "legendary",
+    "skillId": "blade_shatter_army"
+  },
+  {
+    "id": "manual_hujiaya_blade",
+    "name": "胡家刀法刀谱",
+    "description": "记载「胡家刀法」的刀谱，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 1800,
+    "rarity": "epic",
+    "skillId": "hujiaya_blade"
+  },
+  {
+    "id": "manual_daoba_blade",
+    "name": "刀霸天下刀谱",
+    "description": "记载「刀霸天下」的刀谱，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 2300,
+    "rarity": "epic",
+    "skillId": "daoba_blade"
+  },
+  {
+    "id": "manual_lie_ri_blade",
+    "name": "烈日刀法刀谱",
+    "description": "记载「烈日刀法」的刀谱，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 6600,
+    "rarity": "legendary",
+    "skillId": "lie_ri_blade"
+  },
+  {
+    "id": "manual_xianglong_palms",
+    "name": "降龙十八掌拳谱",
+    "description": "记载「降龙十八掌」的拳谱，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 2000,
+    "rarity": "epic",
+    "skillId": "xianglong_palms"
+  },
+  {
+    "id": "manual_wudu_palm",
+    "name": "五毒神掌拳谱",
+    "description": "记载「五毒神掌」的拳谱，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 1900,
+    "rarity": "epic",
+    "skillId": "wudu_palm"
+  },
+  {
+    "id": "manual_tieshan_palm",
+    "name": "铁砂掌拳谱",
+    "description": "记载「铁砂掌」的拳谱，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 1900,
+    "rarity": "epic",
+    "skillId": "tieshan_palm"
+  },
+  {
+    "id": "manual_jiuyin_internal",
+    "name": "九阴真经心法",
+    "description": "记载「九阴真经」的心法，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 2000,
+    "rarity": "epic",
+    "skillId": "jiuyin_internal"
+  },
+  {
+    "id": "manual_shenxing_step",
+    "name": "神行百变身法",
+    "description": "记载「神行百变」的身法，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 1800,
+    "rarity": "epic",
+    "skillId": "shenxing_step"
+  },
+  {
+    "id": "manual_fengmo_staff",
+    "name": "疯魔杖法杖谱",
+    "description": "记载「疯魔杖法」的杖谱，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 2000,
+    "rarity": "epic",
+    "skillId": "fengmo_staff"
+  },
+  {
+    "id": "manual_wanjan_sword",
+    "name": "万剑归宗剑谱",
+    "description": "记载「万剑归宗」的剑谱，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 2200,
+    "rarity": "epic",
+    "skillId": "wanjan_sword"
+  },
+  {
+    "id": "manual_dugu_nine",
+    "name": "独孤九剑剑谱",
+    "description": "记载「独孤九剑」的剑谱，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 2300,
+    "rarity": "epic",
+    "skillId": "dugu_nine"
+  }
+]

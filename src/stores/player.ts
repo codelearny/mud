@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import type { Character, EquipSlot } from '../types'
+import type { Character, EquipSlot, Skill } from '../types'
 import {
   createNewCharacter,
   getEffectiveAttributes,
@@ -13,7 +13,7 @@ import {
   type AllocatableStat,
 } from '../engine/character'
 import { expForNextLevel } from '../engine/leveling'
-import { getItem } from '../engine/data-loader'
+import { getItem, getSkill, getAllItems } from '../engine/data-loader'
 
 const SAVE_KEY = 'jianghu_player'
 
@@ -43,10 +43,44 @@ export const usePlayerStore = defineStore('player', () => {
     return result
   }
 
-  function learnNewSkill(skillId: string) {
-    if (!character.value) return
-    character.value = engineLearnSkill(character.value, skillId)
+  // 参悟武学所需银两：按稀有度递增（common 分文不取）
+  function learnGoldCost(skill: Skill): number {
+    const rarity = skill.rarity ?? 'common'
+    if (rarity === 'common') return 0
+    if (rarity === 'rare') return 200 + skill.unlockLevel * 50
+    if (rarity === 'epic') return 400 + skill.unlockLevel * 80
+    return 800 + skill.unlockLevel * 120
+  }
+
+  // 参悟武学：按稀有度校验并收取代价
+  //   common 达标即悟 / rare 需银两 / epic 需秘籍 / legendary 需秘籍 + 银两（秘籍参悟后消耗）
+  function learnNewSkill(skillId: string): { ok: boolean; reason?: string } {
+    const char = character.value
+    if (!char) return { ok: false, reason: '尚无角色' }
+    const skill = getSkill(skillId)
+    if (!skill) return { ok: false, reason: '武学不存在' }
+    if (char.level < skill.unlockLevel) {
+      return { ok: false, reason: '修为不足，需第' + skill.unlockLevel + '重' }
+    }
+    const rarity = skill.rarity ?? 'common'
+    const goldCost = learnGoldCost(skill)
+    if (char.gold < goldCost) {
+      return { ok: false, reason: '银两不足，需 ' + goldCost + ' 两' }
+    }
+    if (rarity === 'epic' || rarity === 'legendary') {
+      const manual = getAllItems().find(i => i.skillId === skillId)
+      if (!manual) return { ok: false, reason: '世间尚无此武学秘籍' }
+      const inv = char.inventory.find(i => i.itemId === manual.id)
+      if (!inv || inv.quantity < 1) {
+        return { ok: false, reason: '需「' + manual.name + '」' }
+      }
+      inv.quantity -= 1
+      if (inv.quantity <= 0) char.inventory = char.inventory.filter(i => i.itemId !== manual.id)
+    }
+    char.gold -= goldCost
+    character.value = engineLearnSkill(char, skillId)
     save()
+    return { ok: true }
   }
 
   function equip(itemId: string) {
@@ -190,6 +224,7 @@ export const usePlayerStore = defineStore('player', () => {
     discoverEnemy,
     addExp,
     learnNewSkill,
+    learnGoldCost,
     equip,
     unequip,
     useItem,

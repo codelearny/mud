@@ -136,6 +136,26 @@
         "itemId": "xuepo_sword",
         "price": 2200,
         "limit": 3
+      },
+      {
+        "itemId": "manual_shenxing_step",
+        "price": 1600,
+        "limit": 5
+      },
+      {
+        "itemId": "manual_hujiaya_blade",
+        "price": 1800,
+        "limit": 5
+      },
+      {
+        "itemId": "manual_tieshan_palm",
+        "price": 2000,
+        "limit": 5
+      },
+      {
+        "itemId": "manual_dugu_nine",
+        "price": 3000,
+        "limit": 3
       }
     ]
   }
