@@ -8,12 +8,20 @@ const playerStore = usePlayerStore()
 
 type Tab = 'enemy' | 'skill' | 'manual' | 'equip'
 const tab = ref<Tab>('enemy')
+const sub = ref<string>('') // 当前主页签下的子页签
+
 const TABS: { key: Tab; label: string }[] = [
   { key: 'enemy', label: '敌人' },
   { key: 'skill', label: '武功' },
   { key: 'manual', label: '秘籍' },
   { key: 'equip', label: '装备' },
 ]
+
+function selectTab(key: Tab) {
+  tab.value = key
+  const groups = subGroupsFor(key)
+  sub.value = groups.length ? groups[0].key : ''
+}
 
 const RARITY_LABEL: Record<string, string> = {
   common: '寻常',
@@ -48,23 +56,33 @@ const enemyGroups = computed(() => {
   }
   return Array.from(map.entries())
     .sort((a, b) => (ENEMY_CAT_ORDER.indexOf(a[0]) + 1 || 99) - (ENEMY_CAT_ORDER.indexOf(b[0]) + 1 || 99))
-    .map(([cat, list]) => ({
-      key: cat,
-      label: ENEMY_CAT_LABEL[cat] ?? '其他',
-      list: [...list].sort((a, b) => a.level - b.level),
-      found: list.filter(e => discoveredEnemies.value.has(e.id)).length,
-    }))
+    .map(([cat, list]) => {
+      const sorted = [...list].sort((a, b) => a.level - b.level)
+      return {
+        key: cat,
+        label: ENEMY_CAT_LABEL[cat] ?? '其他',
+        list: sorted,
+        found: sorted.filter(e => discoveredEnemies.value.has(e.id)).length,
+        total: sorted.length,
+      }
+    })
 })
 
-// —— 武功（按流派分组，习得即录）——
+// —— 武功（按流派分组，仅展示已习得；未习得不显示，避免「自动参悟」观感）——
 const skillGroups = computed(() => {
-  const all = getAllSkills()
   return SKILL_CAT_ORDER
     .map(cat => {
-      const list = all.filter(s => s.category === cat).sort((a, b) => a.unlockLevel - b.unlockLevel)
-      return { key: cat, label: SKILL_CAT_LABEL[cat] ?? cat, list, found: list.filter(s => learnedSkills.value.has(s.id)).length }
+      const all = getAllSkills().filter(s => s.category === cat)
+      const learned = all.filter(s => learnedSkills.value.has(s.id))
+      return {
+        key: cat,
+        label: SKILL_CAT_LABEL[cat] ?? cat,
+        list: learned, // 仅已学
+        found: learned.length,
+        total: all.length,
+      }
     })
-    .filter(g => g.list.length > 0)
+    .filter(g => g.total > 0)
 })
 
 // —— 秘籍（按稀有度分组，得手即录；参悟消耗后仍记为已得）——
@@ -72,7 +90,7 @@ const manualGroups = computed(() => {
   const manuals = getAllItems().filter(i => i.category === 'manual')
   return (['epic', 'legendary'] as const).map(r => {
     const list = manuals.filter(m => m.rarity === r)
-    return { key: r, label: RARITY_LABEL[r], list, found: list.filter(m => hasManual(m)).length }
+    return { key: r, label: RARITY_LABEL[r], list, found: list.filter(m => hasManual(m)).length, total: list.length }
   })
 })
 
@@ -87,9 +105,29 @@ const equipGroups = computed(() => {
   const all = getAllItems().filter(i => ['weapon', 'armor', 'accessory'].includes(i.type))
   return (['weapon', 'armor', 'accessory'] as const).map(t => {
     const list = all.filter(i => i.type === t).sort((a, b) => (a.minLevel ?? 0) - (b.minLevel ?? 0))
-    return { key: t, label: EQUIP_LABEL[t], list, found: list.filter(i => discoveredItems.value.has(i.id)).length }
+    return { key: t, label: EQUIP_LABEL[t], list, found: list.filter(i => discoveredItems.value.has(i.id)).length, total: list.length }
   })
 })
+
+// 当前主页面签下的子页签列表
+function subGroupsFor(t: Tab) {
+  if (t === 'enemy') return enemyGroups.value
+  if (t === 'skill') return skillGroups.value
+  if (t === 'manual') return manualGroups.value
+  return equipGroups.value
+}
+const subGroups = computed(() => subGroupsFor(tab.value))
+// 子页签选中项（失效时回退到第一项）
+const activeSub = computed(() => {
+  const groups = subGroups.value
+  if (!groups.length) return ''
+  return groups.some(g => g.key === sub.value) ? sub.value : groups[0].key
+})
+
+const activeEnemyGroup = computed(() => enemyGroups.value.find(g => g.key === activeSub.value) ?? enemyGroups.value[0] ?? null)
+const activeSkillGroup = computed(() => skillGroups.value.find(g => g.key === activeSub.value) ?? skillGroups.value[0] ?? null)
+const activeManualGroup = computed(() => manualGroups.value.find(g => g.key === activeSub.value) ?? manualGroups.value[0] ?? null)
+const activeEquipGroup = computed(() => equipGroups.value.find(g => g.key === activeSub.value) ?? equipGroups.value[0] ?? null)
 
 // 推导物品来源：哪些敌人掉落 / 哪些店铺有售（引导玩家去哪找）
 const sourceMap = computed(() => {
@@ -132,7 +170,7 @@ const totals = computed(() => {
 
 const hintText: Record<Tab, string> = {
   enemy: '遭遇即录，所见皆入卷',
-  skill: '习得即录，武学源流一目了然',
+  skill: '习得即录，未学武功不显于卷',
   manual: '得手即录，参悟之后亦留其名',
   equip: '入手即录，卖出亦不改其载',
 }
@@ -175,133 +213,130 @@ function isBoss(e: Enemy): boolean {
           :key="t.key"
           class="codex-tab"
           :class="{ active: tab === t.key }"
-          @click="tab = t.key"
+          @click="selectTab(t.key)"
         >{{ t.label }}</button>
+      </div>
+      <!-- 子页签：按大类/流派/稀有度/部位拆分，避免单页长滚 -->
+      <div class="codex-subtabs" v-if="subGroups.length">
+        <button
+          v-for="g in subGroups"
+          :key="g.key"
+          class="codex-subtab"
+          :class="{ active: activeSub === g.key }"
+          @click="sub = g.key"
+        >{{ g.label }}<span class="codex-subtab-count">{{ g.found }}/{{ g.total }}</span></button>
       </div>
       <p class="codex-progress">
         已录 <b>{{ totals.found }}</b> / 共 {{ totals.total }} · {{ hintText[tab] }}
       </p>
     </div>
 
-    <!-- 敌人 -->
-    <template v-if="tab === 'enemy'">
-      <div class="panel" v-for="g in enemyGroups" :key="g.key">
-        <div class="panel-title codex-group-title">
-          {{ g.label }}<span class="codex-group-count">{{ g.found }} / {{ g.list.length }}</span>
-        </div>
-        <div class="codex-grid">
-          <template v-for="e in g.list" :key="e.id">
-            <div class="codex-card" v-if="discoveredEnemies.has(e.id)">
-              <div class="codex-card-head">
-                <span class="codex-name">{{ e.name }}</span>
-                <span v-if="isBoss(e)" class="codex-boss-tag">头目</span>
-              </div>
-              <div class="codex-meta">等级 {{ e.level }} · {{ g.label }}</div>
-              <p class="codex-desc">{{ e.description }}</p>
-              <div class="codex-detail"><span class="codex-detail-label">武功</span>{{ skillNames(e.skills) }}</div>
-              <div class="codex-detail"><span class="codex-detail-label">掉落</span>{{ dropText(e) }}</div>
-              <div class="codex-detail"><span class="codex-detail-label">赏金</span>{{ e.goldReward }} 两</div>
-            </div>
-            <div class="codex-card locked" v-else>
-              <div class="codex-card-head"><span class="codex-name">？？？</span></div>
-              <div class="codex-meta">{{ g.label }}</div>
-              <p class="codex-desc locked-text">尚未遭遇，江湖险恶，且去历练。</p>
-            </div>
-          </template>
-        </div>
+    <!-- 敌人（子页签：异兽/匪类/邪魔/头目） -->
+    <div class="panel" v-if="tab === 'enemy' && activeEnemyGroup">
+      <div class="panel-title codex-group-title">
+        {{ activeEnemyGroup.label }}<span class="codex-group-count">{{ activeEnemyGroup.found }} / {{ activeEnemyGroup.total }}</span>
       </div>
-    </template>
-
-    <!-- 武功 -->
-    <template v-else-if="tab === 'skill'">
-      <div class="panel" v-for="g in skillGroups" :key="g.key">
-        <div class="panel-title codex-group-title">
-          {{ g.label }}<span class="codex-group-count">{{ g.found }} / {{ g.list.length }}</span>
-        </div>
-        <div class="codex-grid">
-          <div
-            class="codex-card"
-            v-for="s in g.list"
-            :key="s.id"
-            :class="{ locked: !learnedSkills.has(s.id) }"
-          >
+      <div class="codex-grid">
+        <template v-for="e in activeEnemyGroup.list" :key="e.id">
+          <div class="codex-card" v-if="discoveredEnemies.has(e.id)">
             <div class="codex-card-head">
-              <span class="codex-name">{{ s.name }}</span>
-              <span class="codex-rarity" :class="rarityClass(s.rarity)">{{ rarityLabel(s.rarity) }}</span>
+              <span class="codex-name">{{ e.name }}</span>
+              <span v-if="isBoss(e)" class="codex-boss-tag">头目</span>
             </div>
-            <div class="codex-meta">{{ g.label }} · 需第{{ s.unlockLevel }}重</div>
-            <p class="codex-desc">{{ s.description }}</p>
-            <div class="codex-detail" v-if="learnedSkills.has(s.id)">
-              <span class="codex-detail-label">威力</span>{{ s.power }} · 耗内力 {{ s.mpCost }} · 命中 {{ Math.round(s.hitRate * 100) }}%
-            </div>
-            <div class="codex-detail" v-else>
-              <span class="codex-detail-label">状态</span><span class="locked-text">尚未习得</span>
-            </div>
+            <div class="codex-meta">等级 {{ e.level }} · {{ activeEnemyGroup.label }}</div>
+            <p class="codex-desc">{{ e.description }}</p>
+            <div class="codex-detail"><span class="codex-detail-label">武功</span>{{ skillNames(e.skills) }}</div>
+            <div class="codex-detail"><span class="codex-detail-label">掉落</span>{{ dropText(e) }}</div>
+            <div class="codex-detail"><span class="codex-detail-label">赏金</span>{{ e.goldReward }} 两</div>
           </div>
-        </div>
+          <div class="codex-card locked" v-else>
+            <div class="codex-card-head"><span class="codex-name">？？？</span></div>
+            <div class="codex-meta">{{ activeEnemyGroup.label }}</div>
+            <p class="codex-desc locked-text">尚未遭遇，江湖险恶，且去历练。</p>
+          </div>
+        </template>
       </div>
-    </template>
+    </div>
 
-    <!-- 秘籍 -->
-    <template v-else-if="tab === 'manual'">
-      <div class="panel" v-for="g in manualGroups" :key="g.key">
-        <div class="panel-title codex-group-title">
-          {{ g.label }}秘籍<span class="codex-group-count">{{ g.found }} / {{ g.list.length }}</span>
-        </div>
-        <div class="codex-grid">
-          <template v-for="m in g.list" :key="m.id">
-            <div class="codex-card" v-if="hasManual(m)">
-              <div class="codex-card-head">
-                <span class="codex-name">{{ m.name }}</span>
-                <span class="codex-rarity" :class="rarityClass(m.rarity)">{{ rarityLabel(m.rarity) }}</span>
-              </div>
-              <div class="codex-meta">所载：{{ m.skillId ? (getSkill(m.skillId)?.name ?? m.skillId) : '—' }}</div>
-              <p class="codex-desc">{{ m.description }}</p>
-              <div class="codex-detail"><span class="codex-detail-label">来历</span>{{ sourceOf(m.id) }}</div>
-            </div>
-            <div class="codex-card locked" v-else>
-              <div class="codex-card-head">
-                <span class="codex-name">？？？</span>
-                <span class="codex-rarity" :class="rarityClass(m.rarity)">{{ rarityLabel(m.rarity) }}</span>
-              </div>
-              <div class="codex-meta">未得秘籍</div>
-              <p class="codex-desc locked-text">下落不明，或藏于某位头目之手。</p>
-            </div>
-          </template>
+    <!-- 武功（子页签：剑法/刀法/拳脚/棍棒/内功/轻功；仅展示已习得） -->
+    <div class="panel" v-else-if="tab === 'skill' && activeSkillGroup">
+      <div class="panel-title codex-group-title">
+        {{ activeSkillGroup.label }}<span class="codex-group-count">{{ activeSkillGroup.found }} / {{ activeSkillGroup.total }}</span>
+      </div>
+      <div class="codex-grid">
+        <div
+          class="codex-card"
+          v-for="s in activeSkillGroup.list"
+          :key="s.id"
+        >
+          <div class="codex-card-head">
+            <span class="codex-name">{{ s.name }}</span>
+            <span class="codex-rarity" :class="rarityClass(s.rarity)">{{ rarityLabel(s.rarity) }}</span>
+          </div>
+          <div class="codex-meta">{{ activeSkillGroup.label }} · 需第{{ s.unlockLevel }}重</div>
+          <p class="codex-desc">{{ s.description }}</p>
+          <div class="codex-detail"><span class="codex-detail-label">威力</span>{{ s.power }} · 耗内力 {{ s.mpCost }} · 命中 {{ Math.round(s.hitRate * 100) }}%</div>
         </div>
       </div>
-    </template>
+      <div v-if="!activeSkillGroup.list.length" class="empty-text">尚未习得此类武功</div>
+    </div>
 
-    <!-- 装备 -->
-    <template v-else>
-      <div class="panel" v-for="g in equipGroups" :key="g.key">
-        <div class="panel-title codex-group-title">
-          {{ g.label }}<span class="codex-group-count">{{ g.found }} / {{ g.list.length }}</span>
-        </div>
-        <div class="codex-grid">
-          <template v-for="it in g.list" :key="it.id">
-            <div class="codex-card" v-if="discoveredItems.has(it.id)">
-              <div class="codex-card-head">
-                <span class="codex-name">{{ it.name }}</span>
-                <span class="codex-rarity" :class="rarityClass(it.rarity)">{{ rarityLabel(it.rarity) }}</span>
-              </div>
-              <div class="codex-meta">{{ g.label }} · 需第{{ it.minLevel ?? 0 }}重</div>
-              <p class="codex-desc">{{ it.description }}</p>
-              <div class="codex-detail"><span class="codex-detail-label">属性</span>{{ effectText(it) }}</div>
-              <div class="codex-detail"><span class="codex-detail-label">来历</span>{{ sourceOf(it.id) }}</div>
-            </div>
-            <div class="codex-card locked" v-else>
-              <div class="codex-card-head">
-                <span class="codex-name">？？？</span>
-                <span class="codex-rarity" :class="rarityClass(it.rarity)">{{ rarityLabel(it.rarity) }}</span>
-              </div>
-              <div class="codex-meta">{{ g.label }}</div>
-              <p class="codex-desc locked-text">尚未入手，不知其详。</p>
-            </div>
-          </template>
-        </div>
+    <!-- 秘籍（子页签：精妙/绝世） -->
+    <div class="panel" v-else-if="tab === 'manual' && activeManualGroup">
+      <div class="panel-title codex-group-title">
+        {{ activeManualGroup.label }}秘籍<span class="codex-group-count">{{ activeManualGroup.found }} / {{ activeManualGroup.total }}</span>
       </div>
-    </template>
+      <div class="codex-grid">
+        <template v-for="m in activeManualGroup.list" :key="m.id">
+          <div class="codex-card" v-if="hasManual(m)">
+            <div class="codex-card-head">
+              <span class="codex-name">{{ m.name }}</span>
+              <span class="codex-rarity" :class="rarityClass(m.rarity)">{{ rarityLabel(m.rarity) }}</span>
+            </div>
+            <div class="codex-meta">所载：{{ m.skillId ? (getSkill(m.skillId)?.name ?? m.skillId) : '—' }}</div>
+            <p class="codex-desc">{{ m.description }}</p>
+            <div class="codex-detail"><span class="codex-detail-label">来历</span>{{ sourceOf(m.id) }}</div>
+          </div>
+          <div class="codex-card locked" v-else>
+            <div class="codex-card-head">
+              <span class="codex-name">？？？</span>
+              <span class="codex-rarity" :class="rarityClass(m.rarity)">{{ rarityLabel(m.rarity) }}</span>
+            </div>
+            <div class="codex-meta">未得秘籍</div>
+            <p class="codex-desc locked-text">下落不明，或藏于某位头目之手。</p>
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <!-- 装备（子页签：兵刃/护甲/饰品） -->
+    <div class="panel" v-else-if="tab === 'equip' && activeEquipGroup">
+      <div class="panel-title codex-group-title">
+        {{ activeEquipGroup.label }}<span class="codex-group-count">{{ activeEquipGroup.found }} / {{ activeEquipGroup.total }}</span>
+      </div>
+      <div class="codex-grid">
+        <template v-for="it in activeEquipGroup.list" :key="it.id">
+          <div class="codex-card" v-if="discoveredItems.has(it.id)">
+            <div class="codex-card-head">
+              <span class="codex-name">{{ it.name }}</span>
+              <span class="codex-rarity" :class="rarityClass(it.rarity)">{{ rarityLabel(it.rarity) }}</span>
+            </div>
+            <div class="codex-meta">{{ activeEquipGroup.label }} · 需第{{ it.minLevel ?? 0 }}重</div>
+            <p class="codex-desc">{{ it.description }}</p>
+            <div class="codex-detail"><span class="codex-detail-label">属性</span>{{ effectText(it) }}</div>
+            <div class="codex-detail"><span class="codex-detail-label">来历</span>{{ sourceOf(it.id) }}</div>
+          </div>
+          <div class="codex-card locked" v-else>
+            <div class="codex-card-head">
+              <span class="codex-name">？？？</span>
+              <span class="codex-rarity" :class="rarityClass(it.rarity)">{{ rarityLabel(it.rarity) }}</span>
+            </div>
+            <div class="codex-meta">{{ activeEquipGroup.label }}</div>
+            <p class="codex-desc locked-text">尚未入手，不知其详。</p>
+          </div>
+        </template>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -330,6 +365,38 @@ function isBoss(e: Enemy): boolean {
   color: var(--text-accent);
   border-color: var(--text-accent);
   background: rgba(201, 168, 76, 0.1);
+}
+.codex-subtabs {
+  display: flex;
+  gap: 5px;
+  margin: 2px 0 4px;
+  flex-wrap: wrap;
+}
+.codex-subtab {
+  font-family: var(--font-serif);
+  font-size: 12px;
+  padding: 3px 10px;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.codex-subtab.active {
+  color: var(--text-accent);
+  border-color: var(--text-accent);
+  background: rgba(201, 168, 76, 0.1);
+}
+.codex-subtab-count {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  color: var(--text-tertiary);
+}
+.codex-subtab.active .codex-subtab-count {
+  color: var(--text-accent);
 }
 .codex-progress {
   font-family: var(--font-serif);
@@ -422,6 +489,14 @@ function isBoss(e: Enemy): boolean {
   width: 32px;
   color: var(--text-secondary);
   margin-right: 6px;
+}
+.empty-text {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  color: var(--text-tertiary);
+  text-align: center;
+  padding: 16px 0;
+  font-style: italic;
 }
 @media (max-width: 480px) {
   .codex-grid { grid-template-columns: 1fr; }
