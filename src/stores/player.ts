@@ -142,7 +142,15 @@ export const usePlayerStore = defineStore('player', () => {
 
   function save() {
     if (character.value) {
-      localStorage.setItem(SAVE_KEY, JSON.stringify(character.value))
+      // 图鉴：保存时统一把当前背包与在穿戴备并入「已获得」。
+      // 覆盖掉落/购买/任务/采集/NPC 等全部入口，卖出或消耗后记录依然保留。
+      const char = character.value
+      const discovered = new Set(char.discoveredItems ?? [])
+      for (const it of char.inventory) discovered.add(it.itemId)
+      const eq = char.equipment
+      for (const id of [eq.weapon, eq.armor, eq.accessory]) if (id) discovered.add(id)
+      char.discoveredItems = [...discovered]
+      localStorage.setItem(SAVE_KEY, JSON.stringify(char))
     }
   }
 
@@ -154,6 +162,12 @@ export const usePlayerStore = defineStore('player', () => {
       char.freePoints = char.freePoints ?? 0
       char.expToNext = expForNextLevel(char.level)
       char.discoveredEnemies = char.discoveredEnemies ?? []
+      // 图鉴：兼容旧存档——加载时即把当前背包与在穿戴备并入「已获得」，与 save() 保持一致
+      const discovered = new Set(char.discoveredItems ?? [])
+      for (const it of char.inventory) discovered.add(it.itemId)
+      const eq = char.equipment
+      for (const id of [eq.weapon, eq.armor, eq.accessory]) if (id) discovered.add(id)
+      char.discoveredItems = [...discovered]
       character.value = char
       return true
     }

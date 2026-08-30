@@ -157,6 +157,7 @@ export interface Character {
   freePoints?: number      // 升级获得的自由属性点，可在角色面板自行分配（增强可玩性）
   origin?: string          // 开局出身（见 src/data/origins.json），影响初始属性与资源
   discoveredEnemies?: string[] // 图鉴：已遭遇/已击败的敌人 id 集合（配置不写死，战斗开始时写入）
+  discoveredItems?: string[]   // 图鉴：已获得过的物品 id 集合（卖出或消耗后仍保留，由 player.save 统一记录）
   attributes: CharacterAttributes
   learnedSkills: LearnedSkill[]
   equipment: Equipment
