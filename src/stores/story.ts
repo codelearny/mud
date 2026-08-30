@@ -9,7 +9,7 @@ import {
   isChoiceVisible,
   rollRandomEncounter,
 } from '../engine/story'
-import { getAllQuests, getSkill } from '../engine/data-loader'
+import { getAllQuests, getSkill, getItem } from '../engine/data-loader'
 import { usePlayerStore } from './player'
 import { useShopStore } from './shop'
 
@@ -23,6 +23,7 @@ export const useStoryStore = defineStore('story', () => {
   const usedEncounters = ref<string[]>([]) // 已触发过的一次性际遇 id
   const currentDialogue = ref<{ npcId: string; nodeId: string } | null>(null)
   const currentEncounter = ref<Encounter | null>(null)
+  const encounterResult = ref<{ title: string; lines: string[] } | null>(null)
   const toast = ref<{ msg: string; id: number } | null>(null)
   let toastSeq = 0
   function pushToast(msg: string) {
@@ -170,6 +171,7 @@ export const useStoryStore = defineStore('story', () => {
 
   // pool 来自 SceneAction.encounters，用于让不同地点/行动触发不同遭遇
   function triggerEncounter(pool?: string[]) {
+    encounterResult.value = null
     const enc = rollRandomEncounter(pool, usedEncounters.value)
     // 一次性际遇：触发即消耗，从池子剔除（即便玩家选择拒绝也不再复现，杜绝刷取）
     if (enc && enc.once && !usedEncounters.value.includes(enc.id)) {
@@ -179,6 +181,53 @@ export const useStoryStore = defineStore('story', () => {
     currentEncounter.value = enc ?? null
   }
 
+  // 将际遇选项的效果汇总成可读结果，供选中后展示（避免"选了没反应"）
+  function summarizeEffects(effects?: DialogueEffect[]): string[] {
+    const lines: string[] = []
+    if (!effects) return lines
+    for (const eff of effects) {
+      switch (eff.type) {
+        case 'learn_skill': {
+          const sk = getSkill(eff.target!)
+          lines.push(`习得武学：${sk?.name ?? eff.target!}`)
+          break
+        }
+        case 'exp':
+          lines.push(`经验 +${eff.value}`)
+          break
+        case 'gold': {
+          const v = Number(eff.value)
+          lines.push(v >= 0 ? `银两 +${v}` : `银两 ${v}`)
+          break
+        }
+        case 'item': {
+          const it = getItem(eff.target!)
+          const v = Number(eff.value)
+          lines.push(`${it?.name ?? eff.target!} ×${v}`)
+          break
+        }
+        case 'affinity': {
+          const npc = getNPCById(eff.target!)
+          lines.push(`与${npc?.name ?? eff.target!} 好感 +${eff.value}`)
+          break
+        }
+        case 'heal':
+          lines.push('气血内力尽复')
+          break
+        case 'flag':
+          lines.push('（心中记下此事）')
+          break
+        case 'counter':
+          lines.push('（江湖记录已更新）')
+          break
+        case 'quest':
+          lines.push('（任务进展更新）')
+          break
+      }
+    }
+    return lines
+  }
+
   // 供场景进入条件、行动前置等外部判定复用（Scene.requirement / SceneAction.requirement）
   function meetsCondition(cond?: DialogueCondition): boolean {
     if (!cond) return true
@@ -186,14 +235,25 @@ export const useStoryStore = defineStore('story', () => {
   }
 
   function selectEncounterChoice(choice: DialogueChoice): string {
+    const lines = summarizeEffects(choice.effects)
     applyEffects(choice.effects)
     checkQuestCompletions()
-    closeEncounter()
+    if (choice.battle) {
+      // 战斗类交由面板跳转，不弹结果卡
+      closeEncounter()
+    } else {
+      // 选中后停留展示结果，避免"选了没反应"
+      encounterResult.value = {
+        title: choice.text,
+        lines: lines.length ? lines : ['（你淡然离去。）'],
+      }
+    }
     return choice.next
   }
 
   function closeEncounter() {
     currentEncounter.value = null
+    encounterResult.value = null
   }
 
   function incrementCounter(name: string, amount: number = 1) {
@@ -283,6 +343,7 @@ export const useStoryStore = defineStore('story', () => {
     counters,
     currentDialogue,
     currentEncounter,
+    encounterResult,
     currentNpc,
     currentDialogueNode,
     visibleDialogueChoices,
