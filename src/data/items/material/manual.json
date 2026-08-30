@@ -238,5 +238,65 @@
     "price": 2300,
     "rarity": "epic",
     "skillId": "dugu_nine"
+  },
+  {
+    "id": "manual_wuji_sword",
+    "name": "无极剑道剑谱",
+    "description": "记载「无极剑道」的剑谱，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 9000,
+    "rarity": "legendary",
+    "skillId": "wuji_sword"
+  },
+  {
+    "id": "manual_wuxiang_blade",
+    "name": "无相刀罡刀谱",
+    "description": "记载「无相刀罡」的刀谱，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 9000,
+    "rarity": "legendary",
+    "skillId": "wuxiang_blade"
+  },
+  {
+    "id": "manual_qiankun_shift",
+    "name": "乾坤大挪移拳谱",
+    "description": "记载「乾坤大挪移」的拳谱，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 8800,
+    "rarity": "legendary",
+    "skillId": "qiankun_shift"
+  },
+  {
+    "id": "manual_qingtian_staff",
+    "name": "擎天杖法杖谱",
+    "description": "记载「擎天杖法」的杖谱，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 8600,
+    "rarity": "legendary",
+    "skillId": "qingtian_staff"
+  },
+  {
+    "id": "manual_changsheng_internal",
+    "name": "长生诀心法",
+    "description": "记载「长生诀」的心法，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 9000,
+    "rarity": "legendary",
+    "skillId": "changsheng_internal"
+  },
+  {
+    "id": "manual_dapeng_step",
+    "name": "大鹏展翅身法",
+    "description": "记载「大鹏展翅」的身法，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 8800,
+    "rarity": "legendary",
+    "skillId": "dapeng_step"
   }
 ]

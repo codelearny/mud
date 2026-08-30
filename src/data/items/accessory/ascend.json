@@ -1,0 +1,33 @@
+[
+  {
+    "id": "star_tear",
+    "name": "星辰之泪",
+    "description": "传说为星辰陨落时所凝的一滴泪，莹润通透，佩戴者福缘深厚、内力如星空浩瀚。",
+    "type": "accessory",
+    "category": "accessory",
+    "price": 12000,
+    "slot": "accessory",
+    "minLevel": 26,
+    "rarity": "legendary",
+    "effects": [
+      { "type": "luck", "value": 16 },
+      { "type": "maxMp", "value": 50 }
+    ]
+  },
+  {
+    "id": "tiandao_talisman",
+    "name": "天道玉符",
+    "description": "无上道尊以自身道纹炼制的玉符，符上刻着无人能解的道纹，佩之攻守兼具、诸事顺遂。",
+    "type": "accessory",
+    "category": "accessory",
+    "price": 20000,
+    "slot": "accessory",
+    "minLevel": 29,
+    "rarity": "legendary",
+    "effects": [
+      { "type": "attack", "value": 14 },
+      { "type": "defense", "value": 12 },
+      { "type": "luck", "value": 14 }
+    ]
+  }
+]

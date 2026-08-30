@@ -1,0 +1,86 @@
+[
+  {
+    "id": "celestial_hermit",
+    "name": "枯坐老人",
+    "title": "天外散人",
+    "description": "盘坐于浮岛边缘的散发老者，衣衫已被星风吹得看不出本色，据说已在此枯坐六十三年。",
+    "sceneId": "celestial_realm",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "枯坐老人",
+        "text": "你竟能从那道裂隙里走出来……老夫在此枯坐六十三年，见过从下面爬上来的，无一不是半途折返。你身上有血魔的气味，却又不是魔——你是来寻什么的？",
+        "choices": [
+          { "text": "敢问此地是何处？", "next": "story" },
+          { "text": "我愿除去此间的剑魂。", "next": "accept", "condition": { "type": "quest", "target": "quest_ascend", "op": "!=", "value": "active" }, "effects": [{ "type": "quest", "target": "quest_ascend", "value": "active" }] },
+          { "text": "剑魂已被我斩了。", "next": "done", "condition": { "type": "quest", "target": "quest_ascend", "op": "==", "value": "completed" } },
+          { "text": "告辞。", "next": "END" }
+        ]
+      },
+      "story": {
+        "id": "story",
+        "speaker": "枯坐老人",
+        "text": "天外之境。九幽深渊的那一头，便是这里。此地灵气虽盛，却也招来了域外的东西——那道剑魂便是其一，本是古时一位剑修兵解所留，如今只剩一副杀性。留着它，此地永无宁日。",
+        "choices": [
+          { "text": "我去会会它。", "next": "accept", "condition": { "type": "quest", "target": "quest_ascend", "op": "!=", "value": "active" }, "effects": [{ "type": "quest", "target": "quest_ascend", "value": "active" }] },
+          { "text": "可叹。", "next": "END" }
+        ]
+      },
+      "accept": {
+        "id": "accept",
+        "speaker": "枯坐老人",
+        "text": "剑魂在星海尽头那座倒悬的浮岛上。它的剑意已臻无招无相之境，你若还拘泥于招式，必败无疑——要忘掉剑，方能胜剑。",
+        "choices": [{ "text": "晚辈记下了。", "next": "END" }]
+      },
+      "done": {
+        "id": "done",
+        "speaker": "枯坐老人",
+        "text": "剑魂散了……六十三年，老夫终于等到了这一天。这些年来攒下的物事，你拿去罢，老夫留着也无用了。",
+        "choices": [{ "text": "多谢前辈。", "next": "END" }]
+      }
+    }
+  },
+  {
+    "id": "dao_attendant",
+    "name": "青禾",
+    "title": "极巅道童",
+    "description": "侍奉无上道尊的垂髫道童，看起来不过十来岁，据说却已在此陪伴道尊一甲子。",
+    "sceneId": "dao_pinnacle",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "青禾",
+        "text": "呀，又有人上来了！你是来挑战真人爷爷的吗？真人爷爷可厉害了，三百年来没一个人赢得过他！",
+        "choices": [
+          { "text": "真人爷爷是谁？", "next": "story" },
+          { "text": "我愿领教真人绝学。", "next": "accept", "condition": { "type": "quest", "target": "quest_pinnacle", "op": "!=", "value": "active" }, "effects": [{ "type": "quest", "target": "quest_pinnacle", "value": "active" }] },
+          { "text": "我已胜过真人了。", "next": "done", "condition": { "type": "quest", "target": "quest_pinnacle", "op": "==", "value": "completed" } },
+          { "text": "随便看看。", "next": "END" }
+        ]
+      },
+      "story": {
+        "id": "story",
+        "speaker": "青禾",
+        "text": "真人爷爷是这武道极巅的主人，天下各派的武功他都会。他说过，若有人能接下他十招，便可登顶论道——不过三百年来，还没人接下过三招呢。",
+        "choices": [
+          { "text": "我去试试。", "next": "accept", "condition": { "type": "quest", "target": "quest_pinnacle", "op": "!=", "value": "active" }, "effects": [{ "type": "quest", "target": "quest_pinnacle", "value": "active" }] },
+          { "text": "当真厉害。", "next": "END" }
+        ]
+      },
+      "accept": {
+        "id": "accept",
+        "speaker": "青禾",
+        "text": "那你可要小心了！真人爷爷出手很重的——不过他要是输了，说过会把身上带的物事都给你呢。",
+        "choices": [{ "text": "那就试试看。", "next": "END" }]
+      },
+      "done": {
+        "id": "done",
+        "speaker": "青禾",
+        "text": "你、你真的赢了真人爷爷？！真人爷爷他笑了……我侍奉他一甲子，这是头一回见他笑。",
+        "choices": [{ "text": "承让了。", "next": "END" }]
+      }
+    }
+  }
+]

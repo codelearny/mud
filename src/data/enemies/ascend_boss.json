@@ -1,0 +1,179 @@
+[
+  {
+    "id": "formless_demon",
+    "name": "无相心魔",
+    "category": "evil",
+    "description": "由修行者心中执念化生的魔物，无固定形貌，你心中惧着什么，它便化作什么，专趁人心神失守时夺舍。",
+    "level": 28,
+    "attributes": {
+      "hp": 1080,
+      "maxHp": 1080,
+      "mp": 380,
+      "maxMp": 380,
+      "attack": 100,
+      "defense": 44,
+      "agility": 28,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "huagong_internal",
+      "jiuyin_internal",
+      "wudu_palm"
+    ],
+    "goldReward": 1800,
+    "drops": [
+      {
+        "itemId": "mystery_ore",
+        "rate": 0.45
+      },
+      {
+        "itemId": "spirit_orb",
+        "rate": 0.3
+      },
+      {
+        "itemId": "luck_pill",
+        "rate": 0.2
+      },
+      {
+        "itemId": "manual_qingtian_staff",
+        "rate": 0.15
+      },
+      {
+        "itemId": "wuxiang_blade",
+        "rate": 0.1
+      }
+    ]
+  },
+  {
+    "id": "sky_sword_wraith",
+    "name": "天外剑魂",
+    "category": "boss",
+    "boss": true,
+    "description": "天外之境中一缕不散的剑魂，乃古时剑修兵解后所留，剑意已臻无招无相之境，举手投足皆有山河倒悬之势。",
+    "level": 29,
+    "attributes": {
+      "hp": 1300,
+      "maxHp": 1300,
+      "mp": 420,
+      "maxMp": 420,
+      "attack": 108,
+      "defense": 48,
+      "agility": 34,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "dugu_nine",
+      "taiji_sword",
+      "tianwai_flysword",
+      "qingyun_step"
+    ],
+    "goldReward": 2400,
+    "drops": [
+      {
+        "itemId": "mystery_ore",
+        "rate": 0.5
+      },
+      {
+        "itemId": "spirit_orb",
+        "rate": 0.4
+      },
+      {
+        "itemId": "jade_heal",
+        "rate": 0.35
+      },
+      {
+        "itemId": "power_pill",
+        "rate": 0.25
+      },
+      {
+        "itemId": "manual_qiankun_shift",
+        "rate": 0.15
+      },
+      {
+        "itemId": "manual_dapeng_step",
+        "rate": 0.12
+      },
+      {
+        "itemId": "tiandao_talisman",
+        "rate": 0.15
+      }
+    ],
+    "counters": [
+      "skyWraithSlain"
+    ]
+  },
+  {
+    "id": "supreme_daoist",
+    "name": "无上道尊",
+    "category": "boss",
+    "boss": true,
+    "description": "端坐于武道极巅云端的道人，据说已活过三个甲子，通晓天下各派绝学。他不动则已，一动便是百家武学齐出，无人能接其二招。",
+    "level": 30,
+    "attributes": {
+      "hp": 1500,
+      "maxHp": 1500,
+      "mp": 520,
+      "maxMp": 520,
+      "attack": 120,
+      "defense": 54,
+      "agility": 32,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "xianglong_palms",
+      "jiuyin_internal",
+      "taixuan_internal",
+      "zhichi_step",
+      "blade_shatter_army"
+    ],
+    "goldReward": 3600,
+    "drops": [
+      {
+        "itemId": "mystery_ore",
+        "rate": 0.6
+      },
+      {
+        "itemId": "spirit_orb",
+        "rate": 0.5
+      },
+      {
+        "itemId": "jade_heal",
+        "rate": 0.45
+      },
+      {
+        "itemId": "power_pill",
+        "rate": 0.3
+      },
+      {
+        "itemId": "luck_pill",
+        "rate": 0.25
+      },
+      {
+        "itemId": "manual_wuji_sword",
+        "rate": 0.15
+      },
+      {
+        "itemId": "manual_wuxiang_blade",
+        "rate": 0.15
+      },
+      {
+        "itemId": "manual_changsheng_internal",
+        "rate": 0.12
+      },
+      {
+        "itemId": "qiankun_gauntlet",
+        "rate": 0.12
+      },
+      {
+        "itemId": "wuji_robe",
+        "rate": 0.12
+      }
+    ],
+    "counters": [
+      "supremeDaoistSlain"
+    ]
+  }
+]

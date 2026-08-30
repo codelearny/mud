@@ -1,0 +1,59 @@
+[
+  {
+    "id": "celestial_realm",
+    "name": "天外之境",
+    "description": "穿过深渊尽头的裂隙，眼前竟是另一番天地：无数浮岛悬于虚空，脚下星河缓缓倒转，头顶却无日月，只有一片浩瀚星海。此地灵气浓得化不开，却也游荡着来自域外的天魔。一名散发老者盘坐于浮岛边缘，似已在此枯坐多年。",
+    "connections": ["blood_pool", "thunder_pool"],
+    "npcs": ["celestial_hermit"],
+    "enemyPool": ["void_fiend", "star_devourer", "abyss_fiend"],
+    "requirement": { "type": "level", "target": "", "op": ">=", "value": 26 },
+    "requireHint": "天外有天，需等级 26 方可踏足",
+    "trainFactor": 1.6,
+    "actions": [
+      { "id": "explore_celestial", "label": "浮岛探寻", "type": "encounter", "text": "你踏着虚空中的浮石，向星海深处走去。", "encounters": ["enc_celestial_drift", "enc_abyss_whisper", "enc_master"] },
+      { "id": "gather_celestial", "label": "拾取星屑", "type": "gather", "text": "你从浮岛边缘刮下闪烁的星屑与晶石。", "gains": [
+        { "itemId": "mystery_ore", "min": 2, "max": 3, "weight": 3 },
+        { "itemId": "spirit_orb", "min": 1, "max": 2, "weight": 3 },
+        { "itemId": "ancient_relic", "min": 1, "max": 2, "weight": 1 }
+      ] }
+    ]
+  },
+  {
+    "id": "thunder_pool",
+    "name": "九天雷池",
+    "description": "雷池并非水池，而是一整片翻涌的紫雷云海，雷蛇在云层间穿梭炸裂，空气焦糊刺鼻。池中矗立着九根引雷石柱，据说以身受雷淬，可脱胎换骨——亦有不少修士就此形神俱灭。",
+    "connections": ["celestial_realm", "dao_pinnacle"],
+    "npcs": [],
+    "enemyPool": ["thunder_beast", "formless_demon", "void_fiend"],
+    "requirement": { "type": "level", "target": "", "op": ">=", "value": 28 },
+    "requireHint": "雷霆噬身，需等级 28 方可入池",
+    "trainFactor": 1.7,
+    "actions": [
+      { "id": "explore_thunder", "label": "雷池穿行", "type": "encounter", "text": "你运起周身内力，踏入翻涌的雷云。", "encounters": ["enc_thunder_pool", "enc_wild_trap", "enc_abyss_whisper"] },
+      { "id": "gather_thunder", "label": "收取雷晶", "type": "gather", "text": "你在引雷石柱下搜集凝结的雷晶。", "gains": [
+        { "itemId": "spirit_orb", "min": 2, "max": 3, "weight": 3 },
+        { "itemId": "mystery_ore", "min": 1, "max": 2, "weight": 2 },
+        { "itemId": "jade_heal", "min": 1, "max": 1, "weight": 1 }
+      ] }
+    ]
+  },
+  {
+    "id": "dao_pinnacle",
+    "name": "武道极巅",
+    "description": "雷池尽头是一座孤峰，峰顶平地如削，四顾云海茫茫。一名道人盘坐于峰顶青石之上，白须垂胸，周身无一丝气息外泄，仿佛与这片天地融为一体。他身侧立着一名垂髫道童，正睁着好奇的眼睛打量来人。此乃武道之尽头，亦是修行的起点。",
+    "connections": ["thunder_pool"],
+    "npcs": ["dao_attendant"],
+    "enemyPool": ["formless_demon", "sky_sword_wraith", "supreme_daoist"],
+    "requirement": { "type": "level", "target": "", "op": ">=", "value": 30 },
+    "requireHint": "武道尽头，需等级 30 方可登顶",
+    "trainFactor": 1.8,
+    "actions": [
+      { "id": "explore_pinnacle", "label": "极巅论道", "type": "encounter", "text": "你登上孤峰，向那道人走去。", "encounters": ["enc_dao_pinnacle", "enc_master", "enc_abyss_whisper"] },
+      { "id": "gather_pinnacle", "label": "峰顶拾遗", "type": "gather", "text": "你在峰顶青石四周搜寻前人遗留的物事。", "gains": [
+        { "itemId": "mystery_ore", "min": 2, "max": 3, "weight": 3 },
+        { "itemId": "spirit_orb", "min": 2, "max": 3, "weight": 3 },
+        { "itemId": "jade_heal", "min": 1, "max": 2, "weight": 2 }
+      ] }
+    ]
+  }
+]

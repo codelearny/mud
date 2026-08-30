@@ -1,0 +1,33 @@
+[
+  {
+    "id": "taixu_armor",
+    "name": "太虚神甲",
+    "description": "太虚金精炼制的护甲，甲上云纹流转，穿上身轻若无物，刀剑加身只闻金声。",
+    "type": "armor",
+    "category": "body",
+    "price": 15000,
+    "slot": "armor",
+    "minLevel": 27,
+    "rarity": "legendary",
+    "effects": [
+      { "type": "defense", "value": 48 },
+      { "type": "maxHp", "value": 70 }
+    ]
+  },
+  {
+    "id": "wuji_robe",
+    "name": "无极道袍",
+    "description": "无上道尊所留道袍，袍上没有一丝缝线，浑然天成，穿上后内息与天地相通，万法难侵。",
+    "type": "armor",
+    "category": "body",
+    "price": 24000,
+    "slot": "armor",
+    "minLevel": 30,
+    "rarity": "legendary",
+    "effects": [
+      { "type": "defense", "value": 58 },
+      { "type": "maxHp", "value": 90 },
+      { "type": "maxMp", "value": 60 }
+    ]
+  }
+]

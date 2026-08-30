@@ -1,0 +1,51 @@
+[
+  {
+    "id": "tianwai_sword",
+    "name": "天外玄铁剑",
+    "description": "以九天坠落的玄铁铸成，剑身隐现星纹，重而不钝，挥之隐隐有风雷之声。",
+    "type": "weapon",
+    "category": "sword",
+    "school": "sword",
+    "price": 12000,
+    "slot": "weapon",
+    "minLevel": 26,
+    "rarity": "legendary",
+    "effects": [
+      { "type": "attack", "value": 62 },
+      { "type": "defense", "value": 8 }
+    ]
+  },
+  {
+    "id": "wuxiang_blade",
+    "name": "无相魔刀",
+    "description": "刀身漆黑无光，望去似有似无，出鞘时连持刀者自己也看不清刀锋所在。",
+    "type": "weapon",
+    "category": "blade",
+    "school": "blade",
+    "price": 16000,
+    "slot": "weapon",
+    "minLevel": 28,
+    "rarity": "legendary",
+    "effects": [
+      { "type": "attack", "value": 70 },
+      { "type": "luck", "value": 10 }
+    ]
+  },
+  {
+    "id": "qiankun_gauntlet",
+    "name": "乾坤拳套",
+    "description": "以阴阳双铁锻造的拳套，一阴一阳，戴之可牵引挪移四方之力，更能身随意动。",
+    "type": "weapon",
+    "category": "fist",
+    "school": "fist",
+    "price": 22000,
+    "slot": "weapon",
+    "minLevel": 30,
+    "rarity": "legendary",
+    "effects": [
+      { "type": "attack", "value": 80 },
+      { "type": "agility", "value": 10 },
+      { "type": "luck", "value": 8 }
+    ]
+  }
+]

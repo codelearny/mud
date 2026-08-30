@@ -41,7 +41,7 @@
     "id": "blood_pool",
     "name": "血池秘境",
     "description": "深渊尽头的密闭石窟，窟心一池血水粘稠如浆，咕嘟咕嘟冒着泡。池畔立着九根残破的封魔石柱，柱上刻满了早已失效的符咒。池中似有物事在缓缓翻身，每一次起伏，整个石窟便随之震颤。",
-    "connections": ["nine_nether_abyss"],
+    "connections": ["nine_nether_abyss", "celestial_realm"],
     "npcs": [],
     "enemyPool": ["blood_demon", "abyss_fiend", "demon_leader"],
     "requirement": { "type": "level", "target": "", "op": ">=", "value": 23 },

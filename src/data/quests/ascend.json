@@ -1,0 +1,39 @@
+[
+  {
+    "id": "quest_ascend",
+    "name": "天外之劫",
+    "giver": "celestial_hermit",
+    "description": "天外之境星海尽头，古时剑修兵解所留的剑魂已成祸患，枯坐老人恳你前往除之。",
+    "acceptText": "少侠领命除剑魂",
+    "completeCondition": { "type": "counter", "target": "skyWraithSlain", "op": ">=", "value": 1 },
+    "completeFlag": "ascendDone",
+    "rewards": {
+      "exp": 5000,
+      "gold": 3000,
+      "items": [
+        { "itemId": "mystery_ore", "quantity": 3 },
+        { "itemId": "spirit_orb", "quantity": 3 },
+        { "itemId": "power_pill", "quantity": 1 }
+      ]
+    }
+  },
+  {
+    "id": "quest_pinnacle",
+    "name": "武道之巅",
+    "giver": "dao_attendant",
+    "description": "武道极巅的无上道尊通晓天下各派绝学，三百年来无人能胜。道童青禾盼你登顶论道，一较高下。",
+    "acceptText": "少侠领命登顶",
+    "completeCondition": { "type": "counter", "target": "supremeDaoistSlain", "op": ">=", "value": 1 },
+    "completeFlag": "pinnacleDone",
+    "rewards": {
+      "exp": 10000,
+      "gold": 6000,
+      "items": [
+        { "itemId": "mystery_ore", "quantity": 5 },
+        { "itemId": "spirit_orb", "quantity": 3 },
+        { "itemId": "jade_heal", "quantity": 3 },
+        { "itemId": "luck_pill", "quantity": 2 }
+      ]
+    }
+  }
+]

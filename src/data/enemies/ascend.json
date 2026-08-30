@@ -1,0 +1,132 @@
+[
+  {
+    "id": "void_fiend",
+    "name": "域外天魔",
+    "category": "evil",
+    "description": "来自九天之外的魔物，形如浓墨人影，五官模糊不清，所过之处空间微微扭曲，凡人视之即生眩晕。",
+    "level": 26,
+    "attributes": {
+      "hp": 950,
+      "maxHp": 950,
+      "mp": 300,
+      "maxMp": 300,
+      "attack": 88,
+      "defense": 42,
+      "agility": 26,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "huagong_internal",
+      "fengmo_staff",
+      "tieshan_palm"
+    ],
+    "goldReward": 1200,
+    "drops": [
+      {
+        "itemId": "mystery_ore",
+        "rate": 0.4
+      },
+      {
+        "itemId": "spirit_orb",
+        "rate": 0.3
+      },
+      {
+        "itemId": "jade_heal",
+        "rate": 0.25
+      },
+      {
+        "itemId": "star_tear",
+        "rate": 0.1
+      },
+      {
+        "itemId": "tianwai_sword",
+        "rate": 0.08
+      }
+    ]
+  },
+  {
+    "id": "thunder_beast",
+    "name": "九天雷兽",
+    "category": "beast",
+    "description": "栖息于九天雷池的远古凶兽，通体缠绕紫雷，奔行时脚下生电，一吼可令云层炸裂、电蛇乱窜。",
+    "level": 27,
+    "attributes": {
+      "hp": 1020,
+      "maxHp": 1020,
+      "mp": 260,
+      "maxMp": 260,
+      "attack": 94,
+      "defense": 40,
+      "agility": 30,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "basic_fist",
+      "wolf_fang",
+      "xianglong_palms"
+    ],
+    "goldReward": 1400,
+    "drops": [
+      {
+        "itemId": "beast_core",
+        "rate": 0.45
+      },
+      {
+        "itemId": "spirit_orb",
+        "rate": 0.3
+      },
+      {
+        "itemId": "power_pill",
+        "rate": 0.2
+      },
+      {
+        "itemId": "taixu_armor",
+        "rate": 0.1
+      }
+    ]
+  },
+  {
+    "id": "star_devourer",
+    "name": "吞星兽",
+    "category": "beast",
+    "description": "以星辰精气为食的太古巨兽，身躯如小山，一张口便有星辉倒卷而入，皮甲硬逾九幽玄铁。",
+    "level": 28,
+    "attributes": {
+      "hp": 1150,
+      "maxHp": 1150,
+      "mp": 320,
+      "maxMp": 320,
+      "attack": 98,
+      "defense": 46,
+      "agility": 24,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "basic_fist",
+      "wolf_fang",
+      "tieshan_palm"
+    ],
+    "goldReward": 1600,
+    "drops": [
+      {
+        "itemId": "beast_core",
+        "rate": 0.5
+      },
+      {
+        "itemId": "mystery_ore",
+        "rate": 0.35
+      },
+      {
+        "itemId": "jade_heal",
+        "rate": 0.25
+      },
+      {
+        "itemId": "tianwai_sword",
+        "rate": 0.06
+      }
+    ]
+  }
+]
