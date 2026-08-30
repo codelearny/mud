@@ -20,6 +20,7 @@ export const useStoryStore = defineStore('story', () => {
   const npcAffinity = ref<Record<string, number>>({})
   const questStatus = ref<Record<string, QuestStatus>>({})
   const counters = ref<Record<string, number>>({})
+  const usedEncounters = ref<string[]>([]) // 已触发过的一次性际遇 id
   const currentDialogue = ref<{ npcId: string; nodeId: string } | null>(null)
   const currentEncounter = ref<Encounter | null>(null)
   const toast = ref<{ msg: string; id: number } | null>(null)
@@ -41,6 +42,7 @@ export const useStoryStore = defineStore('story', () => {
     }
     flags.value = {}
     npcAffinity.value = {}
+    usedEncounters.value = []
     currentDialogue.value = null
     currentEncounter.value = null
   }
@@ -168,7 +170,12 @@ export const useStoryStore = defineStore('story', () => {
 
   // pool 来自 SceneAction.encounters，用于让不同地点/行动触发不同遭遇
   function triggerEncounter(pool?: string[]) {
-    const enc = rollRandomEncounter(pool)
+    const enc = rollRandomEncounter(pool, usedEncounters.value)
+    // 一次性际遇：触发即消耗，从池子剔除（即便玩家选择拒绝也不再复现，杜绝刷取）
+    if (enc && enc.once && !usedEncounters.value.includes(enc.id)) {
+      usedEncounters.value = [...usedEncounters.value, enc.id]
+      saveStoryState()
+    }
     currentEncounter.value = enc ?? null
   }
 
@@ -233,6 +240,7 @@ export const useStoryStore = defineStore('story', () => {
       npcAffinity: npcAffinity.value,
       questStatus: questStatus.value,
       counters: counters.value,
+      usedEncounters: usedEncounters.value,
     }
     localStorage.setItem(STORY_KEY, JSON.stringify(data))
   }
@@ -248,6 +256,7 @@ export const useStoryStore = defineStore('story', () => {
       flags.value = parsed.flags ?? {}
       npcAffinity.value = parsed.npcAffinity ?? {}
       questStatus.value = parsed.questStatus ?? {}
+      usedEncounters.value = parsed.usedEncounters ?? []
       counters.value = {
         banditsDefeated: 0,
         duelsWon: 0,

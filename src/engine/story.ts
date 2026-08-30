@@ -101,7 +101,7 @@ export function getVisibleChoices(node: DialogueNode, ctx: ConditionContext): Di
 
 // pool 为可选的场景/行动限定遭遇池（来自 SceneAction.encounters）。
 // 若池中 id 全部无效则回退到全局池，保证配置写错也不会卡住流程。
-export function rollRandomEncounter(pool?: string[]): Encounter | undefined {
+export function rollRandomEncounter(pool?: string[], usedIds: string[] = []): Encounter | undefined {
   const all = getAllEncounters()
   if (all.length === 0) return undefined
   let list = all
@@ -109,7 +109,10 @@ export function rollRandomEncounter(pool?: string[]): Encounter | undefined {
     const scoped = pool.map(id => getEncounter(id)).filter((e): e is Encounter => !!e)
     if (scoped.length > 0) list = scoped
   }
-  return list[Math.floor(Math.random() * list.length)]
+  // 一次性际遇：已触发过的不再出现，避免刷取
+  const available = list.filter(e => !(e.once && usedIds.includes(e.id)))
+  if (available.length === 0) return undefined
+  return available[Math.floor(Math.random() * available.length)]
 }
 
 export function getEncounterById(id: string): Encounter | undefined {

@@ -12,6 +12,7 @@
   {
     "id": "enc_sword_epitaph",
     "title": "剑碑",
+    "once": true,
     "text": "冢心立着一方残碑，碑文已漫漶不清，唯余八个大字：『心剑合一，无招胜有招』。",
     "choices": [
       { "text": "凝神参悟（得经验）", "next": "END", "effects": [{ "type": "exp", "value": 60 }] },

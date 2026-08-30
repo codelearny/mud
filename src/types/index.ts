@@ -359,6 +359,7 @@ export interface Encounter {
   title: string
   text: string
   condition?: DialogueCondition
+  once?: boolean        // 一次性际遇：触发过一次后从随机池中剔除（用于送绝学/独门武学等不可刷取的机缘）
   choices: DialogueChoice[]
 }
 

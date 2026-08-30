@@ -2,6 +2,7 @@
   {
     "id": "enc_ferry_talk",
     "title": "艄公闲话",
+    "once": true,
     "text": "老艄公磕了磕烟袋：『客官，这江水底下可埋着不少故事。前朝那支运宝的船队，就沉在下游第三道弯里。』",
     "choices": [
       { "text": "细听究竟（长见识）", "next": "END", "effects": [{ "type": "exp", "value": 25 }] },

@@ -2,6 +2,7 @@
   {
     "id": "enc_bottle",
     "title": "拾遗秘籍",
+    "once": true,
     "text": "草丛间赫然露出一角布包，翻开竟是一本残旧武功秘籍，似是前辈高人所遗。",
     "choices": [
       { "text": "拾起习练（领悟基础内功）", "next": "END", "effects": [{ "type": "learn_skill", "target": "basic_internal" }, { "type": "exp", "value": 30 }] },
@@ -21,6 +22,7 @@
   {
     "id": "enc_master",
     "title": "神秘高手",
+    "once": true,
     "text": "一位灰袍老者负手而立，笑道：『小友根骨不俗，老夫传你一招青云步如何？』",
     "choices": [
       { "text": "拜谢前辈（习青云步）", "next": "END", "effects": [{ "type": "learn_skill", "target": "qingyun_step" }, { "type": "affinity", "target": "mysterious_master", "value": 5 }] },
