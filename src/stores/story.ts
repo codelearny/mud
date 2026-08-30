@@ -9,7 +9,7 @@ import {
   isChoiceVisible,
   rollRandomEncounter,
 } from '../engine/story'
-import { getAllQuests } from '../engine/data-loader'
+import { getAllQuests, getSkill } from '../engine/data-loader'
 import { usePlayerStore } from './player'
 import { useShopStore } from './shop'
 
@@ -108,9 +108,14 @@ export const useStoryStore = defineStore('story', () => {
           if (Number(eff.value) >= 0) playerStore.addGold(Number(eff.value))
           else playerStore.spendGold(-Number(eff.value))
           break
-        case 'learn_skill':
-          playerStore.learnNewSkill(eff.target!)
+        case 'learn_skill': {
+          const ok = playerStore.grantSkill(eff.target!)
+          if (ok) {
+            const sk = getSkill(eff.target!)
+            pushToast(`习得武学：${sk?.name ?? eff.target!}`)
+          }
           break
+        }
         case 'quest':
           questStatus.value[eff.target!] = eff.value as QuestStatus
           break
@@ -208,11 +213,16 @@ export const useStoryStore = defineStore('story', () => {
         questStatus.value[quest.id] = 'completed'
         if (quest.completeFlag) flags.value[quest.completeFlag] = true
         const r = quest.rewards
-        pushToast(`任务【${quest.name}】完成！获得经验 ${r.exp} · 银两 ${r.gold}`)
+        const skillNames = (r.skills ?? []).map(id => getSkill(id)?.name ?? id)
+        const parts: string[] = []
+        if (r.exp) parts.push(`经验 ${r.exp}`)
+        if (r.gold) parts.push(`银两 ${r.gold}`)
+        if (skillNames.length) parts.push(`武学 ${skillNames.join('、')}`)
+        pushToast(`任务【${quest.name}】完成！${parts.join(' · ')}`)
         if (r.exp) playerStore.addExp(r.exp)
         if (r.gold) playerStore.addGold(r.gold)
         if (r.items) for (const it of r.items) playerStore.addToInventory(it.itemId, it.quantity)
-        if (r.skills) for (const sk of r.skills) playerStore.learnNewSkill(sk)
+        if (r.skills) for (const sk of r.skills) playerStore.grantSkill(sk)
       }
     }
   }

@@ -83,6 +83,25 @@ export const usePlayerStore = defineStore('player', () => {
     return { ok: true }
   }
 
+  // 剧情/任务/际遇「赠送」武学：无条件习得，跳过等级、稀有度、秘籍、银两等一切门槛。
+  // 与 learnNewSkill（玩家手动参悟，需满足门槛并付费）区分，避免「说学会了却没学会」。
+  function grantSkill(skillId: string): boolean {
+    const char = character.value
+    if (!char) return false
+    const skill = getSkill(skillId)
+    if (!skill) return false
+    if (char.learnedSkills.some(s => s.skillId === skillId)) return false
+    character.value = {
+      ...char,
+      learnedSkills: [
+        ...char.learnedSkills,
+        { skillId, level: 1, proficiency: 0, proficiencyToNext: 100 },
+      ],
+    }
+    save()
+    return true
+  }
+
   function equip(itemId: string) {
     if (!character.value) return
     character.value = engineEquip(character.value, itemId)
@@ -238,6 +257,7 @@ export const usePlayerStore = defineStore('player', () => {
     discoverEnemy,
     addExp,
     learnNewSkill,
+    grantSkill,
     learnGoldCost,
     equip,
     unequip,
