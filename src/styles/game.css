@@ -27,6 +27,26 @@
   box-sizing: border-box;
 }
 
+/* ===== 全局滚动条统一样式（所有滚动容器共用） ===== */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-hover) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--border-hover);
+  border-radius: 999px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
 html, body {
   height: 100%;
   background: var(--bg-primary);
@@ -865,23 +885,7 @@ html, body {
   gap: 8px;
   max-height: 52vh;
   overflow-y: auto;
-  /* 简洁清爽的细滚动条（WebKit + Firefox） */
-  scrollbar-width: thin;
-  scrollbar-color: var(--border-hover) transparent;
   padding-right: 6px;
-}
-.shop-list::-webkit-scrollbar {
-  width: 6px;
-}
-.shop-list::-webkit-scrollbar-track {
-  background: transparent;
-}
-.shop-list::-webkit-scrollbar-thumb {
-  background: var(--border-hover);
-  border-radius: 999px;
-}
-.shop-list::-webkit-scrollbar-thumb:hover {
-  background: var(--text-secondary);
 }
 
 .shop-price {
