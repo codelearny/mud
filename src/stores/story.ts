@@ -12,6 +12,7 @@ import {
 import { getAllQuests, getSkill, getItem } from '../engine/data-loader'
 import { usePlayerStore } from './player'
 import { useShopStore } from './shop'
+import { useMessageStore } from './messages'
 
 const STORY_KEY = 'jianghu_story'
 
@@ -23,13 +24,6 @@ export const useStoryStore = defineStore('story', () => {
   const usedEncounters = ref<string[]>([]) // 已触发过的一次性际遇 id
   const currentDialogue = ref<{ npcId: string; nodeId: string } | null>(null)
   const currentEncounter = ref<Encounter | null>(null)
-  const encounterResult = ref<{ title: string; lines: string[] } | null>(null)
-  const toast = ref<{ msg: string; id: number } | null>(null)
-  let toastSeq = 0
-  function pushToast(msg: string) {
-    toastSeq += 1
-    toast.value = { msg, id: toastSeq }
-  }
 
   function initStory() {
     const status: Record<string, QuestStatus> = {}
@@ -115,7 +109,7 @@ export const useStoryStore = defineStore('story', () => {
           const ok = playerStore.grantSkill(eff.target!)
           if (ok) {
             const sk = getSkill(eff.target!)
-            pushToast(`习得武学：${sk?.name ?? eff.target!}`)
+            useMessageStore().addMessage('习得武学', sk?.name ?? eff.target!, 'reward')
           }
           break
         }
@@ -171,7 +165,6 @@ export const useStoryStore = defineStore('story', () => {
 
   // pool 来自 SceneAction.encounters，用于让不同地点/行动触发不同遭遇
   function triggerEncounter(pool?: string[]) {
-    encounterResult.value = null
     const enc = rollRandomEncounter(pool, usedEncounters.value)
     // 一次性际遇：触发即消耗，从池子剔除（即便玩家选择拒绝也不再复现，杜绝刷取）
     if (enc && enc.once && !usedEncounters.value.includes(enc.id)) {
@@ -234,26 +227,24 @@ export const useStoryStore = defineStore('story', () => {
     return evaluateCondition(cond, buildContext())
   }
 
+  // 选中际遇选项后，将结果写入全局消息列表（取代原结果弹窗），并关闭面板
   function selectEncounterChoice(choice: DialogueChoice): string {
     const lines = summarizeEffects(choice.effects)
     applyEffects(choice.effects)
     checkQuestCompletions()
+    const msgStore = useMessageStore()
     if (choice.battle) {
-      // 战斗类交由面板跳转，不弹结果卡
+      // 战斗类交由 BattleView 呈现，不写消息列表
       closeEncounter()
     } else {
-      // 选中后停留展示结果，避免"选了没反应"
-      encounterResult.value = {
-        title: choice.text,
-        lines: lines.length ? lines : ['（你淡然离去。）'],
-      }
+      msgStore.addMessage(choice.text, lines.length ? lines : ['（你淡然离去。）'], 'event')
+      closeEncounter()
     }
     return choice.next
   }
 
   function closeEncounter() {
     currentEncounter.value = null
-    encounterResult.value = null
   }
 
   function incrementCounter(name: string, amount: number = 1) {
@@ -285,7 +276,7 @@ export const useStoryStore = defineStore('story', () => {
         if (r.exp) parts.push(`经验 ${r.exp}`)
         if (r.gold) parts.push(`银两 ${r.gold}`)
         if (skillNames.length) parts.push(`武学 ${skillNames.join('、')}`)
-        pushToast(`任务【${quest.name}】完成！${parts.join(' · ')}`)
+        useMessageStore().addMessage(`任务【${quest.name}】完成`, parts, 'reward')
         if (r.exp) playerStore.addExp(r.exp)
         if (r.gold) playerStore.addGold(r.gold)
         if (r.items) for (const it of r.items) playerStore.addToInventory(it.itemId, it.quantity)
@@ -343,13 +334,10 @@ export const useStoryStore = defineStore('story', () => {
     counters,
     currentDialogue,
     currentEncounter,
-    encounterResult,
     currentNpc,
     currentDialogueNode,
     visibleDialogueChoices,
     visibleEncounterChoices,
-    toast,
-    pushToast,
     activeQuests,
     completedQuests,
     initStory,

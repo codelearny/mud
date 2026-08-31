@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref, computed, watch, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePlayerStore } from '../stores/player'
 import { useGameStore } from '../stores/game'
 import { useBattleStore } from '../stores/battle'
 import { useStoryStore } from '../stores/story'
 import { useShopStore } from '../stores/shop'
+import { useMessageStore } from '../stores/messages'
 import { getScene, getNPC, getItem } from '../engine/data-loader'
 import { trainingExpFromLevel } from '../engine/leveling'
 import StatusBar from '../components/StatusBar.vue'
@@ -26,11 +27,10 @@ const gameStore = useGameStore()
 const battleStore = useBattleStore()
 const storyStore = useStoryStore()
 const shopStore = useShopStore()
+const messageStore = useMessageStore()
 
 type Tab = 'map' | 'quests' | 'character' | 'skills' | 'inventory' | 'codex'
 const activeTab = ref<Tab>('map')
-const toastMsg = ref('')
-let toastTimer: ReturnType<typeof setTimeout> | undefined
 
 const scene = computed(() => getScene(gameStore.currentScene))
 const sceneNpcs = computed(() =>
@@ -65,7 +65,7 @@ function rollGain(gains: SceneGain[]): SceneGain | undefined {
 function travel(sceneId: string) {
   const target = connectedScenes.value.find(s => s.id === sceneId)
   if (target?.locked) {
-    showToast(target.hint)
+    messageStore.addMessage('前路未通', target.hint, 'info')
     return
   }
   gameStore.setScene(sceneId)
@@ -78,20 +78,20 @@ function talkNpc(npcId: string) {
 
 function doAction(action: SceneAction) {
   if (!storyStore.meetsCondition(action.requirement)) {
-    showToast(action.requireHint ?? '时机未到，此事尚不可为。')
+    messageStore.addMessage('时机未到', action.requireHint ?? '此事尚不可为。', 'info')
     return
   }
   const eff = playerStore.effectiveAttrs
   switch (action.type) {
     case 'rest':
       if (eff) playerStore.setHpMp(eff.maxHp, eff.maxMp)
-      showToast(action.text ?? '你歇息片刻，气血内力尽复。')
+      messageStore.addMessage(undefined, action.text ?? '你歇息片刻，气血内力尽复。', 'action')
       break
     case 'train': {
       const base = trainingExpFromLevel(playerStore.character?.level ?? 1)
       const amt = Math.round(base * (scene.value?.trainFactor ?? 1))
       playerStore.addExp(amt)
-      showToast((action.text ?? '你勤练不辍') + `（功力 +${amt}）`)
+      messageStore.addMessage(undefined, (action.text ?? '你勤练不辍') + `（功力 +${amt}）`, 'action')
       break
     }
     case 'gather': {
@@ -100,9 +100,9 @@ function doAction(action: SceneAction) {
       if (gain && qty > 0) {
         playerStore.addToInventory(gain.itemId, qty)
         const name = getItem(gain.itemId)?.name ?? gain.itemId
-        showToast(`${action.text ?? '你搜寻一番'}：得【${name}】×${qty}`)
+        messageStore.addMessage(undefined, `${action.text ?? '你搜寻一番'}：得【${name}】×${qty}`, 'action')
       } else {
-        showToast(`${action.text ?? '你搜寻一番'}：一无所获。`)
+        messageStore.addMessage(undefined, `${action.text ?? '你搜寻一番'}：一无所获。`, 'action')
       }
       break
     }
@@ -121,7 +121,7 @@ function randomBattle() {
 
 function saveGame() {
   gameStore.saveGame()
-  showToast('存档成功！')
+  messageStore.addMessage(undefined, '存档成功！', 'info')
 }
 
 function exitGame() {
@@ -131,22 +131,11 @@ function exitGame() {
   router.push('/')
 }
 
-function showToast(msg: string) {
-  toastMsg.value = msg
-  if (toastTimer) clearTimeout(toastTimer)
-  toastTimer = setTimeout(() => { toastMsg.value = '' }, 3000)
+function formatMsgTime(t: number): string {
+  const d = new Date(t)
+  const p = (n: number) => String(n).padStart(2, '0')
+  return `${p(d.getHours())}:${p(d.getMinutes())}`
 }
-
-watch(
-  () => storyStore.toast?.id,
-  (id) => {
-    if (id) showToast(storyStore.toast!.msg)
-  }
-)
-
-onMounted(() => {
-  if (storyStore.toast) showToast(storyStore.toast.msg)
-})
 </script>
 
 <template>
@@ -157,7 +146,6 @@ onMounted(() => {
       <div class="panel">
         <div class="panel-title">{{ scene?.name }}</div>
         <p class="scene-desc">{{ scene?.description }}</p>
-        <div v-if="toastMsg" class="toast">{{ toastMsg }}</div>
       </div>
 
       <div class="panel" v-if="sceneNpcs.length">
@@ -228,6 +216,24 @@ onMounted(() => {
 
     <div v-show="activeTab === 'codex'">
       <CodexPanel />
+    </div>
+
+    <!-- 江湖消息：所有事件交互结果在此留痕，仅保留最近几条 -->
+    <div class="panel msg-panel">
+      <div class="panel-title">江湖消息</div>
+      <div class="msg-scroll">
+        <div v-if="!messageStore.messages.length" class="msg-empty">行走江湖，际遇自会在此留痕。</div>
+        <div
+          v-for="m in messageStore.messages"
+          :key="m.id"
+          class="msg-item"
+          :class="'msg-' + m.type"
+        >
+          <div v-if="m.title" class="msg-title">{{ m.title }}</div>
+          <div v-for="(line, i) in m.lines" :key="i" class="msg-line">{{ line }}</div>
+          <div class="msg-time">{{ formatMsgTime(m.time) }}</div>
+        </div>
+      </div>
     </div>
 
     <div class="action-menu">
