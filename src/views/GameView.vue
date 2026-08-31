@@ -17,6 +17,7 @@ import EncounterPanel from '../components/EncounterPanel.vue'
 import QuestPanel from '../components/QuestPanel.vue'
 import ShopPanel from '../components/ShopPanel.vue'
 import CodexPanel from '../components/CodexPanel.vue'
+import TalentChoiceModal from '../components/TalentChoiceModal.vue'
 import type { SceneAction, SceneGain } from '../types'
 
 const router = useRouter()
@@ -241,5 +242,6 @@ onMounted(() => {
     <DialoguePanel v-if="storyStore.currentDialogue" />
     <EncounterPanel v-if="storyStore.currentEncounter" />
     <ShopPanel v-if="shopStore.currentShopId" />
+    <TalentChoiceModal />
   </template>
 </template>

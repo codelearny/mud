@@ -2,8 +2,8 @@
 import { computed } from 'vue'
 import { usePlayerStore } from '../stores/player'
 import { getEffectiveAttributes } from '../engine/character'
-import { getItem } from '../engine/data-loader'
-import type { EquipSlot } from '../types'
+import { getItem, getTalent } from '../engine/data-loader'
+import type { EquipSlot, Talent } from '../types'
 
 const playerStore = usePlayerStore()
 const char = computed(() => playerStore.character)
@@ -12,6 +12,11 @@ const eff = computed(() => {
   if (!char.value) return null
   return getEffectiveAttributes(char.value)
 })
+
+// 已顿悟的天赋（升级三选一获得），构成玩家当前 build
+const ownedTalents = computed<Talent[]>(() =>
+  (char.value?.talents ?? []).map(id => getTalent(id)).filter((t): t is Talent => !!t)
+)
 
 const freePoints = computed(() => char.value?.freePoints ?? 0)
 
@@ -133,5 +138,44 @@ function alloc(stat: 'attack' | 'defense' | 'agility' | 'comprehension' | 'luck'
       <span class="attr-name">{{ slot.label }}</span>
       <span class="attr-value">{{ equippedItemName(slot.key) }}</span>
     </div>
+
+    <div class="panel-title" style="margin-top: 12px;">天赋（顿悟）</div>
+    <div v-if="ownedTalents.length === 0" class="alloc-done">（尚未顿悟任何天赋，升级时可三选一）</div>
+      <div class="talent-chips" v-else>
+        <div class="talent-chip" v-for="t in ownedTalents" :key="t.id" :class="'rar-' + t.rarity">
+          <span class="tc-name">{{ t.name }}</span>
+          <span class="tc-desc">{{ t.description }}</span>
+        </div>
+      </div>
   </div>
 </template>
+
+<style scoped>
+.talent-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.talent-chip {
+  border: 1px solid #5a4a2f;
+  border-left: 3px solid #8a6a35;
+  border-radius: 6px;
+  padding: 5px 9px;
+  background: #15100b;
+}
+.tc-name {
+  font-weight: 700;
+  color: #f0e2c0;
+  margin-right: 8px;
+}
+.tc-desc {
+  font-size: 12px;
+  color: #c2b08a;
+}
+.rar-rare { border-left-color: #4a90d9; }
+.rar-epic { border-left-color: #a85ad9; }
+.rar-legendary { border-left-color: #e0a72e; }
+.rar-rare .tc-name { color: #9cc6ef; }
+.rar-epic .tc-name { color: #cf9ce8; }
+.rar-legendary .tc-name { color: #f3c75a; }
+</style>

@@ -1,0 +1,245 @@
+[
+  {
+    "id": "gangmeng",
+    "name": "刚猛",
+    "category": "attack",
+    "rarity": "common",
+    "description": "攻击 +12%",
+    "weight": 100,
+    "effects": { "attackPercent": 0.12 }
+  },
+  {
+    "id": "xiongchan",
+    "name": "凶悍",
+    "category": "attack",
+    "rarity": "rare",
+    "description": "攻击 +18%，但气血上限 -10（以伤换攻）",
+    "weight": 45,
+    "effects": { "attackPercent": 0.18, "maxHpFlat": -10 }
+  },
+  {
+    "id": "baodao",
+    "name": "爆裂",
+    "category": "attack",
+    "rarity": "epic",
+    "description": "攻击 +10%，暴击率 +8%",
+    "weight": 18,
+    "effects": { "attackPercent": 0.10, "critRate": 0.08 }
+  },
+  {
+    "id": "ciji",
+    "name": "致命一击",
+    "category": "attack",
+    "rarity": "legendary",
+    "description": "暴击率 +15%，暴击伤害 +50%",
+    "weight": 6,
+    "effects": { "critRate": 0.15, "critDamage": 0.5 }
+  },
+  {
+    "id": "tiegu",
+    "name": "铁骨",
+    "category": "defense",
+    "rarity": "common",
+    "description": "防御 +15%，气血上限 +30",
+    "weight": 100,
+    "effects": { "defensePercent": 0.15, "maxHpFlat": 30 }
+  },
+  {
+    "id": "jinzhong",
+    "name": "金钟罩",
+    "category": "defense",
+    "rarity": "rare",
+    "description": "受到伤害 -12%",
+    "weight": 45,
+    "effects": { "damageReduction": 0.12 }
+  },
+  {
+    "id": "buhuai",
+    "name": "不坏金身",
+    "category": "defense",
+    "rarity": "epic",
+    "description": "受到伤害 -10%，气血上限 +60",
+    "weight": 18,
+    "effects": { "damageReduction": 0.10, "maxHpFlat": 60 }
+  },
+  {
+    "id": "gangchang",
+    "name": "钢肠铁壁",
+    "category": "defense",
+    "rarity": "legendary",
+    "description": "受到伤害 -20%",
+    "weight": 6,
+    "effects": { "damageReduction": 0.20 }
+  },
+  {
+    "id": "jifeng",
+    "name": "疾风",
+    "category": "agility",
+    "rarity": "common",
+    "description": "身法 +18%",
+    "weight": 100,
+    "effects": { "agilityPercent": 0.18 }
+  },
+  {
+    "id": "qingshen",
+    "name": "轻身",
+    "category": "agility",
+    "rarity": "rare",
+    "description": "身法 +12%，内力上限 +20",
+    "weight": 45,
+    "effects": { "agilityPercent": 0.12, "maxMpFlat": 20 }
+  },
+  {
+    "id": "xianfa",
+    "name": "先发制人",
+    "category": "agility",
+    "rarity": "epic",
+    "description": "身法 +20%，暴击率 +5%",
+    "weight": 18,
+    "effects": { "agilityPercent": 0.20, "critRate": 0.05 }
+  },
+  {
+    "id": "tongxuan",
+    "name": "悟性通玄",
+    "category": "wisdom",
+    "rarity": "common",
+    "description": "悟性 +20%",
+    "weight": 100,
+    "effects": { "comprehensionPercent": 0.20 }
+  },
+  {
+    "id": "huichun",
+    "name": "回春",
+    "category": "wisdom",
+    "rarity": "rare",
+    "description": "每回合开始回复 5% 最大气血",
+    "weight": 45,
+    "effects": { "regenPercent": 0.05 }
+  },
+  {
+    "id": "xuandao",
+    "name": "玄门正宗",
+    "category": "wisdom",
+    "rarity": "epic",
+    "description": "内力上限 +40，悟性 +10%",
+    "weight": 18,
+    "effects": { "maxMpFlat": 40, "comprehensionPercent": 0.10 }
+  },
+  {
+    "id": "wuxing",
+    "name": "五行轮转",
+    "category": "wisdom",
+    "rarity": "legendary",
+    "description": "每回合回复 10% 最大气血，内力上限 +50",
+    "weight": 6,
+    "effects": { "regenPercent": 0.10, "maxMpFlat": 50 }
+  },
+  {
+    "id": "caiyuan",
+    "name": "财源广进",
+    "category": "economy",
+    "rarity": "common",
+    "description": "所得银两 +25%",
+    "weight": 100,
+    "effects": { "goldPercent": 0.25 }
+  },
+  {
+    "id": "xiuxing",
+    "name": "修行有道",
+    "category": "economy",
+    "rarity": "rare",
+    "description": "战斗所得经验 +20%",
+    "weight": 45,
+    "effects": { "expPercent": 0.20 }
+  },
+  {
+    "id": "tianyun",
+    "name": "天降横财",
+    "category": "economy",
+    "rarity": "epic",
+    "description": "所得银两 +30%，经验 +10%",
+    "weight": 18,
+    "effects": { "goldPercent": 0.30, "expPercent": 0.10 }
+  },
+  {
+    "id": "jiandao",
+    "name": "剑道专精",
+    "category": "school",
+    "rarity": "rare",
+    "description": "剑法伤害 +20%",
+    "weight": 45,
+    "effects": { "schoolDamage": { "sword": 0.20 } }
+  },
+  {
+    "id": "daofa",
+    "name": "刀法精通",
+    "category": "school",
+    "rarity": "rare",
+    "description": "刀法伤害 +20%",
+    "weight": 45,
+    "effects": { "schoolDamage": { "blade": 0.20 } }
+  },
+  {
+    "id": "quanfa",
+    "name": "拳脚无双",
+    "category": "school",
+    "rarity": "rare",
+    "description": "拳脚伤害 +20%",
+    "weight": 45,
+    "effects": { "schoolDamage": { "fist": 0.20 } }
+  },
+  {
+    "id": "gunfa",
+    "name": "棍棒通神",
+    "category": "school",
+    "rarity": "rare",
+    "description": "棍棒伤害 +20%",
+    "weight": 45,
+    "effects": { "schoolDamage": { "staff": 0.20 } }
+  },
+  {
+    "id": "neigong",
+    "name": "内功深厚",
+    "category": "school",
+    "rarity": "rare",
+    "description": "内功伤害 +20%",
+    "weight": 45,
+    "effects": { "schoolDamage": { "internal": 0.20 } }
+  },
+  {
+    "id": "qinggong",
+    "name": "身轻如燕",
+    "category": "school",
+    "rarity": "rare",
+    "description": "轻功伤害 +25%",
+    "weight": 45,
+    "effects": { "schoolDamage": { "movement": 0.25 } }
+  },
+  {
+    "id": "xixue",
+    "name": "嗜血",
+    "category": "special",
+    "rarity": "epic",
+    "description": "造成伤害时吸取 15% 气血",
+    "weight": 18,
+    "effects": { "lifesteal": 0.15 }
+  },
+  {
+    "id": "baofa",
+    "name": "爆发",
+    "category": "special",
+    "rarity": "epic",
+    "description": "暴击率 +10%，暴击伤害 +30%",
+    "weight": 18,
+    "effects": { "critRate": 0.10, "critDamage": 0.3 }
+  },
+  {
+    "id": "jixue",
+    "name": "汲血狂战",
+    "category": "special",
+    "rarity": "legendary",
+    "description": "吸取 25% 伤害为气血，攻击 +10%",
+    "weight": 6,
+    "effects": { "lifesteal": 0.25, "attackPercent": 0.10 }
+  }
+]

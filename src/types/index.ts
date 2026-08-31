@@ -158,6 +158,7 @@ export interface Character {
   origin?: string          // 开局出身（见 src/data/origins/origins.json），影响初始属性与资源
   discoveredEnemies?: string[] // 图鉴：已遭遇/已击败的敌人 id 集合（配置不写死，战斗开始时写入）
   discoveredItems?: string[]   // 图鉴：已获得过的物品 id 集合（卖出或消耗后仍保留，由 player.save 统一记录）
+  talents?: string[]           // 已顿悟的天赋 id 集合（升级时三选一），塑造 build 多样性（roguelike 要素）
   attributes: CharacterAttributes
   learnedSkills: LearnedSkill[]
   equipment: Equipment
@@ -179,6 +180,36 @@ export interface OriginConfig {
   startSkills?: string[]
   startItems?: { itemId: string; quantity: number }[]
   startGold?: number       // 覆盖初始金钱（默认 100），用于「商贾之家」之类开局富裕的出身
+}
+
+// ===== 天赋（顿悟）系统（roguelike 要素，纯配置驱动）=====
+// 升级时弹出「三选一」，玩家择一永久写入 character.talents，塑造每局 build 差异。
+// 效果分两类：属性百分比（融入 getEffectiveAttributes）/ 战斗内修正（注入 BattleCharacter）。
+export interface TalentEffect {
+  attackPercent?: number           // 攻击 +X%（乘算在有效属性之上）
+  defensePercent?: number
+  agilityPercent?: number
+  comprehensionPercent?: number
+  maxHpFlat?: number               // 气血上限 +X（定值，避开百分比带来的血量钳制问题）
+  maxMpFlat?: number
+  lifesteal?: number               // 吸血比例 0~1（按造成伤害吸取气血）
+  critRate?: number                // 暴击率 +X（叠加在技能 critRate 上）
+  critDamage?: number              // 暴击伤害加成（基础 1.5 → 1.5 + 此值）
+  damageReduction?: number         // 受伤减免 0~1
+  regenPercent?: number            // 每回合开始回血比例（基于最大气血）
+  schoolDamage?: Partial<Record<SkillCategory, number>> // 指定流派技能伤害 +X
+  goldPercent?: number             // 战斗/机缘所得银两 +X
+  expPercent?: number              // 战斗所得经验 +X
+}
+
+export interface Talent {
+  id: string
+  name: string
+  category: 'attack' | 'defense' | 'agility' | 'wisdom' | 'economy' | 'school' | 'special'
+  rarity: ItemRarity               // common/rare/epic/legendary：越稀有权重越低，越难抽到
+  description: string
+  weight: number                   // 抽取权重（与 rarity 配合：common 权重大、legendary 极小）
+  effects: TalentEffect
 }
 
 // 战斗内临时增益（由 buff* 类物品/技能施加，回合开始结算）
@@ -203,6 +234,13 @@ export interface BattleCharacter {
   poisonTurns?: number
   buffs?: ActiveBuff[]
   weaponSchool?: WeaponSchool // 已装备兵器的流派，用于战斗内「兵刃与功法相性」判定
+  // —— 天赋（顿悟）带来的战斗内修正（由 getEffectiveTalents 聚合后注入）——
+  lifesteal?: number            // 已造成伤害的吸血比例 0~1
+  critRateBonus?: number       // 附加暴击率（叠加在技能 critRate 上）
+  critDamageBonus?: number     // 暴击伤害加成（基础 1.5 → 1.5 + 此值）
+  damageReduction?: number     // 受到伤害减免比例 0~1
+  regenPercent?: number        // 每回合开始回复气血比例（基于最大气血）
+  schoolDamage?: Partial<Record<SkillCategory, number>> // 各流派技能伤害加成（比例）
 }
 
 export interface BattleLogEntry {

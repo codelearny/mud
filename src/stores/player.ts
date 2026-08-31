@@ -14,11 +14,14 @@ import {
 } from '../engine/character'
 import { expForNextLevel } from '../engine/leveling'
 import { getItem, getSkill, getAllItems } from '../engine/data-loader'
+import { rollTalentChoices } from '../engine/talents'
 
 const SAVE_KEY = 'jianghu_player'
 
 export const usePlayerStore = defineStore('player', () => {
   const character = ref<Character | null>(null)
+  // 升级「顿悟」待选天赋：升级时生成三选一，玩家择一后清空
+  const talentOffer = ref<{ options: string[] } | null>(null)
 
   const effectiveAttrs = computed(() => {
     if (!character.value) return null
@@ -40,7 +43,23 @@ export const usePlayerStore = defineStore('player', () => {
     const result = gainExp(character.value, amount)
     character.value = result.character
     save()
+    // 升级触发「顿悟」：三选一天赋（一次升级一次抉择，丰富 build 多样性）
+    if (result.leveledUp) {
+      const owned = character.value.talents ?? []
+      const options = rollTalentChoices(3, owned).map(t => t.id)
+      if (options.length > 0) talentOffer.value = { options }
+    }
     return result
+  }
+
+  // 顿悟：选定一个天赋，写入 character.talents 并清空待选
+  function chooseTalent(talentId: string) {
+    if (!character.value) return
+    const char = JSON.parse(JSON.stringify(character.value)) as Character
+    char.talents = [...(char.talents ?? []), talentId]
+    character.value = char
+    talentOffer.value = null
+    save()
   }
 
   // 参悟武学所需银两：按稀有度递增（common 分文不取）
@@ -269,6 +288,8 @@ export const usePlayerStore = defineStore('player', () => {
     save,
     load,
     allocatePoint,
+    talentOffer,
+    chooseTalent,
     hasSave,
     clear,
     getOwnedItemIds,

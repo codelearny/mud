@@ -7,6 +7,7 @@ import {
   titleForLevel,
   MAX_LEVEL,
 } from './leveling'
+import { getTalentEffects } from './talents'
 
 // 经验曲线改由升级配置驱动（见 src/data/leveling.json），便于整体调参。
 export function expForNextLevel(level: number): number {
@@ -106,6 +107,17 @@ export function getEffectiveAttributes(character: Character): CharacterAttribute
       }
     }
   }
+
+  // 天赋（顿悟）属性加成：百分比乘算在有效属性之上，气血/内力用定值避免钳制问题。
+  const te = getTalentEffects(character)
+  if (te.attackPercent) attrs.attack = Math.round(attrs.attack * (1 + te.attackPercent))
+  if (te.defensePercent) attrs.defense = Math.round(attrs.defense * (1 + te.defensePercent))
+  if (te.agilityPercent) attrs.agility = Math.round(attrs.agility * (1 + te.agilityPercent))
+  if (te.comprehensionPercent) attrs.comprehension = Math.round(attrs.comprehension * (1 + te.comprehensionPercent))
+  if (te.maxHpFlat) attrs.maxHp += te.maxHpFlat
+  if (te.maxMpFlat) attrs.maxMp += te.maxMpFlat
+  // 负向 maxHp 天赋（如「凶悍」）可能使当前气血超出上限，需钳制
+  if (attrs.hp > attrs.maxHp) attrs.hp = attrs.maxHp
 
   return attrs
 }

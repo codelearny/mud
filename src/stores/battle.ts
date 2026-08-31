@@ -12,6 +12,7 @@ import {
 import { usePlayerStore } from './player'
 import { useStoryStore } from './story'
 import { getAllEnemies, getEnemy } from '../engine/data-loader'
+import { getTalentEffects } from '../engine/talents'
 
 export const useBattleStore = defineStore('battle', () => {
   const battle = ref<Battle | null>(null)
@@ -80,8 +81,12 @@ export const useBattleStore = defineStore('battle', () => {
 
     if (battle.value.state === 'victory') {
       const rewards = getBattleRewards(battle.value)
-      const expResult = playerStore.addExp(rewards.exp)
-      playerStore.addGold(rewards.gold)
+      // 天赋经济加成：经验/银两按比例提升
+      const teff = getTalentEffects(playerStore.character)
+      const expMult = 1 + (teff.expPercent ?? 0)
+      const goldMult = 1 + (teff.goldPercent ?? 0)
+      const expResult = playerStore.addExp(Math.round(rewards.exp * expMult))
+      playerStore.addGold(Math.round(rewards.gold * goldMult))
       for (const dropId of rewards.drops) {
         playerStore.addToInventory(dropId, 1)
       }

@@ -1,6 +1,7 @@
 import type { Battle, BattleCharacter, Character, Skill, ActiveBuff, WeaponSchool } from '../types'
 import { getEnemy, getSkill, getItem } from './data-loader'
 import { getEffectiveAttributes } from './character'
+import { getTalentEffects } from './talents'
 import { chance, randomInt } from './random'
 import {
   WEAPON_SCHOOL_LABELS,
@@ -23,6 +24,9 @@ export function startBattle(player: Character, enemyId: string): Battle {
   const equippedWeapon = player.equipment.weapon ? getItem(player.equipment.weapon) : undefined
   const weaponSchool: WeaponSchool | undefined = equippedWeapon?.school
 
+  // 天赋（顿悟）战斗内修正：聚合后注入 BattleCharacter
+  const teff = getTalentEffects(player)
+
   const playerBC: BattleCharacter = {
     name: player.name,
     hp: eff.hp,
@@ -35,7 +39,13 @@ export function startBattle(player: Character, enemyId: string): Battle {
     skills: player.learnedSkills.map(s => s.skillId),
     isPlayer: true,
     buffs: [],
-    weaponSchool
+    weaponSchool,
+    lifesteal: teff.lifesteal,
+    critRateBonus: teff.critRate,
+    critDamageBonus: teff.critDamage,
+    damageReduction: teff.damageReduction,
+    regenPercent: teff.regenPercent,
+    schoolDamage: teff.schoolDamage
   }
 
   const enemyBC: BattleCharacter = {
@@ -83,11 +93,14 @@ function calculateDamage(
 
   const skillPower = skill?.power ?? 5
   const baseDamage = (attacker.attack * skillPower) / 10 + randomInt(1, 5)
-  const damage = Math.max(1, baseDamage - defender.defense * 0.3)
+  // 受伤减免：防御结算后再乘 (1 - 减免)，天赋「金钟罩」等生效（敌方无减免则不触发）
+  const reduction = defender.damageReduction ?? 0
+  const damage = Math.max(1, Math.round((baseDamage - defender.defense * 0.3) * (1 - reduction)))
 
-  const critRate = skill?.critRate ?? 0.05
+  const critRate = (skill?.critRate ?? 0.05) + (attacker.critRateBonus ?? 0)
   const crit = chance(critRate)
-  const finalDamage = crit ? Math.round(damage * 1.5) : Math.round(damage)
+  const critMult = 1.5 + (attacker.critDamageBonus ?? 0)
+  const finalDamage = crit ? Math.round(damage * critMult) : Math.round(damage)
 
   return { damage: finalDamage, crit, dodged: false }
 }
@@ -119,9 +132,10 @@ function performOffensive(
     }
   }
 
-  // 吸血：按总伤害比例恢复自身气血
-  if (total > 0 && skill.lifesteal && skill.lifesteal > 0) {
-    const healed = Math.floor(total * skill.lifesteal)
+  // 吸血：天赋吸血与技能吸血叠加，按总伤害比例恢复自身气血
+  const lifesteal = (skill.lifesteal ?? 0) + (attacker.lifesteal ?? 0)
+  if (total > 0 && lifesteal > 0) {
+    const healed = Math.floor(total * lifesteal)
     if (healed > 0) {
       attacker.hp = Math.min(attacker.maxHp, attacker.hp + healed)
       logParts.push(`吸取${healed}点气血`)
@@ -201,6 +215,9 @@ function enemyTurn(battle: Battle): Battle {
     return b
   }
 
+  // 敌方回合开始同样结算回血（当前敌人无此天赋，留作扩展）
+  applyRegen(b.enemy, b.turn, b.log)
+
   const usableSkills = b.enemy.skills.filter(sid => {
     const sk = getSkill(sid)
     return sk && sk.mpCost <= b.enemy.mp && sk.power > 0
@@ -271,9 +288,28 @@ function tickBuffs(bc: BattleCharacter, turn: number, log: Battle['log']) {
   }
 }
 
+// 回合开始结算回血（天赋「回春 / 五行轮转」）：按最大气血比例回复
+function applyRegen(bc: BattleCharacter, turn: number, log: Battle['log']) {
+  if (!bc.regenPercent || bc.regenPercent <= 0) return
+  const heal = Math.round(bc.maxHp * bc.regenPercent)
+  if (heal <= 0) return
+  const before = bc.hp
+  bc.hp = Math.min(bc.maxHp, bc.hp + heal)
+  const gained = bc.hp - before
+  if (gained > 0) {
+    log.push({
+      turn,
+      actor: bc.isPlayer ? 'player' : 'enemy',
+      text: `${bc.name}运转功法，回复${gained}点气血。`,
+      type: 'heal' as const
+    })
+  }
+}
+
 export function playerAttack(battle: Battle): Battle {
   const b: Battle = JSON.parse(JSON.stringify(battle))
   tickBuffs(b.player, b.turn, b.log)
+  applyRegen(b.player, b.turn, b.log)
   const { damage, crit, dodged } = calculateDamage(b.player, b.enemy, undefined)
 
   let logText: string
@@ -305,6 +341,7 @@ export function playerUseSkill(battle: Battle, skillId: string): Battle {
 
   const b: Battle = JSON.parse(JSON.stringify(battle))
   tickBuffs(b.player, b.turn, b.log)
+  applyRegen(b.player, b.turn, b.log)
 
   if (b.player.mp < skill.mpCost) {
     b.log.push({ turn: b.turn, actor: 'player', text: `内力不足，无法施展${skill.name}！`, type: 'info' })
@@ -329,7 +366,10 @@ export function playerUseSkill(battle: Battle, skillId: string): Battle {
       schoolNote = `手中${have}难展${need}法，招法威力大减`
     }
   }
-  const effSkill: Skill = { ...skill, power: Math.max(0, Math.round(skill.power * schoolMult)) }
+  // 流派专精天赋：对应流派技能伤害额外加成
+  const schoolTalent = b.player.schoolDamage?.[skill.category] ?? 0
+  const talentMult = 1 + schoolTalent
+  const effSkill: Skill = { ...skill, power: Math.max(0, Math.round(skill.power * schoolMult * talentMult)) }
 
   const logParts: string[] = []
 
@@ -373,6 +413,7 @@ export function playerUseItem(battle: Battle, itemId: string): Battle {
 
   const b: Battle = JSON.parse(JSON.stringify(battle))
   tickBuffs(b.player, b.turn, b.log)
+  applyRegen(b.player, b.turn, b.log)
 
   const parts: string[] = []
   for (const effect of item.effects) {

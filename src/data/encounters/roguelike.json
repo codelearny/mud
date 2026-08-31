@@ -1,0 +1,32 @@
+[
+  {
+    "id": "enc_ancient_tomb",
+    "title": "古墓探宝",
+    "text": "一座荒冢半掩于蒿草之中，封土松塌，露出一隙幽暗。冢前石兽缺了半边头颅，似在无声地警告来人。",
+    "choices": [
+      { "text": "撬开棺椁，探取陪葬奇珍（触发守墓傀儡）", "next": "END", "battle": "evil_disciple" },
+      { "text": "只取墓道明器（得银两与古物）", "next": "END", "effects": [{ "type": "gold", "value": 40 }, { "type": "item", "target": "ancient_relic", "value": 1 }] },
+      { "text": "不惊扰亡者，悄然离去", "next": "END" }
+    ]
+  },
+  {
+    "id": "enc_demon_altar",
+    "title": "邪神祭坛",
+    "text": "山坳深处矗着一座无字石坛，坛上血渍犹新。四隅残烛幽幽，仿佛有什么东西正自阴影里窥伺着你。",
+    "choices": [
+      { "text": "血祭邪神，换取一身通天手段（触发邪物）", "next": "END", "battle": "jianghu_villain" },
+      { "text": "唾弃邪祀，转身离去（得银两若干）", "next": "END", "effects": [{ "type": "gold", "value": 30 }] },
+      { "text": "静立观望，不发一言", "next": "END" }
+    ]
+  },
+  {
+    "id": "enc_mystic_gamble",
+    "title": "神秘赌局",
+    "text": "茶楼角落，一名青衣客以玉杯叩案，笑邀你入局：「赌一把么？赢了，囊中之物尽归阁下；输了——嘿，各凭本事。」",
+    "choices": [
+      { "text": "与神秘客赌斗一场（胜则尽收其财）", "next": "END", "battle": "river_pirate" },
+      { "text": "只作旁观，讨个彩头（得银二十）", "next": "END", "effects": [{ "type": "gold", "value": 20 }] },
+      { "text": "摇头婉拒", "next": "END" }
+    ]
+  }
+]

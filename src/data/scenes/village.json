@@ -18,7 +18,7 @@
     "npcs": ["hunter"],
     "enemyPool": ["ruffian", "bandit", "wild_wolf", "boar"],
     "actions": [
-      { "id": "explore_mountain", "label": "搜山寻敌", "type": "encounter", "text": "你提气轻身，深入后山搜寻匪踪。", "encounters": ["enc_wild_trap", "enc_wild_cave", "enc_wild_merchant", "enc_robber"] },
+      { "id": "explore_mountain", "label": "搜山寻敌", "type": "encounter", "text": "你提气轻身，深入后山搜寻匪踪。", "encounters": ["enc_wild_trap", "enc_wild_cave", "enc_wild_merchant", "enc_robber", "enc_ancient_tomb"] },
       { "id": "train", "label": "石台练功", "type": "train", "text": "你在石台上吐纳运功，隐隐有所领悟。" },
       { "id": "gather_herb", "label": "山间采药", "type": "gather", "text": "你在山石草木间寻觅药材。", "gains": [
         { "itemId": "medicine_herb", "min": 1, "max": 2, "weight": 3 },
@@ -45,7 +45,7 @@
         { "itemId": "iron_ore", "min": 1, "max": 2, "weight": 3 },
         { "itemId": "ancient_relic", "min": 1, "max": 1, "weight": 1 }
       ] },
-      { "id": "explore_ferry", "label": "渡口闲逛", "type": "encounter", "text": "你在渡口徘徊，看南来北往的行客。", "encounters": ["enc_ferry_talk", "enc_boat_wreck", "enc_river_trade", "enc_drowning"] }
+      { "id": "explore_ferry", "label": "渡口闲逛", "type": "encounter", "text": "你在渡口徘徊，看南来北往的行客。", "encounters": ["enc_ferry_talk", "enc_boat_wreck", "enc_river_trade", "enc_drowning", "enc_mystic_gamble"] }
     ]
   }
 ]
