@@ -175,9 +175,13 @@ const hintText: Record<Tab, string> = {
   equip: '入手即录，卖出亦不改其载',
 }
 
+function isLearned(id: string): boolean {
+  return learnedSkills.value.has(id)
+}
 function skillNames(ids: string[]): string {
   if (!ids.length) return '—'
-  return ids.map(id => getSkill(id)?.name ?? id).join('、')
+  // 未习得的武功不显其名，仅以「？？？」示之
+  return ids.map(id => isLearned(id) ? (getSkill(id)?.name ?? id) : '？？？').join('、')
 }
 function dropText(e: Enemy): string {
   const drops = e.drops ?? []
@@ -293,7 +297,7 @@ function isBoss(e: Enemy): boolean {
               <span class="codex-name">{{ m.name }}</span>
               <span class="codex-rarity" :class="rarityClass(m.rarity)">{{ rarityLabel(m.rarity) }}</span>
             </div>
-            <div class="codex-meta">所载：{{ m.skillId ? (getSkill(m.skillId)?.name ?? m.skillId) : '—' }}</div>
+            <div class="codex-meta">所载：{{ m.skillId ? (isLearned(m.skillId) ? (getSkill(m.skillId)?.name ?? m.skillId) : '？？？') : '—' }}</div>
             <p class="codex-desc">{{ m.description }}</p>
             <div class="codex-detail"><span class="codex-detail-label">来历</span>{{ sourceOf(m.id) }}</div>
           </div>
