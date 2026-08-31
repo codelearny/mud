@@ -68,7 +68,7 @@ const enemyGroups = computed(() => {
     })
 })
 
-// —— 武功（按流派分组，仅展示已习得；未习得不显示，避免「自动参悟」观感）——
+// —— 武功（按流派分组，全部列出；未习得者以「？？？」示之，与物品/装备未知卡片一致）——
 const skillGroups = computed(() => {
   return SKILL_CAT_ORDER
     .map(cat => {
@@ -77,7 +77,7 @@ const skillGroups = computed(() => {
       return {
         key: cat,
         label: SKILL_CAT_LABEL[cat] ?? cat,
-        list: learned, // 仅已学
+        list: all, // 全部列出；未学以？？？示之
         found: learned.length,
         total: all.length,
       }
@@ -170,7 +170,7 @@ const totals = computed(() => {
 
 const hintText: Record<Tab, string> = {
   enemy: '遭遇即录，所见皆入卷',
-  skill: '习得即录，未学武功不显于卷',
+  skill: '未学以？？？示之，习得方显真容',
   manual: '得手即录，参悟之后亦留其名',
   equip: '入手即录，卖出亦不改其载',
 }
@@ -262,27 +262,33 @@ function isBoss(e: Enemy): boolean {
       </div>
     </div>
 
-    <!-- 武功（子页签：剑法/刀法/拳脚/棍棒/内功/轻功；仅展示已习得） -->
+    <!-- 武功（子页签：剑法/刀法/拳脚/棍棒/内功/轻功；未习得者以？？？示之，与物品/装备一致） -->
     <div class="panel" v-else-if="tab === 'skill' && activeSkillGroup">
       <div class="panel-title codex-group-title">
         {{ activeSkillGroup.label }}<span class="codex-group-count">{{ activeSkillGroup.found }} / {{ activeSkillGroup.total }}</span>
       </div>
       <div class="codex-grid">
-        <div
-          class="codex-card"
-          v-for="s in activeSkillGroup.list"
-          :key="s.id"
-        >
-          <div class="codex-card-head">
-            <span class="codex-name">{{ s.name }}</span>
-            <span class="codex-rarity" :class="rarityClass(s.rarity)">{{ rarityLabel(s.rarity) }}</span>
+        <template v-for="s in activeSkillGroup.list" :key="s.id">
+          <div class="codex-card" v-if="learnedSkills.has(s.id)">
+            <div class="codex-card-head">
+              <span class="codex-name">{{ s.name }}</span>
+              <span class="codex-rarity" :class="rarityClass(s.rarity)">{{ rarityLabel(s.rarity) }}</span>
+            </div>
+            <div class="codex-meta">{{ activeSkillGroup.label }} · 需第{{ s.unlockLevel }}重</div>
+            <p class="codex-desc">{{ s.description }}</p>
+            <div class="codex-detail"><span class="codex-detail-label">威力</span>{{ s.power }} · 耗内力 {{ s.mpCost }} · 命中 {{ Math.round(s.hitRate * 100) }}%</div>
           </div>
-          <div class="codex-meta">{{ activeSkillGroup.label }} · 需第{{ s.unlockLevel }}重</div>
-          <p class="codex-desc">{{ s.description }}</p>
-          <div class="codex-detail"><span class="codex-detail-label">威力</span>{{ s.power }} · 耗内力 {{ s.mpCost }} · 命中 {{ Math.round(s.hitRate * 100) }}%</div>
-        </div>
+          <div class="codex-card locked" v-else>
+            <div class="codex-card-head">
+              <span class="codex-name">？？？</span>
+              <span class="codex-rarity" :class="rarityClass(s.rarity)">{{ rarityLabel(s.rarity) }}</span>
+            </div>
+            <div class="codex-meta">{{ activeSkillGroup.label }}</div>
+            <p class="codex-desc locked-text">尚未习得，江湖浩如烟海，且去寻访。</p>
+          </div>
+        </template>
       </div>
-      <div v-if="!activeSkillGroup.list.length" class="empty-text">尚未习得此类武功</div>
+      <div v-if="!activeSkillGroup.list.length" class="empty-text">此类武功暂未载入</div>
     </div>
 
     <!-- 秘籍（子页签：精妙/绝世） -->
