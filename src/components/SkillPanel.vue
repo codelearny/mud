@@ -33,7 +33,8 @@ const learnedSkills = computed<LearnedSkillView[]>(() => {
 const availableSkills = computed(() => {
   if (!char.value) return []
   const learned = new Set(char.value.learnedSkills.map(s => s.skillId))
-  return getAllSkills().filter(s => !learned.has(s.id))
+  // 仅展示当前立即可参悟者（修为/银两/秘籍皆备）；未达条件者不显，避免列出大量"未生效"的绝学
+  return getAllSkills().filter(s => !learned.has(s.id) && canLearn(s.id))
 })
 
 const categoryLabels: Record<SkillCategory, string> = {
@@ -150,12 +151,11 @@ function learnSkill(skillId: string) {
 
     <div class="panel-title" style="margin-top: 12px;">江湖绝学</div>
     <div v-if="learnMsg" class="learn-msg">{{ learnMsg }}</div>
-    <div class="skill-list">
+    <div class="skill-list" v-if="availableSkills.length">
       <div
         class="skill-card"
         v-for="skill in availableSkills"
         :key="skill.id"
-        :style="{ opacity: canLearn(skill.id) ? 1 : 0.5 }"
       >
         <div class="skill-info">
           <div class="skill-name">
@@ -190,5 +190,6 @@ function learnSkill(skillId: string) {
         </div>
       </div>
     </div>
+    <div v-else class="empty-text">暂无可参悟之绝学，且去历练、寻访秘籍。</div>
   </div>
 </template>
