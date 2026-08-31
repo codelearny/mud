@@ -188,6 +188,9 @@ html, body {
   padding: 10px 14px;
   background: var(--bg-secondary);
   border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 50;
 }
 
 .status-info {
@@ -662,6 +665,40 @@ html, body {
   margin-bottom: 4px;
 }
 
+/* 场景介绍降为页眉式标题栏，不再作为最显眼的英雄块 */
+.scene-header {
+  padding: 10px 14px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+}
+.scene-name {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-accent);
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+}
+
+/* 整体布局：主内容区 + 常驻消息侧栏 */
+.game-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.game-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.game-aside {
+  order: -1; /* 窄屏：消息列表置于顶部，场景介绍退居其下 */
+}
+
 /* ===== 江湖消息列表 ===== */
 .msg-panel {
   display: flex;
@@ -959,4 +996,26 @@ html, body {
   .btn-grid-4 { grid-template-columns: repeat(2, 1fr); }
   .action-menu { flex-direction: column; }
   .action-menu .btn { width: 100%; }
+}
+
+/* 桌面端：左右两栏，江湖消息常驻右侧并吸顶（打破纯上下布局） */
+@media (min-width: 900px) {
+  #app { max-width: 1040px; }
+  .game-body {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .game-main { flex: 1; min-width: 0; }
+  .game-aside {
+    order: 0;
+    width: 320px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 70px;
+    align-self: flex-start;
+    max-height: calc(100vh - 80px);
+  }
+  .game-aside .msg-panel { margin: 0; }
+  .game-aside .msg-scroll { max-height: calc(100vh - 130px); }
 }

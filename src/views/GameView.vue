@@ -142,13 +142,15 @@ function formatMsgTime(t: number): string {
   <template v-if="playerStore.character">
     <StatusBar />
 
-    <div v-show="activeTab === 'map'" class="map-view">
-      <div class="panel">
-        <div class="panel-title">{{ scene?.name }}</div>
-        <p class="scene-desc">{{ scene?.description }}</p>
-      </div>
+    <div class="game-body">
+      <div class="game-main">
+        <div v-show="activeTab === 'map'" class="map-view">
+          <div class="scene-header">
+            <div class="scene-name">{{ scene?.name }}</div>
+            <p class="scene-desc">{{ scene?.description }}</p>
+          </div>
 
-      <div class="panel" v-if="sceneNpcs.length">
+          <div class="panel" v-if="sceneNpcs.length">
         <div class="panel-title">此间人物</div>
         <div class="npc-list">
           <button
@@ -218,23 +220,6 @@ function formatMsgTime(t: number): string {
       <CodexPanel />
     </div>
 
-    <!-- 江湖消息：所有事件交互结果在此留痕，仅保留最近几条 -->
-    <div class="panel msg-panel">
-      <div class="panel-title">江湖消息</div>
-      <div class="msg-scroll">
-        <div v-if="!messageStore.messages.length" class="msg-empty">行走江湖，际遇自会在此留痕。</div>
-        <div
-          v-for="m in messageStore.messages"
-          :key="m.id"
-          class="msg-item"
-          :class="'msg-' + m.type"
-        >
-          <div class="msg-text">{{ m.text }}</div>
-          <div class="msg-time">{{ formatMsgTime(m.time) }}</div>
-        </div>
-      </div>
-    </div>
-
     <div class="action-menu">
       <button class="btn" :class="{ 'btn-primary': activeTab === 'map' }" @click="activeTab = 'map'">江湖</button>
       <button class="btn" :class="{ 'btn-primary': activeTab === 'quests' }" @click="activeTab = 'quests'">任务</button>
@@ -243,6 +228,27 @@ function formatMsgTime(t: number): string {
       <button class="btn" :class="{ 'btn-primary': activeTab === 'inventory' }" @click="activeTab = 'inventory'">物品</button>
       <button class="btn" :class="{ 'btn-primary': activeTab === 'codex' }" @click="activeTab = 'codex'">图鉴</button>
     </div>
+    </div><!-- /game-main -->
+
+    <aside class="game-aside">
+      <!-- 江湖消息：所有事件交互结果在此留痕，仅保留最近几条，常驻可见 -->
+      <div class="panel msg-panel">
+        <div class="panel-title">江湖消息</div>
+        <div class="msg-scroll">
+          <div v-if="!messageStore.messages.length" class="msg-empty">行走江湖，际遇自会在此留痕。</div>
+          <div
+            v-for="m in messageStore.messages"
+            :key="m.id"
+            class="msg-item"
+            :class="'msg-' + m.type"
+          >
+            <div class="msg-text">{{ m.text }}</div>
+            <div class="msg-time">{{ formatMsgTime(m.time) }}</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+    </div><!-- /game-body -->
 
     <DialoguePanel v-if="storyStore.currentDialogue" />
     <EncounterPanel v-if="storyStore.currentEncounter" />
