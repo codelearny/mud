@@ -865,6 +865,23 @@ html, body {
   gap: 8px;
   max-height: 52vh;
   overflow-y: auto;
+  /* 简洁清爽的细滚动条（WebKit + Firefox） */
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-hover) transparent;
+  padding-right: 6px;
+}
+.shop-list::-webkit-scrollbar {
+  width: 6px;
+}
+.shop-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.shop-list::-webkit-scrollbar-thumb {
+  background: var(--border-hover);
+  border-radius: 999px;
+}
+.shop-list::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
 }
 
 .shop-price {
