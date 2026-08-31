@@ -56,7 +56,12 @@ function unequip(slot: EquipSlot) {
 }
 
 function useItem(itemId: string) {
-  playerStore.useItem(itemId)
+  const item = getItem(itemId)
+  if (item?.category === 'manual') {
+    studyManual(itemId)
+  } else {
+    playerStore.useItem(itemId)
+  }
 }
 
 function studyManual(itemId: string) {
@@ -115,11 +120,6 @@ function studyManual(itemId: string) {
           </div>
         </div>
         <div class="item-actions">
-          <button
-            v-if="item.category === 'manual'"
-            class="btn btn-primary"
-            @click="studyManual(item.id)"
-          >研读</button>
           <button
             v-if="item.type === 'consumable'"
             class="btn btn-primary"

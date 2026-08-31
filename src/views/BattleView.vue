@@ -67,7 +67,7 @@ const consumableItems = computed<(Item & { quantity: number })[]>(() => {
       const item = getItem(inv.itemId)
       return item ? { ...item, quantity: inv.quantity } : null
     })
-    .filter((x): x is Item & { quantity: number } => x !== null && x.type === 'consumable')
+    .filter((x): x is Item & { quantity: number } => x !== null && x.type === 'consumable' && x.category !== 'manual')
 })
 
 // 当前所持兵器及其流派（用于战斗中提示「兵刃与功法相性」）
