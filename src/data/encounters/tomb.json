@@ -2,39 +2,40 @@
   {
     "id": "enc_tomb_door",
     "title": "墓门机关",
-    "text": "一道厚重的石门横在墓道尽头，门上布满铜锈的机括，门缝里透出陈腐的阴风。",
+    "text": "一道厚重的石门横在墓道尽头，门上布满铜锈的机括，门缝里透出陈腐的阴风。门后似有枯尸蠢蠢欲动。",
     "choices": [
-      { "text": "细心破解机括（得古物）", "next": "END", "effects": [{ "type": "item", "target": "ancient_relic", "value": 1 }, { "type": "exp", "value": 30 }] },
       { "text": "强行破门", "next": "END", "battle": "ancient_corps" },
+      { "text": "细心破解机括，避过机关", "next": "END", "effects": [{ "type": "flag", "target": "tomb_unlocked", "value": true }] },
       { "text": "原路退出", "next": "END" }
     ]
   },
   {
     "id": "enc_tomb_coffin",
     "title": "石椁",
-    "text": "墓室正中一具巨大的石椁，椁盖上刻满晦涩的符文，椁旁散落着几件锈蚀的陪葬明器。",
+    "text": "墓室正中一具巨大的石椁，椁盖上刻满晦涩的符文，椁旁散落着几件锈蚀的陪葬明器。椁中似有异动。",
     "choices": [
       { "text": "开启石椁", "next": "END", "battle": "ancient_corps" },
-      { "text": "只取陪葬明器", "next": "END", "effects": [{ "type": "item", "target": "ancient_relic", "value": 1 }, { "type": "item", "target": "mystery_ore", "value": 1 }] },
-      { "text": "上香拜祭（得经验）", "next": "END", "effects": [{ "type": "exp", "value": 25 }] }
+      { "text": "只上香拜祭，安抚亡灵", "next": "END", "effects": [{ "type": "flag", "target": "tomb_respect", "value": true }] },
+      { "text": "退出墓室", "next": "END" }
     ]
   },
   {
     "id": "enc_tomb_gas",
     "title": "尸气弥漫",
-    "text": "墓道深处涌出一团墨绿色的浊气，触之肌肤刺痛，显然是积年的尸气。",
+    "text": "墓道深处涌出一团墨绿色的浊气，触之肌肤刺痛。气中潜伏着炼尸的邪修，伺机而动。",
     "choices": [
-      { "text": "闭气疾冲而过（得玄铁）", "next": "END", "effects": [{ "type": "item", "target": "mystery_ore", "value": 1 }] },
       { "text": "硬闯过去", "next": "END", "battle": "poison_cultist" },
+      { "text": "闭气绕行，寻通风口", "next": "END", "effects": [{ "type": "flag", "target": "gas_avoided", "value": true }] },
       { "text": "暂且退避", "next": "END" }
     ]
   },
   {
     "id": "enc_tomb_keeper",
     "title": "守墓低语",
-    "text": "昏黄的烛火下，一个干瘦的老者喃喃自语：『……三十年了，他们还不肯安息啊……』",
+    "text": "昏黄的烛火下，一个干瘦的老者喃喃自语：『……三十年了，他们还不肯安息啊……』他浑浊的眼珠忽然转向你，杀机骤起。",
     "choices": [
-      { "text": "上前询问究竟", "next": "END", "effects": [{ "type": "exp", "value": 30 }, { "type": "flag", "target": "tomb_known", "value": true }] },
+      { "text": "应战这疯癫守墓人", "next": "END", "battle": "ancient_corps" },
+      { "text": "静听守墓人呓语，暗记于心", "next": "END", "effects": [{ "type": "flag", "target": "tomb_known", "value": true }] },
       { "text": "悄然离去", "next": "END" }
     ]
   }

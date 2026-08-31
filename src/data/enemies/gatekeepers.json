@@ -1,0 +1,88 @@
+[
+  {
+    "id": "snatcher",
+    "name": "夺谱贼",
+    "category": "bandit",
+    "description": "专在荒野扒窃行人、抢夺秘籍的猥琐偷儿，身手猥琐却跑得极快。",
+    "level": 2,
+    "attributes": {
+      "hp": 45,
+      "maxHp": 45,
+      "mp": 0,
+      "maxMp": 0,
+      "attack": 11,
+      "defense": 3,
+      "agility": 9,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "basic_fist"
+    ],
+    "goldReward": 15,
+    "drops": [
+      {
+        "itemId": "manual_basic_internal",
+        "rate": 1.0
+      }
+    ]
+  },
+  {
+    "id": "waylayer",
+    "name": "拦路劫徒",
+    "category": "bandit",
+    "description": "盘踞道旁、专劫落单行旅的悍匪，刀法粗陋却胜在狠辣。",
+    "level": 4,
+    "attributes": {
+      "hp": 75,
+      "maxHp": 75,
+      "mp": 10,
+      "maxMp": 10,
+      "attack": 17,
+      "defense": 6,
+      "agility": 11,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "basic_fist",
+      "basic_blade"
+    ],
+    "goldReward": 25,
+    "drops": [
+      {
+        "itemId": "manual_qingyun_step",
+        "rate": 1.0
+      }
+    ]
+  },
+  {
+    "id": "sword_wraith",
+    "name": "剑冢残魂",
+    "category": "evil",
+    "description": "剑碑下郁结百年的执念所化，周身剑气森然，似要寻个传人。",
+    "level": 6,
+    "attributes": {
+      "hp": 120,
+      "maxHp": 120,
+      "mp": 30,
+      "maxMp": 30,
+      "attack": 23,
+      "defense": 9,
+      "agility": 15,
+      "comprehension": 0,
+      "luck": 0
+    },
+    "skills": [
+      "basic_sword",
+      "lianhuan_sword"
+    ],
+    "goldReward": 40,
+    "drops": [
+      {
+        "itemId": "manual_taiji_sword",
+        "rate": 1.0
+      }
+    ]
+  }
+]

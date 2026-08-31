@@ -2,31 +2,31 @@
   {
     "id": "enc_celestial_drift",
     "title": "浮岛星河",
-    "text": "脚下浮岛缓缓漂移，一片星河自身侧横贯而过，河中无数细碎光点明灭不定，似在向你低语。",
+    "text": "脚下浮岛缓缓漂移，一片星河自身侧横贯而过，河中无数细碎光点明灭不定。星河中游出一头吞星之兽，张口啮向浮岛。",
     "choices": [
-      { "text": "静心观星", "next": "END", "effects": [{ "type": "exp", "value": 800 }, { "type": "flag", "target": "seenStarRiver", "value": true }] },
-      { "text": "伸手捞取星屑", "next": "END", "effects": [{ "type": "item", "target": "spirit_orb", "value": 2 }, { "type": "exp", "value": 400 }] },
+      { "text": "迎击吞星之兽，夺那星核", "next": "END", "battle": "star_devourer" },
+      { "text": "静心观星，记诵星图", "next": "END", "effects": [{ "type": "flag", "target": "seenStarRiver", "value": true }] },
       { "text": "不为所动", "next": "END" }
     ]
   },
   {
     "id": "enc_thunder_pool",
     "title": "雷池淬体",
-    "text": "一道紫雷自云中劈落，正中引雷石柱，雷光顺着石纹四下游走。你周身汗毛倒竖，体内气血竟随之一同翻涌。",
+    "text": "一道紫雷自云中劈落，正中引雷石柱，雷光顺着石纹四下游走。雷池深处蛰着一头雷兽，护着雷核。",
     "choices": [
-      { "text": "迎雷而上，以身淬体", "next": "END", "effects": [{ "type": "exp", "value": 1200 }, { "type": "heal", "value": "full" }] },
-      { "text": "借雷淬炼兵刃", "next": "END", "effects": [{ "type": "item", "target": "mystery_ore", "value": 2 }, { "type": "exp", "value": 600 }] },
-      { "text": "绕道避开", "next": "END", "effects": [{ "type": "exp", "value": 300 }] }
+      { "text": "迎雷而上，力战雷兽", "next": "END", "battle": "thunder_beast" },
+      { "text": "只远远引雷淬炼自身，恢复气力", "next": "END", "effects": [{ "type": "heal", "value": "full" }] },
+      { "text": "绕道避开", "next": "END" }
     ]
   },
   {
     "id": "enc_dao_pinnacle",
     "title": "极巅论道",
-    "text": "那道人缓缓睁眼，目光如古井无波：「你能走到此处，已算难得。可愿与老道论一论——何为武道？」",
+    "text": "那道人缓缓睁眼，目光如古井无波：『你能走到此处，已算难得。可愿与老道论一论——何为武道？』他剑意化形，直逼你眉心。",
     "choices": [
-      { "text": "武道在于止戈", "next": "END", "effects": [{ "type": "exp", "value": 1500 }, { "type": "flag", "target": "daoInsight", "value": true }] },
-      { "text": "武道在于自强不息", "next": "END", "effects": [{ "type": "exp", "value": 1500 }] },
-      { "text": "晚辈不敢妄言", "next": "END", "effects": [{ "type": "exp", "value": 500 }] }
+      { "text": "以剑意接下道人试招", "next": "END", "battle": "void_fiend" },
+      { "text": "论道止戈，记诵心得", "next": "END", "effects": [{ "type": "flag", "target": "daoInsight", "value": true }] },
+      { "text": "晚辈不敢妄言，告退", "next": "END" }
     ]
   }
 ]

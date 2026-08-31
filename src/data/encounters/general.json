@@ -3,30 +3,32 @@
     "id": "enc_bottle",
     "title": "拾遗秘籍",
     "once": true,
-    "text": "草丛间赫然露出一角布包，翻开竟是一本残旧武功秘籍，似是前辈高人所遗。",
+    "text": "草丛间露出一角布包，你方要拾取，却蹿出个眼尖的偷儿一把抢了便跑，钻进林子深处。",
     "choices": [
-      { "text": "拾起习练（领悟基础内功）", "next": "END", "effects": [{ "type": "learn_skill", "target": "basic_internal" }, { "type": "exp", "value": 30 }] },
-      { "text": "换作银两（得银二十）", "next": "END", "effects": [{ "type": "gold", "value": 20 }] },
-      { "text": "弃之不顾", "next": "END" }
+      { "text": "追入林中夺回秘籍（与偷儿交手）", "next": "END", "battle": "snatcher" },
+      { "text": "不追了，就地调息疗伤", "next": "END", "effects": [{ "type": "heal", "value": "full" }] },
+      { "text": "弃之不顾，径自离去", "next": "END" }
     ]
   },
   {
     "id": "enc_herb",
     "title": "山野灵草",
-    "text": "岩缝中一株灵草泛着幽光，嗅之清心宁神，正是一味疗伤良药。",
+    "text": "岩缝中一株灵草泛着幽光，嗅之清心宁神。草丛里却盘着一条斑斓毒蛇，吐信盯着你。",
     "choices": [
-      { "text": "采下草药", "next": "END", "effects": [{ "type": "item", "target": "medicine_herb", "value": 2 }, { "type": "item", "target": "spirit_herb", "value": 1 }] },
-      { "text": "不理会", "next": "END" }
+      { "text": "冒险采药（惊动护草毒蛇）", "next": "END", "battle": "venom_snake" },
+      { "text": "只远远记下方位，改日带人再来", "next": "END", "effects": [{ "type": "flag", "target": "herb_marker", "value": true }] },
+      { "text": "不理会，继续赶路", "next": "END" }
     ]
   },
   {
     "id": "enc_master",
     "title": "神秘高手",
     "once": true,
-    "text": "一位灰袍老者负手而立，笑道：『小友根骨不俗，老夫传你一招青云步如何？』",
+    "text": "一位灰袍老者负手而立，笑道：『小友根骨不俗，老夫欲试你筋骨——可敢与老夫委派的好手过过招？』",
     "choices": [
-      { "text": "拜谢前辈（习青云步）", "next": "END", "effects": [{ "type": "learn_skill", "target": "qingyun_step" }, { "type": "affinity", "target": "mysterious_master", "value": 5 }] },
-      { "text": "不敢叨扰", "next": "END" }
+      { "text": "应战夺那真传（与劫徒交手）", "next": "END", "battle": "waylayer" },
+      { "text": "只叙话闲聊，结个善缘", "next": "END", "effects": [{ "type": "affinity", "target": "mysterious_master", "value": 5 }] },
+      { "text": "不敢叨扰，告辞", "next": "END" }
     ]
   },
   {

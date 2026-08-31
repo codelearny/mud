@@ -3,41 +3,41 @@
     "id": "enc_ferry_talk",
     "title": "艄公闲话",
     "once": true,
-    "text": "老艄公磕了磕烟袋：『客官，这江水底下可埋着不少故事。前朝那支运宝的船队，就沉在下游第三道弯里。』",
+    "text": "老艄公磕了磕烟袋：『客官，这江水底下可埋着不少故事。前朝那支运宝的船队，就沉在下游第三道弯里。』话音未落，岸边蹿出个劫道的。",
     "choices": [
-      { "text": "细听究竟（长见识）", "next": "END", "effects": [{ "type": "exp", "value": 25 }] },
-      { "text": "请教水性（习青云步）", "next": "END", "effects": [{ "type": "learn_skill", "target": "qingyun_step" }] },
+      { "text": "护住船家，与劫徒一战", "next": "END", "battle": "waylayer" },
+      { "text": "只闲话家常，结个善缘", "next": "END", "effects": [{ "type": "affinity", "target": "mysterious_master", "value": 5 }] },
       { "text": "多谢，告辞", "next": "END" }
     ]
   },
   {
     "id": "enc_boat_wreck",
     "title": "沉船遗骸",
-    "text": "退潮时分，一截焦黑的船骸从江底露出，舱板缝隙里似乎卡着什么东西，正泛着金属的光。",
+    "text": "退潮时分，一截焦黑的船骸从江底露出，舱板缝隙里卡着东西，泛着金属的光。水下却潜伏着巡江的水寇。",
     "choices": [
-      { "text": "撬开舱板", "next": "END", "effects": [{ "type": "item", "target": "iron_ore", "value": 2 }, { "type": "item", "target": "ancient_relic", "value": 1 }] },
-      { "text": "只取看得见的", "next": "END", "effects": [{ "type": "item", "target": "iron_ore", "value": 1 }] },
+      { "text": "下水驱赶水寇，夺那舱中之物", "next": "END", "battle": "river_pirate" },
+      { "text": "只记下沉船方位，报官查抄改日", "next": "END", "effects": [{ "type": "flag", "target": "wreck_marker", "value": true }] },
       { "text": "晦气，走开", "next": "END" }
     ]
   },
   {
     "id": "enc_river_trade",
     "title": "江上商船",
-    "text": "一艘满载货物的商船缓缓靠岸，船主满面堆笑地迎上来：『这位爷，可要捎带些货物？』",
+    "text": "一艘满载货物的商船缓缓靠岸，船主满面堆笑地迎上来：『这位爷，可要捎带些货物？』舱后却藏着不速之客。",
     "choices": [
-      { "text": "好言攀谈（得金创药）", "next": "END", "effects": [{ "type": "item", "target": "minor_heal", "value": 2 }] },
-      { "text": "强行索要买路钱", "next": "END", "battle": "river_pirate" },
+      { "text": "强行讨个说法（与水寇交手）", "next": "END", "battle": "river_pirate" },
+      { "text": "好言攀谈，换得些船家见闻", "next": "END", "effects": [{ "type": "flag", "target": "river_lore", "value": true }] },
       { "text": "不做理会", "next": "END" }
     ]
   },
   {
     "id": "enc_drowning",
     "title": "江中遇险",
-    "text": "江心传来孩童的呼救声，一个小小的身影在急流中起伏，眼看就要被漩涡卷走。",
+    "text": "江心传来孩童的呼救声，一个小小的身影在急流中起伏。你纵身入水拽住孩童，却惊动了水下巡江的水寇。",
     "choices": [
-      { "text": "纵身入水相救", "next": "END", "effects": [{ "type": "exp", "value": 40 }, { "type": "item", "target": "jade_heal", "value": 1 }] },
-      { "text": "高呼求援（得银十两）", "next": "END", "effects": [{ "type": "gold", "value": 10 }] },
-      { "text": "佯作未见", "next": "END" }
+      { "text": "护住孩童，与水寇缠斗", "next": "END", "battle": "river_pirate" },
+      { "text": "岸上高呼求援，引舟家抛绳救人", "next": "END", "effects": [{ "type": "flag", "target": "saved_child", "value": true }] },
+      { "text": "佯作未见，转头离去", "next": "END" }
     ]
   }
 ]

@@ -2,21 +2,21 @@
   {
     "id": "enc_battlefield_ghost",
     "title": "战场残魂",
-    "text": "残破的军旗下，一名甲士的残魂缓缓转过身来，眼窝中鬼火明明灭灭，似有万千言语要说。",
+    "text": "残破的军旗下，一名甲士的残魂缓缓转过身来，眼窝中鬼火明明灭灭。他手中残枪骤然刺向你。",
     "choices": [
-      { "text": "上前搭话", "next": "END", "effects": [{ "type": "exp", "value": 40 }, { "type": "flag", "target": "metGhost", "value": true }] },
-      { "text": "拔剑相向", "next": "END", "battle": "ghost_soldier" },
+      { "text": "拔剑相向，镇那残魂", "next": "END", "battle": "ghost_soldier" },
+      { "text": "上前搭话，听其遗言", "next": "END", "effects": [{ "type": "flag", "target": "metGhost", "value": true }] },
       { "text": "退避三舍", "next": "END" }
     ]
   },
   {
     "id": "enc_battlefield_armor",
     "title": "锈甲遗骸",
-    "text": "一具半埋在土中的铁甲，甲片上还嵌着几支断箭，腰间悬着一枚锈蚀的铜印。",
+    "text": "一具半埋在土中的铁甲，甲片上还嵌着几支断箭，腰间悬着一枚锈蚀的铜印。甲下却蛰着一缕怨灵。",
     "choices": [
-      { "text": "拆取甲片", "next": "END", "effects": [{ "type": "item", "target": "iron_ore", "value": 2 }] },
-      { "text": "取走铜印", "next": "END", "effects": [{ "type": "item", "target": "ancient_relic", "value": 1 }, { "type": "gold", "value": 30 }] },
-      { "text": "掘土掩埋，以全其躯", "next": "END", "effects": [{ "type": "exp", "value": 50 }] }
+      { "text": "取甲镇魂，与怨灵相争", "next": "END", "battle": "ghost_soldier" },
+      { "text": "只恭敬掩埋，全其躯", "next": "END", "effects": [{ "type": "flag", "target": "buried_soldier", "value": true }] },
+      { "text": "不取，径去", "next": "END" }
     ]
   },
   {
@@ -25,67 +25,67 @@
     "text": "脚下忽地一紧，竟踩上了碗口粗的蛛丝，整面洞壁随之颤动，一只巨蛛自头顶缓缓垂落。",
     "choices": [
       { "text": "挥刃斩蛛", "next": "END", "battle": "spider_demon" },
-      { "text": "以火折焚网脱身", "next": "END", "effects": [{ "type": "item", "target": "antidote", "value": 1 }, { "type": "exp", "value": 30 }] },
+      { "text": "以火折焚网，悄然脱身", "next": "END", "effects": [{ "type": "flag", "target": "escaped_web", "value": true }] },
       { "text": "屏息缓缓退走", "next": "END" }
     ]
   },
   {
     "id": "enc_port_cargo",
     "title": "码头货栈",
-    "text": "货栈后巷堆着几只无人看管的木箱，封条已然开裂，隐约露出里头的药材与布匹。",
+    "text": "货栈后巷堆着几只无人看管的木箱，封条已然开裂，隐约露出里头的药材与布匹。巷口却倚着个巡货的打手。",
     "choices": [
-      { "text": "取些药材", "next": "END", "effects": [{ "type": "item", "target": "medicine_herb", "value": 2 }] },
-      { "text": "取匹细布换钱", "next": "END", "effects": [{ "type": "gold", "value": 60 }] },
-      { "text": "分毫不动", "next": "END", "effects": [{ "type": "exp", "value": 20 }] }
+      { "text": "制住打手，夺货而走", "next": "END", "battle": "river_pirate" },
+      { "text": "只记下货栈虚实，报官查办", "next": "END", "effects": [{ "type": "flag", "target": "cargo_mark", "value": true }] },
+      { "text": "分毫不动，离去", "next": "END" }
     ]
   },
   {
     "id": "enc_penglai_pearl",
     "title": "蓬莱明珠",
-    "text": "浅滩上一枚巨蚌缓缓开合，壳内一颗明珠光华夺目，照得周遭水色通明。",
+    "text": "浅滩上一枚巨蚌缓缓开合，壳内一颗明珠光华夺目。蚌旁游弋着一头护珠的蚌精，虎视眈眈。",
     "choices": [
       { "text": "探手取珠", "next": "END", "battle": "clam_spirit" },
-      { "text": "只刮取少许珠粉", "next": "END", "effects": [{ "type": "item", "target": "spirit_orb", "value": 1 }, { "type": "exp", "value": 60 }] },
-      { "text": "合上蚌壳，悄然离去", "next": "END", "effects": [{ "type": "exp", "value": 30 }] }
+      { "text": "只远远合上蚌壳，不惊其灵", "next": "END", "effects": [{ "type": "flag", "target": "pearl_respect", "value": true }] },
+      { "text": "合上蚌壳，悄然离去", "next": "END" }
     ]
   },
   {
     "id": "enc_snow_cave",
     "title": "雪洞避寒",
-    "text": "风雪骤紧，崖壁间现出一处浅洞，洞内生着一堆尚有余温的篝火，旁有一具冻僵的尸身。",
+    "text": "风雪骤紧，崖壁间现出一处浅洞，洞内生着一堆尚有余温的篝火，旁有一具冻僵的尸身。那『冻尸』竟猛地暴起。",
     "choices": [
-      { "text": "烤火歇息", "next": "END", "effects": [{ "type": "heal", "value": "full" }] },
-      { "text": "搜检尸身", "next": "END", "effects": [{ "type": "item", "target": "beast_hide", "value": 1 }, { "type": "gold", "value": 40 }] },
-      { "text": "冒雪赶路", "next": "END", "effects": [{ "type": "exp", "value": 50 }] }
+      { "text": "应战这诈死之徒", "next": "END", "battle": "bandit" },
+      { "text": "只烤火歇息，恢复气力", "next": "END", "effects": [{ "type": "heal", "value": "full" }] },
+      { "text": "冒雪赶路", "next": "END" }
     ]
   },
   {
     "id": "enc_desert_well",
     "title": "沙井水源",
-    "text": "沙丘环抱中藏着一线水脉，井口以石板半掩，旁边横七竖八倒着几具商旅的干尸。",
+    "text": "沙丘环抱中藏着一线水脉，井口以石板半掩，旁边横七竖八倒着几具商旅的干尸。干尸堆里竟盘着一条毒蛇，嘶嘶吐信。",
     "choices": [
-      { "text": "取水痛饮", "next": "END", "effects": [{ "type": "heal", "value": "full" }] },
-      { "text": "细查四周干尸", "next": "END", "effects": [{ "type": "item", "target": "ancient_relic", "value": 1 }, { "type": "exp", "value": 40 }] },
-      { "text": "恐水有毒，谨慎离去", "next": "END", "effects": [{ "type": "exp", "value": 30 }] }
+      { "text": "护住水源，与毒蛇相争", "next": "END", "battle": "venom_snake" },
+      { "text": "取水痛饮，恢复气力", "next": "END", "effects": [{ "type": "heal", "value": "full" }] },
+      { "text": "恐水有毒，谨慎离去", "next": "END" }
     ]
   },
   {
     "id": "enc_capital_bazaar",
     "title": "京城瓦市",
-    "text": "瓦市之中百戏杂陈，一名独臂老者正以断臂舞枪，围观者喝彩连连，却无一人投钱。",
+    "text": "瓦市之中百戏杂陈，一名独臂老者正以断臂舞枪，围观者喝彩连连。他招式忽转，竟朝你逼来。",
     "choices": [
-      { "text": "掷银十两相助", "next": "END", "condition": { "type": "gold", "target": "", "op": ">=", "value": 10 }, "effects": [{ "type": "gold", "value": -10 }, { "type": "exp", "value": 80 }] },
-      { "text": "上前讨教枪法", "next": "END", "effects": [{ "type": "item", "target": "minor_heal", "value": 1 }, { "type": "exp", "value": 60 }] },
+      { "text": "上前接招，与老者较艺", "next": "END", "battle": "female_thief" },
+      { "text": "掷银十两相助，聊表敬意", "next": "END", "condition": { "type": "gold", "target": "", "op": ">=", "value": 10 }, "effects": [{ "type": "gold", "value": -10 }] },
       { "text": "转身走开", "next": "END" }
     ]
   },
   {
     "id": "enc_abyss_whisper",
     "title": "深渊低语",
-    "text": "深渊底部，无数细碎的声音自岩缝中渗出，似在唤你的名字，又似在数说你的过往。",
+    "text": "深渊底部，无数细碎的声音自岩缝中渗出，似在唤你的名字。循声探去，一尊深渊凶灵自黑暗中苏醒。",
     "choices": [
-      { "text": "凝神倾听", "next": "END", "effects": [{ "type": "exp", "value": 150 }, { "type": "flag", "target": "heardAbyss", "value": true }] },
-      { "text": "运功护住心神", "next": "END", "effects": [{ "type": "exp", "value": 100 }] },
+      { "text": "循声探入，与凶灵一战", "next": "END", "battle": "abyss_fiend" },
+      { "text": "凝神倾听，记诵低语", "next": "END", "effects": [{ "type": "flag", "target": "heardAbyss", "value": true }] },
       { "text": "掉头退回", "next": "END" }
     ]
   }

@@ -298,5 +298,35 @@
     "price": 8800,
     "rarity": "legendary",
     "skillId": "dapeng_step"
+  },
+  {
+    "id": "manual_basic_internal",
+    "name": "基础内功心法",
+    "description": "记载「基础内功」的心法，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 300,
+    "rarity": "epic",
+    "skillId": "basic_internal"
+  },
+  {
+    "id": "manual_qingyun_step",
+    "name": "青云步身法",
+    "description": "记载「青云步」的身法，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 600,
+    "rarity": "epic",
+    "skillId": "qingyun_step"
+  },
+  {
+    "id": "manual_taiji_sword",
+    "name": "太极剑谱",
+    "description": "记载「太极剑」的剑谱，参悟之后可习得此门武学。",
+    "type": "material",
+    "category": "manual",
+    "price": 700,
+    "rarity": "epic",
+    "skillId": "taiji_sword"
   }
 ]
