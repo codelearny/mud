@@ -1,8 +1,14 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 import { usePlayerStore } from '../stores/player'
+import { useGameStore } from '../stores/game'
+import { useMessageStore } from '../stores/messages'
 
+const router = useRouter()
 const playerStore = usePlayerStore()
+const gameStore = useGameStore()
+const messageStore = useMessageStore()
 
 const char = computed(() => playerStore.character)
 const eff = computed(() => playerStore.effectiveAttrs)
@@ -21,6 +27,18 @@ const expPercent = computed(() => {
   if (!char.value) return 0
   return (char.value.exp / char.value.expToNext) * 100
 })
+
+function saveGame() {
+  gameStore.saveGame()
+  messageStore.addMessage('存档成功！', 'info')
+}
+
+function exitGame() {
+  gameStore.saveGame()
+  gameStore.exitToMenu()
+  playerStore.clear()
+  router.push('/')
+}
 </script>
 
 <template>
@@ -47,6 +65,10 @@ const expPercent = computed(() => {
     </div>
     <div class="gold-display">
       <span>{{ char.gold }} 两</span>
+    </div>
+    <div class="status-actions">
+      <button class="btn btn-slim" @click="saveGame">存档</button>
+      <button class="btn btn-slim btn-danger" @click="exitGame">退出</button>
     </div>
   </div>
 </template>

@@ -245,6 +245,18 @@ html, body {
   font-family: var(--font-serif);
 }
 
+.status-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-actions .btn-slim {
+  margin-top: 0;
+  padding: 3px 12px;
+  font-size: 12px;
+}
+
 .game-log {
   flex: 1;
   overflow-y: auto;

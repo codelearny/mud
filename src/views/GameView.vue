@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
 import { usePlayerStore } from '../stores/player'
 import { useGameStore } from '../stores/game'
 import { useBattleStore } from '../stores/battle'
@@ -22,7 +21,6 @@ import BattlePanel from '../components/BattlePanel.vue'
 import TalentChoiceModal from '../components/TalentChoiceModal.vue'
 import type { SceneAction, SceneGain } from '../types'
 
-const router = useRouter()
 const playerStore = usePlayerStore()
 const gameStore = useGameStore()
 const battleStore = useBattleStore()
@@ -119,18 +117,6 @@ function randomBattle() {
   battleStore.startRandomBattle(scene.value?.enemyPool)
 }
 
-function saveGame() {
-  gameStore.saveGame()
-  messageStore.addMessage('存档成功！', 'info')
-}
-
-function exitGame() {
-  gameStore.saveGame()
-  gameStore.exitToMenu()
-  playerStore.clear()
-  router.push('/')
-}
-
 function formatMsgTime(t: number): string {
   const d = new Date(t)
   const p = (n: number) => String(n).padStart(2, '0')
@@ -196,11 +182,6 @@ function formatMsgTime(t: number): string {
           </button>
           <button class="btn btn-primary" @click="randomBattle">游走历练</button>
         </div>
-      </div>
-
-      <div class="btn-grid" style="padding: 0 10px 12px;">
-        <button class="btn" @click="saveGame">存档</button>
-        <button class="btn btn-danger" @click="exitGame">退出</button>
       </div>
     </div>
 
