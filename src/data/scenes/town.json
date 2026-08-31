@@ -6,7 +6,7 @@
     "connections": ["village", "temple", "ferry", "valley", "silk_road_desert", "imperial_capital"],
     "npcs": ["instructor", "merchant", "blacksmith"],
     "actions": [
-      { "id": "explore_town", "label": "镇上走动", "type": "encounter", "text": "你在镇上走动，市井之中藏着不少故事。", "encounters": ["enc_bottle", "enc_master", "enc_robber", "enc_mystic_gamble"] }
+      { "id": "explore_town", "label": "镇上走动", "type": "encounter", "text": "你在镇上走动，市井之中藏着不少故事。", "encounters": ["enc_bottle", "enc_master", "enc_robber", "enc_mystic_gamble", "enc_wandering_master", "enc_poison_grove"] }
     ]
   },
   {
@@ -35,7 +35,7 @@
         { "itemId": "spirit_herb", "min": 1, "max": 2, "weight": 2 },
         { "itemId": "antidote", "min": 1, "max": 1, "weight": 1 }
       ] },
-      { "id": "explore_valley", "label": "谷中探幽", "type": "encounter", "text": "你循着药香向谷深处走去。", "encounters": ["enc_valley_spring", "enc_valley_oldman", "enc_valley_snake", "enc_valley_flower"] }
+      { "id": "explore_valley", "label": "谷中探幽", "type": "encounter", "text": "你循着药香向谷深处走去。", "encounters": ["enc_valley_spring", "enc_valley_oldman", "enc_valley_snake", "enc_valley_flower", "enc_poison_grove", "enc_cursed_shrine"] }
     ]
   },
   {
@@ -50,7 +50,7 @@
     "trainFactor": 1.6,
     "actions": [
       { "id": "train_peak", "label": "崖顶吐纳", "type": "train", "text": "你于崖顶迎风吐纳，内力隐隐增长。" },
-      { "id": "explore_peak", "label": "峰顶远眺", "type": "encounter", "text": "你独立峰顶，极目四望。", "encounters": ["enc_sword_epitaph", "enc_sword_spirit", "enc_valley_oldman", "enc_ancient_tomb", "enc_demon_altar"] }
+      { "id": "explore_peak", "label": "峰顶远眺", "type": "encounter", "text": "你独立峰顶，极目四望。", "encounters": ["enc_sword_epitaph", "enc_sword_spirit", "enc_valley_oldman", "enc_ancient_tomb", "enc_demon_altar", "enc_meteor_pit", "enc_wandering_master"] }
     ]
   }
 ]

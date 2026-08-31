@@ -28,5 +28,45 @@
       { "text": "只作旁观，讨个彩头（得银二十）", "next": "END", "effects": [{ "type": "gold", "value": 20 }] },
       { "text": "摇头婉拒", "next": "END" }
     ]
+  },
+  {
+    "id": "enc_cursed_shrine",
+    "title": "荒祠邪祀",
+    "text": "半山腰一座荒废小祠，神像早被劈作两半，供桌上却新供着三牲血食，犹带余温。烛火幽幽，似有看不见的东西在正午里打着寒颤。",
+    "choices": [
+      { "text": "踏破血食，镇那作祟阴魂（触发邪长老）", "next": "END", "battle": "evil_elder" },
+      { "text": "取走祠中陪葬古玉便走（得古物与些许银两）", "next": "END", "effects": [{ "type": "item", "target": "ancient_relic", "value": 1 }, { "type": "gold", "value": 35 }] },
+      { "text": "绕道而行，不沾因果", "next": "END" }
+    ]
+  },
+  {
+    "id": "enc_wandering_master",
+    "title": "云游宗师",
+    "text": "渡头柳荫下，一名麻衣老者负手而立，腰间酒葫芦叮当作响。他瞥你一眼，笑道：「小友根骨尚可，老夫今日兴致正好——要讨教，还是讨巧？」",
+    "choices": [
+      { "text": "与他切磋武艺（战江湖恶徒，胜则得真传）", "next": "END", "battle": "jianghu_villain" },
+      { "text": "受他点拨，得秘籍残页（得《降龙掌谱》）", "next": "END", "effects": [{ "type": "item", "target": "manual_xianglong_palms", "value": 1 }] },
+      { "text": "稽首告退", "next": "END" }
+    ]
+  },
+  {
+    "id": "enc_poison_grove",
+    "title": "瘴林探幽",
+    "text": "林深处雾气泛着惨绿，腐叶下隐约有莹莹微光——那是只在瘴中才生的灵草。可雾里也游动着尺许长的毒蛛，吐纳间腥风扑面。",
+    "choices": [
+      { "text": "深入瘴中取那株灵药（触发毒修）", "next": "END", "battle": "poison_cultist" },
+      { "text": "只采解毒草与灵草便走（得解毒丹与灵草）", "next": "END", "effects": [{ "type": "item", "target": "antidote", "value": 2 }, { "type": "item", "target": "spirit_herb", "value": 1 }] },
+      { "text": "屏息退出瘴林", "next": "END" }
+    ]
+  },
+  {
+    "id": "enc_meteor_pit",
+    "title": "陨星坠谷",
+    "text": "山谷正中砸出个焦黑大坑，坑壁尚有余温，星屑般的碎铁散落四周，泛着幽蓝的冷光。坑底似有猛兽低吼，应是被异响惊动的山君。",
+    "choices": [
+      { "text": "探入陨坑，夺那星核（触发猛虎）", "next": "END", "battle": "tiger" },
+      { "text": "只拾取坑边星屑便走（得星铁与些许银两）", "next": "END", "effects": [{ "type": "item", "target": "mystery_ore", "value": 2 }, { "type": "gold", "value": 25 }] },
+      { "text": "不近危地，悄然离去", "next": "END" }
+    ]
   }
 ]
