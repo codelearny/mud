@@ -10,7 +10,9 @@
     "hitRate": 0.9,
     "critRate": 0.05,
     "unlockLevel": 1,
-    "rarity": "common"
+    "rarity": "common",
+    "trigger": { "type": "always" },
+    "cooldown": 0
   },
   {
     "id": "wolf_fang",
@@ -23,26 +25,14 @@
     "hitRate": 0.85,
     "critRate": 0.12,
     "unlockLevel": 3,
-    "rarity": "common"
-  },
-  {
-    "id": "qishang_fist",
-    "name": "七伤拳",
-    "description": "崆峒绝技，先伤己后伤人，拳拳到肉，兼带吸力。",
-    "type": "active",
-    "category": "fist",
-    "power": 46,
-    "mpCost": 16,
-    "hitRate": 0.82,
-    "critRate": 0.22,
-    "unlockLevel": 7,
-    "lifesteal": 0.18,
-    "rarity": "rare"
+    "rarity": "common",
+    "trigger": { "type": "always" },
+    "cooldown": 0
   },
   {
     "id": "zui_fist",
     "name": "醉拳",
-    "description": "似醉非醉，步法飘忽难以预测，身法随之精进。",
+    "description": "似醉非醉，步法飘忽难以预测。交手之初先乱敌眼目，身法随之精进。",
     "type": "active",
     "category": "fist",
     "power": 30,
@@ -53,7 +43,9 @@
     "selfBuff": {
       "agility": 6
     },
-    "rarity": "rare"
+    "rarity": "rare",
+    "trigger": { "type": "firstTurn" },
+    "cooldown": 3
   },
   {
     "id": "taiji_fist",
@@ -69,25 +61,30 @@
     "enemyDebuff": {
       "attack": -4
     },
-    "rarity": "rare"
+    "rarity": "rare",
+    "trigger": { "type": "always" },
+    "cooldown": 1
   },
   {
-    "id": "xianglong_palms",
-    "name": "降龙十八掌",
-    "description": "丐帮绝学，掌力雄浑，有降龙伏虎之威，江湖第一刚猛掌法。",
+    "id": "qishang_fist",
+    "name": "七伤拳",
+    "description": "崆峒绝技，先伤己后伤人，拳拳到肉，兼带吸力。负伤之际方肯拼命。",
     "type": "active",
     "category": "fist",
-    "power": 55,
-    "mpCost": 20,
-    "hitRate": 0.78,
-    "critRate": 0.2,
-    "unlockLevel": 12,
-    "rarity": "epic"
+    "power": 46,
+    "mpCost": 16,
+    "hitRate": 0.82,
+    "critRate": 0.22,
+    "unlockLevel": 7,
+    "lifesteal": 0.18,
+    "rarity": "rare",
+    "trigger": { "type": "hpBelow", "value": 0.6 },
+    "cooldown": 2
   },
   {
     "id": "poison_sand",
     "name": "含沙射影",
-    "description": "淬毒暗器手法，伤人于无形，中者身中奇毒。",
+    "description": "淬毒暗器手法，伤人于无形，中者身中奇毒。开局即下毒，让毒性耗足全场。",
     "type": "active",
     "category": "fist",
     "power": 20,
@@ -97,7 +94,24 @@
     "unlockLevel": 5,
     "poison": 8,
     "poisonTurns": 3,
-    "rarity": "rare"
+    "rarity": "rare",
+    "trigger": { "type": "firstTurn" },
+    "cooldown": 3
+  },
+  {
+    "id": "xianglong_palms",
+    "name": "降龙十八掌",
+    "description": "丐帮绝学，掌力雄浑，有降龙伏虎之威，江湖第一刚猛掌法。敌气力尚足时全力相搏。",
+    "type": "active",
+    "category": "fist",
+    "power": 55,
+    "mpCost": 20,
+    "hitRate": 0.78,
+    "critRate": 0.2,
+    "unlockLevel": 12,
+    "rarity": "epic",
+    "trigger": { "type": "enemyHpAbove", "value": 0.35 },
+    "cooldown": 3
   },
   {
     "id": "wudu_palm",
@@ -113,7 +127,9 @@
     "poison": 14,
     "poisonTurns": 4,
     "lifesteal": 0.1,
-    "rarity": "epic"
+    "rarity": "epic",
+    "trigger": { "type": "always" },
+    "cooldown": 2
   },
   {
     "id": "tieshan_palm",
@@ -130,6 +146,8 @@
       "defense": -8,
       "agility": -4
     },
-    "rarity": "epic"
+    "rarity": "epic",
+    "trigger": { "type": "always" },
+    "cooldown": 2
   }
 ]

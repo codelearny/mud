@@ -10,7 +10,9 @@
     "hitRate": 0.88,
     "critRate": 0.08,
     "unlockLevel": 1,
-    "rarity": "common"
+    "rarity": "common",
+    "trigger": { "type": "always" },
+    "cooldown": 0
   },
   {
     "id": "lianhuan_sword",
@@ -23,7 +25,9 @@
     "hitRate": 0.82,
     "critRate": 0.15,
     "unlockLevel": 5,
-    "rarity": "rare"
+    "rarity": "rare",
+    "trigger": { "type": "always" },
+    "cooldown": 1
   },
   {
     "id": "taiji_sword",
@@ -39,7 +43,9 @@
     "enemyDebuff": {
       "attack": -5
     },
-    "rarity": "rare"
+    "rarity": "rare",
+    "trigger": { "type": "always" },
+    "cooldown": 2
   },
   {
     "id": "yuenyu_sword",
@@ -53,12 +59,14 @@
     "critRate": 0.12,
     "unlockLevel": 8,
     "hits": 2,
-    "rarity": "rare"
+    "rarity": "rare",
+    "trigger": { "type": "always" },
+    "cooldown": 2
   },
   {
     "id": "wanjan_sword",
     "name": "万剑归宗",
-    "description": "剑圣绝学，剑气纵横化为万剑，三连斩落，无可躲闪。",
+    "description": "剑圣绝学，剑气纵横化为万剑，三连斩落，无可躲闪。敌势未衰时尽出为佳。",
     "type": "active",
     "category": "sword",
     "power": 58,
@@ -67,7 +75,9 @@
     "critRate": 0.25,
     "unlockLevel": 14,
     "hits": 3,
-    "rarity": "epic"
+    "rarity": "epic",
+    "trigger": { "type": "enemyHpAbove", "value": 0.4 },
+    "cooldown": 3
   },
   {
     "id": "dugu_nine",
@@ -80,6 +90,8 @@
     "hitRate": 0.85,
     "critRate": 0.3,
     "unlockLevel": 15,
-    "rarity": "epic"
+    "rarity": "epic",
+    "trigger": { "type": "always" },
+    "cooldown": 3
   }
 ]

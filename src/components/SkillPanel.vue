@@ -2,7 +2,10 @@
 import { computed, ref } from 'vue'
 import { usePlayerStore } from '../stores/player'
 import { getAllSkills, getSkill, getItem, getAllItems } from '../engine/data-loader'
-import { skillTags, skillSchoolLabel, WEAPON_SCHOOL_LABELS, weaponSchoolMatches } from '../engine/skill-utils'
+import {
+  skillTags, skillSchoolLabel, passiveTags, triggerLabel, inferTrigger,
+  WEAPON_SCHOOL_LABELS, weaponSchoolMatches, MAX_EQUIPPED_SKILLS,
+} from '../engine/skill-utils'
 import type { Skill, SkillCategory } from '../types'
 
 const playerStore = usePlayerStore()
@@ -28,6 +31,20 @@ const learnedSkills = computed<LearnedSkillView[]>(() => {
       }
     })
     .filter((s): s is LearnedSkillView => s !== null)
+})
+
+// 主动战技 / 被动心法分列：前者要占战技槽，后者习得即常驻生效
+const activeSkills = computed(() => learnedSkills.value.filter(s => s.type === 'active'))
+const passiveSkills = computed(() => learnedSkills.value.filter(s => s.type === 'passive'))
+
+const equippedIds = computed(() => char.value?.equippedSkills ?? [])
+const slots = computed(() => {
+  const filled = equippedIds.value
+    .map(id => getSkill(id))
+    .filter((s): s is Skill => !!s)
+  const list = [...filled]
+  while (list.length < MAX_EQUIPPED_SKILLS) list.push(undefined as unknown as Skill)
+  return list
 })
 
 const availableSkills = computed(() => {
@@ -114,19 +131,61 @@ function learnSkill(skillId: string) {
   learnMsg.value = res.ok ? '参悟有成，习得新武功！' : res.reason ?? '参悟失败'
   setTimeout(() => { learnMsg.value = '' }, 2600)
 }
+
+const slotMsg = ref('')
+function toggleEquip(skillId: string) {
+  const equipped = equippedIds.value.includes(skillId)
+  if (equipped) {
+    playerStore.unequipSkill(skillId)
+    slotMsg.value = '已卸下战技'
+  } else {
+    const res = playerStore.equipSkill(skillId)
+    slotMsg.value = res.ok ? '已装备战技' : res.reason ?? '装备失败'
+  }
+  setTimeout(() => { slotMsg.value = '' }, 2000)
+}
 </script>
 
 <template>
   <div class="panel" v-if="char">
-    <div class="panel-title">已学武功</div>
+    <!-- ===== 战技槽：自动战斗只会释放槽中的主动功法 ===== -->
+    <div class="panel-title">战技槽（{{ equippedIds.length }}/{{ MAX_EQUIPPED_SKILLS }} · 自动施展）</div>
     <div class="weapon-current" v-if="equippedWeapon">
       当前兵器：{{ equippedWeapon.name }}（{{ equippedSchoolLabel }}）— 功法与兵器相合方能尽展威能
     </div>
     <div v-else class="weapon-current">
       当前兵器：空手（拳脚）— 拳脚功法相合，刀/剑/棍法则威力折扣
     </div>
-    <div class="skill-list" v-if="learnedSkills.length > 0">
-      <div class="skill-card" v-for="skill in learnedSkills" :key="skill.id">
+    <div v-if="slotMsg" class="learn-msg">{{ slotMsg }}</div>
+    <div class="slot-list">
+      <div
+        v-for="(s, i) in slots"
+        :key="i"
+        class="slot-card"
+        :class="{ 'slot-empty': !s }"
+      >
+        <template v-if="s">
+          <div class="slot-name">
+            {{ s.name }}
+            <span class="skill-tag" :class="RARITY_CLASS[rarityOf(s)]">{{ RARITY_LABEL[rarityOf(s)] }}</span>
+          </div>
+          <div class="slot-meta">{{ triggerLabel(inferTrigger(s)) }} · 冷却 {{ s.cooldown ?? 0 }} 回合 · 内力 {{ s.mpCost }}</div>
+          <div class="skill-tags" v-if="skillTags(s).length">
+            <span class="skill-tag" v-for="t in skillTags(s)" :key="t">{{ t }}</span>
+          </div>
+          <button class="btn btn-slim" @click="toggleEquip(s.id)">卸下</button>
+        </template>
+        <template v-else>
+          <div class="slot-empty-text">空槽位</div>
+          <div class="slot-meta">从下方「已学战技」中挑选装配</div>
+        </template>
+      </div>
+    </div>
+
+    <!-- ===== 已学主动战技 ===== -->
+    <div class="panel-title" style="margin-top: 12px;">已学战技（须装备方会施展）</div>
+    <div class="skill-list" v-if="activeSkills.length > 0">
+      <div class="skill-card" v-for="skill in activeSkills" :key="skill.id">
         <div class="skill-info">
           <div class="skill-name">
             {{ skill.name }}
@@ -139,16 +198,49 @@ function learnSkill(skillId: string) {
           </div>
           <div class="skill-desc">{{ skill.description }}</div>
           <div class="skill-desc" style="color: var(--text-tertiary);">
-            威力 {{ skill.power }} · 耗内力 {{ skill.mpCost }} · 命中 {{ Math.round(skill.hitRate * 100) }}% · 暴击 {{ Math.round(skill.critRate * 100) }}%
+            威力 {{ skill.power }} · 耗内力 {{ skill.mpCost }} · 冷却 {{ skill.cooldown ?? 0 }} 回合 ·
+            命中 {{ Math.round(skill.hitRate * 100) }}% · 暴击 {{ Math.round(skill.critRate * 100) }}%
+          </div>
+          <div class="skill-desc" style="color: var(--text-accent);">
+            触发：{{ triggerLabel(inferTrigger(skill)) }}
           </div>
           <div class="skill-tags" v-if="skillTags(skill).length">
             <span class="skill-tag" v-for="t in skillTags(skill)" :key="t">{{ t }}</span>
           </div>
         </div>
+        <div class="skill-actions">
+          <button
+            class="btn"
+            :class="equippedIds.includes(skill.id) ? '' : 'btn-primary'"
+            @click="toggleEquip(skill.id)"
+          >{{ equippedIds.includes(skill.id) ? '卸下' : '装备' }}</button>
+        </div>
       </div>
     </div>
-    <div v-else class="empty-text">尚未习得任何武功</div>
+    <div v-else class="empty-text">尚未习得任何主动战技</div>
 
+    <!-- ===== 已学被动心法 ===== -->
+    <div class="panel-title" style="margin-top: 12px;">已学心法（习得即常驻生效）</div>
+    <div class="skill-list" v-if="passiveSkills.length > 0">
+      <div class="skill-card" v-for="skill in passiveSkills" :key="skill.id">
+        <div class="skill-info">
+          <div class="skill-name">
+            {{ skill.name }}
+            <span class="skill-tag" :class="RARITY_CLASS[rarityOf(skill)]">{{ RARITY_LABEL[rarityOf(skill)] }}</span>
+            <span class="equipped-badge">{{ categoryLabels[skill.category] }}</span>
+            <span class="equipped-badge">第{{ skill.level }}层</span>
+            <span class="skill-tag good">被动</span>
+          </div>
+          <div class="skill-desc">{{ skill.description }}</div>
+          <div class="skill-tags" v-if="passiveTags(skill).length">
+            <span class="skill-tag" v-for="t in passiveTags(skill)" :key="t">{{ t }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div v-else class="empty-text">尚未习得任何内功心法</div>
+
+    <!-- ===== 可参悟绝学 ===== -->
     <div class="panel-title" style="margin-top: 12px;">江湖绝学</div>
     <div v-if="learnMsg" class="learn-msg">{{ learnMsg }}</div>
     <div class="skill-list" v-if="availableSkills.length">
@@ -163,20 +255,27 @@ function learnSkill(skillId: string) {
             <span class="skill-tag" :class="RARITY_CLASS[rarityOf(skill)]">{{ RARITY_LABEL[rarityOf(skill)] }}</span>
             <span class="equipped-badge">{{ categoryLabels[skill.category] }}</span>
             <span class="equipped-badge" v-if="skillSchoolLabel(skill)">适配{{ skillSchoolLabel(skill) }}</span>
+            <span class="skill-tag" v-if="skill.type === 'passive'">被动</span>
             <span class="skill-tag good" v-if="affinityOf(skill) === 'match'">相合 +10%</span>
             <span class="skill-tag warn" v-else-if="affinityOf(skill) === 'mismatch'">不合 ×0.6</span>
           </div>
           <div class="skill-desc">{{ skill.description }}</div>
-          <div class="skill-desc" style="color: var(--text-tertiary);">
+          <div class="skill-desc" style="color: var(--text-tertiary);" v-if="skill.type === 'active'">
             威力 {{ skill.power }} · 耗内力 {{ skill.mpCost }} · 需第{{ skill.unlockLevel }}重<template v-if="learnCheck(skill).goldCost > 0"> · 银两 {{ learnCheck(skill).goldCost }}</template>
+          </div>
+          <div class="skill-desc" style="color: var(--text-tertiary);" v-else>
+            常驻生效 · 无需装备 · 需第{{ skill.unlockLevel }}重<template v-if="learnCheck(skill).goldCost > 0"> · 银两 {{ learnCheck(skill).goldCost }}</template>
+          </div>
+          <div class="skill-tags" v-if="skill.type === 'passive' && passiveTags(skill).length">
+            <span class="skill-tag" v-for="t in passiveTags(skill)" :key="t">{{ t }}</span>
+          </div>
+          <div class="skill-tags" v-else-if="skillTags(skill).length">
+            <span class="skill-tag" v-for="t in skillTags(skill)" :key="t">{{ t }}</span>
           </div>
           <div class="skill-desc learn-req" v-if="learnCheck(skill).manual">
             需「{{ learnCheck(skill).manual?.name }}」
             <span v-if="char?.inventory?.some(i => i.itemId === learnCheck(skill).manual?.id && i.quantity > 0)" class="own">（已持有）</span>
             <span v-else class="lack">（未得）</span>
-          </div>
-          <div class="skill-tags" v-if="skillTags(skill).length">
-            <span class="skill-tag" v-for="t in skillTags(skill)" :key="t">{{ t }}</span>
           </div>
         </div>
         <div class="skill-actions">

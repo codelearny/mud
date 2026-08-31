@@ -38,6 +38,8 @@ export type BattleActionType =
   | 'info'
   | 'victory'
   | 'defeat'
+  | 'trait'     // 被动特质触发（反伤/反击/护盾等）
+  | 'modifier'  // roguelike 战况播报
 
 export type BattleState = 'ongoing' | 'victory' | 'defeat' | 'fled'
 
@@ -61,6 +63,57 @@ export interface SkillBuff {
   agility?: number
 }
 
+// ===== 自动战斗：主动功法的触发条件 =====
+// 玩家不再手动出招；引擎每回合按「已装备战技」的顺序逐一检查 trigger，
+// 取第一个满足条件且冷却已好、内力足够的战技释放，全部不满足则普通攻击。
+export type SkillTriggerType =
+  | 'always'        // 无条件（冷却与内力允许即放）
+  | 'hpBelow'       // 自身气血比例低于 value（0~1）
+  | 'hpAbove'       // 自身气血比例高于 value
+  | 'mpAbove'       // 自身内力比例高于 value
+  | 'enemyHpBelow'  // 对手气血比例低于 value（斩杀线）
+  | 'enemyHpAbove'  // 对手气血比例高于 value（开局爆发）
+  | 'firstTurn'     // 仅第一回合（起手削弱/上buff）
+  | 'everyNTurns'   // 每 value 回合一次
+  | 'turnAbove'     // 回合数大于 value（久战不下的底牌）
+
+export interface SkillTrigger {
+  type: SkillTriggerType
+  value?: number
+}
+
+// 被动功法带来的常驻属性加成（并入 getEffectiveAttributes）
+export interface PassiveEffects {
+  maxHp?: number
+  maxMp?: number
+  attack?: number
+  defense?: number
+  agility?: number
+  comprehension?: number
+  luck?: number
+  attackPercent?: number
+  defensePercent?: number
+  agilityPercent?: number
+  maxHpPercent?: number
+  maxMpPercent?: number
+}
+
+// 被动功法带来的战斗内「特质」（常驻生效，不占回合、不耗内力）
+export interface PassiveTraits {
+  critRate?: number          // 附加暴击率
+  critDamage?: number        // 暴击伤害加成
+  damageReduction?: number   // 受伤减免 0~1
+  lifesteal?: number         // 吸血比例 0~1
+  regenPercent?: number      // 每回合回血比例（基于最大气血）
+  mpRegen?: number           // 每回合回内力（定值）
+  dodgeBonus?: number        // 附加闪避率
+  thorns?: number            // 反伤：受击时按受到伤害比例反弹
+  counterRate?: number       // 反击率：受击后有几率立刻还手一次
+  firstShield?: number       // 开局护盾（按最大气血比例吸收伤害）
+  executeBonus?: number      // 对残血（<30%）对手的额外伤害比例
+  extraHitRate?: number      // 连击率：普攻/战技有几率多打一段
+}
+
 export interface Skill {
   id: string
   name: string
@@ -75,7 +128,8 @@ export interface Skill {
   rarity?: ItemRarity  // 稀有度决定获取难度：common 达标即悟 / rare 需银两 / epic 需秘籍 / legendary 需秘籍+银两
   // —— 进阶机制（可选）——
   hits?: number            // 多段攻击次数，默认 1
-  heal?: number            // 命中后自我治疗（恢复气血）
+  heal?: number            // 命中后自我治疗（恢复气血，定值）
+  healPercent?: number     // 自我治疗（按最大气血比例，与 heal 叠加；后期疗伤不至于脱节）
   restoreMp?: number       // 自我恢复内力
   lifesteal?: number       // 吸血比例 0~1（按造成伤害吸取气血）
   selfBuff?: SkillBuff     // 自身增益（攻击/防御/身法）
@@ -83,6 +137,11 @@ export interface Skill {
   stun?: boolean           // 点穴：使对手本回合无法行动
   poison?: number          // 施毒：对手每回合受到的中毒伤害
   poisonTurns?: number     // 中毒持续回合，默认 3
+  // —— 自动战斗字段 ——
+  trigger?: SkillTrigger      // 自动释放条件（仅 type==='active'）；省略则由引擎按字段推断
+  cooldown?: number           // 冷却回合数（仅 active）；省略默认 0（无冷却）
+  passiveEffects?: PassiveEffects // 常驻属性加成（仅 type==='passive'）
+  passiveTraits?: PassiveTraits   // 常驻战斗特质（仅 type==='passive'）
 }
 
 export interface LearnedSkill {
@@ -159,6 +218,7 @@ export interface Character {
   discoveredEnemies?: string[] // 图鉴：已遭遇/已击败的敌人 id 集合（配置不写死，战斗开始时写入）
   discoveredItems?: string[]   // 图鉴：已获得过的物品 id 集合（卖出或消耗后仍保留，由 player.save 统一记录）
   talents?: string[]           // 已顿悟的天赋 id 集合（升级时三选一），塑造 build 多样性（roguelike 要素）
+  equippedSkills?: string[]    // 已装备的主动战技 id（最多 MAX_EQUIPPED_SKILLS 个）；自动战斗只会释放已装备的战技
   attributes: CharacterAttributes
   learnedSkills: LearnedSkill[]
   equipment: Equipment
@@ -230,6 +290,11 @@ export interface BattleCharacter {
   agility: number
   skills: string[]
   isPlayer: boolean
+  // 入场时的基础三维快照：增益/削弱一律以此为基准钳制，
+  // 防止「化功大法」这类削弱被反复叠加，把属性压到地板导致战斗永远打不完。
+  baseAttack?: number
+  baseDefense?: number
+  baseAgility?: number
   poison?: number
   poisonTurns?: number
   buffs?: ActiveBuff[]
@@ -241,6 +306,20 @@ export interface BattleCharacter {
   damageReduction?: number     // 受到伤害减免比例 0~1
   regenPercent?: number        // 每回合开始回复气血比例（基于最大气血）
   schoolDamage?: Partial<Record<SkillCategory, number>> // 各流派技能伤害加成（比例）
+  // —— 被动功法特质聚合（passiveTraits 累加后注入）——
+  traits?: PassiveTraits
+  shield?: number              // 剩余护盾值，优先吸收伤害（由 firstShield / 战况修饰赋予）
+  stunned?: boolean            // 被点穴：本回合跳过行动
+  // 自动战斗只从「已装备战技」中选招（玩家侧为 character.equippedSkills 的快照）
+  equippedSkills?: string[]
+  // —— roguelike 战况修饰的最终乘算系数（由 BattleModifier 聚合）——
+  damageDealtMult?: number     // 造成伤害倍率，默认 1
+  damageTakenMult?: number     // 受到伤害倍率，默认 1
+  hitMult?: number             // 命中率倍率，默认 1
+  healMult?: number            // 治疗效果倍率，默认 1
+  // —— 久战力竭（每回合重算，不累乘）——
+  exhaustMult?: number         // 力竭状态下受到伤害的放大倍率，默认 1
+  exhaustHealMult?: number     // 力竭状态下疗伤/回复的衰减倍率，默认 1
 }
 
 export interface BattleLogEntry {
@@ -250,6 +329,40 @@ export interface BattleLogEntry {
   type: BattleActionType
 }
 
+// ===== roguelike 战况修饰（见 src/data/battleModifiers.json，纯配置驱动）=====
+// 每场战斗开局随机抽若干条「战况」，把倍率/护盾/毒等效果分别施加给我方或敌方，
+// 使同一只怪的每次交手都不一样（roguelike 要素）。引擎只按字段分发，不写死具体条目。
+export interface BattleModifierEffect {
+  playerDamageDealtMult?: number
+  playerDamageTakenMult?: number
+  playerHitMult?: number
+  playerHealMult?: number
+  playerShieldPercent?: number   // 我方开局护盾（最大气血比例）
+  playerRegenPercent?: number
+  playerCritRate?: number
+  playerLifesteal?: number
+  enemyDamageDealtMult?: number
+  enemyDamageTakenMult?: number
+  enemyHitMult?: number
+  enemyShieldPercent?: number
+  enemyRegenPercent?: number
+  enemyCritRate?: number
+  expMult?: number               // 战后经验倍率
+  goldMult?: number              // 战后银两倍率
+  dropRateMult?: number          // 战后掉落率倍率
+}
+
+export interface BattleModifier {
+  id: string
+  name: string
+  description: string
+  // 'boon' 有利 / 'bane' 不利 / 'chaos' 双刃（既有利又有弊）
+  kind: 'boon' | 'bane' | 'chaos'
+  rarity: ItemRarity
+  weight: number                 // 抽取权重
+  effects: BattleModifierEffect
+}
+
 export interface Battle {
   player: BattleCharacter
   enemy: BattleCharacter
@@ -257,6 +370,12 @@ export interface Battle {
   log: BattleLogEntry[]
   state: BattleState
   enemyId: string
+  // —— 自动战斗运行时状态 ——
+  modifiers?: BattleModifier[]              // 本场战斗抽到的 roguelike 战况
+  cooldowns?: Record<string, number>        // 玩家战技剩余冷却（skillId -> 回合）
+  enemyCooldowns?: Record<string, number>   // 敌方战技剩余冷却
+  rewardMult?: { exp: number; gold: number; drop: number } // 战况带来的战利品倍率
+  exhausted?: boolean                       // 是否已播报「久战力竭」（避免每回合重复刷屏）
 }
 
 export interface SaveData {

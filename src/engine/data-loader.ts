@@ -1,4 +1,4 @@
-import type { Skill, Item, Enemy, Scene, NPC, Quest, Encounter, Shop, OriginConfig, Talent } from '../types'
+import type { Skill, Item, Enemy, Scene, NPC, Quest, Encounter, Shop, OriginConfig, Talent, BattleModifier } from '../types'
 
 // 所有数据表均按「大类/地区」拆分到独立文件（见 src/data 下对应目录）。
 // 这里用 import.meta.glob 将目录下所有 JSON 合并进 Map，对外接口保持不变。
@@ -12,6 +12,7 @@ const questModules = import.meta.glob('../data/quests/**/*.json', { eager: true 
 const encounterModules = import.meta.glob('../data/encounters/**/*.json', { eager: true }) as unknown as Record<string, { default: Encounter[] }>
 const originModules = import.meta.glob('../data/origins/**/*.json', { eager: true }) as unknown as Record<string, { default: OriginConfig[] }>
 const talentModules = import.meta.glob('../data/talents/**/*.json', { eager: true }) as unknown as Record<string, { default: Talent[] }>
+const modifierModules = import.meta.glob('../data/battleModifiers.json', { eager: true }) as unknown as Record<string, { default: BattleModifier[] }>
 
 const skills = new Map<string, Skill>()
 const items = new Map<string, Item>()
@@ -23,6 +24,7 @@ const encounters = new Map<string, Encounter>()
 const shops = new Map<string, Shop>()
 const origins = new Map<string, OriginConfig>()
 const talents = new Map<string, Talent>()
+const modifiers = new Map<string, BattleModifier>()
 
 for (const mod of Object.values(skillModules)) {
   for (const skill of mod.default) {
@@ -81,6 +83,12 @@ for (const mod of Object.values(originModules)) {
 for (const mod of Object.values(talentModules)) {
   for (const talent of mod.default) {
     talents.set(talent.id, talent)
+  }
+}
+
+for (const mod of Object.values(modifierModules)) {
+  for (const m of mod.default) {
+    modifiers.set(m.id, m)
   }
 }
 
@@ -162,4 +170,12 @@ export function getTalent(id: string): Talent | undefined {
 
 export function getAllTalents(): Talent[] {
   return Array.from(talents.values())
+}
+
+export function getBattleModifier(id: string): BattleModifier | undefined {
+  return modifiers.get(id)
+}
+
+export function getAllBattleModifiers(): BattleModifier[] {
+  return Array.from(modifiers.values())
 }

@@ -1,4 +1,6 @@
-import type { Character, CharacterAttributes, EquipSlot } from '../types'
+import type {
+  Character, CharacterAttributes, EquipSlot, PassiveEffects, PassiveTraits,
+} from '../types'
 import { getItem, getSkill, getOrigin } from './data-loader'
 import {
   expForNextLevel as configExpForNextLevel,
@@ -84,6 +86,76 @@ export function createNewCharacter(name: string, originId?: string): Character {
   return char
 }
 
+/**
+ * 汇总一组功法中「被动功法」的常驻属性加成。
+ * 玩家传已习得功法，敌人传其技能表——双方共用同一套被动规则，避免敌人白带心法。
+ */
+export function aggregatePassiveEffects(skillIds: string[]): Required<PassiveEffects> {
+  const total: Required<PassiveEffects> = {
+    maxHp: 0, maxMp: 0, attack: 0, defense: 0, agility: 0, comprehension: 0, luck: 0,
+    attackPercent: 0, defensePercent: 0, agilityPercent: 0, maxHpPercent: 0, maxMpPercent: 0,
+  }
+  for (const id of skillIds) {
+    const skill = getSkill(id)
+    if (!skill || skill.type !== 'passive') continue
+    const e = skill.passiveEffects
+    if (!e) continue
+    total.maxHp += e.maxHp ?? 0
+    total.maxMp += e.maxMp ?? 0
+    total.attack += e.attack ?? 0
+    total.defense += e.defense ?? 0
+    total.agility += e.agility ?? 0
+    total.comprehension += e.comprehension ?? 0
+    total.luck += e.luck ?? 0
+    total.attackPercent += e.attackPercent ?? 0
+    total.defensePercent += e.defensePercent ?? 0
+    total.agilityPercent += e.agilityPercent ?? 0
+    total.maxHpPercent += e.maxHpPercent ?? 0
+    total.maxMpPercent += e.maxMpPercent ?? 0
+  }
+  return total
+}
+
+/**
+ * 汇总一组功法中「被动功法」的战斗特质（暴击/吸血/反伤/反击/护盾/连击……）。
+ * 战斗开始时注入 BattleCharacter.traits，由战斗引擎按字段消费。
+ */
+export function aggregatePassiveTraits(skillIds: string[]): Required<PassiveTraits> {
+  const total: Required<PassiveTraits> = {
+    critRate: 0, critDamage: 0, damageReduction: 0, lifesteal: 0, regenPercent: 0,
+    mpRegen: 0, dodgeBonus: 0, thorns: 0, counterRate: 0, firstShield: 0,
+    executeBonus: 0, extraHitRate: 0,
+  }
+  for (const id of skillIds) {
+    const skill = getSkill(id)
+    if (!skill || skill.type !== 'passive') continue
+    const t = skill.passiveTraits
+    if (!t) continue
+    total.critRate += t.critRate ?? 0
+    total.critDamage += t.critDamage ?? 0
+    total.damageReduction += t.damageReduction ?? 0
+    total.lifesteal += t.lifesteal ?? 0
+    total.regenPercent += t.regenPercent ?? 0
+    total.mpRegen += t.mpRegen ?? 0
+    total.dodgeBonus += t.dodgeBonus ?? 0
+    total.thorns += t.thorns ?? 0
+    total.counterRate += t.counterRate ?? 0
+    total.firstShield += t.firstShield ?? 0
+    total.executeBonus += t.executeBonus ?? 0
+    total.extraHitRate += t.extraHitRate ?? 0
+  }
+  return total
+}
+
+// 玩家侧便捷入口（沿用原有调用点）
+export function getPassiveEffects(character: Character): Required<PassiveEffects> {
+  return aggregatePassiveEffects(character.learnedSkills.map(ls => ls.skillId))
+}
+
+export function getPassiveTraits(character: Character): Required<PassiveTraits> {
+  return aggregatePassiveTraits(character.learnedSkills.map(ls => ls.skillId))
+}
+
 export function getEffectiveAttributes(character: Character): CharacterAttributes {
   const attrs = { ...character.attributes }
 
@@ -108,16 +180,35 @@ export function getEffectiveAttributes(character: Character): CharacterAttribute
     }
   }
 
+  // 被动功法（内功/轻功）常驻加成：定值先加，百分比后乘
+  const pe = getPassiveEffects(character)
+  attrs.maxHp += pe.maxHp
+  attrs.maxMp += pe.maxMp
+  attrs.attack += pe.attack
+  attrs.defense += pe.defense
+  attrs.agility += pe.agility
+  attrs.comprehension += pe.comprehension
+  attrs.luck += pe.luck
+
   // 天赋（顿悟）属性加成：百分比乘算在有效属性之上，气血/内力用定值避免钳制问题。
   const te = getTalentEffects(character)
   if (te.attackPercent) attrs.attack = Math.round(attrs.attack * (1 + te.attackPercent))
   if (te.defensePercent) attrs.defense = Math.round(attrs.defense * (1 + te.defensePercent))
   if (te.agilityPercent) attrs.agility = Math.round(attrs.agility * (1 + te.agilityPercent))
   if (te.comprehensionPercent) attrs.comprehension = Math.round(attrs.comprehension * (1 + te.comprehensionPercent))
+
+  // 被动功法百分比加成（与天赋乘算叠加）
+  if (pe.attackPercent) attrs.attack = Math.round(attrs.attack * (1 + pe.attackPercent))
+  if (pe.defensePercent) attrs.defense = Math.round(attrs.defense * (1 + pe.defensePercent))
+  if (pe.agilityPercent) attrs.agility = Math.round(attrs.agility * (1 + pe.agilityPercent))
+  if (pe.maxHpPercent) attrs.maxHp = Math.round(attrs.maxHp * (1 + pe.maxHpPercent))
+  if (pe.maxMpPercent) attrs.maxMp = Math.round(attrs.maxMp * (1 + pe.maxMpPercent))
+
   if (te.maxHpFlat) attrs.maxHp += te.maxHpFlat
   if (te.maxMpFlat) attrs.maxMp += te.maxMpFlat
   // 负向 maxHp 天赋（如「凶悍」）可能使当前气血超出上限，需钳制
   if (attrs.hp > attrs.maxHp) attrs.hp = attrs.maxHp
+  if (attrs.mp > attrs.maxMp) attrs.mp = attrs.maxMp
 
   return attrs
 }

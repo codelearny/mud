@@ -18,6 +18,7 @@ import EncounterPanel from '../components/EncounterPanel.vue'
 import QuestPanel from '../components/QuestPanel.vue'
 import ShopPanel from '../components/ShopPanel.vue'
 import CodexPanel from '../components/CodexPanel.vue'
+import BattlePanel from '../components/BattlePanel.vue'
 import TalentChoiceModal from '../components/TalentChoiceModal.vue'
 import type { SceneAction, SceneGain } from '../types'
 
@@ -116,7 +117,6 @@ function doAction(action: SceneAction) {
 
 function randomBattle() {
   battleStore.startRandomBattle(scene.value?.enemyPool)
-  router.push('/battle')
 }
 
 function saveGame() {
@@ -143,7 +143,11 @@ function formatMsgTime(t: number): string {
     <StatusBar />
 
     <div class="game-body">
-      <div class="game-main">
+    <div class="game-main">
+      <!-- 战斗在主界面内自动进行，交手过程实时写入右侧「江湖消息」 -->
+      <BattlePanel v-if="battleStore.battle" />
+
+      <template v-else>
         <div v-show="activeTab === 'map'" class="map-view">
           <div class="scene-header">
             <div class="scene-name">{{ scene?.name }}</div>
@@ -217,17 +221,18 @@ function formatMsgTime(t: number): string {
     </div>
 
     <div v-show="activeTab === 'codex'">
-      <CodexPanel />
-    </div>
+          <CodexPanel />
+        </div>
 
-    <div class="action-menu">
-      <button class="btn" :class="{ 'btn-primary': activeTab === 'map' }" @click="activeTab = 'map'">江湖</button>
-      <button class="btn" :class="{ 'btn-primary': activeTab === 'quests' }" @click="activeTab = 'quests'">任务</button>
-      <button class="btn" :class="{ 'btn-primary': activeTab === 'character' }" @click="activeTab = 'character'">角色</button>
-      <button class="btn" :class="{ 'btn-primary': activeTab === 'skills' }" @click="activeTab = 'skills'">武功</button>
-      <button class="btn" :class="{ 'btn-primary': activeTab === 'inventory' }" @click="activeTab = 'inventory'">物品</button>
-      <button class="btn" :class="{ 'btn-primary': activeTab === 'codex' }" @click="activeTab = 'codex'">图鉴</button>
-    </div>
+        <div class="action-menu">
+          <button class="btn" :class="{ 'btn-primary': activeTab === 'map' }" @click="activeTab = 'map'">江湖</button>
+          <button class="btn" :class="{ 'btn-primary': activeTab === 'quests' }" @click="activeTab = 'quests'">任务</button>
+          <button class="btn" :class="{ 'btn-primary': activeTab === 'character' }" @click="activeTab = 'character'">角色</button>
+          <button class="btn" :class="{ 'btn-primary': activeTab === 'skills' }" @click="activeTab = 'skills'">武功</button>
+          <button class="btn" :class="{ 'btn-primary': activeTab === 'inventory' }" @click="activeTab = 'inventory'">物品</button>
+          <button class="btn" :class="{ 'btn-primary': activeTab === 'codex' }" @click="activeTab = 'codex'">图鉴</button>
+        </div>
+      </template>
     </div><!-- /game-main -->
 
     <aside class="game-aside">

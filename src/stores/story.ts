@@ -9,7 +9,7 @@ import {
   isChoiceVisible,
   rollRandomEncounter,
 } from '../engine/story'
-import { getAllQuests, getSkill, getItem } from '../engine/data-loader'
+import { getAllQuests, getSkill, getItem, getEnemy } from '../engine/data-loader'
 import { usePlayerStore } from './player'
 import { useShopStore } from './shop'
 import { useMessageStore } from './messages'
@@ -234,7 +234,10 @@ export const useStoryStore = defineStore('story', () => {
     checkQuestCompletions()
     const msgStore = useMessageStore()
     if (choice.battle) {
-      // 战斗类交由 BattleView 呈现，不写消息列表
+      // 战斗交由主界面内的 BattlePanel 自动进行，交手过程会逐条写入消息列表，
+      // 此处只播报开战，不重复写结果。
+      const enemy = getEnemy(choice.battle)
+      msgStore.addMessage(`你与${enemy?.name ?? '强敌'}动起手来！`, 'event')
       closeEncounter()
     } else {
       const summary = lines.length ? lines.join('，') : '（你淡然离去。）'

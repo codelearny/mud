@@ -1019,3 +1019,231 @@ html, body {
   .game-aside .msg-panel { margin: 0; }
   .game-aside .msg-scroll { max-height: calc(100vh - 130px); }
 }
+
+/* ===== 自动战斗面板（内嵌于主界面，交手过程写入江湖消息列表）===== */
+.battle-panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.battle-side {
+  padding: 8px 0;
+}
+
+.battle-side.enemy {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.battle-side.self {
+  border-top: 1px solid var(--border-color);
+}
+
+.battle-side .bar-num {
+  width: auto;
+  min-width: 74px;
+  text-align: right;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.battle-sub {
+  font-size: 12px;
+  color: var(--text-info);
+  margin-top: 4px;
+}
+
+/* roguelike 战况标签 */
+.battle-mods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px 0;
+}
+
+.mod-chip {
+  font-size: 11px;
+  font-family: var(--font-serif);
+  border-radius: 3px;
+  padding: 2px 7px;
+  border: 1px solid var(--border-hover);
+  color: var(--text-secondary);
+  cursor: help;
+}
+
+.mod-chip.mod-boon {
+  color: #8fe08a;
+  border-color: rgba(80, 180, 90, 0.55);
+  background: rgba(80, 180, 90, 0.12);
+}
+
+.mod-chip.mod-bane {
+  color: #f0a0a0;
+  border-color: rgba(200, 60, 60, 0.55);
+  background: rgba(200, 60, 60, 0.12);
+}
+
+.mod-chip.mod-chaos {
+  color: #e0b060;
+  border-color: rgba(201, 140, 40, 0.6);
+  background: rgba(201, 140, 40, 0.14);
+}
+
+/* 久战力竭提示：与「不利」战况同色系，暗示局势正被推向终局 */
+.battle-exhaust {
+  margin: 6px 0;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-family: var(--font-serif);
+  color: #e0b060;
+  border: 1px solid rgba(201, 140, 40, 0.6);
+  background: rgba(201, 140, 40, 0.12);
+  border-radius: 3px;
+  text-align: center;
+}
+
+.battle-section-title {
+  margin-top: 10px;
+}
+
+.equipped-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.equipped-card {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 8px 10px;
+}
+
+.equipped-card.on-cooldown {
+  opacity: 0.55;
+}
+
+.equipped-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.equipped-name {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.equipped-cd {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+
+.equipped-cd.ready {
+  color: #8fe08a;
+}
+
+.equipped-meta {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+.battle-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.battle-controls .btn {
+  flex: 1 1 auto;
+  min-width: 64px;
+  padding: 7px 8px;
+}
+
+.btn-speed {
+  flex: 0 0 auto;
+  min-width: 44px;
+}
+
+.battle-hint {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  line-height: 1.6;
+  margin-top: 8px;
+}
+
+.battle-result {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.result-lines {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin: 8px 0;
+}
+
+.result-lines .level-up {
+  color: var(--text-accent);
+  font-weight: 600;
+}
+
+.btn-block {
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* ===== 武功页：战技槽 ===== */
+.slot-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.slot-card {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--text-accent);
+  border-radius: 4px;
+  padding: 8px 10px;
+}
+
+.slot-card.slot-empty {
+  border-style: dashed;
+  border-color: var(--border-hover);
+}
+
+.slot-name {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.slot-meta {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+.slot-empty-text {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+
+.btn-slim {
+  margin-top: 6px;
+  padding: 3px 10px;
+  font-size: 12px;
+}

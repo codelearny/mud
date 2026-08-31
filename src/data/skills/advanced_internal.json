@@ -2,88 +2,108 @@
   {
     "id": "xisui_internal",
     "name": "洗髓经",
-    "description": "少林不传之秘，伐毛洗髓，攻守俱增，兼能自愈内伤。",
-    "type": "active",
+    "description": "少林不传之秘，伐毛洗髓。习成后攻守俱增，且能自愈内伤。",
+    "type": "passive",
     "category": "internal",
     "power": 0,
-    "mpCost": 18,
+    "mpCost": 0,
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 16,
-    "selfBuff": {
+    "rarity": "epic",
+    "passiveEffects": {
+      "maxHp": 80,
+      "maxMp": 20,
       "attack": 14,
       "defense": 10
     },
-    "heal": 45,
-    "rarity": "epic"
+    "passiveTraits": {
+      "regenPercent": 0.02,
+      "damageReduction": 0.06
+    }
   },
   {
     "id": "taixuan_internal",
     "name": "太玄经",
-    "description": "侠客岛绝学，内力如渊深不可测，攻守兼备，且能自复内力气血。",
-    "type": "active",
+    "description": "侠客岛绝学，内力如渊深不可测。习成后攻守兼备，内力气血生生不息。",
+    "type": "passive",
     "category": "internal",
     "power": 0,
-    "mpCost": 24,
+    "mpCost": 0,
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 22,
-    "selfBuff": {
+    "rarity": "legendary",
+    "passiveEffects": {
+      "maxHp": 120,
+      "maxMp": 40,
       "attack": 18,
       "defense": 14
     },
-    "restoreMp": 60,
-    "heal": 50,
-    "rarity": "legendary"
+    "passiveTraits": {
+      "regenPercent": 0.03,
+      "mpRegen": 3,
+      "damageReduction": 0.08
+    }
   },
   {
     "id": "taxue_step",
     "name": "踏雪无痕",
-    "description": "塞外苦修的身法，踏雪而行不留痕迹，身法大增。",
-    "type": "active",
+    "description": "塞外苦修的身法，踏雪而行不留痕迹。习成后身法大增，敌招每每一空。",
+    "type": "passive",
     "category": "movement",
     "power": 0,
-    "mpCost": 12,
+    "mpCost": 0,
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 14,
-    "selfBuff": {
+    "rarity": "epic",
+    "passiveEffects": {
       "agility": 14
     },
-    "rarity": "epic"
+    "passiveTraits": {
+      "dodgeBonus": 0.05
+    }
   },
   {
     "id": "xiaoyao_step",
     "name": "逍遥游",
-    "description": "逍遥子所悟身法，逍遥于天地之间，身法与守势俱进。",
-    "type": "active",
+    "description": "逍遥子所悟身法，逍遥于天地之间。习成后身法与守势俱进，进退从容。",
+    "type": "passive",
     "category": "movement",
     "power": 0,
-    "mpCost": 16,
+    "mpCost": 0,
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 19,
-    "selfBuff": {
+    "rarity": "epic",
+    "passiveEffects": {
       "agility": 20,
       "defense": 6
     },
-    "rarity": "epic"
+    "passiveTraits": {
+      "dodgeBonus": 0.07
+    }
   },
   {
     "id": "zhichi_step",
     "name": "咫尺天涯",
-    "description": "身法之极致，咫尺之间恍若天涯，进退如电，且能借势反击。",
-    "type": "active",
+    "description": "身法之极致，咫尺之间恍若天涯。习成后进退如电，更能借势反击。",
+    "type": "passive",
     "category": "movement",
     "power": 0,
-    "mpCost": 20,
+    "mpCost": 0,
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 23,
-    "selfBuff": {
+    "rarity": "legendary",
+    "passiveEffects": {
       "agility": 26,
       "attack": 6
     },
-    "rarity": "legendary"
+    "passiveTraits": {
+      "dodgeBonus": 0.08,
+      "counterRate": 0.15
+    }
   }
 ]

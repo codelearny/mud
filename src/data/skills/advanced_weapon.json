@@ -11,12 +11,14 @@
     "critRate": 0.3,
     "unlockLevel": 19,
     "hits": 2,
-    "rarity": "epic"
+    "rarity": "epic",
+    "trigger": { "type": "always" },
+    "cooldown": 3
   },
   {
     "id": "taia_sword_codex",
     "name": "太阿剑典",
-    "description": "上古剑道总纲，三剑齐出，威势可断山河，非剑道宗师不可施展。",
+    "description": "上古剑道总纲，三剑齐出，威势可断山河。敌势正盛时出剑，可一举摧其锐气。",
     "type": "active",
     "category": "sword",
     "power": 88,
@@ -25,12 +27,14 @@
     "critRate": 0.36,
     "unlockLevel": 24,
     "hits": 3,
-    "rarity": "legendary"
+    "rarity": "legendary",
+    "trigger": { "type": "enemyHpAbove", "value": 0.5 },
+    "cooldown": 4
   },
   {
     "id": "blood_blade_sutra",
     "name": "血刀经",
-    "description": "血刀门镇派绝学，刀出必见血，一瞬两斩，招招直取要害。",
+    "description": "血刀门镇派绝学，刀出必见血，一瞬两斩，招招直取要害。自身见血时杀性愈盛。",
     "type": "active",
     "category": "blade",
     "power": 76,
@@ -39,12 +43,14 @@
     "critRate": 0.3,
     "unlockLevel": 21,
     "hits": 2,
-    "rarity": "legendary"
+    "rarity": "legendary",
+    "trigger": { "type": "hpBelow", "value": 0.7 },
+    "cooldown": 3
   },
   {
     "id": "blade_shatter_army",
     "name": "刀破千军",
-    "description": "刀道极致，一刀破尽千军万马，三斩连环，血气为之夺。",
+    "description": "刀道极致，一刀破尽千军万马，三斩连环，血气为之夺。敌势未挫时方能尽展其威。",
     "type": "active",
     "category": "blade",
     "power": 92,
@@ -53,6 +59,8 @@
     "critRate": 0.34,
     "unlockLevel": 24,
     "hits": 3,
-    "rarity": "legendary"
+    "rarity": "legendary",
+    "trigger": { "type": "enemyHpAbove", "value": 0.4 },
+    "cooldown": 4
   }
 ]

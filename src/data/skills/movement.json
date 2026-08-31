@@ -2,51 +2,61 @@
   {
     "id": "qingyun_step",
     "name": "青云步",
-    "description": "轻功身法，脚踏青云，闪避大幅提升。",
-    "type": "active",
+    "description": "轻功身法，脚踏青云，身随意动。习成后身法常驻精进，闪避更为灵便。",
+    "type": "passive",
     "category": "movement",
     "power": 0,
-    "mpCost": 6,
+    "mpCost": 0,
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 4,
-    "selfBuff": {
+    "rarity": "common",
+    "passiveEffects": {
       "agility": 10
     },
-    "rarity": "common"
+    "passiveTraits": {
+      "dodgeBonus": 0.03
+    }
   },
   {
     "id": "lingbo_step",
     "name": "凌波微步",
-    "description": "逍遥派轻功，步法如凌波踏水，身法、守势俱增。",
-    "type": "active",
+    "description": "逍遥派轻功，步法如凌波踏水，进退之间自带守势，身法与防御俱增。",
+    "type": "passive",
     "category": "movement",
     "power": 0,
-    "mpCost": 8,
+    "mpCost": 0,
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 6,
-    "selfBuff": {
+    "rarity": "rare",
+    "passiveEffects": {
       "agility": 14,
       "defense": 3
     },
-    "rarity": "rare"
+    "passiveTraits": {
+      "dodgeBonus": 0.05
+    }
   },
   {
     "id": "shenxing_step",
     "name": "神行百变",
-    "description": "江湖逃命绝学，身形飘忽，攻守皆受其益。",
-    "type": "active",
+    "description": "江湖逃命绝学，身形飘忽百变，敌招落空之际正可借势还手。",
+    "type": "passive",
     "category": "movement",
     "power": 0,
-    "mpCost": 10,
+    "mpCost": 0,
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 10,
-    "selfBuff": {
+    "rarity": "epic",
+    "passiveEffects": {
       "agility": 8,
       "attack": 4
     },
-    "rarity": "epic"
+    "passiveTraits": {
+      "dodgeBonus": 0.06,
+      "counterRate": 0.1
+    }
   }
 ]

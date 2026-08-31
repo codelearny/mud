@@ -1,0 +1,229 @@
+[
+  {
+    "id": "mod_favorable_ground",
+    "name": "天时地利",
+    "description": "地势开阔，进退自如，出手顺畅，招招到位。",
+    "kind": "boon",
+    "rarity": "common",
+    "weight": 10,
+    "effects": { "playerDamageDealtMult": 1.2 }
+  },
+  {
+    "id": "mod_qiguan",
+    "name": "气贯长虹",
+    "description": "真气鼓荡，血脉贲张，此战更易击中敌之要害。",
+    "kind": "boon",
+    "rarity": "common",
+    "weight": 8,
+    "effects": { "playerCritRate": 0.15 }
+  },
+  {
+    "id": "mod_golden_body",
+    "name": "金身护体",
+    "description": "真气自行凝于体表，开战之初便有一层护体罡气。",
+    "kind": "boon",
+    "rarity": "rare",
+    "weight": 7,
+    "effects": { "playerShieldPercent": 0.2 }
+  },
+  {
+    "id": "mod_calm_mind",
+    "name": "心静如水",
+    "description": "心无杂念，卸力有法，所受创伤大为减轻。",
+    "kind": "boon",
+    "rarity": "common",
+    "weight": 8,
+    "effects": { "playerDamageTakenMult": 0.8 }
+  },
+  {
+    "id": "mod_lucky_star",
+    "name": "福星高照",
+    "description": "今日运道正盛，此战所获银两与物事格外丰厚。",
+    "kind": "boon",
+    "rarity": "rare",
+    "weight": 6,
+    "effects": { "goldMult": 1.5, "dropRateMult": 1.3 }
+  },
+  {
+    "id": "mod_epiphany",
+    "name": "醍醐灌顶",
+    "description": "此敌招法正好印证胸中所学，战后体悟倍深。",
+    "kind": "boon",
+    "rarity": "rare",
+    "weight": 6,
+    "effects": { "expMult": 1.4 }
+  },
+  {
+    "id": "mod_flowing",
+    "name": "行云流水",
+    "description": "身法与招式浑然一体，出手更难得空。",
+    "kind": "boon",
+    "rarity": "common",
+    "weight": 8,
+    "effects": { "playerHitMult": 1.15 }
+  },
+  {
+    "id": "mod_spring_breath",
+    "name": "回春之息",
+    "description": "内息自行流转，每过一合便有气血回复。",
+    "kind": "boon",
+    "rarity": "rare",
+    "weight": 7,
+    "effects": { "playerRegenPercent": 0.04 }
+  },
+  {
+    "id": "mod_bloody_fight",
+    "name": "血战八方",
+    "description": "杀性既起，敌血入手即为己用。",
+    "kind": "boon",
+    "rarity": "rare",
+    "weight": 7,
+    "effects": { "playerLifesteal": 0.12 }
+  },
+
+  {
+    "id": "mod_headwind",
+    "name": "逆风而行",
+    "description": "迎风而立，气力难舒，出手威力打了折扣。",
+    "kind": "bane",
+    "rarity": "common",
+    "weight": 10,
+    "effects": { "playerDamageDealtMult": 0.85 }
+  },
+  {
+    "id": "mod_restless",
+    "name": "心浮气躁",
+    "description": "心绪不宁，眼力偏差，招招都差了分毫。",
+    "kind": "bane",
+    "rarity": "common",
+    "weight": 8,
+    "effects": { "playerHitMult": 0.9 }
+  },
+  {
+    "id": "mod_stagnant_qi",
+    "name": "内力滞涩",
+    "description": "真气运行不畅，护体之力大减。",
+    "kind": "bane",
+    "rarity": "common",
+    "weight": 7,
+    "effects": { "playerDamageTakenMult": 1.2 }
+  },
+  {
+    "id": "mod_enemy_rampage",
+    "name": "敌势如虹",
+    "description": "对方气势正盛，招式狠辣，杀伤更甚往常。",
+    "kind": "bane",
+    "rarity": "common",
+    "weight": 9,
+    "effects": { "enemyDamageDealtMult": 1.25 }
+  },
+  {
+    "id": "mod_enemy_prepared",
+    "name": "敌有备而来",
+    "description": "对方早有防备，开战便撑起一层护体真气。",
+    "kind": "bane",
+    "rarity": "rare",
+    "weight": 7,
+    "effects": { "enemyShieldPercent": 0.15 }
+  },
+  {
+    "id": "mod_enemy_keen",
+    "name": "敌目如电",
+    "description": "对方目光如炬，专挑破绽下手，更易打出重击。",
+    "kind": "bane",
+    "rarity": "rare",
+    "weight": 6,
+    "effects": { "enemyCritRate": 0.12 }
+  },
+  {
+    "id": "mod_enemy_regen",
+    "name": "敌息绵长",
+    "description": "对方内息悠长，边战边自复气血，久战不利。",
+    "kind": "bane",
+    "rarity": "rare",
+    "weight": 6,
+    "effects": { "enemyRegenPercent": 0.03 }
+  },
+  {
+    "id": "mod_thin_luck",
+    "name": "福缘浅薄",
+    "description": "今日运道平平，所获银两寥寥。",
+    "kind": "bane",
+    "rarity": "common",
+    "weight": 5,
+    "effects": { "goldMult": 0.7 }
+  },
+
+  {
+    "id": "mod_last_stand",
+    "name": "背水一战",
+    "description": "退无可退，出手狠辣三分，却也门户大开。",
+    "kind": "chaos",
+    "rarity": "rare",
+    "weight": 7,
+    "effects": { "playerDamageDealtMult": 1.35, "playerDamageTakenMult": 1.25 }
+  },
+  {
+    "id": "mod_risk_reward",
+    "name": "险中求胜",
+    "description": "专走险招，要害拿捏更准，自身却也顾不上守。",
+    "kind": "chaos",
+    "rarity": "rare",
+    "weight": 7,
+    "effects": { "playerCritRate": 0.2, "playerDamageTakenMult": 1.15 }
+  },
+  {
+    "id": "mod_dragon_tiger",
+    "name": "龙争虎斗",
+    "description": "双方都豁出了全力，彼来我往，伤势都来得更快。",
+    "kind": "chaos",
+    "rarity": "rare",
+    "weight": 8,
+    "effects": { "playerDamageDealtMult": 1.2, "enemyDamageDealtMult": 1.2 }
+  },
+  {
+    "id": "mod_fortune_risk",
+    "name": "富贵险中求",
+    "description": "对方凶悍异常，但若胜之，收获也格外可观。",
+    "kind": "chaos",
+    "rarity": "epic",
+    "weight": 5,
+    "effects": { "enemyDamageDealtMult": 1.3, "expMult": 1.5, "goldMult": 1.5 }
+  },
+  {
+    "id": "mod_turtle_breath",
+    "name": "龟息之法",
+    "description": "行功收敛，守得极稳，出手却也慢了半分。",
+    "kind": "chaos",
+    "rarity": "common",
+    "weight": 6,
+    "effects": { "playerDamageTakenMult": 0.7, "playerDamageDealtMult": 0.8 }
+  },
+  {
+    "id": "mod_war_sustains",
+    "name": "以战养战",
+    "description": "以敌血补己身，只是这般打法自己也免不了多受些伤。",
+    "kind": "chaos",
+    "rarity": "rare",
+    "weight": 6,
+    "effects": { "playerLifesteal": 0.15, "playerDamageTakenMult": 1.15 }
+  },
+  {
+    "id": "mod_harass_tired",
+    "name": "敌疲我扰",
+    "description": "对方气力不继，招式渐软，却仍在勉力自复。",
+    "kind": "chaos",
+    "rarity": "common",
+    "weight": 6,
+    "effects": { "enemyDamageDealtMult": 0.8, "enemyRegenPercent": 0.03 }
+  },
+  {
+    "id": "mod_break_cauldron",
+    "name": "破釜沉舟",
+    "description": "断了退路，攻势如潮，此战体悟尤深。",
+    "kind": "chaos",
+    "rarity": "epic",
+    "weight": 5,
+    "effects": { "playerDamageDealtMult": 1.3, "playerDamageTakenMult": 1.2, "expMult": 1.3 }
+  }
+]

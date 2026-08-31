@@ -15,6 +15,7 @@ import {
 import { expForNextLevel } from '../engine/leveling'
 import { getItem, getSkill, getAllItems } from '../engine/data-loader'
 import { rollTalentChoices } from '../engine/talents'
+import { MAX_EQUIPPED_SKILLS, recommendEquippedSkills } from '../engine/skill-utils'
 
 const SAVE_KEY = 'jianghu_player'
 
@@ -30,6 +31,8 @@ export const usePlayerStore = defineStore('player', () => {
 
   function init(name: string, originId?: string) {
     character.value = createNewCharacter(name, originId)
+    // 开局自动填满战技槽，玩家可在武功页自行调整
+    character.value.equippedSkills = autoEquipSkills()
     save()
   }
 
@@ -97,9 +100,29 @@ export const usePlayerStore = defineStore('player', () => {
       if (inv.quantity <= 0) char.inventory = char.inventory.filter(i => i.itemId !== manual.id)
     }
     char.gold -= goldCost
-    character.value = engineLearnSkill(char, skillId)
+    // 新习得的主动功法若还有空槽，顺手装上，免得学会了却在自动战斗中毫无用武之地
+    const learned = engineLearnSkill(char, skillId)
+    const slots = learned.equippedSkills ?? []
+    const isActive = getSkill(skillId)?.type === 'active'
+    if (isActive && slots.length < MAX_EQUIPPED_SKILLS && !slots.includes(skillId)) {
+      learned.equippedSkills = [...slots, skillId]
+    }
+    character.value = learned
     save()
     return { ok: true }
+  }
+
+  // 若战技槽空着，把已习得的主动功法补进去（按威力降序）
+  function fillEmptySkillSlots(char: Character): Character {
+    if ((char.equippedSkills ?? []).length >= MAX_EQUIPPED_SKILLS) return char
+    const next = JSON.parse(JSON.stringify(char)) as Character
+    const cur = next.equippedSkills ?? []
+    for (const id of autoEquipSkills()) {
+      if (cur.length >= MAX_EQUIPPED_SKILLS) break
+      if (!cur.includes(id)) cur.push(id)
+    }
+    next.equippedSkills = cur
+    return next
   }
 
   // 剧情/任务/际遇「赠送」武学：无条件习得，跳过等级、稀有度、秘籍、银两等一切门槛。
@@ -110,13 +133,14 @@ export const usePlayerStore = defineStore('player', () => {
     const skill = getSkill(skillId)
     if (!skill) return false
     if (char.learnedSkills.some(s => s.skillId === skillId)) return false
-    character.value = {
+    const withSkill: Character = {
       ...char,
       learnedSkills: [
         ...char.learnedSkills,
         { skillId, level: 1, proficiency: 0, proficiencyToNext: 100 },
       ],
     }
+    character.value = fillEmptySkillSlots(withSkill)
     save()
     return true
   }
@@ -193,13 +217,72 @@ export const usePlayerStore = defineStore('player', () => {
     return true
   }
 
+  // 写回气血内力。上限按「有效属性」（含装备、天赋与被动功法）钳制，
+  // 否则战斗中被动加成撑高的气血一写回就被基础上限截断，血条会莫名掉落。
+  function clampHpMp(hp: number, mp: number): { hp: number; mp: number } {
+    const eff = getEffectiveAttributes(character.value!)
+    return {
+      hp: Math.max(0, Math.min(eff.maxHp, hp)),
+      mp: Math.max(0, Math.min(eff.maxMp, mp)),
+    }
+  }
+
+  // ===== 战技装备（自动战斗只会释放已装备的主动功法）=====
+  // 旧存档没有 equippedSkills 字段，加载时按「已习得的主动功法」自动填满槽位，
+  // 避免改版后老玩家一进战斗只会普通攻击。
+  function autoEquipSkills(): string[] {
+    const char = character.value
+    if (!char) return []
+    const learned = char.learnedSkills
+      .map(ls => getSkill(ls.skillId))
+      .filter((s): s is Skill => !!s && s.type === 'active')
+    // 选装规则与模拟脚本共用同一实现：保证有一个「随时施展」的主输出，其余按威力补足
+    return recommendEquippedSkills(learned)
+  }
+
+  function equipSkill(skillId: string): { ok: boolean; reason?: string } {
+    const char = character.value
+    if (!char) return { ok: false, reason: '尚无角色' }
+    const skill = getSkill(skillId)
+    if (!skill) return { ok: false, reason: '武学不存在' }
+    if (skill.type !== 'active') return { ok: false, reason: '此乃被动心法，常驻生效无须装备' }
+    if (!char.learnedSkills.some(s => s.skillId === skillId)) {
+      return { ok: false, reason: '尚未习得此功法' }
+    }
+    const cur = char.equippedSkills ?? []
+    if (cur.includes(skillId)) return { ok: false, reason: '已在战技槽中' }
+    if (cur.length >= MAX_EQUIPPED_SKILLS) {
+      return { ok: false, reason: `战技槽已满（${MAX_EQUIPPED_SKILLS} 个）` }
+    }
+    const next = JSON.parse(JSON.stringify(char)) as Character
+    next.equippedSkills = [...cur, skillId]
+    character.value = next
+    save()
+    return { ok: true }
+  }
+
+  function unequipSkill(skillId: string) {
+    const char = character.value
+    if (!char) return
+    const next = JSON.parse(JSON.stringify(char)) as Character
+    next.equippedSkills = (next.equippedSkills ?? []).filter(id => id !== skillId)
+    character.value = next
+    save()
+  }
+
   function setHpMp(hp: number, mp: number) {
     if (!character.value) return
     const char = JSON.parse(JSON.stringify(character.value)) as Character
-    char.attributes.hp = Math.max(0, Math.min(char.attributes.maxHp, hp))
-    char.attributes.mp = Math.max(0, Math.min(char.attributes.maxMp, mp))
+    const c = clampHpMp(hp, mp)
+    char.attributes.hp = c.hp
+    char.attributes.mp = c.mp
     character.value = char
     save()
+  }
+
+  // 战斗中每回合同步一次，避免中途离开页面丢失战况；与 setHpMp 同规则钳制
+  function syncBattleHpMp(hp: number, mp: number) {
+    setHpMp(hp, mp)
   }
 
   function save() {
@@ -230,7 +313,18 @@ export const usePlayerStore = defineStore('player', () => {
       const eq = char.equipment
       for (const id of [eq.weapon, eq.armor, eq.accessory]) if (id) discovered.add(id)
       char.discoveredItems = [...discovered]
+      // 自动战斗改版：旧存档补齐战技槽，未装备任何战技时自动填满
+      char.equippedSkills = (char.equippedSkills ?? []).filter(id => getSkill(id)?.type === 'active')
       character.value = char
+      if (char.equippedSkills.length === 0) {
+        const auto = autoEquipSkills()
+        if (auto.length > 0) {
+          const next = JSON.parse(JSON.stringify(char)) as Character
+          next.equippedSkills = auto
+          character.value = next
+          save()
+        }
+      }
       return true
     }
     return false
@@ -310,6 +404,10 @@ export const usePlayerStore = defineStore('player', () => {
     addGold,
     spendGold,
     setHpMp,
+    syncBattleHpMp,
+    equipSkill,
+    unequipSkill,
+    autoEquipSkills,
     save,
     load,
     allocatePoint,

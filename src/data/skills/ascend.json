@@ -11,7 +11,9 @@
     "critRate": 0.38,
     "unlockLevel": 30,
     "rarity": "legendary",
-    "hits": 3
+    "hits": 3,
+    "trigger": { "type": "enemyHpAbove", "value": 0.5 },
+    "cooldown": 4
   },
   {
     "id": "wuxiang_blade",
@@ -25,7 +27,9 @@
     "critRate": 0.36,
     "unlockLevel": 30,
     "rarity": "legendary",
-    "hits": 3
+    "hits": 3,
+    "trigger": { "type": "enemyHpAbove", "value": 0.5 },
+    "cooldown": 4
   },
   {
     "id": "qiankun_shift",
@@ -39,7 +43,9 @@
     "critRate": 0.3,
     "unlockLevel": 29,
     "rarity": "legendary",
-    "hits": 2
+    "hits": 2,
+    "trigger": { "type": "enemyHpBelow", "value": 0.6 },
+    "cooldown": 4
   },
   {
     "id": "qingtian_staff",
@@ -53,36 +59,54 @@
     "critRate": 0.24,
     "unlockLevel": 28,
     "rarity": "legendary",
-    "enemyDebuff": { "attack": -15 }
+    "enemyDebuff": { "attack": -15 },
+    "trigger": { "type": "always" },
+    "cooldown": 4
   },
   {
     "id": "changsheng_internal",
     "name": "长生诀",
-    "description": "道家无上心法，修之可伐毛洗髓、延年益寿，攻守俱进且内力气血生生不息。",
-    "type": "active",
+    "description": "道家无上心法，修之可伐毛洗髓、延年益寿。习成后攻守俱进，内力气血生生不息。",
+    "type": "passive",
     "category": "internal",
     "power": 0,
-    "mpCost": 30,
+    "mpCost": 0,
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 30,
     "rarity": "legendary",
-    "selfBuff": { "attack": 24, "defense": 18 },
-    "restoreMp": 80,
-    "heal": 80
+    "passiveEffects": {
+      "maxHp": 200,
+      "maxMp": 60,
+      "attack": 24,
+      "defense": 18
+    },
+    "passiveTraits": {
+      "regenPercent": 0.04,
+      "mpRegen": 4,
+      "damageReduction": 0.1
+    }
   },
   {
     "id": "dapeng_step",
     "name": "大鹏展翅",
-    "description": "取自鲲鹏九万里之姿，身法展开如垂天之云，进退无迹，更能借势反扑。",
-    "type": "active",
+    "description": "取自鲲鹏九万里之姿。习成后身法展开如垂天之云，进退无迹，更能借势反扑。",
+    "type": "passive",
     "category": "movement",
     "power": 0,
-    "mpCost": 26,
+    "mpCost": 0,
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 29,
     "rarity": "legendary",
-    "selfBuff": { "agility": 32, "attack": 8 }
+    "passiveEffects": {
+      "agility": 32,
+      "attack": 8
+    },
+    "passiveTraits": {
+      "dodgeBonus": 0.1,
+      "counterRate": 0.2,
+      "extraHitRate": 0.15
+    }
   }
 ]

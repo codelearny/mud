@@ -13,12 +13,14 @@
     "enemyDebuff": {
       "defense": -8
     },
-    "rarity": "epic"
+    "rarity": "epic",
+    "trigger": { "type": "always" },
+    "cooldown": 3
   },
   {
     "id": "anran_palm",
     "name": "黯然销魂掌",
-    "description": "情至深处所悟掌法，掌出两叠，一掌断肠，再掌销魂。",
+    "description": "情至深处所悟掌法，掌出两叠，一掌断肠，再掌销魂。敌已力衰时取其性命。",
     "type": "active",
     "category": "fist",
     "power": 78,
@@ -27,7 +29,9 @@
     "critRate": 0.26,
     "unlockLevel": 21,
     "hits": 2,
-    "rarity": "legendary"
+    "rarity": "legendary",
+    "trigger": { "type": "enemyHpBelow", "value": 0.5 },
+    "cooldown": 3
   },
   {
     "id": "weiduo_staff",
@@ -41,7 +45,9 @@
     "critRate": 0.18,
     "unlockLevel": 16,
     "hits": 2,
-    "rarity": "epic"
+    "rarity": "epic",
+    "trigger": { "type": "always" },
+    "cooldown": 3
   },
   {
     "id": "panlong_staff",
@@ -57,6 +63,8 @@
     "enemyDebuff": {
       "attack": -12
     },
-    "rarity": "legendary"
+    "rarity": "legendary",
+    "trigger": { "type": "always" },
+    "cooldown": 3
   }
 ]

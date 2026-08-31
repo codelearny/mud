@@ -1,22 +1,20 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useRouter } from 'vue-router'
 import { useStoryStore } from '../stores/story'
 import { useBattleStore } from '../stores/battle'
 import type { DialogueChoice } from '../types'
 
-const router = useRouter()
 const storyStore = useStoryStore()
 const battleStore = useBattleStore()
 
 const encounter = computed(() => storyStore.currentEncounter)
 const choices = computed(() => storyStore.visibleEncounterChoices)
 
+// 战斗在主界面内自动进行，不再跳转独立战斗页
 function choose(choice: DialogueChoice) {
   storyStore.selectEncounterChoice(choice)
   if (choice.battle) {
     battleStore.startBattle(choice.battle)
-    router.push('/battle')
   }
 }
 </script>

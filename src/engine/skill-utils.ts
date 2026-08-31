@@ -1,4 +1,7 @@
-import type { Skill, SkillCategory, WeaponSchool } from '../types'
+import type { Skill, SkillCategory, SkillTrigger, WeaponSchool } from '../types'
+
+// 可装备的主动战技槽位上限（自动战斗只会释放已装备的战技）
+export const MAX_EQUIPPED_SKILLS = 3
 
 // 兵器流派中文名（与 Item.school / Skill.category 对应）
 export const WEAPON_SCHOOL_LABELS: Record<WeaponSchool, string> = {
@@ -51,6 +54,9 @@ export function skillTags(skill: Skill): string[] {
   if (skill.heal) {
     tags.push(`疗伤${skill.heal}`)
   }
+  if (skill.healPercent) {
+    tags.push(`疗伤${Math.round(skill.healPercent * 100)}%`)
+  }
   if (skill.restoreMp) {
     tags.push(`回内${skill.restoreMp}`)
   }
@@ -73,6 +79,102 @@ export function skillTags(skill: Skill): string[] {
   }
   if (skill.poison) {
     tags.push(`中毒(${skill.poison}×${skill.poisonTurns ?? 3})`)
+  }
+
+  return tags
+}
+
+// ===== 自动战斗：触发条件（单一数据源，引擎与 UI 共用）=====
+// 未显式声明 trigger 的主动功法，按其字段语义推断一个合理的默认条件，
+// 使旧数据无需逐条改写也能在自动战斗中表现得像「会打架」。
+export function inferTrigger(skill: Skill): SkillTrigger {
+  if (skill.trigger) return skill.trigger
+  // 疗伤类：危急时才用
+  if ((skill.heal || skill.healPercent) && skill.power <= 0) return { type: 'hpBelow', value: 0.5 }
+  // 纯回内类：内力见底时才用
+  if (skill.restoreMp && skill.power <= 0) return { type: 'mpAbove', value: 0 }
+  // 起手削弱 / 上增益：首回合
+  if (skill.power <= 0 && (skill.selfBuff || skill.enemyDebuff)) return { type: 'firstTurn' }
+  // 点穴：对手血量尚多时更值钱
+  if (skill.stun) return { type: 'enemyHpAbove', value: 0.3 }
+  // 施毒：首回合放毒，收益最大化
+  if (skill.poison) return { type: 'firstTurn' }
+  return { type: 'always' }
+}
+
+/**
+ * 自动装备推荐：先占一槽给「随时可施展的主输出」，再按威力补足其余槽位。
+ * 若三个槽位全是「残血才放」「对手血少才放」这类条件苛刻的大招，
+ * 自动战斗会有大半回合只能普攻——这条规则就是为了避免那种空转。
+ */
+export function recommendEquippedSkills(skills: Skill[]): string[] {
+  const byPower = skills
+    .filter(s => s.type === 'active')
+    .sort((a, b) => b.power - a.power)
+
+  const picked: Skill[] = []
+  const mainstay = byPower.find(s => s.power > 0 && inferTrigger(s).type === 'always')
+  if (mainstay) picked.push(mainstay)
+
+  for (const s of byPower) {
+    if (picked.length >= MAX_EQUIPPED_SKILLS) break
+    if (picked.some(p => p.id === s.id)) continue
+    picked.push(s)
+  }
+  return picked.map(s => s.id)
+}
+
+export function triggerLabel(trigger: SkillTrigger): string {
+  const pct = (v: number | undefined) => `${Math.round((v ?? 0) * 100)}%`
+  switch (trigger.type) {
+    case 'always': return '随时施展'
+    case 'hpBelow': return `自身气血低于${pct(trigger.value)}`
+    case 'hpAbove': return `自身气血高于${pct(trigger.value)}`
+    case 'mpAbove': return `内力高于${pct(trigger.value)}`
+    case 'enemyHpBelow': return `对手气血低于${pct(trigger.value)}`
+    case 'enemyHpAbove': return `对手气血高于${pct(trigger.value)}`
+    case 'firstTurn': return '开局首回合'
+    case 'everyNTurns': return `每${trigger.value ?? 2}回合`
+    case 'turnAbove': return `第${trigger.value ?? 3}回合之后`
+    default: return '随时施展'
+  }
+}
+
+// 被动功法（心法）的常驻加成 → 中文标签，用于 UI 展示
+export function passiveTags(skill: Skill): string[] {
+  const tags: string[] = []
+  const e = skill.passiveEffects
+  const pct = (v: number) => `${Math.round(v * 100)}%`
+
+  if (e) {
+    if (e.maxHp) tags.push(`气血上限+${e.maxHp}`)
+    if (e.maxMp) tags.push(`内力上限+${e.maxMp}`)
+    if (e.attack) tags.push(`攻击+${e.attack}`)
+    if (e.defense) tags.push(`防御+${e.defense}`)
+    if (e.agility) tags.push(`轻功+${e.agility}`)
+    if (e.comprehension) tags.push(`悟性+${e.comprehension}`)
+    if (e.luck) tags.push(`福缘+${e.luck}`)
+    if (e.maxHpPercent) tags.push(`气血上限+${pct(e.maxHpPercent)}`)
+    if (e.maxMpPercent) tags.push(`内力上限+${pct(e.maxMpPercent)}`)
+    if (e.attackPercent) tags.push(`攻击+${pct(e.attackPercent)}`)
+    if (e.defensePercent) tags.push(`防御+${pct(e.defensePercent)}`)
+    if (e.agilityPercent) tags.push(`轻功+${pct(e.agilityPercent)}`)
+  }
+
+  const t = skill.passiveTraits
+  if (t) {
+    if (t.critRate) tags.push(`暴击率+${pct(t.critRate)}`)
+    if (t.critDamage) tags.push(`暴击伤害+${pct(t.critDamage)}`)
+    if (t.damageReduction) tags.push(`受伤减免${pct(t.damageReduction)}`)
+    if (t.lifesteal) tags.push(`吸血${pct(t.lifesteal)}`)
+    if (t.regenPercent) tags.push(`每回合回血${pct(t.regenPercent)}`)
+    if (t.mpRegen) tags.push(`每回合回内${t.mpRegen}`)
+    if (t.dodgeBonus) tags.push(`闪避+${pct(t.dodgeBonus)}`)
+    if (t.thorns) tags.push(`反伤${pct(t.thorns)}`)
+    if (t.counterRate) tags.push(`反击率${pct(t.counterRate)}`)
+    if (t.firstShield) tags.push(`开局护盾${pct(t.firstShield)}`)
+    if (t.executeBonus) tags.push(`残敌斩杀+${pct(t.executeBonus)}`)
+    if (t.extraHitRate) tags.push(`连击率${pct(t.extraHitRate)}`)
   }
 
   return tags

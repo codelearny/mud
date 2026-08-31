@@ -2,89 +2,104 @@
   {
     "id": "basic_internal",
     "name": "吐纳基本功",
-    "description": "最基础的内功心法，调息吐纳，运转周天恢复内力。",
-    "type": "active",
+    "description": "最基础的内功心法，调息吐纳，运转周天。习成后内力绵长，行功之际仍能自行回气。",
+    "type": "passive",
     "category": "internal",
     "power": 0,
     "mpCost": 0,
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 1,
-    "restoreMp": 15,
-    "rarity": "common"
+    "rarity": "common",
+    "passiveEffects": {
+      "maxMp": 10
+    },
+    "passiveTraits": {
+      "mpRegen": 1
+    }
   },
   {
     "id": "yijinjing",
     "name": "易筋经",
-    "description": "少林镇寺之宝，脱胎换骨，大幅提升攻击与防御。",
-    "type": "active",
+    "description": "少林镇寺之宝，脱胎换骨。习成后筋骨如铁，攻守根基大增。",
+    "type": "passive",
     "category": "internal",
     "power": 0,
-    "mpCost": 12,
+    "mpCost": 0,
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 8,
-    "selfBuff": {
-      "attack": 10,
+    "rarity": "rare",
+    "passiveEffects": {
+      "maxHp": 40,
+      "attack": 8,
       "defense": 5
-    },
-    "rarity": "rare"
+    }
   },
   {
     "id": "beiming_internal",
     "name": "北冥神功",
-    "description": "逍遥派绝学，海纳百川，既可回复内力，又能滋养气血。",
+    "description": "逍遥派绝学，海纳百川。危殆之际自行运转，既补内力又养气血。",
     "type": "active",
     "category": "internal",
     "power": 0,
-    "mpCost": 10,
+    "mpCost": 0,
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 6,
+    "healPercent": 0.25,
     "restoreMp": 30,
-    "heal": 20,
-    "rarity": "rare"
+    "rarity": "rare",
+    "trigger": { "type": "hpBelow", "value": 0.6 },
+    "cooldown": 3
   },
   {
     "id": "heal_shengshou",
     "name": "疗伤圣手",
-    "description": "杏林妙手，运功疗伤，瞬息间回复大量气血。",
+    "description": "杏林妙手，运功疗伤。气血将尽时无须吩咐，自会封脉止血。",
     "type": "active",
     "category": "internal",
     "power": 0,
-    "mpCost": 8,
+    "mpCost": 6,
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 4,
-    "heal": 60,
-    "rarity": "common"
+    "heal": 30,
+    "healPercent": 0.3,
+    "rarity": "common",
+    "trigger": { "type": "hpBelow", "value": 0.5 },
+    "cooldown": 4
   },
   {
     "id": "jiuyin_internal",
     "name": "九阴真经",
-    "description": "武学总纲，内力深不可测，攻守兼备且能自愈。",
-    "type": "active",
+    "description": "武学总纲，内力深不可测。习成后攻守兼备，且能自愈内伤。",
+    "type": "passive",
     "category": "internal",
     "power": 0,
-    "mpCost": 16,
+    "mpCost": 0,
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 12,
-    "selfBuff": {
-      "attack": 8,
-      "defense": 8
+    "rarity": "epic",
+    "passiveEffects": {
+      "maxHpPercent": 0.1,
+      "attack": 10,
+      "defense": 10
     },
-    "heal": 30,
-    "rarity": "epic"
+    "passiveTraits": {
+      "regenPercent": 0.03,
+      "damageReduction": 0.05
+    }
   },
   {
     "id": "huagong_internal",
     "name": "化功大法",
-    "description": "星宿奇功，化去敌人功力，令其攻弱身滞。",
+    "description": "星宿奇功，化去敌人功力。交手之初便施为，令其攻弱身滞。",
     "type": "active",
     "category": "internal",
     "power": 0,
-    "mpCost": 14,
+    "mpCost": 12,
     "hitRate": 1,
     "critRate": 0,
     "unlockLevel": 9,
@@ -92,6 +107,8 @@
       "attack": -8,
       "agility": -4
     },
-    "rarity": "rare"
+    "rarity": "rare",
+    "trigger": { "type": "firstTurn" },
+    "cooldown": 5
   }
 ]

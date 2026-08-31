@@ -10,7 +10,9 @@
     "hitRate": 0.9,
     "critRate": 0.06,
     "unlockLevel": 1,
-    "rarity": "common"
+    "rarity": "common",
+    "trigger": { "type": "always" },
+    "cooldown": 0
   },
   {
     "id": "kuangfeng_blade",
@@ -24,7 +26,9 @@
     "critRate": 0.12,
     "unlockLevel": 5,
     "hits": 2,
-    "rarity": "rare"
+    "rarity": "rare",
+    "trigger": { "type": "always" },
+    "cooldown": 1
   },
   {
     "id": "hujiaya_blade",
@@ -40,12 +44,14 @@
     "enemyDebuff": {
       "defense": -6
     },
-    "rarity": "epic"
+    "rarity": "epic",
+    "trigger": { "type": "always" },
+    "cooldown": 2
   },
   {
     "id": "daoba_blade",
     "name": "刀霸天下",
-    "description": "霸道绝伦的刀法，双刀齐出，刀过处血涌如泉。",
+    "description": "霸道绝伦的刀法，双刀齐出，刀过处血涌如泉。血战之际自会奋起伤人。",
     "type": "active",
     "category": "blade",
     "power": 70,
@@ -55,12 +61,14 @@
     "unlockLevel": 15,
     "hits": 2,
     "lifesteal": 0.15,
-    "rarity": "epic"
+    "rarity": "epic",
+    "trigger": { "type": "hpBelow", "value": 0.7 },
+    "cooldown": 3
   },
   {
     "id": "lie_ri_blade",
     "name": "烈日刀法",
-    "description": "刀光大盛如烈日当空，三连斩落灼敌周身，破其守势。",
+    "description": "刀光大盛如烈日当空，三连斩落灼敌周身，破其守势。敌势正盛时方全力施为。",
     "type": "active",
     "category": "blade",
     "power": 62,
@@ -72,6 +80,8 @@
     "enemyDebuff": {
       "defense": -8
     },
-    "rarity": "legendary"
+    "rarity": "legendary",
+    "trigger": { "type": "enemyHpAbove", "value": 0.4 },
+    "cooldown": 3
   }
 ]
