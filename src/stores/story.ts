@@ -208,7 +208,7 @@ export const useStoryStore = defineStore('story', () => {
         }
         case 'affinity': {
           const npc = getNPCById(eff.target!)
-          lines.push(`与${npc?.name ?? eff.target!} 好感 +${eff.value}`)
+          lines.push(`与${npc?.name ?? '某位江湖人'} 好感 +${eff.value}`)
           break
         }
         case 'heal':

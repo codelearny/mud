@@ -1,0 +1,34 @@
+[
+  {
+    "id": "mysterious_master",
+    "name": "神秘高手",
+    "title": "云游异人",
+    "description": "来历不明的江湖高手，偶现于旅途之中，似含深意。",
+    "sceneId": "river",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "神秘高手",
+        "text": "……（他负手而立，未发一言，却令你心头一凛。）",
+        "choices": [{ "text": "告辞。", "next": "END" }]
+      }
+    }
+  },
+  {
+    "id": "valley_elder",
+    "name": "幽谷隐士",
+    "title": "谷中高人",
+    "description": "隐居幽谷的长者，通晓江湖掌故，性喜清静。",
+    "sceneId": "valley",
+    "startNode": "start",
+    "dialogue": {
+      "start": {
+        "id": "start",
+        "speaker": "幽谷隐士",
+        "text": "后生，此间清静，莫要惊扰。",
+        "choices": [{ "text": "告辞。", "next": "END" }]
+      }
+    }
+  }
+]
