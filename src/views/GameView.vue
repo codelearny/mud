@@ -65,7 +65,7 @@ function rollGain(gains: SceneGain[]): SceneGain | undefined {
 function travel(sceneId: string) {
   const target = connectedScenes.value.find(s => s.id === sceneId)
   if (target?.locked) {
-    messageStore.addMessage('前路未通', target.hint, 'info')
+    messageStore.addMessage(`前路未通：${target.hint}`, 'info')
     return
   }
   gameStore.setScene(sceneId)
@@ -78,20 +78,20 @@ function talkNpc(npcId: string) {
 
 function doAction(action: SceneAction) {
   if (!storyStore.meetsCondition(action.requirement)) {
-    messageStore.addMessage('时机未到', action.requireHint ?? '此事尚不可为。', 'info')
+    messageStore.addMessage(`时机未到：${action.requireHint ?? '此事尚不可为。'}`, 'info')
     return
   }
   const eff = playerStore.effectiveAttrs
   switch (action.type) {
     case 'rest':
       if (eff) playerStore.setHpMp(eff.maxHp, eff.maxMp)
-      messageStore.addMessage(undefined, action.text ?? '你歇息片刻，气血内力尽复。', 'action')
+      messageStore.addMessage(action.text ?? '你歇息片刻，气血内力尽复。', 'action')
       break
     case 'train': {
       const base = trainingExpFromLevel(playerStore.character?.level ?? 1)
       const amt = Math.round(base * (scene.value?.trainFactor ?? 1))
       playerStore.addExp(amt)
-      messageStore.addMessage(undefined, (action.text ?? '你勤练不辍') + `（功力 +${amt}）`, 'action')
+      messageStore.addMessage(`${(action.text ?? '你勤练不辍')}（功力 +${amt}）`, 'action')
       break
     }
     case 'gather': {
@@ -100,9 +100,9 @@ function doAction(action: SceneAction) {
       if (gain && qty > 0) {
         playerStore.addToInventory(gain.itemId, qty)
         const name = getItem(gain.itemId)?.name ?? gain.itemId
-        messageStore.addMessage(undefined, `${action.text ?? '你搜寻一番'}：得【${name}】×${qty}`, 'action')
+        messageStore.addMessage(`${action.text ?? '你搜寻一番'}：得【${name}】×${qty}`, 'action')
       } else {
-        messageStore.addMessage(undefined, `${action.text ?? '你搜寻一番'}：一无所获。`, 'action')
+        messageStore.addMessage(`${action.text ?? '你搜寻一番'}：一无所获。`, 'action')
       }
       break
     }
@@ -121,7 +121,7 @@ function randomBattle() {
 
 function saveGame() {
   gameStore.saveGame()
-  messageStore.addMessage(undefined, '存档成功！', 'info')
+  messageStore.addMessage('存档成功！', 'info')
 }
 
 function exitGame() {
@@ -229,8 +229,7 @@ function formatMsgTime(t: number): string {
           class="msg-item"
           :class="'msg-' + m.type"
         >
-          <div v-if="m.title" class="msg-title">{{ m.title }}</div>
-          <div v-for="(line, i) in m.lines" :key="i" class="msg-line">{{ line }}</div>
+          <div class="msg-text">{{ m.text }}</div>
           <div class="msg-time">{{ formatMsgTime(m.time) }}</div>
         </div>
       </div>

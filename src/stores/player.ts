@@ -139,6 +139,30 @@ export const usePlayerStore = defineStore('player', () => {
     save()
   }
 
+  // 背包内研读秘籍：参悟其所载武学并消耗该秘籍（common/rare 的秘籍 learnNewSkill 不会自动消耗，此处补扣）
+  function studyManual(itemId: string): { ok: boolean; reason?: string; skillName?: string } {
+    const char = character.value
+    if (!char) return { ok: false, reason: '尚无角色' }
+    const item = getAllItems().find(i => i.id === itemId)
+    if (!item || item.category !== 'manual' || !item.skillId) {
+      return { ok: false, reason: '此物无法参悟' }
+    }
+    const skill = getSkill(item.skillId)
+    const rarity = skill?.rarity ?? 'common'
+    const res = learnNewSkill(item.skillId)
+    if (!res.ok) return res
+    // learnNewSkill 仅对 epic/legendary 自动消耗秘籍，common/rare 的秘籍在此补扣
+    if (rarity === 'common' || rarity === 'rare') {
+      const inv = char.inventory.find(i => i.itemId === itemId)
+      if (inv) {
+        inv.quantity -= 1
+        if (inv.quantity <= 0) char.inventory = char.inventory.filter(i => i.itemId !== itemId)
+        save()
+      }
+    }
+    return { ok: true, skillName: skill?.name ?? item.skillId }
+  }
+
   function addToInventory(itemId: string, quantity: number = 1) {
     if (!character.value) return
     const char = JSON.parse(JSON.stringify(character.value)) as Character
@@ -278,6 +302,7 @@ export const usePlayerStore = defineStore('player', () => {
     learnNewSkill,
     grantSkill,
     learnGoldCost,
+    studyManual,
     equip,
     unequip,
     useItem,

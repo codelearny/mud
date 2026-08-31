@@ -6,8 +6,7 @@ export type MessageType = 'event' | 'action' | 'reward' | 'info'
 
 export interface GameMessage {
   id: number
-  title?: string
-  lines: string[]
+  text: string
   type: MessageType
   time: number
 }
@@ -19,14 +18,12 @@ export const useMessageStore = defineStore('messages', () => {
   const messages = ref<GameMessage[]>([])
   let seq = 0
 
-  // title 可选；lines 可为字符串或字符串数组；新消息置顶（最新在最前）
-  function addMessage(title: string | undefined, lines: string[] | string, type: MessageType = 'info') {
+  // 单段文字（一段话），新消息置顶（最新在最前）
+  function addMessage(text: string, type: MessageType = 'info') {
     seq += 1
-    const lineArr = Array.isArray(lines) ? lines : [lines]
     messages.value.unshift({
       id: seq,
-      title: title || undefined,
-      lines: lineArr,
+      text,
       type,
       time: Date.now(),
     })

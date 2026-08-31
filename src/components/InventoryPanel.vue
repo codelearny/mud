@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { usePlayerStore } from '../stores/player'
+import { useMessageStore } from '../stores/messages'
 import { getItem } from '../engine/data-loader'
 import { itemTags, RARITY_LABELS, itemSchoolLabel } from '../engine/item-utils'
 import type { EquipSlot, Item, ItemType, ItemRarity } from '../types'
 
 const playerStore = usePlayerStore()
+const messageStore = useMessageStore()
 const char = computed(() => playerStore.character)
 
 const slots: { key: EquipSlot; label: string }[] = [
@@ -56,6 +58,16 @@ function unequip(slot: EquipSlot) {
 function useItem(itemId: string) {
   playerStore.useItem(itemId)
 }
+
+function studyManual(itemId: string) {
+  const manualName = getItem(itemId)?.name ?? itemId
+  const res = playerStore.studyManual(itemId)
+  if (res.ok) {
+    messageStore.addMessage(`研习《${manualName}》，习得「${res.skillName ?? ''}」`, 'reward')
+  } else {
+    messageStore.addMessage(`参悟《${manualName}》未成：${res.reason ?? '未知缘由'}`, 'info')
+  }
+}
 </script>
 
 <template>
@@ -103,6 +115,11 @@ function useItem(itemId: string) {
           </div>
         </div>
         <div class="item-actions">
+          <button
+            v-if="item.category === 'manual'"
+            class="btn btn-primary"
+            @click="studyManual(item.id)"
+          >研读</button>
           <button
             v-if="item.type === 'consumable'"
             class="btn btn-primary"

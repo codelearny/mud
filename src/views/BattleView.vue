@@ -106,16 +106,14 @@ function recordBattleResult() {
   if (!b || !r) return
   const enemyName = b.enemy.name
   if (b.state === 'victory') {
-    const lines: string[] = [`力克 ${enemyName}`]
-    if (r.exp) lines.push(`经验 +${r.exp}`)
-    if (r.gold) lines.push(`银两 +${r.gold}`)
-    for (const id of r.drops) lines.push(`获得 ${getItem(id)?.name ?? id}`)
-    if (r.leveledUp) lines.push(`功力精进！突破至第 ${r.newLevel} 重`)
-    messageStore.addMessage('战斗·大获全胜', lines, 'reward')
+    const parts: string[] = [`经验 +${r.exp}`, `银两 +${r.gold}`]
+    for (const id of r.drops) parts.push(`获得 ${getItem(id)?.name ?? id}`)
+    if (r.leveledUp) parts.push(`突破至第 ${r.newLevel} 重`)
+    messageStore.addMessage(`力克 ${enemyName}：${parts.join('，')}`, 'reward')
   } else if (b.state === 'fled') {
-    messageStore.addMessage('成功脱身', `于 ${enemyName} 手下遁走`, 'info')
+    messageStore.addMessage(`于 ${enemyName} 手下遁走`, 'info')
   } else if (b.state === 'defeat') {
-    messageStore.addMessage('不敌败北', ['伤痕累累，昏倒在地……', '幸得被好心人救回村落。'], 'info')
+    messageStore.addMessage('伤痕累累，昏倒在地……幸得被好心人救回村落。', 'info')
   }
 }
 

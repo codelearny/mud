@@ -691,14 +691,7 @@ html, body {
 .msg-item.msg-action { border-left-color: var(--text-secondary); }
 .msg-item.msg-reward { border-left-color: var(--text-accent); }
 .msg-item.msg-info { border-left-color: var(--border-hover); }
-.msg-title {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-accent);
-  font-family: var(--font-serif);
-  margin-bottom: 2px;
-}
-.msg-line {
+.msg-text {
   font-size: 13px;
   color: var(--text-primary);
   line-height: 1.6;

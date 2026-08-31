@@ -109,7 +109,7 @@ export const useStoryStore = defineStore('story', () => {
           const ok = playerStore.grantSkill(eff.target!)
           if (ok) {
             const sk = getSkill(eff.target!)
-            useMessageStore().addMessage('习得武学', sk?.name ?? eff.target!, 'reward')
+            useMessageStore().addMessage(`习得武学：${sk?.name ?? eff.target!}`, 'reward')
           }
           break
         }
@@ -237,7 +237,8 @@ export const useStoryStore = defineStore('story', () => {
       // 战斗类交由 BattleView 呈现，不写消息列表
       closeEncounter()
     } else {
-      msgStore.addMessage(choice.text, lines.length ? lines : ['（你淡然离去。）'], 'event')
+      const summary = lines.length ? lines.join('，') : '（你淡然离去。）'
+      msgStore.addMessage(summary, 'event')
       closeEncounter()
     }
     return choice.next
@@ -276,7 +277,7 @@ export const useStoryStore = defineStore('story', () => {
         if (r.exp) parts.push(`经验 ${r.exp}`)
         if (r.gold) parts.push(`银两 ${r.gold}`)
         if (skillNames.length) parts.push(`武学 ${skillNames.join('、')}`)
-        useMessageStore().addMessage(`任务【${quest.name}】完成`, parts, 'reward')
+        useMessageStore().addMessage(`任务【${quest.name}】完成${parts.length ? '：' + parts.join('，') : ''}`, 'reward')
         if (r.exp) playerStore.addExp(r.exp)
         if (r.gold) playerStore.addGold(r.gold)
         if (r.items) for (const it of r.items) playerStore.addToInventory(it.itemId, it.quantity)
