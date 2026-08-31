@@ -642,24 +642,6 @@ html, body {
 .result-title.defeat { color: var(--text-danger); }
 .result-title.fled { color: var(--text-info); }
 
-.result-details {
-  font-family: var(--font-serif);
-  font-size: 14px;
-  color: var(--text-secondary);
-  margin-bottom: 20px;
-  line-height: 2;
-}
-
-.result-details .reward-line {
-  color: var(--text-primary);
-}
-
-.level-up-text {
-  color: var(--text-accent);
-  font-weight: 600;
-  margin-top: 8px;
-}
-
 .empty-text {
   text-align: center;
   color: var(--text-tertiary);

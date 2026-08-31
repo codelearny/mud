@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useBattleStore } from '../stores/battle'
 import { usePlayerStore } from '../stores/player'
+import { useMessageStore } from '../stores/messages'
 import { getSkill, getItem } from '../engine/data-loader'
 import { skillTags, skillSchoolLabel, WEAPON_SCHOOL_LABELS, WEAPON_AFFINITY_MATCH, WEAPON_AFFINITY_MISMATCH } from '../engine/skill-utils'
 import { itemTags } from '../engine/item-utils'
@@ -12,6 +13,7 @@ import type { Skill, Item } from '../types'
 const router = useRouter()
 const battleStore = useBattleStore()
 const playerStore = usePlayerStore()
+const messageStore = useMessageStore()
 
 const showSkillMenu = ref(false)
 const showItemMenu = ref(false)
@@ -80,11 +82,6 @@ const equippedSchoolLabel = computed(() => {
 const affinityMatchPct = Math.round((WEAPON_AFFINITY_MATCH - 1) * 100)
 const affinityMismatchMult = WEAPON_AFFINITY_MISMATCH
 
-const dropNames = computed(() => {
-  if (!result.value || result.value.drops.length === 0) return []
-  return result.value.drops.map(id => getItem(id)?.name ?? id)
-})
-
 function doAttack() {
   battleStore.attack()
 }
@@ -103,7 +100,27 @@ function doFlee() {
   battleStore.flee()
 }
 
+function recordBattleResult() {
+  const b = battle.value
+  const r = result.value
+  if (!b || !r) return
+  const enemyName = b.enemy.name
+  if (b.state === 'victory') {
+    const lines: string[] = [`力克 ${enemyName}`]
+    if (r.exp) lines.push(`经验 +${r.exp}`)
+    if (r.gold) lines.push(`银两 +${r.gold}`)
+    for (const id of r.drops) lines.push(`获得 ${getItem(id)?.name ?? id}`)
+    if (r.leveledUp) lines.push(`功力精进！突破至第 ${r.newLevel} 重`)
+    messageStore.addMessage('战斗·大获全胜', lines, 'reward')
+  } else if (b.state === 'fled') {
+    messageStore.addMessage('成功脱身', `于 ${enemyName} 手下遁走`, 'info')
+  } else if (b.state === 'defeat') {
+    messageStore.addMessage('不敌败北', ['伤痕累累，昏倒在地……', '幸得被好心人救回村落。'], 'info')
+  }
+}
+
 function returnToGame() {
+  recordBattleResult()
   if (battle.value?.state === 'defeat') {
     playerStore.setHpMp(1, 0)
   }
@@ -112,6 +129,7 @@ function returnToGame() {
 }
 
 function returnToMenu() {
+  recordBattleResult()
   battleStore.clearBattle()
   playerStore.clear()
   router.push('/')
@@ -233,22 +251,6 @@ function returnToMenu() {
         <div v-if="battle.state === 'victory'" class="result-title victory">大获全胜！</div>
         <div v-else-if="battle.state === 'fled'" class="result-title fled">成功脱身</div>
         <div v-else class="result-title defeat">不敌败北</div>
-
-        <div class="result-details" v-if="result && !result.fled">
-          <p class="reward-line">获得经验 {{ result.exp }} 点</p>
-          <p class="reward-line">获得银两 {{ result.gold }} 两</p>
-          <p v-for="name in dropNames" :key="name" class="reward-line">
-            获得物品 {{ name }}
-          </p>
-          <p v-if="result.leveledUp" class="level-up-text">
-            功力精进！突破至第 {{ result.newLevel }} 重！
-          </p>
-        </div>
-
-        <div class="result-details" v-else-if="battle.state === 'defeat'">
-          <p>你伤痕累累，昏倒在地......</p>
-          <p>醒来时发现自己被好心人救回村落。</p>
-        </div>
 
         <button
           v-if="battle.state === 'defeat'"
